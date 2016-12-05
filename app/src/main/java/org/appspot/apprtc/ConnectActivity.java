@@ -250,6 +250,8 @@ public class ConnectActivity extends Activity {
     }
   }
 
+  //算法介绍
+  //http://blog.csdn.net/ssdzdk/article/details/39577335
   private void connectToRoom(
       String roomId, boolean commandLineRun, boolean loopback, int runTimeMs) {
     this.commandLineRun = commandLineRun;
@@ -259,29 +261,30 @@ public class ConnectActivity extends Activity {
       roomId = Integer.toString((new Random()).nextInt(100000000));
     }
 
+    //room地址
     String roomUrl = sharedPref.getString(
         keyprefRoomServerUrl,
         getString(R.string.pref_room_server_url_default));
 
-    // Video call enabled flag.
+    // Video call enabled flag.是否启用音频
     boolean videoCallEnabled = sharedPref.getBoolean(keyprefVideoCallEnabled,
         Boolean.valueOf(getString(R.string.pref_videocall_default)));
 
-    // Use Camera2 option.
+    // Use Camera2 option.使用camera2
     boolean useCamera2 = sharedPref.getBoolean(keyprefCamera2,
         Boolean.valueOf(getString(R.string.pref_camera2_default)));
 
-    // Get default codecs.
+    // Get default codecs.编码格式
     String videoCodec = sharedPref.getString(keyprefVideoCodec,
         getString(R.string.pref_videocodec_default));
     String audioCodec = sharedPref.getString(keyprefAudioCodec,
         getString(R.string.pref_audiocodec_default));
 
-    // Check HW codec flag.
+    // Check HW codec flag.硬件编码
     boolean hwCodec = sharedPref.getBoolean(keyprefHwCodecAcceleration,
         Boolean.valueOf(getString(R.string.pref_hwcodec_default)));
 
-    // Check Capture to texture.
+    // Check Capture to texture.捕捉纹理
     boolean captureToTexture = sharedPref.getBoolean(keyprefCaptureToTexture,
         Boolean.valueOf(getString(R.string.pref_capturetotexture_default)));
 
@@ -300,17 +303,18 @@ public class ConnectActivity extends Activity {
         keyprefOpenSLES,
         Boolean.valueOf(getString(R.string.pref_opensles_default)));
 
-    // Check Disable built-in AEC flag.
+    // Check Disable built-in AEC flag.回声抵消算法
     boolean disableBuiltInAEC = sharedPref.getBoolean(
         keyprefDisableBuiltInAec,
         Boolean.valueOf(getString(R.string.pref_disable_built_in_aec_default)));
 
-    // Check Disable built-in AGC flag.
+    // Check Disable built-in AGC flag.自动增益算法
+    //http://blog.csdn.net/ssdzdk/article/details/52588415
     boolean disableBuiltInAGC = sharedPref.getBoolean(
         keyprefDisableBuiltInAgc,
         Boolean.valueOf(getString(R.string.pref_disable_built_in_agc_default)));
 
-    // Check Disable built-in NS flag.
+    // Check Disable built-in NS flag.噪声抑制算法（NoiseSuppression）
     boolean disableBuiltInNS = sharedPref.getBoolean(
         keyprefDisableBuiltInNs,
         Boolean.valueOf(getString(R.string.pref_disable_built_in_ns_default)));
@@ -320,7 +324,7 @@ public class ConnectActivity extends Activity {
         keyprefEnableLevelControl,
         Boolean.valueOf(getString(R.string.pref_enable_level_control_key)));
 
-    // Get video resolution from settings.
+    // Get video resolution from settings.视频解析度
     int videoWidth = 0;
     int videoHeight = 0;
     String resolution = sharedPref.getString(keyprefResolution,
@@ -354,7 +358,7 @@ public class ConnectActivity extends Activity {
     boolean captureQualitySlider = sharedPref.getBoolean(keyprefCaptureQualitySlider,
         Boolean.valueOf(getString(R.string.pref_capturequalityslider_default)));
 
-    // Get video and audio start bitrate.
+    // Get video and audio start bitrate. 比特率
     int videoStartBitrate = 0;
     String bitrateTypeDefault = getString(
         R.string.pref_startvideobitrate_default);
@@ -390,7 +394,7 @@ public class ConnectActivity extends Activity {
       intent.setData(uri);
       intent.putExtra(CallActivity.EXTRA_ROOMID, roomId);
       intent.putExtra(CallActivity.EXTRA_LOOPBACK, loopback);
-      intent.putExtra(CallActivity.EXTRA_VIDEO_CALL, videoCallEnabled);
+      intent.putExtra(CallActivity.EXTRA_VIDEO_CALL, videoCallEnabled);//是否启用音频
       intent.putExtra(CallActivity.EXTRA_CAMERA2, useCamera2);
       intent.putExtra(CallActivity.EXTRA_VIDEO_WIDTH, videoWidth);
       intent.putExtra(CallActivity.EXTRA_VIDEO_HEIGHT, videoHeight);
