@@ -22,16 +22,23 @@ import java.util.Scanner;
  * Asynchronous http requests implementation.
  */
 public class AsyncHttpURLConnection {
+  //超时时间
   private static final int HTTP_TIMEOUT_MS = 8000;
+  //默认请求地址
   private static final String HTTP_ORIGIN = "https://appr.tc";
+  //请求方式
   private final String method;
+  //请求地址
   private final String url;
+  //请求体
   private final String message;
+  //回调函数
   private final AsyncHttpEvents events;
   private String contentType;
 
   /**
    * Http requests callbacks.
+   * Http请求的回调函数
    */
   public interface AsyncHttpEvents {
     void onHttpError(String errorMessage);
@@ -69,7 +76,7 @@ public class AsyncHttpURLConnection {
       }
       connection.setRequestMethod(method);
       connection.setUseCaches(false);
-      connection.setDoInput(true);
+      connection.setDoInput(true);//是否使用输入流向服务器发送数据
       connection.setConnectTimeout(HTTP_TIMEOUT_MS);
       connection.setReadTimeout(HTTP_TIMEOUT_MS);
       // TODO(glaznev) - query request origin from pref_room_server_url_key preferences.

@@ -160,6 +160,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
 
   // Callback issued when room parameters are extracted. Runs on local
   // looper thread.
+  //信令服务器返回成功时的回调，运行在looper线程
   private void signalingParametersReady(final SignalingParameters signalingParameters) {
     Log.d(TAG, "Room connection completed.");
     if (connectionParameters.loopback && (!signalingParameters.initiator

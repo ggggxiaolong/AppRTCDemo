@@ -44,43 +44,43 @@ import org.webrtc.SurfaceViewRenderer;
  * and call view.
  */
 public class CallActivity extends Activity
-    implements AppRTCClient.SignalingEvents,
-      PeerConnectionClient.PeerConnectionEvents,
-      CallFragment.OnCallEvents {
+    implements AppRTCClient.SignalingEvents, PeerConnectionClient.PeerConnectionEvents,
+    CallFragment.OnCallEvents {
 
-  public static final String EXTRA_ROOMID                             = "org.appspot.apprtc.ROOMID";
-  public static final String EXTRA_LOOPBACK                           = "org.appspot.apprtc.LOOPBACK";
-  public static final String EXTRA_VIDEO_CALL                         = "org.appspot.apprtc.VIDEO_CALL";
-  public static final String EXTRA_CAMERA2                            = "org.appspot.apprtc.CAMERA2";
-  public static final String EXTRA_VIDEO_WIDTH                        = "org.appspot.apprtc.VIDEO_WIDTH";
-  public static final String EXTRA_VIDEO_HEIGHT                       = "org.appspot.apprtc.VIDEO_HEIGHT";
-  public static final String EXTRA_VIDEO_FPS                          = "org.appspot.apprtc.VIDEO_FPS";
-  public static final String EXTRA_VIDEO_CAPTUREQUALITYSLIDER_ENABLED = "org.appsopt.apprtc.VIDEO_CAPTUREQUALITYSLIDER";
-  public static final String EXTRA_VIDEO_BITRATE                      = "org.appspot.apprtc.VIDEO_BITRATE";
-  public static final String EXTRA_VIDEOCODEC                         = "org.appspot.apprtc.VIDEOCODEC";
-  public static final String EXTRA_HWCODEC_ENABLED                    = "org.appspot.apprtc.HWCODEC";
-  public static final String EXTRA_CAPTURETOTEXTURE_ENABLED           = "org.appspot.apprtc.CAPTURETOTEXTURE";
-  public static final String EXTRA_AUDIO_BITRATE                      = "org.appspot.apprtc.AUDIO_BITRATE";
-  public static final String EXTRA_AUDIOCODEC                         = "org.appspot.apprtc.AUDIOCODEC";
-  public static final String EXTRA_NOAUDIOPROCESSING_ENABLED          = "org.appspot.apprtc.NOAUDIOPROCESSING";
-  public static final String EXTRA_AECDUMP_ENABLED                    = "org.appspot.apprtc.AECDUMP";
-  public static final String EXTRA_OPENSLES_ENABLED                   = "org.appspot.apprtc.OPENSLES";
-  public static final String EXTRA_DISABLE_BUILT_IN_AEC               = "org.appspot.apprtc.DISABLE_BUILT_IN_AEC";
-  public static final String EXTRA_DISABLE_BUILT_IN_AGC               = "org.appspot.apprtc.DISABLE_BUILT_IN_AGC";
-  public static final String EXTRA_DISABLE_BUILT_IN_NS                = "org.appspot.apprtc.DISABLE_BUILT_IN_NS";
-  public static final String EXTRA_ENABLE_LEVEL_CONTROL               = "org.appspot.apprtc.ENABLE_LEVEL_CONTROL";
-  public static final String EXTRA_DISPLAY_HUD                        = "org.appspot.apprtc.DISPLAY_HUD";
-  public static final String EXTRA_TRACING                            = "org.appspot.apprtc.TRACING";
-  public static final String EXTRA_CMDLINE                            = "org.appspot.apprtc.CMDLINE";
-  public static final String EXTRA_RUNTIME                            = "org.appspot.apprtc.RUNTIME";
+  public static final String EXTRA_ROOMID = "org.appspot.apprtc.ROOMID";
+  public static final String EXTRA_LOOPBACK = "org.appspot.apprtc.LOOPBACK";
+  public static final String EXTRA_VIDEO_CALL = "org.appspot.apprtc.VIDEO_CALL";
+  public static final String EXTRA_CAMERA2 = "org.appspot.apprtc.CAMERA2";
+  public static final String EXTRA_VIDEO_WIDTH = "org.appspot.apprtc.VIDEO_WIDTH";
+  public static final String EXTRA_VIDEO_HEIGHT = "org.appspot.apprtc.VIDEO_HEIGHT";
+  public static final String EXTRA_VIDEO_FPS = "org.appspot.apprtc.VIDEO_FPS";
+  public static final String EXTRA_VIDEO_CAPTUREQUALITYSLIDER_ENABLED =
+      "org.appsopt.apprtc.VIDEO_CAPTUREQUALITYSLIDER";
+  public static final String EXTRA_VIDEO_BITRATE = "org.appspot.apprtc.VIDEO_BITRATE";
+  public static final String EXTRA_VIDEOCODEC = "org.appspot.apprtc.VIDEOCODEC";
+  public static final String EXTRA_HWCODEC_ENABLED = "org.appspot.apprtc.HWCODEC";
+  public static final String EXTRA_CAPTURETOTEXTURE_ENABLED = "org.appspot.apprtc.CAPTURETOTEXTURE";
+  public static final String EXTRA_AUDIO_BITRATE = "org.appspot.apprtc.AUDIO_BITRATE";
+  public static final String EXTRA_AUDIOCODEC = "org.appspot.apprtc.AUDIOCODEC";
+  public static final String EXTRA_NOAUDIOPROCESSING_ENABLED =
+      "org.appspot.apprtc.NOAUDIOPROCESSING";
+  public static final String EXTRA_AECDUMP_ENABLED = "org.appspot.apprtc.AECDUMP";
+  public static final String EXTRA_OPENSLES_ENABLED = "org.appspot.apprtc.OPENSLES";
+  public static final String EXTRA_DISABLE_BUILT_IN_AEC = "org.appspot.apprtc.DISABLE_BUILT_IN_AEC";
+  public static final String EXTRA_DISABLE_BUILT_IN_AGC = "org.appspot.apprtc.DISABLE_BUILT_IN_AGC";
+  public static final String EXTRA_DISABLE_BUILT_IN_NS = "org.appspot.apprtc.DISABLE_BUILT_IN_NS";
+  public static final String EXTRA_ENABLE_LEVEL_CONTROL = "org.appspot.apprtc.ENABLE_LEVEL_CONTROL";
+  public static final String EXTRA_DISPLAY_HUD = "org.appspot.apprtc.DISPLAY_HUD";
+  public static final String EXTRA_TRACING = "org.appspot.apprtc.TRACING";
+  public static final String EXTRA_CMDLINE = "org.appspot.apprtc.CMDLINE";
+  public static final String EXTRA_RUNTIME = "org.appspot.apprtc.RUNTIME";
   private static final String TAG = "CallRTCClient";
 
   // List of mandatory application permissions.
   // 需要的权限
   private static final String[] MANDATORY_PERMISSIONS = {
-    "android.permission.MODIFY_AUDIO_SETTINGS",
-    "android.permission.RECORD_AUDIO",
-    "android.permission.INTERNET"
+      "android.permission.MODIFY_AUDIO_SETTINGS", "android.permission.RECORD_AUDIO",
+      "android.permission.INTERNET"
   };
 
   // Peer connection statistics callback period in ms.
@@ -127,25 +127,22 @@ public class CallActivity extends Activity
   private HudFragment hudFragment;
   private CpuMonitor cpuMonitor;
 
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
+  @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    Thread.setDefaultUncaughtExceptionHandler(
-        new UnhandledExceptionHandler(this));
+    Thread.setDefaultUncaughtExceptionHandler(new UnhandledExceptionHandler(this));
 
     // Set window styles for fullscreen-window size. Needs to be done before
     // adding content.
     requestWindowFeature(Window.FEATURE_NO_TITLE);
-    getWindow().addFlags(
-        LayoutParams.FLAG_FULLSCREEN
+    getWindow().addFlags(LayoutParams.FLAG_FULLSCREEN
         | LayoutParams.FLAG_KEEP_SCREEN_ON
         | LayoutParams.FLAG_DISMISS_KEYGUARD
         | LayoutParams.FLAG_SHOW_WHEN_LOCKED
         | LayoutParams.FLAG_TURN_SCREEN_ON);
-    getWindow().getDecorView().setSystemUiVisibility(
-        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-        | View.SYSTEM_UI_FLAG_FULLSCREEN
-        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    getWindow().getDecorView()
+        .setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            | View.SYSTEM_UI_FLAG_FULLSCREEN
+            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     setContentView(R.layout.activity_call);
 
     iceConnected = false;
@@ -162,8 +159,7 @@ public class CallActivity extends Activity
 
     // Show/hide call control fragment on view click.
     View.OnClickListener listener = new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
+      @Override public void onClick(View view) {
         toggleCallControlFragmentVisibility();
       }
     };
@@ -213,30 +209,24 @@ public class CallActivity extends Activity
     boolean tracing = intent.getBooleanExtra(EXTRA_TRACING, false);
 
     //camera2 支持
-    boolean useCamera2 = Camera2Enumerator.isSupported()
-        && intent.getBooleanExtra(EXTRA_CAMERA2, true);
+    boolean useCamera2 =
+        Camera2Enumerator.isSupported() && intent.getBooleanExtra(EXTRA_CAMERA2, true);
 
-    peerConnectionParameters = new PeerConnectionParameters(
-        intent.getBooleanExtra(EXTRA_VIDEO_CALL, true),
-        loopback,
-        tracing,
-        useCamera2,
-        intent.getIntExtra(EXTRA_VIDEO_WIDTH, 0),
-        intent.getIntExtra(EXTRA_VIDEO_HEIGHT, 0),
-        intent.getIntExtra(EXTRA_VIDEO_FPS, 0),
-        intent.getIntExtra(EXTRA_VIDEO_BITRATE, 0),
-        intent.getStringExtra(EXTRA_VIDEOCODEC),
-        intent.getBooleanExtra(EXTRA_HWCODEC_ENABLED, true),
-        intent.getBooleanExtra(EXTRA_CAPTURETOTEXTURE_ENABLED, false),
-        intent.getIntExtra(EXTRA_AUDIO_BITRATE, 0),
-        intent.getStringExtra(EXTRA_AUDIOCODEC),
-        intent.getBooleanExtra(EXTRA_NOAUDIOPROCESSING_ENABLED, false),
-        intent.getBooleanExtra(EXTRA_AECDUMP_ENABLED, false),
-        intent.getBooleanExtra(EXTRA_OPENSLES_ENABLED, false),
-        intent.getBooleanExtra(EXTRA_DISABLE_BUILT_IN_AEC, false),
-        intent.getBooleanExtra(EXTRA_DISABLE_BUILT_IN_AGC, false),
-        intent.getBooleanExtra(EXTRA_DISABLE_BUILT_IN_NS, false),
-        intent.getBooleanExtra(EXTRA_ENABLE_LEVEL_CONTROL, false));
+    peerConnectionParameters =
+        new PeerConnectionParameters(intent.getBooleanExtra(EXTRA_VIDEO_CALL, true), loopback,
+            tracing, useCamera2, intent.getIntExtra(EXTRA_VIDEO_WIDTH, 0),
+            intent.getIntExtra(EXTRA_VIDEO_HEIGHT, 0), intent.getIntExtra(EXTRA_VIDEO_FPS, 0),
+            intent.getIntExtra(EXTRA_VIDEO_BITRATE, 0), intent.getStringExtra(EXTRA_VIDEOCODEC),
+            intent.getBooleanExtra(EXTRA_HWCODEC_ENABLED, true),
+            intent.getBooleanExtra(EXTRA_CAPTURETOTEXTURE_ENABLED, false),
+            intent.getIntExtra(EXTRA_AUDIO_BITRATE, 0), intent.getStringExtra(EXTRA_AUDIOCODEC),
+            intent.getBooleanExtra(EXTRA_NOAUDIOPROCESSING_ENABLED, false),
+            intent.getBooleanExtra(EXTRA_AECDUMP_ENABLED, false),
+            intent.getBooleanExtra(EXTRA_OPENSLES_ENABLED, false),
+            intent.getBooleanExtra(EXTRA_DISABLE_BUILT_IN_AEC, false),
+            intent.getBooleanExtra(EXTRA_DISABLE_BUILT_IN_AGC, false),
+            intent.getBooleanExtra(EXTRA_DISABLE_BUILT_IN_NS, false),
+            intent.getBooleanExtra(EXTRA_ENABLE_LEVEL_CONTROL, false));
     commandLineRun = intent.getBooleanExtra(EXTRA_CMDLINE, false);//是否显示命令行
     runTimeMs = intent.getIntExtra(EXTRA_RUNTIME, 0);//？？？延时设置
 
@@ -250,8 +240,7 @@ public class CallActivity extends Activity
       appRtcClient = new DirectRTCClient(this);
     }
     // Create connection parameters.
-    roomConnectionParameters = new RoomConnectionParameters(
-        roomUri.toString(), roomId, loopback);
+    roomConnectionParameters = new RoomConnectionParameters(roomUri.toString(), roomId, loopback);
 
     // Create CPU monitor
     cpuMonitor = new CpuMonitor(this);
@@ -270,8 +259,7 @@ public class CallActivity extends Activity
     // For command line execution run connection for <runTimeMs> and exit.
     if (commandLineRun && runTimeMs > 0) {
       (new Handler()).postDelayed(new Runnable() {
-        @Override
-        public void run() {
+        @Override public void run() {
           disconnect();
         }
       }, runTimeMs);
@@ -283,13 +271,12 @@ public class CallActivity extends Activity
       options.networkIgnoreMask = 0;
       peerConnectionClient.setPeerConnectionFactoryOptions(options);
     }
-    peerConnectionClient.createPeerConnectionFactory(
-        CallActivity.this, peerConnectionParameters, CallActivity.this);
+    peerConnectionClient.createPeerConnectionFactory(CallActivity.this, peerConnectionParameters,
+        CallActivity.this);
   }
 
   // Activity interfaces
-  @Override
-  public void onPause() {
+  @Override public void onPause() {
     super.onPause();
     activityRunning = false;
     if (peerConnectionClient != null) {
@@ -298,8 +285,7 @@ public class CallActivity extends Activity
     cpuMonitor.pause();
   }
 
-  @Override
-  public void onResume() {
+  @Override public void onResume() {
     super.onResume();
     activityRunning = true;
     if (peerConnectionClient != null) {
@@ -308,8 +294,7 @@ public class CallActivity extends Activity
     cpuMonitor.resume();
   }
 
-  @Override
-  protected void onDestroy() {
+  @Override protected void onDestroy() {
     disconnect();
     if (logToast != null) {
       logToast.cancel();
@@ -320,33 +305,28 @@ public class CallActivity extends Activity
   }
 
   // CallFragment.OnCallEvents interface implementation.
-  @Override
-  public void onCallHangUp() {
+  @Override public void onCallHangUp() {
     disconnect();
   }
 
-  @Override
-  public void onCameraSwitch() {
+  @Override public void onCameraSwitch() {
     if (peerConnectionClient != null) {
       peerConnectionClient.switchCamera();
     }
   }
 
-  @Override
-  public void onVideoScalingSwitch(ScalingType scalingType) {
+  @Override public void onVideoScalingSwitch(ScalingType scalingType) {
     this.scalingType = scalingType;
     updateVideoView();
   }
 
-  @Override
-  public void onCaptureFormatChange(int width, int height, int framerate) {
+  @Override public void onCaptureFormatChange(int width, int height, int framerate) {
     if (peerConnectionClient != null) {
       peerConnectionClient.changeCaptureFormat(width, height, framerate);
     }
   }
 
-  @Override
-  public boolean onToggleMic() {
+  @Override public boolean onToggleMic() {
     if (peerConnectionClient != null) {
       micEnabled = !micEnabled;
       peerConnectionClient.setAudioEnabled(micEnabled);
@@ -379,12 +359,12 @@ public class CallActivity extends Activity
     remoteRender.setMirror(false);
 
     if (iceConnected) {
-      localRenderLayout.setPosition(
-          LOCAL_X_CONNECTED, LOCAL_Y_CONNECTED, LOCAL_WIDTH_CONNECTED, LOCAL_HEIGHT_CONNECTED);
+      localRenderLayout.setPosition(LOCAL_X_CONNECTED, LOCAL_Y_CONNECTED, LOCAL_WIDTH_CONNECTED,
+          LOCAL_HEIGHT_CONNECTED);
       localRender.setScalingType(ScalingType.SCALE_ASPECT_FIT);
     } else {
-      localRenderLayout.setPosition(
-          LOCAL_X_CONNECTING, LOCAL_Y_CONNECTING, LOCAL_WIDTH_CONNECTING, LOCAL_HEIGHT_CONNECTING);
+      localRenderLayout.setPosition(LOCAL_X_CONNECTING, LOCAL_Y_CONNECTING, LOCAL_WIDTH_CONNECTING,
+          LOCAL_HEIGHT_CONNECTING);
       localRender.setScalingType(scalingType);
     }
     localRender.setMirror(true);
@@ -401,21 +381,18 @@ public class CallActivity extends Activity
     callStartedTimeMs = System.currentTimeMillis();
 
     // Start room connection.
-    logAndToast(getString(R.string.connecting_to,
-        roomConnectionParameters.roomUrl));
+    logAndToast(getString(R.string.connecting_to, roomConnectionParameters.roomUrl));
     appRtcClient.connectToRoom(roomConnectionParameters);
 
     // Create and audio manager that will take care of audio routing,
     // audio modes, audio device enumeration etc.
     audioManager = AppRTCAudioManager.create(this, new Runnable() {
-        // This method will be called each time the audio state (number and
-        // type of devices) has been changed.
-        @Override
-        public void run() {
-          onAudioManagerChangedState();
-        }
+      // This method will be called each time the audio state (number and
+      // type of devices) has been changed.
+      @Override public void run() {
+        onAudioManagerChangedState();
       }
-    );
+    });
     // Store existing audio settings and change audio mode to
     // MODE_IN_COMMUNICATION for best possible VoIP performance.
     Log.d(TAG, "Initializing the audio manager...");
@@ -477,17 +454,17 @@ public class CallActivity extends Activity
       Log.e(TAG, "Critical error: " + errorMessage);
       disconnect();
     } else {
-      new AlertDialog.Builder(this)
-          .setTitle(getText(R.string.channel_error_title))
+      new AlertDialog.Builder(this).setTitle(getText(R.string.channel_error_title))
           .setMessage(errorMessage)
           .setCancelable(false)
           .setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
+            @Override public void onClick(DialogInterface dialog, int id) {
               dialog.cancel();
               disconnect();
             }
-          }).create().show();
+          })
+          .create()
+          .show();
     }
   }
 
@@ -503,8 +480,7 @@ public class CallActivity extends Activity
 
   private void reportError(final String description) {
     runOnUiThread(new Runnable() {
-      @Override
-      public void run() {
+      @Override public void run() {
         if (!isError) {
           isError = true;
           disconnectWithErrorMessage(description);
@@ -521,8 +497,8 @@ public class CallActivity extends Activity
 
     signalingParameters = params;
     logAndToast("Creating peer connection, delay=" + delta + "ms");
-    peerConnectionClient.createPeerConnection(rootEglBase.getEglBaseContext(),
-        localRender, remoteRender, signalingParameters);
+    peerConnectionClient.createPeerConnection(rootEglBase.getEglBaseContext(), localRender,
+        remoteRender, signalingParameters);
 
     if (signalingParameters.initiator) {
       logAndToast("Creating OFFER...");
@@ -546,22 +522,18 @@ public class CallActivity extends Activity
     }
   }
 
-  @Override
-  public void onConnectedToRoom(final SignalingParameters params) {
+  @Override public void onConnectedToRoom(final SignalingParameters params) {
     runOnUiThread(new Runnable() {
-      @Override
-      public void run() {
+      @Override public void run() {
         onConnectedToRoomInternal(params);
       }
     });
   }
 
-  @Override
-  public void onRemoteDescription(final SessionDescription sdp) {
+  @Override public void onRemoteDescription(final SessionDescription sdp) {
     final long delta = System.currentTimeMillis() - callStartedTimeMs;
     runOnUiThread(new Runnable() {
-      @Override
-      public void run() {
+      @Override public void run() {
         if (peerConnectionClient == null) {
           Log.e(TAG, "Received remote SDP for non-initilized peer connection.");
           return;
@@ -578,11 +550,9 @@ public class CallActivity extends Activity
     });
   }
 
-  @Override
-  public void onRemoteIceCandidate(final IceCandidate candidate) {
+  @Override public void onRemoteIceCandidate(final IceCandidate candidate) {
     runOnUiThread(new Runnable() {
-      @Override
-      public void run() {
+      @Override public void run() {
         if (peerConnectionClient == null) {
           Log.e(TAG, "Received ICE candidate for a non-initialized peer connection.");
           return;
@@ -592,11 +562,9 @@ public class CallActivity extends Activity
     });
   }
 
-  @Override
-  public void onRemoteIceCandidatesRemoved(final IceCandidate[] candidates) {
+  @Override public void onRemoteIceCandidatesRemoved(final IceCandidate[] candidates) {
     runOnUiThread(new Runnable() {
-      @Override
-      public void run() {
+      @Override public void run() {
         if (peerConnectionClient == null) {
           Log.e(TAG, "Received ICE candidate removals for a non-initialized peer connection.");
           return;
@@ -606,19 +574,17 @@ public class CallActivity extends Activity
     });
   }
 
-  @Override
-  public void onChannelClose() {
+  @Override public void onChannelClose() {
     runOnUiThread(new Runnable() {
-      @Override
-      public void run() {
+      @Override public void run() {
         logAndToast("Remote end hung up; dropping PeerConnection");
         disconnect();
       }
     });
   }
 
-  @Override
-  public void onChannelError(final String description) {
+  //信令服务器建立连接失败的回调
+  @Override public void onChannelError(final String description) {
     reportError(description);
   }
 
@@ -626,12 +592,10 @@ public class CallActivity extends Activity
   // Send local peer connection SDP and ICE candidates to remote party.
   // All callbacks are invoked from peer connection client looper thread and
   // are routed to UI thread.
-  @Override
-  public void onLocalDescription(final SessionDescription sdp) {
+  @Override public void onLocalDescription(final SessionDescription sdp) {
     final long delta = System.currentTimeMillis() - callStartedTimeMs;
     runOnUiThread(new Runnable() {
-      @Override
-      public void run() {
+      @Override public void run() {
         if (appRtcClient != null) {
           logAndToast("Sending " + sdp.type + ", delay=" + delta + "ms");
           if (signalingParameters.initiator) {
@@ -644,11 +608,9 @@ public class CallActivity extends Activity
     });
   }
 
-  @Override
-  public void onIceCandidate(final IceCandidate candidate) {
+  @Override public void onIceCandidate(final IceCandidate candidate) {
     runOnUiThread(new Runnable() {
-      @Override
-      public void run() {
+      @Override public void run() {
         if (appRtcClient != null) {
           appRtcClient.sendLocalIceCandidate(candidate);
         }
@@ -656,11 +618,9 @@ public class CallActivity extends Activity
     });
   }
 
-  @Override
-  public void onIceCandidatesRemoved(final IceCandidate[] candidates) {
+  @Override public void onIceCandidatesRemoved(final IceCandidate[] candidates) {
     runOnUiThread(new Runnable() {
-      @Override
-      public void run() {
+      @Override public void run() {
         if (appRtcClient != null) {
           appRtcClient.sendLocalIceCandidateRemovals(candidates);
         }
@@ -668,12 +628,10 @@ public class CallActivity extends Activity
     });
   }
 
-  @Override
-  public void onIceConnected() {
+  @Override public void onIceConnected() {
     final long delta = System.currentTimeMillis() - callStartedTimeMs;
     runOnUiThread(new Runnable() {
-      @Override
-      public void run() {
+      @Override public void run() {
         logAndToast("ICE connected, delay=" + delta + "ms");
         iceConnected = true;
         callConnected();
@@ -681,11 +639,9 @@ public class CallActivity extends Activity
     });
   }
 
-  @Override
-  public void onIceDisconnected() {
+  @Override public void onIceDisconnected() {
     runOnUiThread(new Runnable() {
-      @Override
-      public void run() {
+      @Override public void run() {
         logAndToast("ICE disconnected");
         iceConnected = false;
         disconnect();
@@ -693,15 +649,12 @@ public class CallActivity extends Activity
     });
   }
 
-  @Override
-  public void onPeerConnectionClosed() {
+  @Override public void onPeerConnectionClosed() {
   }
 
-  @Override
-  public void onPeerConnectionStatsReady(final StatsReport[] reports) {
+  @Override public void onPeerConnectionStatsReady(final StatsReport[] reports) {
     runOnUiThread(new Runnable() {
-      @Override
-      public void run() {
+      @Override public void run() {
         if (!isError && iceConnected) {
           hudFragment.updateEncoderStatistics(reports);
         }
@@ -709,8 +662,7 @@ public class CallActivity extends Activity
     });
   }
 
-  @Override
-  public void onPeerConnectionError(final String description) {
+  @Override public void onPeerConnectionError(final String description) {
     reportError(description);
   }
 }
