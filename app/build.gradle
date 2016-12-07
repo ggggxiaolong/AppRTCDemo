@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.antfortune.freeline'
 
 android {
   compileSdkVersion 23
@@ -12,7 +13,7 @@ android {
 
   defaultConfig {
     applicationId "org.appspot.apprtc"
-    minSdkVersion 16
+    minSdkVersion 21
     targetSdkVersion 25
 
     versionCode 13665

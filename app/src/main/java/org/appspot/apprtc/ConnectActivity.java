@@ -383,6 +383,7 @@ public class ConnectActivity extends Activity {
     boolean displayHud = sharedPref.getBoolean(keyprefDisplayHud,
         Boolean.valueOf(getString(R.string.pref_displayhud_default)));
 
+    //跟踪？？？
     boolean tracing = sharedPref.getBoolean(
             keyprefTracing, Boolean.valueOf(getString(R.string.pref_tracing_default)));
 

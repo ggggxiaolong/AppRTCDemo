@@ -27,7 +27,7 @@ public class LooperExecutor extends Thread implements Executor {
   // Object used to signal that looper thread has started and Handler instance
   // associated with looper thread has been allocated.
   private final Object looperStartedEvent = new Object();
-  private final List<Runnable> scheduledPeriodicRunnables = new LinkedList<Runnable>();
+  private final List<Runnable> scheduledPeriodicRunnable = new LinkedList<Runnable>();
   private Handler handler = null;
   private boolean running = false;
   private long threadId;
@@ -99,7 +99,7 @@ public class LooperExecutor extends Thread implements Executor {
         }
       }
     };
-    scheduledPeriodicRunnables.add(runnable);
+    scheduledPeriodicRunnable.add(runnable);
     if (!handler.postDelayed(runnable, periodMillis)) {
       Log.e(TAG, "Failed to post a delayed runnable.");
     }
@@ -112,10 +112,10 @@ public class LooperExecutor extends Thread implements Executor {
     }
 
     // Stop scheduled periodic tasks.
-    for (Runnable r : scheduledPeriodicRunnables) {
+    for (Runnable r : scheduledPeriodicRunnable) {
       handler.removeCallbacks(r);
     }
-    scheduledPeriodicRunnables.clear();
+    scheduledPeriodicRunnable.clear();
   }
 
   @Override

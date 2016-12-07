@@ -76,6 +76,7 @@ public class CallActivity extends Activity
   private static final String TAG = "CallRTCClient";
 
   // List of mandatory application permissions.
+  // 需要的权限
   private static final String[] MANDATORY_PERMISSIONS = {
     "android.permission.MODIFY_AUDIO_SETTINGS",
     "android.permission.RECORD_AUDIO",
@@ -178,6 +179,7 @@ public class CallActivity extends Activity
     updateVideoView();
 
     // Check for mandatory permissions.
+    // 检查必须的权限
     for (String permission : MANDATORY_PERMISSIONS) {
       if (checkCallingOrSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
         logAndToast("Permission " + permission + " is not granted");
@@ -188,6 +190,7 @@ public class CallActivity extends Activity
     }
 
     // Get Intent parameters.
+    // 取出预设选项
     final Intent intent = getIntent();
     Uri roomUri = intent.getData();
     if (roomUri == null) {
@@ -209,6 +212,7 @@ public class CallActivity extends Activity
     boolean loopback = intent.getBooleanExtra(EXTRA_LOOPBACK, false);
     boolean tracing = intent.getBooleanExtra(EXTRA_TRACING, false);
 
+    //camera2 支持
     boolean useCamera2 = Camera2Enumerator.isSupported()
         && intent.getBooleanExtra(EXTRA_CAMERA2, true);
 
@@ -233,11 +237,12 @@ public class CallActivity extends Activity
         intent.getBooleanExtra(EXTRA_DISABLE_BUILT_IN_AGC, false),
         intent.getBooleanExtra(EXTRA_DISABLE_BUILT_IN_NS, false),
         intent.getBooleanExtra(EXTRA_ENABLE_LEVEL_CONTROL, false));
-    commandLineRun = intent.getBooleanExtra(EXTRA_CMDLINE, false);
-    runTimeMs = intent.getIntExtra(EXTRA_RUNTIME, 0);
+    commandLineRun = intent.getBooleanExtra(EXTRA_CMDLINE, false);//是否显示命令行
+    runTimeMs = intent.getIntExtra(EXTRA_RUNTIME, 0);//？？？延时设置
 
     // Create connection client. Use DirectRTCClient if room name is an IP otherwise use the
     // standard WebSocketRTCClient.
+    //如果房间号码是ip地址使用DirectRTCClient🔗，否者使用WebSocketRTCClient
     if (loopback || !DirectRTCClient.IP_PATTERN.matcher(roomId).matches()) {
       appRtcClient = new WebSocketRTCClient(this, new LooperExecutor());
     } else {
