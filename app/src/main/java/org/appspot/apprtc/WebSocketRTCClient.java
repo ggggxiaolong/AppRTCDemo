@@ -26,7 +26,7 @@ import org.webrtc.IceCandidate;
 import org.webrtc.SessionDescription;
 
 /**
- * Negotiates signaling for chatting with https://appr.tc "rooms".用于和服务器交流信令
+ * Negotiates signaling for chatting with https://appr.tc "rooms".用于和服务器交换信令
  * Uses the client<->server specifics of the apprtc AppEngine webapp.
  *
  * <p>To use: create an instance of this object (registering a message handler) and
@@ -45,16 +45,19 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
   private static final String ROOM_MESSAGE = "message";
   private static final String ROOM_LEAVE = "leave";
 
+  //连接的状态
   private enum ConnectionState {
     NEW, CONNECTED, CLOSED, ERROR
   }
 
+  //消息的类型
   private enum MessageType {
     MESSAGE, LEAVE
   }
 
   private final LooperExecutor executor;
   private boolean initiator;
+  //信令服务的回调
   private SignalingEvents events;
   private WebSocketChannelClient wsClient;
   private ConnectionState roomState;
@@ -66,7 +69,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
     this.events = events;
     this.executor = executor;
     roomState = ConnectionState.NEW;
-    executor.requestStart();
+    executor.requestStart();//开启消息处理器
   }
 
   // --------------------------------------------------------------------

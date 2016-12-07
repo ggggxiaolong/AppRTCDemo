@@ -33,6 +33,7 @@ import java.util.Scanner;
 /**
  * AsyncTask that converts an AppRTC room URL into the set of signaling
  * parameters to use with that room.
+ * 异步任务 将AppRTC房间URL转换成信令的参数集合
  */
 public class RoomParametersFetcher {
   private static final String TAG = "RoomRTCClient";
