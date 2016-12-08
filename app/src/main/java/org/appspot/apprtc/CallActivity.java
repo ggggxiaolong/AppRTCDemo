@@ -228,7 +228,7 @@ public class CallActivity extends Activity
             intent.getBooleanExtra(EXTRA_DISABLE_BUILT_IN_NS, false),
             intent.getBooleanExtra(EXTRA_ENABLE_LEVEL_CONTROL, false));
     commandLineRun = intent.getBooleanExtra(EXTRA_CMDLINE, false);//是否显示命令行
-    runTimeMs = intent.getIntExtra(EXTRA_RUNTIME, 0);//？？？延时设置
+    runTimeMs = intent.getIntExtra(EXTRA_RUNTIME, 0);//开始建立连接后多长时间结束
 
     // Create connection client. Use DirectRTCClient if room name is an IP otherwise use the
     // standard WebSocketRTCClient.
@@ -239,7 +239,7 @@ public class CallActivity extends Activity
       Log.i(TAG, "Using DirectRTCClient because room name looks like an IP.");
       appRtcClient = new DirectRTCClient(this);
     }
-    // Create connection parameters.
+    // Create connection parameters. 创建连接参数
     roomConnectionParameters = new RoomConnectionParameters(roomUri.toString(), roomId, loopback);
 
     // Create CPU monitor
@@ -257,6 +257,7 @@ public class CallActivity extends Activity
     startCall();
 
     // For command line execution run connection for <runTimeMs> and exit.
+    //对于通过隐式意图开启的连接运行<runTimeMs>长时间后断开连接
     if (commandLineRun && runTimeMs > 0) {
       (new Handler()).postDelayed(new Runnable() {
         @Override public void run() {
@@ -266,7 +267,7 @@ public class CallActivity extends Activity
     }
 
     peerConnectionClient = PeerConnectionClient.getInstance();
-    if (loopback) {
+    if (loopback) {//如果是和自己建立连接
       PeerConnectionFactory.Options options = new PeerConnectionFactory.Options();
       options.networkIgnoreMask = 0;
       peerConnectionClient.setPeerConnectionFactoryOptions(options);
@@ -380,7 +381,7 @@ public class CallActivity extends Activity
     }
     callStartedTimeMs = System.currentTimeMillis();
 
-    // Start room connection.
+    // Start room connection. 开始与房间建立连接
     logAndToast(getString(R.string.connecting_to, roomConnectionParameters.roomUrl));
     appRtcClient.connectToRoom(roomConnectionParameters);
 
@@ -492,6 +493,7 @@ public class CallActivity extends Activity
   // -----Implementation of AppRTCClient.AppRTCSignalingEvents ---------------
   // All callbacks are invoked from websocket signaling looper thread and
   // are routed to UI thread.
+  // 信令服务器返回房间信息时的回调
   private void onConnectedToRoomInternal(final SignalingParameters params) {
     final long delta = System.currentTimeMillis() - callStartedTimeMs;
 
@@ -522,6 +524,7 @@ public class CallActivity extends Activity
     }
   }
 
+  //信令服务器返回建立房间的参数
   @Override public void onConnectedToRoom(final SignalingParameters params) {
     runOnUiThread(new Runnable() {
       @Override public void run() {

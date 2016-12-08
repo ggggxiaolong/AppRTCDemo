@@ -10,13 +10,21 @@
 
 package org.appspot.apprtc;
 
-import org.appspot.apprtc.AppRTCClient.SignalingParameters;
-
 import android.content.Context;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
-
+import java.io.File;
+import java.io.IOException;
+import java.util.EnumSet;
+import java.util.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import org.appspot.apprtc.AppRTCClient.SignalingParameters;
 import org.webrtc.AudioSource;
 import org.webrtc.AudioTrack;
 import org.webrtc.Camera1Enumerator;
@@ -29,7 +37,6 @@ import org.webrtc.EglBase;
 import org.webrtc.IceCandidate;
 import org.webrtc.Logging;
 import org.webrtc.MediaConstraints;
-import org.webrtc.MediaConstraints.KeyValuePair;
 import org.webrtc.MediaStream;
 import org.webrtc.PeerConnection;
 import org.webrtc.PeerConnection.IceConnectionState;
@@ -44,17 +51,6 @@ import org.webrtc.VideoSource;
 import org.webrtc.VideoTrack;
 import org.webrtc.voiceengine.WebRtcAudioManager;
 import org.webrtc.voiceengine.WebRtcAudioUtils;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.EnumSet;
-import java.util.LinkedList;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Peer connection client implementation.
@@ -140,6 +136,7 @@ public class PeerConnectionClient {
 
   /**
    * Peer connection parameters.
+   * p2p建立连接的参数
    */
   public static class PeerConnectionParameters {
     public final boolean videoCallEnabled;
@@ -194,6 +191,7 @@ public class PeerConnectionClient {
 
   /**
    * Peer connection events.
+   * p2p连接回调
    */
   public interface PeerConnectionEvents {
     /**
@@ -243,6 +241,8 @@ public class PeerConnectionClient {
     // Executor thread is started once in private ctor and is used for all
     // peer connection API calls to ensure new peer connection factory is
     // created on the same thread as previously destroyed factory.
+    // 在私有构造函数中线程池实例化， 线程池被用于所有的p2p连接API调用，来保证
+    // 连接工厂方法的建立和销毁在同一个线程
     executor = Executors.newSingleThreadScheduledExecutor();
   }
 
@@ -320,7 +320,7 @@ public class PeerConnectionClient {
   }
 
   private void createPeerConnectionFactoryInternal(Context context) {
-    PeerConnectionFactory.initializeInternalTracer();
+    PeerConnectionFactory.initializeInternalTracer();//初始化p2p的连接工厂
     if (peerConnectionParameters.tracing) {
       PeerConnectionFactory.startInternalTracingCapture(
           Environment.getExternalStorageDirectory().getAbsolutePath()
@@ -334,7 +334,7 @@ public class PeerConnectionClient {
     // Initialize field trials.
     PeerConnectionFactory.initializeFieldTrials("");
 
-    // Check preferred video codec.
+    // Check preferred video codec. 初始化视频编码格式
     preferredVideoCodec = VIDEO_CODEC_VP8;
     if (videoCallEnabled && peerConnectionParameters.videoCodec != null) {
       if (peerConnectionParameters.videoCodec.equals(VIDEO_CODEC_VP9)) {
@@ -350,7 +350,7 @@ public class PeerConnectionClient {
         peerConnectionParameters.audioCodec != null && peerConnectionParameters.audioCodec.equals(
             AUDIO_CODEC_ISAC);
 
-    // Enable/disable OpenSL ES playback.
+    // Enable/disable OpenSL ES playback. 是否开启OpenSL ES
     if (!peerConnectionParameters.useOpenSLES) {
       Log.d(TAG, "Disable OpenSL ES audio even if device supports it");
       WebRtcAudioManager.setBlacklistDeviceForOpenSLESUsage(true /* enable */);
@@ -359,7 +359,7 @@ public class PeerConnectionClient {
       WebRtcAudioManager.setBlacklistDeviceForOpenSLESUsage(false);
     }
 
-    if (peerConnectionParameters.disableBuiltInAEC) {
+    if (peerConnectionParameters.disableBuiltInAEC) {//是否开启音频AEC
       Log.d(TAG, "Disable built-in AEC even if device supports it");
       WebRtcAudioUtils.setWebRtcBasedAcousticEchoCanceler(true);
     } else {
@@ -367,7 +367,7 @@ public class PeerConnectionClient {
       WebRtcAudioUtils.setWebRtcBasedAcousticEchoCanceler(false);
     }
 
-    if (peerConnectionParameters.disableBuiltInAGC) {
+    if (peerConnectionParameters.disableBuiltInAGC) {//是否开启音频AGC
       Log.d(TAG, "Disable built-in AGC even if device supports it");
       WebRtcAudioUtils.setWebRtcBasedAutomaticGainControl(true);
     } else {
@@ -375,7 +375,7 @@ public class PeerConnectionClient {
       WebRtcAudioUtils.setWebRtcBasedAutomaticGainControl(false);
     }
 
-    if (peerConnectionParameters.disableBuiltInNS) {
+    if (peerConnectionParameters.disableBuiltInNS) {//是否开启噪声抑制
       Log.d(TAG, "Disable built-in NS even if device supports it");
       WebRtcAudioUtils.setWebRtcBasedNoiseSuppressor(true);
     } else {
@@ -388,7 +388,7 @@ public class PeerConnectionClient {
         peerConnectionParameters.videoCodecHwAcceleration)) {
       events.onPeerConnectionError("Failed to initializeAndroidGlobals");
     }
-    if (options != null) {
+    if (options != null) {//当和自己通讯的时候为非空
       Log.d(TAG, "Factory networkIgnoreMask option: " + options.networkIgnoreMask);
     }
     this.context = context;
@@ -398,9 +398,10 @@ public class PeerConnectionClient {
 
   private void createMediaConstraintsInternal() {
     // Create peer connection constraints.
+    // 创建p2p连接的约束
     pcConstraints = new MediaConstraints();
-    // Enable DTLS for normal calls and disable for loopback calls.
-    if (peerConnectionParameters.loopback) {
+    // Enable DTLS for normal calls and disable for loopback calls. (DTLS 数据包传输层安全性协议)
+    if (peerConnectionParameters.loopback) {//如果是和自己通讯
       pcConstraints.optional.add(
           new MediaConstraints.KeyValuePair(DTLS_SRTP_KEY_AGREEMENT_CONSTRAINT, "false"));
     } else {
@@ -412,7 +413,7 @@ public class PeerConnectionClient {
     numberOfCameras = CameraEnumerationAndroid.getDeviceCount();
     if (numberOfCameras == 0) {
       Log.w(TAG, "No camera on device. Switch to audio only call.");
-      videoCallEnabled = false;
+      videoCallEnabled = false;//如果设备不存在摄像头
     }
     // Create video constraints if video call is enabled.
     if (videoCallEnabled) {
@@ -439,7 +440,7 @@ public class PeerConnectionClient {
     // Create audio constraints.
     audioConstraints = new MediaConstraints();
     // added for audio performance measurements
-    if (peerConnectionParameters.noAudioProcessing) {
+    if (peerConnectionParameters.noAudioProcessing) {//是否使用谷歌的技术对音频进行处理
       Log.d(TAG, "Disabling audio processing");
       audioConstraints.mandatory.add(
           new MediaConstraints.KeyValuePair(AUDIO_ECHO_CANCELLATION_CONSTRAINT, "false"));
@@ -450,16 +451,16 @@ public class PeerConnectionClient {
       audioConstraints.mandatory.add(
           new MediaConstraints.KeyValuePair(AUDIO_NOISE_SUPPRESSION_CONSTRAINT, "false"));
     }
-    if (peerConnectionParameters.enableLevelControl) {
+    if (peerConnectionParameters.enableLevelControl) {//???音频平滑控制
       Log.d(TAG, "Enabling level control.");
       audioConstraints.mandatory.add(
           new MediaConstraints.KeyValuePair(AUDIO_LEVEL_CONTROL_CONSTRAINT, "true"));
     }
-    // Create SDP constraints.
+    // Create SDP constraints. 创建SDP信息
     sdpMediaConstraints = new MediaConstraints();
     sdpMediaConstraints.mandatory.add(
         new MediaConstraints.KeyValuePair("OfferToReceiveAudio", "true"));
-    if (videoCallEnabled || peerConnectionParameters.loopback) {
+    if (videoCallEnabled || peerConnectionParameters.loopback) {//设备存在可以使用的摄像头，或者和自己通讯
       sdpMediaConstraints.mandatory.add(
           new MediaConstraints.KeyValuePair("OfferToReceiveVideo", "true"));
     } else {
@@ -505,10 +506,10 @@ public class PeerConnectionClient {
     }
     Log.d(TAG, "Create peer connection.");
 
-    Log.d(TAG, "PCConstraints: " + pcConstraints.toString());
+    Log.d(TAG, "PCConstraints: " + pcConstraints.toString());//mandatory: [], optional: [DtlsSrtpKeyAgreement: true]
     queuedRemoteCandidates = new LinkedList<IceCandidate>();
 
-    if (videoCallEnabled) {
+    if (videoCallEnabled) {//当设备存在可用的摄像头的情况下
       Log.d(TAG, "EGLContext: " + renderEGLContext);
       factory.setVideoHwAccelerationOptions(renderEGLContext, renderEGLContext);
     }
@@ -524,6 +525,7 @@ public class PeerConnectionClient {
     // Use ECDSA encryption.
     rtcConfig.keyType = PeerConnection.KeyType.ECDSA;
 
+    // 信令服务器的交流回调 pcObserver
     peerConnection = factory.createPeerConnection(rtcConfig, pcConstraints, pcObserver);
     isInitiator = false;
 
@@ -994,6 +996,7 @@ public class PeerConnectionClient {
   }
 
   // Implementation detail: observe ICE & stream changes and react accordingly.
+  // 实现细节： 根据观察ICE和流的改变而改变
   private class PCObserver implements PeerConnection.Observer {
     @Override public void onIceCandidate(final IceCandidate candidate) {
       executor.execute(new Runnable() {

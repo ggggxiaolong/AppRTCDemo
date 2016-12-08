@@ -59,7 +59,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
   private boolean initiator;
   //信令服务的回调
   private SignalingEvents events;
-  private WebSocketChannelClient wsClient;
+  private WebSocketChannelClient wsClient;//WebSocket的客户端
   private ConnectionState roomState;
   private RoomConnectionParameters connectionParameters;
   private String messageUrl;
@@ -76,6 +76,9 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
   // AppRTCClient interface implementation.
   // Asynchronously connect to an AppRTC room URL using supplied connection
   // parameters, retrieves room parameters and connect to WebSocket server.
+  // AppRTCClient的一种实现
+  // 使用支持的方式异步连接到AppRTC房间url
+  // 参数，检索房间参数并且连接到WebSocket服务器。
   @Override public void connectToRoom(RoomConnectionParameters connectionParameters) {
     this.connectionParameters = connectionParameters;
     executor.execute(new Runnable() {
@@ -95,13 +98,18 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
   }
 
   // Connects to room - function runs on a local looper thread.
+  // 连接到房间 此方法运行在本地looper线程
   private void connectToRoomInternal() {
     String connectionUrl = getConnectionUrl(connectionParameters);
     Log.d(TAG, "Connect to room: " + connectionUrl);
+    //修改房间的状态
     roomState = ConnectionState.NEW;
+    //初始化WebSocket通道客户端
     wsClient = new WebSocketChannelClient(executor, this);
 
+    //初始化通过信令服务器建立连接的回调
     RoomParametersFetcherEvents callbacks = new RoomParametersFetcherEvents() {
+
       @Override public void onSignalingParametersReady(final SignalingParameters params) {
         WebSocketRTCClient.this.executor.execute(new Runnable() {
           @Override public void run() {
@@ -132,10 +140,13 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
   }
 
   // Helper functions to get connection, post message and leave message URLs
+  // 将房间参数对象转换成建立连接，传递信息，和留言的地址
   private String getConnectionUrl(RoomConnectionParameters connectionParameters) {
+    //https://appr.tc/join/456041265
     return connectionParameters.roomUrl + "/" + ROOM_JOIN + "/" + connectionParameters.roomId;
   }
 
+  //获取消息的url地址   https://appr.tc/message/456041265/18946313
   private String getMessageUrl(RoomConnectionParameters connectionParameters,
       SignalingParameters signalingParameters) {
     return connectionParameters.roomUrl
@@ -147,6 +158,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
         + signalingParameters.clientId;
   }
 
+  //离开房间的URL https://appr.tc/leave/456041265/18946313
   private String getLeaveUrl(RoomConnectionParameters connectionParameters,
       SignalingParameters signalingParameters) {
     return connectionParameters.roomUrl
@@ -163,24 +175,27 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
   //信令服务器返回成功时的回调，运行在looper线程
   private void signalingParametersReady(final SignalingParameters signalingParameters) {
     Log.d(TAG, "Room connection completed.");
+    //在和自己通讯的前提下，信令服务器返回的SDP消息不为空||信令的初始化为false
     if (connectionParameters.loopback && (!signalingParameters.initiator
         || signalingParameters.offerSdp != null)) {
       reportError("Loopback room is busy.");
       return;
     }
-    if (!connectionParameters.loopback
-        && !signalingParameters.initiator
-        && signalingParameters.offerSdp == null) {
+    if (!connectionParameters.loopback //不是和自己通讯
+        && !signalingParameters.initiator  //信令服务器已经ok
+        && signalingParameters.offerSdp == null) {//信令服务器没有返回sdp信息
       Log.w(TAG, "No offer SDP in room response.");
     }
     initiator = signalingParameters.initiator;
-    messageUrl = getMessageUrl(connectionParameters, signalingParameters);
-    leaveUrl = getLeaveUrl(connectionParameters, signalingParameters);
+    messageUrl = getMessageUrl(connectionParameters, signalingParameters);//消息通讯的url
+    leaveUrl = getLeaveUrl(connectionParameters, signalingParameters);//离开房间的url
     Log.d(TAG, "Message URL: " + messageUrl);
     Log.d(TAG, "Leave URL: " + leaveUrl);
+    //修改房间的状态
     roomState = ConnectionState.CONNECTED;
 
     // Fire connection and signaling parameters events.
+    // 回调
     events.onConnectedToRoom(signalingParameters);
 
     // Connect and register WebSocket client.

@@ -29,10 +29,12 @@ import java.util.LinkedList;
 
 /**
  * WebSocket client implementation.
- *
+ * WebSocket客户端实现
  * <p>All public methods should be called from a looper executor thread
  * passed in a constructor, otherwise exception will be thrown.
  * All events are dispatched on the same thread.
+ * 所有的public方法都应该执行在通过构造方法传入的looper线程池中
+ * 否则会抛出异常。所有的事件都在同一线程中分发
  */
 
 public class WebSocketChannelClient {
@@ -40,7 +42,7 @@ public class WebSocketChannelClient {
   private static final int CLOSE_TIMEOUT = 1000;
   private final WebSocketChannelEvents events;
   private final LooperExecutor executor;
-  private WebSocketConnection ws;
+  private WebSocketConnection ws;//第三方实现的webSocket的客户端
   private WebSocketObserver wsObserver;
   private String wsServerUrl;
   private String postServerUrl;
@@ -55,18 +57,23 @@ public class WebSocketChannelClient {
 
   /**
    * Possible WebSocket connection states.
+   * WebSocket的可能连接状态
    */
   public enum WebSocketConnectionState {
     NEW, CONNECTED, REGISTERED, CLOSED, ERROR
-  };
+  }
 
   /**
    * Callback interface for messages delivered on WebSocket.
    * All events are dispatched from a looper executor thread.
+   * WebSocket发送消息的回调接口
+   * 所有的事件都是从looper线程池中分发的
    */
   public interface WebSocketChannelEvents {
     void onWebSocketMessage(final String message);
+
     void onWebSocketClose();
+
     void onWebSocketError(final String description);
   }
 
@@ -179,8 +186,7 @@ public class WebSocketChannelClient {
       sendWSSMessage("DELETE", "");
     }
     // Close WebSocket in CONNECTED or ERROR states only.
-    if (state == WebSocketConnectionState.CONNECTED
-        || state == WebSocketConnectionState.ERROR) {
+    if (state == WebSocketConnectionState.CONNECTED || state == WebSocketConnectionState.ERROR) {
       ws.disconnect();
       state = WebSocketConnectionState.CLOSED;
 
@@ -205,8 +211,7 @@ public class WebSocketChannelClient {
   private void reportError(final String errorMessage) {
     Log.e(TAG, errorMessage);
     executor.execute(new Runnable() {
-      @Override
-      public void run() {
+      @Override public void run() {
         if (state != WebSocketConnectionState.ERROR) {
           state = WebSocketConnectionState.ERROR;
           events.onWebSocketError(errorMessage);
@@ -219,36 +224,31 @@ public class WebSocketChannelClient {
   private void sendWSSMessage(final String method, final String message) {
     String postUrl = postServerUrl + "/" + roomID + "/" + clientID;
     Log.d(TAG, "WS " + method + " : " + postUrl + " : " + message);
-    AsyncHttpURLConnection httpConnection = new AsyncHttpURLConnection(
-        method, postUrl, message, new AsyncHttpEvents() {
-          @Override
-          public void onHttpError(String errorMessage) {
+    AsyncHttpURLConnection httpConnection =
+        new AsyncHttpURLConnection(method, postUrl, message, new AsyncHttpEvents() {
+          @Override public void onHttpError(String errorMessage) {
             reportError("WS " + method + " error: " + errorMessage);
           }
 
-          @Override
-          public void onHttpComplete(String response) {
+          @Override public void onHttpComplete(String response) {
           }
         });
     httpConnection.send();
   }
 
-   // Helper method for debugging purposes. Ensures that WebSocket method is
-   // called on a looper thread.
+  // Helper method for debugging purposes. Ensures that WebSocket method is
+  // called on a looper thread.
   private void checkIfCalledOnValidThread() {
     if (!executor.checkOnLooperThread()) {
-      throw new IllegalStateException(
-          "WebSocket method is not called on valid thread");
+      throw new IllegalStateException("WebSocket method is not called on valid thread");
     }
   }
 
   private class WebSocketObserver implements WebSocketConnectionObserver {
-    @Override
-    public void onOpen() {
+    @Override public void onOpen() {
       Log.d(TAG, "WebSocket connection opened to: " + wsServerUrl);
       executor.execute(new Runnable() {
-        @Override
-        public void run() {
+        @Override public void run() {
           state = WebSocketConnectionState.CONNECTED;
           // Check if we have pending register request.
           if (roomID != null && clientID != null) {
@@ -258,17 +258,19 @@ public class WebSocketChannelClient {
       });
     }
 
-    @Override
-    public void onClose(WebSocketCloseNotification code, String reason) {
-      Log.d(TAG, "WebSocket connection closed. Code: " + code
-          + ". Reason: " + reason + ". State: " + state);
+    @Override public void onClose(WebSocketCloseNotification code, String reason) {
+      Log.d(TAG, "WebSocket connection closed. Code: "
+          + code
+          + ". Reason: "
+          + reason
+          + ". State: "
+          + state);
       synchronized (closeEventLock) {
         closeEvent = true;
         closeEventLock.notify();
       }
       executor.execute(new Runnable() {
-        @Override
-        public void run() {
+        @Override public void run() {
           if (state != WebSocketConnectionState.CLOSED) {
             state = WebSocketConnectionState.CLOSED;
             events.onWebSocketClose();
@@ -277,13 +279,11 @@ public class WebSocketChannelClient {
       });
     }
 
-    @Override
-    public void onTextMessage(String payload) {
+    @Override public void onTextMessage(String payload) {
       Log.d(TAG, "WSS->C: " + payload);
       final String message = payload;
       executor.execute(new Runnable() {
-        @Override
-        public void run() {
+        @Override public void run() {
           if (state == WebSocketConnectionState.CONNECTED
               || state == WebSocketConnectionState.REGISTERED) {
             events.onWebSocketMessage(message);
@@ -292,13 +292,10 @@ public class WebSocketChannelClient {
       });
     }
 
-    @Override
-    public void onRawTextMessage(byte[] payload) {
+    @Override public void onRawTextMessage(byte[] payload) {
     }
 
-    @Override
-    public void onBinaryMessage(byte[] payload) {
+    @Override public void onBinaryMessage(byte[] payload) {
     }
   }
-
 }
