@@ -198,7 +198,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
     // 回调
     events.onConnectedToRoom(signalingParameters);
 
-    // Connect and register WebSocket client.
+    // Connect and register WebSocket client. 注册并建立WebSocket客户端的连接
     wsClient.connect(signalingParameters.wssUrl, signalingParameters.wssPostUrl);
     wsClient.register(connectionParameters.roomId, signalingParameters.clientId);
   }
@@ -243,6 +243,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
   }
 
   // Send Ice candidate to the other participant.
+  // 将Ice候选发给另一个参与者
   @Override public void sendLocalIceCandidate(final IceCandidate candidate) {
     executor.execute(new Runnable() {
       @Override public void run() {
@@ -258,7 +259,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
             return;
           }
           sendPostMessage(MessageType.MESSAGE, messageUrl, json.toString());
-          if (connectionParameters.loopback) {
+          if (connectionParameters.loopback) {//和自己通讯
             events.onRemoteIceCandidate(candidate);
           }
         } else {

@@ -498,7 +498,7 @@ public class CallActivity extends Activity
     final long delta = System.currentTimeMillis() - callStartedTimeMs;
 
     signalingParameters = params;
-    logAndToast("Creating peer connection, delay=" + delta + "ms");
+    logAndToast("Creating peer connection, delay=" + delta + "ms"); //日志331行
     peerConnectionClient.createPeerConnection(rootEglBase.getEglBaseContext(), localRender,
         remoteRender, signalingParameters);
 

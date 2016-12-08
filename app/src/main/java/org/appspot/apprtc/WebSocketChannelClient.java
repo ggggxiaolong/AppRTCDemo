@@ -112,6 +112,7 @@ public class WebSocketChannelClient {
     }
   }
 
+  //注册到服务器 并将之间的信息发送给服务器
   public void register(final String roomID, final String clientID) {
     checkIfCalledOnValidThread();
     this.roomID = roomID;
@@ -130,6 +131,7 @@ public class WebSocketChannelClient {
       ws.sendTextMessage(json.toString());
       state = WebSocketConnectionState.REGISTERED;
       // Send any previously accumulated messages.
+      //将之前保存的信息发送到服务端
       for (String sendMessage : wsSendQueue) {
         send(sendMessage);
       }
