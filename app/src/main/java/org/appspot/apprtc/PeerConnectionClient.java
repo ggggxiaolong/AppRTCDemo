@@ -138,29 +138,29 @@ public class PeerConnectionClient {
    * Peer connection parameters.
    * p2p建立连接的参数
    */
-  public static class PeerConnectionParameters {
-    public final boolean videoCallEnabled;
-    public final boolean loopback;
-    public final boolean tracing;
-    public final boolean useCamera2;
-    public final int videoWidth;
-    public final int videoHeight;
-    public final int videoFps;
-    public final int videoStartBitrate;
-    public final String videoCodec;
-    public final boolean videoCodecHwAcceleration;
-    public final boolean captureToTexture;
-    public final int audioStartBitrate;
-    public final String audioCodec;
-    public final boolean noAudioProcessing;
-    public final boolean aecDump;
-    public final boolean useOpenSLES;
-    public final boolean disableBuiltInAEC;
-    public final boolean disableBuiltInAGC;
-    public final boolean disableBuiltInNS;
-    public final boolean enableLevelControl;
+  static class PeerConnectionParameters {
+    final boolean videoCallEnabled;
+    final boolean loopback;
+    final boolean tracing;
+    final boolean useCamera2;
+    final int videoWidth;
+    final int videoHeight;
+    final int videoFps;
+    final int videoStartBitrate;
+    final String videoCodec;
+    final boolean videoCodecHwAcceleration;
+    final boolean captureToTexture;
+    final int audioStartBitrate;
+    final String audioCodec;
+    final boolean noAudioProcessing;
+    final boolean aecDump;
+    final boolean useOpenSLES;
+    final boolean disableBuiltInAEC;
+    final boolean disableBuiltInAGC;
+    final boolean disableBuiltInNS;
+    final boolean enableLevelControl;
 
-    public PeerConnectionParameters(boolean videoCallEnabled, boolean loopback, boolean tracing,
+    PeerConnectionParameters(boolean videoCallEnabled, boolean loopback, boolean tracing,
         boolean useCamera2, int videoWidth, int videoHeight, int videoFps, int videoStartBitrate,
         String videoCodec, boolean videoCodecHwAcceleration, boolean captureToTexture,
         int audioStartBitrate, String audioCodec, boolean noAudioProcessing, boolean aecDump,
@@ -193,7 +193,7 @@ public class PeerConnectionClient {
    * Peer connection events.
    * p2p连接回调
    */
-  public interface PeerConnectionEvents {
+  interface PeerConnectionEvents {
     /**
      * Callback fired once local SDP is created and set.
      */
@@ -246,15 +246,15 @@ public class PeerConnectionClient {
     executor = Executors.newSingleThreadScheduledExecutor();
   }
 
-  public static PeerConnectionClient getInstance() {
+  static PeerConnectionClient getInstance() {
     return instance;
   }
 
-  public void setPeerConnectionFactoryOptions(PeerConnectionFactory.Options options) {
+  void setPeerConnectionFactoryOptions(PeerConnectionFactory.Options options) {
     this.options = options;
   }
 
-  public void createPeerConnectionFactory(final Context context,
+  void createPeerConnectionFactory(final Context context,
       final PeerConnectionParameters peerConnectionParameters, final PeerConnectionEvents events) {
     this.peerConnectionParameters = peerConnectionParameters;
     this.events = events;
@@ -284,7 +284,7 @@ public class PeerConnectionClient {
     });
   }
 
-  public void createPeerConnection(final EglBase.Context renderEGLContext,
+  void createPeerConnection(final EglBase.Context renderEGLContext,
       final VideoRenderer.Callbacks localRender, final VideoRenderer.Callbacks remoteRender,
       final SignalingParameters signalingParameters) {
     if (peerConnectionParameters == null) {
@@ -307,7 +307,7 @@ public class PeerConnectionClient {
     });
   }
 
-  public void close() {
+  void close() {
     executor.execute(new Runnable() {
       @Override public void run() {
         closeInternal();
@@ -620,11 +620,7 @@ public class PeerConnectionClient {
   }
 
   public boolean isHDVideo() {
-    if (!videoCallEnabled) {
-      return false;
-    }
-
-    return videoWidth * videoHeight >= 1280 * 720;
+    return videoCallEnabled && videoWidth * videoHeight >= 1280 * 720;
   }
 
   private void getStats() {
@@ -641,7 +637,7 @@ public class PeerConnectionClient {
     }
   }
 
-  public void enableStatsEvents(boolean enable, int periodMs) {
+  void enableStatsEvents(boolean enable, int periodMs) {
     if (enable) {
       try {
         statsTimer.schedule(new TimerTask() {
@@ -661,7 +657,7 @@ public class PeerConnectionClient {
     }
   }
 
-  public void setAudioEnabled(final boolean enable) {
+  void setAudioEnabled(final boolean enable) {
     executor.execute(new Runnable() {
       @Override public void run() {
         enableAudio = enable;
@@ -686,7 +682,7 @@ public class PeerConnectionClient {
     });
   }
 
-  public void createOffer() {
+  void createOffer() {
     executor.execute(new Runnable() {
       @Override public void run() {
         if (peerConnection != null && !isError) {
@@ -698,7 +694,7 @@ public class PeerConnectionClient {
     });
   }
 
-  public void createAnswer() {
+  void createAnswer() {
     executor.execute(new Runnable() {
       @Override public void run() {
         if (peerConnection != null && !isError) {
@@ -710,7 +706,7 @@ public class PeerConnectionClient {
     });
   }
 
-  public void addRemoteIceCandidate(final IceCandidate candidate) {
+  void addRemoteIceCandidate(final IceCandidate candidate) {
     executor.execute(new Runnable() {
       @Override public void run() {
         if (peerConnection != null && !isError) {
@@ -724,7 +720,7 @@ public class PeerConnectionClient {
     });
   }
 
-  public void removeRemoteIceCandidates(final IceCandidate[] candidates) {
+  void removeRemoteIceCandidates(final IceCandidate[] candidates) {
     executor.execute(new Runnable() {
       @Override public void run() {
         if (peerConnection == null || isError) {
@@ -738,20 +734,20 @@ public class PeerConnectionClient {
     });
   }
 
-  public void setRemoteDescription(final SessionDescription sdp) {
+  void setRemoteDescription(final SessionDescription sdp) {
     executor.execute(new Runnable() {
       @Override public void run() {
         if (peerConnection == null || isError) {
           return;
         }
         String sdpDescription = sdp.description;
-        if (preferIsac) {
+        if (preferIsac) {//设置音频编码格式
           sdpDescription = preferCodec(sdpDescription, AUDIO_CODEC_ISAC, true);
         }
-        if (videoCallEnabled) {
+        if (videoCallEnabled) {//设置是否开启视频编码
           sdpDescription = preferCodec(sdpDescription, preferredVideoCodec, false);
         }
-        if (videoCallEnabled && peerConnectionParameters.videoStartBitrate > 0) {
+        if (videoCallEnabled && peerConnectionParameters.videoStartBitrate > 0) {//设置视频的编码率
           sdpDescription = setStartBitrate(VIDEO_CODEC_VP8, true, sdpDescription,
               peerConnectionParameters.videoStartBitrate);
           sdpDescription = setStartBitrate(VIDEO_CODEC_VP9, true, sdpDescription,
@@ -759,7 +755,7 @@ public class PeerConnectionClient {
           sdpDescription = setStartBitrate(VIDEO_CODEC_H264, true, sdpDescription,
               peerConnectionParameters.videoStartBitrate);
         }
-        if (peerConnectionParameters.audioStartBitrate > 0) {
+        if (peerConnectionParameters.audioStartBitrate > 0) {//设置音频的编码率
           sdpDescription = setStartBitrate(AUDIO_CODEC_OPUS, false, sdpDescription,
               peerConnectionParameters.audioStartBitrate);
         }
@@ -770,7 +766,7 @@ public class PeerConnectionClient {
     });
   }
 
-  public void stopVideoSource() {
+  void stopVideoSource() {
     executor.execute(new Runnable() {
       @Override public void run() {
         if (videoCapture != null && !videoCapturerStopped) {
@@ -778,6 +774,7 @@ public class PeerConnectionClient {
           try {
             videoCapture.stopCapture();
           } catch (InterruptedException e) {
+            Log.e(TAG,e.getMessage());
           }
           videoCapturerStopped = true;
         }
@@ -785,7 +782,7 @@ public class PeerConnectionClient {
     });
   }
 
-  public void startVideoSource() {
+  void startVideoSource() {
     executor.execute(new Runnable() {
       @Override public void run() {
         if (videoCapture != null && videoCapturerStopped) {
@@ -970,7 +967,7 @@ public class PeerConnectionClient {
     videoCapture.switchCamera(null);//切换摄像头
   }
 
-  public void switchCamera() {
+  void switchCamera() {
     executor.execute(new Runnable() {
       @Override public void run() {
         switchCameraInternal();
@@ -978,7 +975,7 @@ public class PeerConnectionClient {
     });
   }
 
-  public void changeCaptureFormat(final int width, final int height, final int framerate) {
+  void changeCaptureFormat(final int width, final int height, final int framerate) {
     executor.execute(new Runnable() {
       @Override public void run() {
         changeCaptureFormatInternal(width, height, framerate);
