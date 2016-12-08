@@ -125,7 +125,7 @@ public class PeerConnectionClient {
   private SessionDescription localSdp; // either offer or answer SDP
   private MediaStream mediaStream;
   private int numberOfCameras;
-  private CameraVideoCapturer videoCapturer;
+  private CameraVideoCapturer videoCapture;
   // enableVideo is set to true if video should be rendered and sent.
   private boolean renderVideo;
   private VideoTrack localVideoTrack;
@@ -269,7 +269,7 @@ public class PeerConnectionClient {
     queuedRemoteCandidates = null;
     localSdp = null; // either offer or answer SDP
     mediaStream = null;
-    videoCapturer = null;
+    videoCapture = null;
     renderVideo = true;
     localVideoTrack = null;
     remoteVideoTrack = null;
@@ -474,12 +474,12 @@ public class PeerConnectionClient {
 
     // First, try to find front facing camera
     Logging.d(TAG, "Looking for front facing cameras.");
-    for (String deviceName : deviceNames) {
+    for (String deviceName : deviceNames) {//开启前置摄像头
       if (enumerator.isFrontFacing(deviceName)) {
         Logging.d(TAG, "Creating front facing camera capturer.");
-        videoCapturer = enumerator.createCapturer(deviceName, null);
+        videoCapture = enumerator.createCapturer(deviceName, null);//实例化videoCapture对象
 
-        if (videoCapturer != null) {
+        if (videoCapture != null) {
           return;
         }
       }
@@ -490,9 +490,9 @@ public class PeerConnectionClient {
     for (String deviceName : deviceNames) {
       if (!enumerator.isFrontFacing(deviceName)) {
         Logging.d(TAG, "Creating other camera capturer.");
-        videoCapturer = enumerator.createCapturer(deviceName, null);
+        videoCapture = enumerator.createCapturer(deviceName, null);
 
-        if (videoCapturer != null) {
+        if (videoCapture != null) {
           return;
         }
       }
@@ -531,11 +531,12 @@ public class PeerConnectionClient {
 
     // Set default WebRTC tracing and INFO libjingle logging.
     // NOTE: this _must_ happen while |factory| is alive!
+    // 设置libjingle的日志模式和输出路径
     Logging.enableTracing("logcat:", EnumSet.of(Logging.TraceLevel.TRACE_DEFAULT));
     Logging.enableLogToDebugOutput(Logging.Severity.LS_INFO);
 
-    mediaStream = factory.createLocalMediaStream("ARDAMS");
-    if (videoCallEnabled) {
+    mediaStream = factory.createLocalMediaStream("ARDAMS");//实例化媒体流
+    if (videoCallEnabled) { //设置开启摄像头，并且设备存在摄像头
       if (peerConnectionParameters.useCamera2) {
         if (!peerConnectionParameters.captureToTexture) {
           reportError(context.getString(R.string.camera2_texture_only_error));
@@ -549,15 +550,15 @@ public class PeerConnectionClient {
         createCapturer(new Camera1Enumerator(peerConnectionParameters.captureToTexture));
       }
 
-      if (videoCapturer == null) {
+      if (videoCapture == null) {
         reportError("Failed to open camera");
         return;
       }
-      mediaStream.addTrack(createVideoTrack(videoCapturer));
+      mediaStream.addTrack(createVideoTrack(videoCapture));//添加视频流
     }
 
-    mediaStream.addTrack(createAudioTrack());
-    peerConnection.addStream(mediaStream);
+    mediaStream.addTrack(createAudioTrack());//添加音频流
+    peerConnection.addStream(mediaStream);//将流信息添加到p2p连接
 
     if (peerConnectionParameters.aecDump) {
       try {
@@ -592,14 +593,14 @@ public class PeerConnectionClient {
       audioSource = null;
     }
     Log.d(TAG, "Stopping capture.");
-    if (videoCapturer != null) {
+    if (videoCapture != null) {
       try {
-        videoCapturer.stopCapture();
+        videoCapture.stopCapture();
       } catch (InterruptedException e) {
         throw new RuntimeException(e);
       }
-      videoCapturer.dispose();
-      videoCapturer = null;
+      videoCapture.dispose();
+      videoCapture = null;
     }
     Log.d(TAG, "Closing video source.");
     if (videoSource != null) {
@@ -772,10 +773,10 @@ public class PeerConnectionClient {
   public void stopVideoSource() {
     executor.execute(new Runnable() {
       @Override public void run() {
-        if (videoCapturer != null && !videoCapturerStopped) {
+        if (videoCapture != null && !videoCapturerStopped) {
           Log.d(TAG, "Stop video source.");
           try {
-            videoCapturer.stopCapture();
+            videoCapture.stopCapture();
           } catch (InterruptedException e) {
           }
           videoCapturerStopped = true;
@@ -787,9 +788,9 @@ public class PeerConnectionClient {
   public void startVideoSource() {
     executor.execute(new Runnable() {
       @Override public void run() {
-        if (videoCapturer != null && videoCapturerStopped) {
+        if (videoCapture != null && videoCapturerStopped) {
           Log.d(TAG, "Restart video source.");
-          videoCapturer.startCapture(videoWidth, videoHeight, videoFps);
+          videoCapture.startCapture(videoWidth, videoHeight, videoFps);
           videoCapturerStopped = false;
         }
       }
@@ -956,7 +957,7 @@ public class PeerConnectionClient {
   }
 
   private void switchCameraInternal() {
-    if (!videoCallEnabled || numberOfCameras < 2 || isError || videoCapturer == null) {
+    if (!videoCallEnabled || numberOfCameras < 2 || isError || videoCapture == null) {
       Log.e(TAG, "Failed to switch camera. Video: "
           + videoCallEnabled
           + ". Error : "
@@ -966,7 +967,7 @@ public class PeerConnectionClient {
       return;  // No video is sent or only one camera is available or error happened.
     }
     Log.d(TAG, "Switch camera");
-    videoCapturer.switchCamera(null);
+    videoCapture.switchCamera(null);
   }
 
   public void switchCamera() {
@@ -986,13 +987,13 @@ public class PeerConnectionClient {
   }
 
   private void changeCaptureFormatInternal(int width, int height, int framerate) {
-    if (!videoCallEnabled || isError || videoCapturer == null) {
+    if (!videoCallEnabled || isError || videoCapture == null) {
       Log.e(TAG,
           "Failed to change capture format. Video: " + videoCallEnabled + ". Error : " + isError);
       return;
     }
     Log.d(TAG, "changeCaptureFormat: " + width + "x" + height + "@" + framerate);
-    videoCapturer.onOutputFormatRequest(width, height, framerate);
+    videoCapture.onOutputFormatRequest(width, height, framerate);
   }
 
   // Implementation detail: observe ICE & stream changes and react accordingly.
@@ -1087,10 +1088,10 @@ public class PeerConnectionClient {
         return;
       }
       String sdpDescription = origSdp.description;
-      if (preferIsac) {
+      if (preferIsac) {//设置音频解码
         sdpDescription = preferCodec(sdpDescription, AUDIO_CODEC_ISAC, true);
       }
-      if (videoCallEnabled) {
+      if (videoCallEnabled) {//是否开启视频解码
         sdpDescription = preferCodec(sdpDescription, preferredVideoCodec, false);
       }
       final SessionDescription sdp = new SessionDescription(origSdp.type, sdpDescription);
