@@ -35,6 +35,11 @@ import java.util.concurrent.TimeUnit;
  * sampleCpuUtilization(), (2) getCpuAvg3() returns the use since 3 prior
  * calls, and (3) getCpuAvgAll() returns the use over all SAMPLE_SAVE_NUMBER
  * calls.
+ * 简单的CPU模拟器 调用者创建一个CPUMonitor对象，可以通过这个对象的sampleCpuUtilization()
+ * 方法收集所有运行在标准频率下的CPU百分比使用量。 将生成3个数值：
+ * (1) getCpuCurrent() 返回上次调用sampleCpuUtilization()的cpu使用量
+ * (2) getCpuAvg3() 返回前3次调用结果
+ * (3) getCpuAvgAll() 返回所有保存的样本
  *
  * <p>CPUs in Android are often "offline", and while this of course means 0 Hz
  * as current frequency, in this state we cannot even get their nominal
@@ -45,23 +50,33 @@ import java.util.concurrent.TimeUnit;
  * online, this unidirectional frequency inheritance should be no problem in
  * practice.)
  *
+ * 安卓中CPU经常是离线状态，此时当然意味当前的运行频率是着0HZ，在这种状态下我们甚至不能获取到他的标准频率
+ * 我们会非常的小心的处理，并允许任何CPU为不可见状态。我们假设不可见的CPU与运行在较低标准的CPU的标准频率
+ * 是相同的，但是一旦它变为可见我们会获取它的真实频率并记录下来。（因为在实际情况下CPU 0一般都是可见的，
+ * 这种单项频率的继承的关系在实际情况下是没有问题的）
+ *
  * <p>Caveats:
  *   o No provision made for zany "turbo" mode, common in the x86 world.
+ *   不支持x86cpu的Turbo Boost（睿频）加速技术
  *   o No provision made for ARM big.LITTLE; if CPU n can switch behind our
  *     back, we might get incorrect estimates.
+ *   不支持ARM big.LITTLE技术
  *   o This is not thread-safe.  To call asynchronously, create different
  *     CpuMonitor objects.
+ *   非线程安全。如果异步调用，创建不同的实体
  *
  * <p>If we can gather enough info to generate a sensible result,
  * sampleCpuUtilization returns true.  It is designed to never throw an
  * exception.
+ * 如果我们可以获取到足够的信息来生成一个精准的结果，sampleCpuUtilization将返回true。
+ * 并且这个方法不会抛异常
  *
  * <p>sampleCpuUtilization should not be called too often in its present form,
  * since then deltas would be small and the percent values would fluctuate and
  * be unreadable. If it is desirable to call it more often than say once per
  * second, one would need to increase SAMPLE_SAVE_NUMBER and probably use
  * Queue<Integer> to avoid copying overhead.
- *
+ * sampleCpuUtilization不可以在当前模式下频繁调用，
  * <p>Known problems:
  *   1. Nexus 7 devices running Kitkat have a kernel which often output an
  *      incorrect 'idle' field in /proc/stat.  The value is close to twice the

@@ -23,6 +23,7 @@ public interface AppRTCClient {
 
   /**
    * Struct holding the connection parameters of an AppRTC room.
+   * 持有AppRtc房间连接参数的结构体
    */
   class RoomConnectionParameters {
     public final String roomUrl;

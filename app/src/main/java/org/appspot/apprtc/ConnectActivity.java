@@ -42,6 +42,7 @@ import java.util.Random;
 
 /**
  * Handles the initial setup where the user selects which room to join.
+ * 处理和房间建立连接的前期准备情况
  */
 public class ConnectActivity extends Activity {
   private static final String TAG = "ConnectActivity";
@@ -142,6 +143,7 @@ public class ConnectActivity extends Activity {
     addFavoriteButton.setOnClickListener(addFavoriteListener);
 
     // If an implicit VIEW intent is launching the app, go directly to that URL.
+    //如果是通过隐式意图启动的activity直接从一图中读取URL
     final Intent intent = getIntent();
     if ("android.intent.action.VIEW".equals(intent.getAction())
         && !commandLineRun) {
@@ -252,11 +254,19 @@ public class ConnectActivity extends Activity {
 
   //算法介绍
   //http://blog.csdn.net/ssdzdk/article/details/39577335
+  /**
+   * 建立连接
+   * @param roomId 房间id
+   * @param commandLineRun 是否是通过隐式意图开启的
+   * @param loopback 是否是和自己通讯
+   * @param runTimeMs 运行的时间（开启后多长时间关闭连接）
+   */
   private void connectToRoom(
       String roomId, boolean commandLineRun, boolean loopback, int runTimeMs) {
     this.commandLineRun = commandLineRun;
 
     // roomId is random for loopback.
+    //如果是和自己通讯建立一个随机房间号
     if (loopback) {
       roomId = Integer.toString((new Random()).nextInt(100000000));
     }
@@ -354,7 +364,7 @@ public class ConnectActivity extends Activity {
       }
     }
 
-    // Check capture quality slider flag.
+    // Check capture quality slider flag.检查是否显示视频质量滚动条
     boolean captureQualitySlider = sharedPref.getBoolean(keyprefCaptureQualitySlider,
         Boolean.valueOf(getString(R.string.pref_capturequalityslider_default)));
 
@@ -379,7 +389,7 @@ public class ConnectActivity extends Activity {
       audioStartBitrate = Integer.parseInt(bitrateValue);
     }
 
-    // Check statistics display option.
+    // Check statistics display option.检查是否显示视频分析选项
     boolean displayHud = sharedPref.getBoolean(keyprefDisplayHud,
         Boolean.valueOf(getString(R.string.pref_displayhud_default)));
 
