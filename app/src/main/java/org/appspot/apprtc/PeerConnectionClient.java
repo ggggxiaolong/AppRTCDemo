@@ -535,8 +535,11 @@ public class PeerConnectionClient {
     // Set default WebRTC tracing and INFO libjingle logging.
     // NOTE: this _must_ happen while |factory| is alive!
     // 设置libjingle的日志模式和输出路径
-    Logging.enableTracing("logcat:", EnumSet.of(Logging.TraceLevel.TRACE_DEFAULT));
-    Logging.enableLogToDebugOutput(Logging.Severity.LS_INFO);
+    // TODO: 2016/12/9 change libjingel log tag and level
+    //Logging.enableTracing("logcat:", EnumSet.of(Logging.TraceLevel.TRACE_DEFAULT));
+    //Logging.enableLogToDebugOutput(Logging.Severity.LS_INFO);
+    Logging.enableTracing("logcat:", EnumSet.of(Logging.TraceLevel.TRACE_NONE));
+    Logging.enableLogToDebugOutput(Logging.Severity.LS_ERROR);
 
     mediaStream = factory.createLocalMediaStream("ARDAMS");//实例化媒体流
     if (videoCallEnabled) { //设置开启摄像头，并且设备存在摄像头 实例化videoCapture对象
@@ -546,10 +549,10 @@ public class PeerConnectionClient {
           return;
         }
 
-        Logging.d(TAG, "Creating capturer using camera2 API.");
+        Logging.d(TAG, "Creating capture using camera2 API.");
         createCapturer(new Camera2Enumerator(context));
       } else {
-        Logging.d(TAG, "Creating capturer using camera1 API.");
+        Logging.d(TAG, "Creating capture using camera1 API.");
         createCapturer(new Camera1Enumerator(peerConnectionParameters.captureToTexture));
       }
 
@@ -1090,7 +1093,7 @@ public class PeerConnectionClient {
   // 处理offer 候选者／信令 和 应答 一旦应答SDP设置就会添加远程ICE候选者
   private class SDPObserver implements SdpObserver {
     @Override public void onCreateSuccess(final SessionDescription origSdp) {
-      Log.i(TAG, "SDPObserver --> onCreateSuccess");
+      Log.d(TAG, "SDPObserver --> onCreateSuccess");
       if (localSdp != null) {
         reportError("Multiple SDP create.");
         return;
@@ -1115,24 +1118,24 @@ public class PeerConnectionClient {
     }
 
     @Override public void onSetSuccess() {
-      Log.i(TAG, "SDPObserver --> onSetSuccess");
+      Log.d(TAG, "SDPObserver --> onSetSuccess");
       executor.execute(new Runnable() {
         @Override public void run() {
           if (peerConnection == null || isError) {
             return;
           }
-          if (isInitiator) {
+          if (isInitiator) {//房间的创建者（不含参与者的SDP信息和ICE信息）
             // For offering peer connection we first create offer and set
             // local SDP, then after receiving answer set remote SDP.
-            // 对于请求peer连接 我们首先创建请求并设置本地SDP信息，然后接受应答设置远端的SDP
+            // 对于请求peer连接 我们首先创建请求并设置本地SDP信息，然后当接受应答后设置远端的SDP
             if (peerConnection.getRemoteDescription() == null) {
               // We've just set our local SDP so time to send it.
-              Log.d(TAG, "Local SDP set succesfully");
+              Log.d(TAG, "Local SDP set successfully");
               events.onLocalDescription(localSdp);
             } else {
               // We've just set remote description, so drain remote
               // and send local ICE candidates.
-              Log.d(TAG, "Remote SDP set succesfully");
+              Log.d(TAG, "Remote SDP set successfully");
               drainCandidates();
             }
           } else {
@@ -1142,7 +1145,7 @@ public class PeerConnectionClient {
             if (peerConnection.getLocalDescription() != null) {
               // We've just set our local SDP so time to send it, drain
               // remote and send local ICE candidates.
-              Log.d(TAG, "Local SDP set succesfully");
+              Log.d(TAG, "Local SDP set successfully");
               events.onLocalDescription(localSdp);
               drainCandidates();
             } else {

@@ -253,7 +253,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
         jsonPut(json, "label", candidate.sdpMLineIndex);
         jsonPut(json, "id", candidate.sdpMid);
         jsonPut(json, "candidate", candidate.sdp);
-        if (initiator) {
+        if (initiator) {//是否为发起者
           // Call initiator sends ice candidates to GAE server.
           if (roomState != ConnectionState.CONNECTED) {
             reportError("Sending ICE candidate in non connected state.");
@@ -305,6 +305,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
   // All events are called by WebSocketChannelClient on a local looper thread
   // (passed to WebSocket client constructor).
   @Override public void onWebSocketMessage(final String msg) {
+    Log.i(TAG, "WebSocketChannelEvents --> onWebSocketMessage:" + msg);
     if (wsClient.getState() != WebSocketConnectionState.REGISTERED) {
       Log.e(TAG, "Got WebSocket message in non registered state.");
       return;
@@ -316,16 +317,16 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
       if (msgText.length() > 0) {
         json = new JSONObject(msgText);
         String type = json.optString("type");
-        if (type.equals("candidate")) {
+        if (type.equals("candidate")) {//有候选者加入
           events.onRemoteIceCandidate(toJavaCandidate(json));
-        } else if (type.equals("remove-candidates")) {
+        } else if (type.equals("remove-candidates")) {//有候选者退出
           JSONArray candidateArray = json.getJSONArray("candidates");
           IceCandidate[] candidates = new IceCandidate[candidateArray.length()];
           for (int i = 0; i < candidateArray.length(); ++i) {
             candidates[i] = toJavaCandidate(candidateArray.getJSONObject(i));
           }
           events.onRemoteIceCandidatesRemoved(candidates);
-        } else if (type.equals("answer")) {
+        } else if (type.equals("answer")) {//offer 应答
           if (initiator) {
             SessionDescription sdp =
                 new SessionDescription(SessionDescription.Type.fromCanonicalForm(type),
@@ -334,7 +335,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
           } else {
             reportError("Received answer for call initiator: " + msg);
           }
-        } else if (type.equals("offer")) {
+        } else if (type.equals("offer")) {//请求
           if (!initiator) {
             SessionDescription sdp =
                 new SessionDescription(SessionDescription.Type.fromCanonicalForm(type),
@@ -343,7 +344,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
           } else {
             reportError("Received offer for call receiver: " + msg);
           }
-        } else if (type.equals("bye")) {
+        } else if (type.equals("bye")) {//关闭
           events.onChannelClose();
         } else {
           reportError("Unexpected WebSocket message: " + msg);
@@ -361,6 +362,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
   }
 
   @Override public void onWebSocketClose() {
+    Log.i(TAG, "WebSocketChannelEvents --> onWebSocketClose" );
     events.onChannelClose();
   }
 
@@ -392,6 +394,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
   }
 
   // Send SDP or ICE candidate to a room server.
+  // 将SDP和ICE候选者信息发送给房间服务器
   private void sendPostMessage(final MessageType messageType, final String url,
       final String message) {
     String logInfo = url;

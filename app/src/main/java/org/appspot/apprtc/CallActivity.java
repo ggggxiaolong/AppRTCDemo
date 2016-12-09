@@ -376,6 +376,7 @@ public class CallActivity extends Activity
     remoteRender.requestLayout();
   }
 
+  // TODO: 2016/12/9 start call
   private void startCall() {
     if (appRtcClient == null) {
       Log.e(TAG, "AppRTC client is not allocated for a call.");
@@ -533,6 +534,7 @@ public class CallActivity extends Activity
 
   //服务器返回建立房间的参数
   @Override public void onConnectedToRoom(final SignalingParameters params) {
+    Log.i(TAG, "SignalingEvents --> onConnectedToRoom");
     runOnUiThread(new Runnable() {
       @Override public void run() {
         onConnectedToRoomInternal(params);
@@ -541,6 +543,7 @@ public class CallActivity extends Activity
   }
 
   @Override public void onRemoteDescription(final SessionDescription sdp) {
+    Log.i(TAG, "SignalingEvents --> onRemoteDescription");
     final long delta = System.currentTimeMillis() - callStartedTimeMs;
     runOnUiThread(new Runnable() {
       @Override public void run() {
@@ -561,6 +564,7 @@ public class CallActivity extends Activity
   }
 
   @Override public void onRemoteIceCandidate(final IceCandidate candidate) {
+    Log.i(TAG, "SignalingEvents --> onRemoteIceCandidate");
     runOnUiThread(new Runnable() {
       @Override public void run() {
         if (peerConnectionClient == null) {
@@ -573,6 +577,7 @@ public class CallActivity extends Activity
   }
 
   @Override public void onRemoteIceCandidatesRemoved(final IceCandidate[] candidates) {
+    Log.i(TAG, "SignalingEvents --> onRemoteIceCandidatesRemoved");
     runOnUiThread(new Runnable() {
       @Override public void run() {
         if (peerConnectionClient == null) {
@@ -585,6 +590,7 @@ public class CallActivity extends Activity
   }
 
   @Override public void onChannelClose() {
+    Log.i(TAG, "SignalingEvents --> onChannelClose");
     runOnUiThread(new Runnable() {
       @Override public void run() {
         logAndToast("Remote end hung up; dropping PeerConnection");
@@ -595,6 +601,7 @@ public class CallActivity extends Activity
 
   //信令服务器建立连接失败的回调
   @Override public void onChannelError(final String description) {
+    Log.i(TAG, "SignalingEvents --> onChannelError");
     reportError(description);
   }
 
@@ -605,6 +612,7 @@ public class CallActivity extends Activity
   // 发送本地peer连接SDP和ICE候选者到远程参与者
   @Override public void onLocalDescription(final SessionDescription sdp) {
     final long delta = System.currentTimeMillis() - callStartedTimeMs;
+    Log.i(TAG, "PeerConnectionEvents --> onLocalDescription");
     runOnUiThread(new Runnable() {
       @Override public void run() {
         if (appRtcClient != null) {
@@ -620,6 +628,7 @@ public class CallActivity extends Activity
   }
 
   @Override public void onIceCandidate(final IceCandidate candidate) {
+    Log.i(TAG, "PeerConnectionEvents --> onIceCandidate");
     runOnUiThread(new Runnable() {
       @Override public void run() {
         if (appRtcClient != null) {
@@ -630,6 +639,7 @@ public class CallActivity extends Activity
   }
 
   @Override public void onIceCandidatesRemoved(final IceCandidate[] candidates) {
+    Log.i(TAG, "PeerConnectionEvents --> onIceCandidatesRemoved");
     runOnUiThread(new Runnable() {
       @Override public void run() {
         if (appRtcClient != null) {
@@ -640,6 +650,7 @@ public class CallActivity extends Activity
   }
 
   @Override public void onIceConnected() {
+    Log.i(TAG, "PeerConnectionEvents --> onIceConnected");
     final long delta = System.currentTimeMillis() - callStartedTimeMs;
     runOnUiThread(new Runnable() {
       @Override public void run() {
@@ -651,6 +662,7 @@ public class CallActivity extends Activity
   }
 
   @Override public void onIceDisconnected() {
+    Log.i(TAG, "PeerConnectionEvents --> onIceDisconnected");
     runOnUiThread(new Runnable() {
       @Override public void run() {
         logAndToast("ICE disconnected");
@@ -661,9 +673,11 @@ public class CallActivity extends Activity
   }
 
   @Override public void onPeerConnectionClosed() {
+    Log.i(TAG, "PeerConnectionEvents --> onPeerConnectionClosed");
   }
 
   @Override public void onPeerConnectionStatsReady(final StatsReport[] reports) {
+    Log.i(TAG, "PeerConnectionEvents --> onPeerConnectionStatsReady");
     runOnUiThread(new Runnable() {
       @Override public void run() {
         if (!isError && iceConnected) {
@@ -674,6 +688,7 @@ public class CallActivity extends Activity
   }
 
   @Override public void onPeerConnectionError(final String description) {
+    Log.i(TAG, "PeerConnectionEvents --> onPeerConnectionError");
     reportError(description);
   }
 }

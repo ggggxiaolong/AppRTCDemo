@@ -1,0 +1,378 @@
+D/ConnectActivity: Connecting to room 228837362 at URL https://appr.tc
+I/org.webrtc.Logging: EglBase14: SDK version: 25. isEGL14Supported: true
+I/org.webrtc.Logging: SurfaceViewRenderer: local_video_view: Initializing.
+I/org.webrtc.Logging: EglBase14: SDK version: 25. isEGL14Supported: true
+I/org.webrtc.Logging: SurfaceViewRenderer: remote_video_view: Initializing.
+I/org.webrtc.Logging: EglBase14: SDK version: 25. isEGL14Supported: true
+D/LooperExecutor: Looper thread started.
+D/CpuMonitor: CpuMonitor ctor.
+D/CallRTCClient: Connecting to: https://appr.tc
+D/WSRTCClient: Connect to room: https://appr.tc/join/228837362
+D/RoomRTCClient: Connecting to room: https://appr.tc/join/228837362
+D/CpuMonitor: Core 0. Max frequency: 1440000
+D/AppRTCProximitySensor: AppRTCProximitySensor@[name=main, id=1]
+D/CpuMonitor: Core 1. Max frequency: 1440000
+D/CpuMonitor: Core 2. Max frequency: 1440000
+D/CpuMonitor: Core 3. Max frequency: 1440000
+D/CpuMonitor: Core 4. Max frequency: 1824000
+D/CpuMonitor: Core 5. Max frequency: 1824000
+D/NetworkSecurityConfig: No Network Security Config specified, using platform default
+D/AppRTCAudioManager: Android SDK: 25, Release: 7.1.1, Brand: google, Device: bullhead, Id: NMF26F, Hardware: bullhead, Manufacturer: LGE, Model: Nexus 5X, Product: bullhead
+D/CallRTCClient: Initializing the audio manager...
+D/AppRTCAudioManager: init
+D/AppRTCAudioManager: audioDevices: [EARPIECE, SPEAKER_PHONE]
+D/AppRTCAudioManager: setAudioDevice(device=SPEAKER_PHONE)
+D/AppRTCAudioManager: onAudioManagerChangedState: devices=[EARPIECE, SPEAKER_PHONE], selected=SPEAKER_PHONE
+D/AppRTCProximitySensor: start@[name=main, id=1]
+D/AppRTCProximitySensor: Proximity sensor: name=RPR0521 Proximity Sensor, vendor: Rohm, power: 0.0, resolution: 1.0, max range: 5.0, min delay: 200000, type: android.sensor.proximity, max delay: 10000000, reporting mode: 1, isWakeUpSensor: true
+D/PCRTCClient: Create peer connection factory. Use video: true
+D/PCRTCClient: Pereferred video codec: VP8
+D/PCRTCClient: Disable OpenSL ES audio even if device supports it
+D/PCRTCClient: Enable built-in AEC if device supports it
+D/PCRTCClient: Enable built-in AGC if device supports it
+D/PCRTCClient: Enable built-in NS if device supports it
+D/JVM: JVM::Initialize@[tid=13005]
+D/JVM: JVM::JVM@[tid=13005]
+W/VideoCapabilities: Unrecognized profile 2130706433 for video/avc
+D/CpuMonitor: resume
+D/AppRTCProximitySensor: Proximity sensor => FAR state
+D/AppRTCAudioManager: setAudioDevice(device=SPEAKER_PHONE)
+D/AppRTCAudioManager: onAudioManagerChangedState: devices=[EARPIECE, SPEAKER_PHONE], selected=SPEAKER_PHONE
+D/AppRTCProximitySensor: start@[name=main, id=1]
+D/AppRTCProximitySensor: onSensorChanged@[name=main, id=1]: accuracy=3, timestamp=267018377214779, distance=5.0
+I/VideoCapabilities: Unsupported profile 4 for video/mp4v-es
+I/org.webrtc.Logging: MediaCodecVideoEncoder: Found target encoder for mime video/x-vnd.on2.vp8 : OMX.qcom.video.encoder.vp8. Color: 0x15
+W/VideoCapabilities: Unrecognized profile 2130706433 for video/avc
+I/org.webrtc.Logging: MediaCodecVideoEncoder: Found target encoder for mime video/avc : OMX.qcom.video.encoder.avc. Color: 0x15
+I/org.webrtc.Logging: MediaCodecVideoDecoder: Trying to find HW decoder for mime video/x-vnd.on2.vp8
+I/org.webrtc.Logging: MediaCodecVideoDecoder: Found candidate decoder OMX.qcom.video.decoder.vp8
+I/org.webrtc.Logging: MediaCodecVideoDecoder: Found target decoder OMX.qcom.video.decoder.vp8. Color: 0x13
+I/org.webrtc.Logging: MediaCodecVideoDecoder: Trying to find HW decoder for mime video/x-vnd.on2.vp9
+I/org.webrtc.Logging: MediaCodecVideoDecoder: Found candidate decoder OMX.google.vp9.decoder
+I/org.webrtc.Logging: MediaCodecVideoDecoder: No HW decoder found for mime video/x-vnd.on2.vp9
+I/org.webrtc.Logging: MediaCodecVideoDecoder: Trying to find HW decoder for mime video/avc
+I/org.webrtc.Logging: MediaCodecVideoDecoder: Found candidate decoder OMX.qcom.video.decoder.avc
+I/org.webrtc.Logging: MediaCodecVideoDecoder: Found target decoder OMX.qcom.video.decoder.avc. Color: 0x13
+D/JVM: AttachCurrentThreadIfNeeded::ctor@[tid=13007]
+D/JVM: Attaching thread to JVM
+D/JVM: JVM::environment@[tid=13007]
+D/JVM: JNIEnvironment::ctor@[tid=13007]
+D/AudioManager: ctor@[tid=13007]
+D/JVM: JNIEnvironment::RegisterNatives(org/webrtc/voiceengine/WebRtcAudioManager)
+D/JVM: NativeRegistration::ctor@[tid=13007]
+D/JVM: NativeRegistration::NewObject@[tid=13007]
+I/org.webrtc.Logging: WebRtcAudioManager: ctor@[name=Thread-5, id=2497]
+I/org.webrtc.Logging: WebRtcAudioManager: Sample rate is set to 48000 Hz
+I/org.webrtc.Logging: WebRtcAudioEffects: canUseAcousticEchoCanceler: true
+I/org.webrtc.Logging: WebRtcAudioEffects: canUseAutomaticGainControl: false
+I/org.webrtc.Logging: WebRtcAudioEffects: canUseNoiseSuppressor: true
+D/AudioManager: OnCacheAudioParameters@[tid=13007]
+D/AudioManager: hardware_aec: 1
+D/AudioManager: hardware_agc: 0
+D/AudioManager: hardware_ns: 1
+D/AudioManager: low_latency_output: 1
+D/AudioManager: pro_audio: 1
+D/AudioManager: sample_rate: 48000
+D/AudioManager: channels: 1
+D/AudioManager: output_buffer_size: 192
+D/AudioManager: input_buffer_size: 1920
+D/JVM: GlobalRef::ctor@[tid=13007]
+D/AudioManager: JavaAudioManager::ctor@[tid=13007]
+D/AudioManager: IsLowLatencyPlayoutSupported()
+E/org.webrtc.Logging: WebRtcAudioManager: Nexus 5X is blacklisted for OpenSL ES usage!
+D/JVM: AttachCurrentThreadIfNeeded::ctor@[tid=13007]
+D/JVM: JVM::environment@[tid=13007]
+D/JVM: JNIEnvironment::ctor@[tid=13007]
+D/AudioTrackJni: ctor@[tid=13007]
+D/JVM: JNIEnvironment::RegisterNatives(org/webrtc/voiceengine/WebRtcAudioTrack)
+D/JVM: NativeRegistration::ctor@[tid=13007]
+D/JVM: NativeRegistration::NewObject@[tid=13007]
+I/org.webrtc.Logging: SurfaceViewRenderer: remote_video_view: Surface created.
+I/org.webrtc.Logging: WebRtcAudioTrack: ctor@[name=Thread-5, id=2497]
+D/JVM: GlobalRef::ctor@[tid=13007]
+D/JVM: AttachCurrentThreadIfNeeded::ctor@[tid=13007]
+D/JVM: JVM::environment@[tid=13007]
+D/JVM: JNIEnvironment::ctor@[tid=13007]
+D/AudioRecordJni: ctor@[tid=13007]
+D/JVM: JNIEnvironment::RegisterNatives(org/webrtc/voiceengine/WebRtcAudioRecord)
+D/JVM: NativeRegistration::ctor@[tid=13007]
+D/JVM: NativeRegistration::NewObject@[tid=13007]
+I/org.webrtc.Logging: SurfaceViewRenderer: remote_video_view: Surface changed: 1080x1920
+I/org.webrtc.Logging: WebRtcAudioRecord: ctor@[name=Thread-5, id=2497]
+I/org.webrtc.Logging: WebRtcAudioEffects: ctor@[name=Thread-5, id=2497]
+D/JVM: GlobalRef::ctor@[tid=13007]
+D/AudioManager: SetActiveAudioLayer(5)@[tid=13007]
+D/AudioManager: delay_estimate_in_milliseconds: 150
+D/AudioTrackJni: AttachAudioBuffer@[tid=13007]
+D/AudioTrackJni: SetPlayoutSampleRate(48000)
+D/AudioTrackJni: SetPlayoutChannels(1)
+D/AudioRecordJni: AttachAudioBuffer
+D/AudioRecordJni: SetRecordingSampleRate(48000)
+D/AudioRecordJni: SetRecordingChannels(1)
+D/AudioRecordJni: total_delay_in_milliseconds: 150
+D/AudioManager: Init@[tid=13007]
+I/org.webrtc.Logging: WebRtcAudioManager: init@[name=Thread-5, id=2497]
+I/org.webrtc.Logging: WebRtcAudioManager: audio mode is: MODE_IN_COMMUNICATION
+D/AudioTrackJni: Init@[tid=13007]
+D/AudioRecordJni: Init@[tid=13007]
+D/AudioRecordJni: EnableBuiltInAEC@[tid=13007]
+I/org.webrtc.Logging: WebRtcAudioRecord: enableBuiltInAEC(true)
+I/org.webrtc.Logging: WebRtcAudioEffects: setAEC(true)
+I/org.webrtc.Logging: WebRtcAudioEffects: canUseAcousticEchoCanceler: true
+D/AudioRecordJni: EnableBuiltInNS@[tid=13007]
+I/org.webrtc.Logging: WebRtcAudioRecord: enableBuiltInNS(true)
+I/org.webrtc.Logging: WebRtcAudioEffects: setNS(true)
+I/org.webrtc.Logging: WebRtcAudioEffects: canUseNoiseSuppressor: true
+I/org.webrtc.Logging: WebRtcAudioManager: VOICE_CALL stream volume: 5 (max=7)
+I/org.webrtc.Logging: PeerConnectionFactory: onNetworkThreadReady
+I/org.webrtc.Logging: PeerConnectionFactory: onWorkerThreadReady
+I/org.webrtc.Logging: PeerConnectionFactory: onSignalingThreadReady
+D/PCRTCClient: Peer connection factory created.
+I/org.webrtc.Logging: SurfaceViewRenderer: local_video_view: Surface created.
+I/org.webrtc.Logging: SurfaceViewRenderer: local_video_view: Surface changed: 1080x1920
+D/RoomRTCClient: Room response: 
+{
+    "params": {
+        "is_initiator": "true",
+        "room_link": "https://appr.tc/r/228837362",
+        "turn_server_override": [],
+        "ice_server_transports": "",
+        "media_constraints": "{\"audio\": true, \"video\": true}",
+        "include_loopback_js": "",
+        "turn_url": "https://computeengineondemand.appspot.com/turn?username=11036533&key=4080218913",
+        "wss_url": "wss://apprtc-ws.webrtc.org:443/ws",
+        "pc_constraints": "{\"optional\": []}",
+        "pc_config": "{\"rtcpMuxPolicy\": \"require\", \"bundlePolicy\": \"max-bundle\", \"iceServers\": []}",
+        "wss_post_url": "https://apprtc-ws.webrtc.org:443",
+        "ice_server_url": "https://networktraversal.googleapis.com/v1alpha/iceconfig?key=AIzaSyAJdh2HkajseEIltlZ3SIXO02Tze9sO3NY",
+        "warning_messages": [],
+        "room_id": "228837362",
+        "version_info": "{\"gitHash\": \"6e89f36e0d67d4ae535849e11bc2aa7910525948\", \"branch\": \"master\", \"time\": \"Wed Nov 2 01:50:02 2016 -0700\"}",
+        "error_messages": [],
+        "client_id": "11036533",
+        "bypass_join_confirmation": "false",
+        "is_loopback": "false",
+        "offer_options": "{}",
+        "messages": [],
+        "callstats_params": "{\"appSecret\": \"IhG4J05kwq3Pxo+LF4uF0mmSdno=\", \"appId\": \"423310139\"}"
+    },
+    "result": "SUCCESS"
+}
+D/RoomRTCClient: RoomId: 228837362. ClientId: 11036533
+D/RoomRTCClient: Initiator: true
+D/RoomRTCClient: WSS url: wss://apprtc-ws.webrtc.org:443/ws
+D/RoomRTCClient: WSS POST url: https://apprtc-ws.webrtc.org:443
+D/RoomRTCClient: Request TURN from: https://networktraversal.googleapis.com/v1alpha/iceconfig?key=AIzaSyAJdh2HkajseEIltlZ3SIXO02Tze9sO3NY
+D/RoomRTCClient: TURN response: 
+{
+    "lifetimeDuration": "86400s",
+    "iceServers": [
+        {
+            "urls": [
+                "turn:216.58.221.30:19305?transport=udp",
+                "turn:[2404:6800:4004:815::201E]:19305?transport=udp",
+                "turn:216.58.221.30:443?transport=tcp",
+                "turn:[2404:6800:4004:815::201E]:443?transport=tcp"
+            ],
+            "username": "CJ7qrsIFEgYl2xNIb8IYzc/s6OMT",
+            "credential": "9ELspYEkUX7+w7i+UawTux+Gq3A="
+        },
+        {
+            "urls": [
+                "stun:stun.l.google.com:19302"
+            ]
+        }
+    ]
+}
+D/RoomRTCClient: TurnServer: turn:216.58.221.30:19305?transport=udp[CJ7qrsIFEgYl2xNIb8IYzc/s6OMT:9ELspYEkUX7+w7i+UawTux+Gq3A=]
+D/RoomRTCClient: TurnServer: turn:[2404:6800:4004:815::201E]:19305?transport=udp[CJ7qrsIFEgYl2xNIb8IYzc/s6OMT:9ELspYEkUX7+w7i+UawTux+Gq3A=]
+D/RoomRTCClient: TurnServer: turn:216.58.221.30:443?transport=tcp[CJ7qrsIFEgYl2xNIb8IYzc/s6OMT:9ELspYEkUX7+w7i+UawTux+Gq3A=]
+D/RoomRTCClient: TurnServer: turn:[2404:6800:4004:815::201E]:443?transport=tcp[CJ7qrsIFEgYl2xNIb8IYzc/s6OMT:9ELspYEkUX7+w7i+UawTux+Gq3A=]
+D/RoomRTCClient: TurnServer: stun:stun.l.google.com:19302[:]
+D/WSRTCClient: Room connection completed.
+D/WSRTCClient: Message URL: https://appr.tc/message/228837362/11036533
+D/WSRTCClient: Leave URL: https://appr.tc/leave/228837362/11036533
+I/CallRTCClient: SignalingEvents --> onConnectedToRoom
+D/CallRTCClient: Creating peer connection, delay=4189ms
+D/WSChannelRTCClient: Connecting WebSocket to: wss://apprtc-ws.webrtc.org:443/ws. Post URL: https://apprtc-ws.webrtc.org:443
+D/de.tavendo.autobahn.WebSocketConnection: WebSocket connection created.
+D/CallRTCClient: Creating OFFER...
+D/PCRTCClient: Create peer connection.
+D/PCRTCClient: PCConstraints: mandatory: [], optional: [DtlsSrtpKeyAgreement: true]
+D/PCRTCClient: EGLContext: org.webrtc.EglBase14$Context@1e6212e
+I/org.webrtc.Logging: EglBase14: SDK version: 25. isEGL14Supported: true
+I/org.webrtc.Logging: EglBase14: SDK version: 25. isEGL14Supported: true
+D/de.tavendo.autobahn.WebSocketReader: WebSocket reader created.
+D/de.tavendo.autobahn.WebSocketConnection: WebSocket reader created and started.
+D/de.tavendo.autobahn.WebSocketWriter: WebSocket writer created.
+I/CameraManagerGlobal: Connecting to camera service
+D/PCRTCClient: Peer connection created.
+D/PCRTCClient: PC Create OFFER
+D/PCRTCClient: SDPObserver --> onCreateSuccess
+D/PCRTCClient: Found VP8 rtpmap 100, prefer at m=video 9 UDP/TLS/RTP/SAVPF 100 101 116 117 121 96 97 98 99
+D/PCRTCClient: Change media description: m=video 9 UDP/TLS/RTP/SAVPF 100 101 116 117 121 96 97 98 99
+D/PCRTCClient: Set local SDP from OFFER
+E/libjingle: (voe_audio_processing_impl.cc:955): SetTypingDetectionStatus: not supported
+D/PCRTCClient: SignalingState: HAVE_LOCAL_OFFER
+E/libjingle: (voe_audio_processing_impl.cc:955): SetTypingDetectionStatus: not supported
+D/PCRTCClient: SDPObserver --> onSetSuccess
+D/PCRTCClient: IceGatheringState: GATHERING
+D/PCRTCClient: Local SDP set successfully
+I/CallRTCClient: PeerConnectionEvents --> onLocalDescription
+D/CallRTCClient: Sending OFFER, delay=4324ms
+I/PCRTCClient: PeerConnection.Observer --> onIceCandidate
+I/CallRTCClient: PeerConnectionEvents --> onIceCandidate
+E/libjingle: (turnport.cc:293): IP address family does not match: server: 10 local: 2
+E/libjingle: (turnport.cc:293): IP address family does not match: server: 10 local: 2
+I/PCRTCClient: PeerConnection.Observer --> onIceCandidate
+I/CallRTCClient: PeerConnectionEvents --> onIceCandidate
+D/de.tavendo.autobahn.WebSocketReader: WebSocker reader running.
+D/de.tavendo.autobahn.WebSocketWriter: WebSocker writer running.
+D/de.tavendo.autobahn.WebSocketConnection: WebSocket writer created and started.
+W/WSChannelRTCClient: WebSocket register() in state NEW
+D/WSRTCClient: C->GAE: https://appr.tc/message/228837362/11036533. Message: 
+{
+    "sdp": "v=0\r\no=- 2573676608508299391 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE audio video\r\na=msid-semantic: WMS ARDAMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 103 104 9 102 0 8 106 105 13 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:dwyL\r\na=ice-pwd:ov+pwfev6e4Xv9K7Z3OcNkD/\r\na=fingerprint:sha-256 81:B5:DE:CC:66:D8:E9:A5:0D:C7:36:37:96:69:94:F5:9B:B9:97:1D:3A:86:BF:20:38:8F:FD:4F:1D:36:7B:C9\r\na=setup:actpass\r\na=mid:audio\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=sendrecv\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:103 ISAC/16000\r\na=rtpmap:104 ISAC/32000\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:106 CN/32000\r\na=rtpmap:105 CN/16000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:139000772 cname:tHolLHamMVQCG+j2\r\na=ssrc:139000772 msid:ARDAMS ARDAMSa0\r\na=ssrc:139000772 mslabel:ARDAMS\r\na=ssrc:139000772 label:ARDAMSa0\r\nm=video 9 UDP/TLS/RTP/SAVPF 100 101 116 117 121 96 97 98 99\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:dwyL\r\na=ice-pwd:ov+pwfev6e4Xv9K7Z3OcNkD/\r\na=fingerprint:sha-256 81:B5:DE:CC:66:D8:E9:A5:0D:C7:36:37:96:69:94:F5:9B:B9:97:1D:3A:86:BF:20:38:8F:FD:4F:1D:36:7B:C9\r\na=setup:actpass\r\na=mid:video\r\na=extmap:2 urn:ietf:params:rtp-hdrext:toffset\r\na=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:4 urn:3gpp:video-orientation\r\na=extmap:6 http://www.webrtc.org/experiments/rtp-hdrext/playout-delay\r\na=sendrecv\r\na=rtcp-mux\r\na=rtcp-rsize\r\na=rtpmap:100 VP8/90000\r\na=rtcp-fb:100 ccm fir\r\na=rtcp-fb:100 nack\r\na=rtcp-fb:100 nack pli\r\na=rtcp-fb:100 goog-remb\r\na=rtcp-fb:100 transport-cc\r\na=rtpmap:101 VP9/90000\r\na=rtcp-fb:101 ccm fir\r\na=rtcp-fb:101 nack\r\na=rtcp-fb:101 nack pli\r\na=rtcp-fb:101 goog-remb\r\na=rtcp-fb:101 transport-cc\r\na=rtpmap:116 red/90000\r\na=rtpmap:117 ulpfec/90000\r\na=rtpmap:121 H264/90000\r\na=rtcp-fb:121 ccm fir\r\na=rtcp-fb:121 nack\r\na=rtcp-fb:121 nack pli\r\na=rtcp-fb:121 goog-remb\r\na=rtcp-fb:121 transport-cc\r\na=rtpmap:96 rtx/90000\r\na=fmtp:96 apt=100\r\na=rtpmap:97 rtx/90000\r\na=fmtp:97 apt=101\r\na=rtpmap:98 rtx/90000\r\na=fmtp:98 apt=116\r\na=rtpmap:99 rtx/90000\r\na=fmtp:99 apt=121\r\na=ssrc-group:FID 1782318453 2174529815\r\na=ssrc:1782318453 cname:tHolLHamMVQCG+j2\r\na=ssrc:1782318453 msid:ARDAMS ARDAMSv0\r\na=ssrc:1782318453 mslabel:ARDAMS\r\na=ssrc:1782318453 label:ARDAMSv0\r\na=ssrc:2174529815 cname:tHolLHamMVQCG+j2\r\na=ssrc:2174529815 msid:ARDAMS ARDAMSv0\r\na=ssrc:2174529815 mslabel:ARDAMS\r\na=ssrc:2174529815 label:ARDAMSv0\r\n",
+    "type": "offer"
+}
+D/WSRTCClient: C->GAE: https://appr.tc/message/228837362/11036533. Message: 
+{
+    "type": "candidate",
+    "label": 0,
+    "id": "audio",
+    "candidate": "candidate:2879032841 1 udp 2122260223 192.168.123.112 43741 typ host generation 0 ufrag dwyL network-id 3 network-cost 10"
+}
+D/WSRTCClient: C->GAE: https://appr.tc/message/228837362/11036533. Message: 
+{
+    "type": "candidate",
+    "label": 0,
+    "id": "audio",
+    "candidate": "candidate:2161414053 1 udp 25108479 216.58.221.30 26525 typ relay raddr 108.61.223.167 rport 47711 generation 0 ufrag dwyL network-id 3 network-cost 10"
+}
+W/de.tavendo.autobahn.WebSocketReader: Status: 101 (Switching Protocols)
+D/de.tavendo.autobahn.WebSocketConnection: opening handshake received
+D/WSChannelRTCClient: WebSocket connection opened to: wss://apprtc-ws.webrtc.org:443/ws
+D/WSChannelRTCClient: Registering WebSocket for room 228837362. ClientID: 11036533
+D/WSChannelRTCClient: C->WSS: {"cmd":"register","roomid":"228837362","clientid":"11036533"}
+D/CpuMonitor: CPU User: 16/10. System: 13/8. Freq: 60/58. Total usage: 18/14. Cores: 6( 87 87 87 87 35 35 ). Battery: 92
+D/WSChannelRTCClient: WSS->C: 
+{
+    "msg": "{\"sdp\":\"v=0\\r\\no=- 7327830317197177132 2 IN IP4 127.0.0.1\\r\\ns=-\\r\\nt=0 0\\r\\na=group:BUNDLE audio video\\r\\na=msid-semantic: WMS\\r\\nm=audio 9 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126\\r\\nc=IN IP4 0.0.0.0\\r\\na=rtcp:9 IN IP4 0.0.0.0\\r\\na=ice-ufrag:5rkp\\r\\na=ice-pwd:W7XXRJdj3K3qWIRtt6PW1Yze\\r\\na=fingerprint:sha-256 93:8B:FF:0E:EC:E0:47:16:1D:93:A4:26:43:87:03:3F:61:33:3C:01:E2:4A:88:6D:62:DD:43:5C:9F:0A:56:7A\\r\\na=setup:active\\r\\na=mid:audio\\r\\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\\r\\na=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\\r\\na=recvonly\\r\\na=rtcp-mux\\r\\na=rtpmap:111 opus/48000/2\\r\\na=rtcp-fb:111 transport-cc\\r\\na=fmtp:111 minptime=10;useinbandfec=1\\r\\na=rtpmap:103 ISAC/16000\\r\\na=rtpmap:104 ISAC/32000\\r\\na=rtpmap:9 G722/8000\\r\\na=rtpmap:0 PCMU/8000\\r\\na=rtpmap:8 PCMA/8000\\r\\na=rtpmap:106 CN/32000\\r\\na=rtpmap:105 CN/16000\\r\\na=rtpmap:13 CN/8000\\r\\na=rtpmap:126 telephone-event/8000\\r\\nm=video 9 UDP/TLS/RTP/SAVPF 101 100 116 117 121 96 97 98 99\\r\\nc=IN IP4 0.0.0.0\\r\\na=rtcp:9 IN IP4 0.0.0.0\\r\\na=ice-ufrag:5rkp\\r\\na=ice-pwd:W7XXRJdj3K3qWIRtt6PW1Yze\\r\\na=fingerprint:sha-256 93:8B:FF:0E:EC:E0:47:16:1D:93:A4:26:43:87:03:3F:61:33:3C:01:E2:4A:88:6D:62:DD:43:5C:9F:0A:56:7A\\r\\na=setup:active\\r\\na=mid:video\\r\\na=extmap:2 urn:ietf:params:rtp-hdrext:toffset\\r\\na=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\\r\\na=extmap:4 urn:3gpp:video-orientation\\r\\na=extmap:6 http://www.webrtc.org/experiments/rtp-hdrext/playout-delay\\r\\na=recvonly\\r\\na=rtcp-mux\\r\\na=rtcp-rsize\\r\\na=rtpmap:100 VP8/90000\\r\\na=rtcp-fb:100 ccm fir\\r\\na=rtcp-fb:100 nack\\r\\na=rtcp-fb:100 nack pli\\r\\na=rtcp-fb:100 goog-remb\\r\\na=rtcp-fb:100 transport-cc\\r\\na=rtpmap:101 VP9/90000\\r\\na=rtcp-fb:101 ccm fir\\r\\na=rtcp-fb:101 nack\\r\\na=rtcp-fb:101 nack pli\\r\\na=rtcp-fb:101 goog-remb\\r\\na=rtcp-fb:101 transport-cc\\r\\na=rtpmap:116 red/90000\\r\\na=rtpmap:117 ulpfec/90000\\r\\na=rtpmap:121 H264/90000\\r\\na=rtcp-fb:121 ccm fir\\r\\na=rtcp-fb:121 nack\\r\\na=rtcp-fb:121 nack pli\\r\\na=rtcp-fb:121 goog-remb\\r\\na=rtcp-fb:121 transport-cc\\r\\na=fmtp:121 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42e01f\\r\\na=rtpmap:96 rtx/90000\\r\\na=fmtp:96 apt=100\\r\\na=rtpmap:97 rtx/90000\\r\\na=fmtp:97 apt=101\\r\\na=rtpmap:98 rtx/90000\\r\\na=fmtp:98 apt=116\\r\\na=rtpmap:99 rtx/90000\\r\\na=fmtp:99 apt=121\\r\\n\",\"type\":\"answer\"}",
+    "error": ""
+}
+I/WSRTCClient: WebSocketChannelEvents --> onWebSocketMessage:
+{
+    "msg": "{\"sdp\":\"v=0\\r\\no=- 7327830317197177132 2 IN IP4 127.0.0.1\\r\\ns=-\\r\\nt=0 0\\r\\na=group:BUNDLE audio video\\r\\na=msid-semantic: WMS\\r\\nm=audio 9 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126\\r\\nc=IN IP4 0.0.0.0\\r\\na=rtcp:9 IN IP4 0.0.0.0\\r\\na=ice-ufrag:5rkp\\r\\na=ice-pwd:W7XXRJdj3K3qWIRtt6PW1Yze\\r\\na=fingerprint:sha-256 93:8B:FF:0E:EC:E0:47:16:1D:93:A4:26:43:87:03:3F:61:33:3C:01:E2:4A:88:6D:62:DD:43:5C:9F:0A:56:7A\\r\\na=setup:active\\r\\na=mid:audio\\r\\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\\r\\na=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\\r\\na=recvonly\\r\\na=rtcp-mux\\r\\na=rtpmap:111 opus/48000/2\\r\\na=rtcp-fb:111 transport-cc\\r\\na=fmtp:111 minptime=10;useinbandfec=1\\r\\na=rtpmap:103 ISAC/16000\\r\\na=rtpmap:104 ISAC/32000\\r\\na=rtpmap:9 G722/8000\\r\\na=rtpmap:0 PCMU/8000\\r\\na=rtpmap:8 PCMA/8000\\r\\na=rtpmap:106 CN/32000\\r\\na=rtpmap:105 CN/16000\\r\\na=rtpmap:13 CN/8000\\r\\na=rtpmap:126 telephone-event/8000\\r\\nm=video 9 UDP/TLS/RTP/SAVPF 101 100 116 117 121 96 97 98 99\\r\\nc=IN IP4 0.0.0.0\\r\\na=rtcp:9 IN IP4 0.0.0.0\\r\\na=ice-ufrag:5rkp\\r\\na=ice-pwd:W7XXRJdj3K3qWIRtt6PW1Yze\\r\\na=fingerprint:sha-256 93:8B:FF:0E:EC:E0:47:16:1D:93:A4:26:43:87:03:3F:61:33:3C:01:E2:4A:88:6D:62:DD:43:5C:9F:0A:56:7A\\r\\na=setup:active\\r\\na=mid:video\\r\\na=extmap:2 urn:ietf:params:rtp-hdrext:toffset\\r\\na=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\\r\\na=extmap:4 urn:3gpp:video-orientation\\r\\na=extmap:6 http://www.webrtc.org/experiments/rtp-hdrext/playout-delay\\r\\na=recvonly\\r\\na=rtcp-mux\\r\\na=rtcp-rsize\\r\\na=rtpmap:100 VP8/90000\\r\\na=rtcp-fb:100 ccm fir\\r\\na=rtcp-fb:100 nack\\r\\na=rtcp-fb:100 nack pli\\r\\na=rtcp-fb:100 goog-remb\\r\\na=rtcp-fb:100 transport-cc\\r\\na=rtpmap:101 VP9/90000\\r\\na=rtcp-fb:101 ccm fir\\r\\na=rtcp-fb:101 nack\\r\\na=rtcp-fb:101 nack pli\\r\\na=rtcp-fb:101 goog-remb\\r\\na=rtcp-fb:101 transport-cc\\r\\na=rtpmap:116 red/90000\\r\\na=rtpmap:117 ulpfec/90000\\r\\na=rtpmap:121 H264/90000\\r\\na=rtcp-fb:121 ccm fir\\r\\na=rtcp-fb:121 nack\\r\\na=rtcp-fb:121 nack pli\\r\\na=rtcp-fb:121 goog-remb\\r\\na=rtcp-fb:121 transport-cc\\r\\na=fmtp:121 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42e01f\\r\\na=rtpmap:96 rtx/90000\\r\\na=fmtp:96 apt=100\\r\\na=rtpmap:97 rtx/90000\\r\\na=fmtp:97 apt=101\\r\\na=rtpmap:98 rtx/90000\\r\\na=fmtp:98 apt=116\\r\\na=rtpmap:99 rtx/90000\\r\\na=fmtp:99 apt=121\\r\\n\",\"type\":\"answer\"}",
+    "error": ""
+}
+I/CallRTCClient: SignalingEvents --> onRemoteDescription
+D/WSChannelRTCClient: WSS->C: 
+{
+    "msg": "{\"type\":\"candidate\",\"label\":0,\"id\":\"audio\",\"candidate\":\"candidate:3468416280 1 udp 2113937151 192.168.123.169 57752 typ host generation 0 ufrag 5rkp network-cost 50\"}",
+    "error": ""
+}
+I/WSRTCClient: WebSocketChannelEvents --> onWebSocketMessage:
+{
+    "msg": "{\"type\":\"candidate\",\"label\":0,\"id\":\"audio\",\"candidate\":\"candidate:3468416280 1 udp 2113937151 192.168.123.169 57752 typ host generation 0 ufrag 5rkp network-cost 50\"}",
+    "error": ""
+}
+D/CallRTCClient: Received remote ANSWER, delay=7180ms
+I/CallRTCClient: SignalingEvents --> onRemoteIceCandidate
+D/WSChannelRTCClient: WSS->C: 
+{
+    "msg": "{\"type\":\"candidate\",\"label\":0,\"id\":\"audio\",\"candidate\":\"candidate:985505607 1 udp 16785407 74.125.39.34 29166 typ relay raddr 108.61.223.167 rport 47718 generation 0 ufrag 5rkp network-cost 50\"}",
+    "error": ""
+}
+I/WSRTCClient: WebSocketChannelEvents --> onWebSocketMessage:
+{
+    "msg": "{\"type\":\"candidate\",\"label\":0,\"id\":\"audio\",\"candidate\":\"candidate:985505607 1 udp 16785407 74.125.39.34 29166 typ relay raddr 108.61.223.167 rport 47718 generation 0 ufrag 5rkp network-cost 50\"}",
+    "error": ""
+}
+I/CallRTCClient: SignalingEvents --> onRemoteIceCandidate
+D/PCRTCClient: Found VP8 rtpmap 100, prefer at m=video 9 UDP/TLS/RTP/SAVPF 101 100 116 117 121 96 97 98 99
+D/PCRTCClient: Change media description: m=video 9 UDP/TLS/RTP/SAVPF 100 101 116 117 121 96 97 98 99
+D/PCRTCClient: Set remote SDP.
+D/PCRTCClient: SignalingState: STABLE
+E/libjingle: (voe_audio_processing_impl.cc:955): SetTypingDetectionStatus: not supported
+I/PCRTCClient: PeerConnection.Observer --> onIceConnectionChange
+D/PCRTCClient: SDPObserver --> onSetSuccess
+D/PCRTCClient: IceConnectionState: CHECKING
+D/PCRTCClient: Remote SDP set successfully
+D/PCRTCClient: Add 2 remote candidates
+E/libjingle: (voe_audio_processing_impl.cc:955): SetTypingDetectionStatus: not supported
+D/AudioRecordJni: InitRecording@[tid=13007]
+D/AudioRecordJni: OnCacheDirectBufferAddress
+D/AudioRecordJni: direct buffer capacity: 960
+I/OMXClient: MuxOMX ctor
+I/PCRTCClient: PeerConnection.Observer --> onIceConnectionChange
+D/PCRTCClient: IceConnectionState: CONNECTED
+I/CallRTCClient: PeerConnectionEvents --> onIceConnected
+D/CallRTCClient: ICE connected, delay=7297ms
+I/CallRTCClient: Call connected: delay=7310ms
+D/AudioRecordJni: frames_per_buffer: 480
+D/AudioManager: IsCommunicationModeEnabled()
+D/AudioRecordJni: StartRecording@[tid=13007]
+E/libjingle: (turnport.cc:1506): Received TURN CreatePermission error response, code=403; pruned connection.
+I/CallRTCClient: PeerConnectionEvents --> onPeerConnectionStatsReady
+E/ACodec: [OMX.qcom.video.encoder.vp8] storeMetaDataInBuffers (output) failed w/ err -1010
+W/ACodec: do not know color format 0x7fa30c04 = 2141391876
+W/ACodec: do not know color format 0x7f000789 = 2130708361
+I/ACodec: [OMX.qcom.video.encoder.vp8] cannot encode color aspects. Ignoring.
+I/ACodec: [OMX.qcom.video.encoder.vp8] cannot encode HDR static metadata. Ignoring.
+I/ACodec: setupVideoEncoder succeeded
+W/ACodec: do not know color format 0x7f000789 = 2130708361
+D/ACodec: dataspace changed to 0x10c40000 (R:2(Limited), P:4(BT601_6_525), M:3(BT601_6), T:3(SMPTE170M)) (R:2(Limited), S:4(BT601_525), T:3(SMPTE_170M))
+I/CallRTCClient: PeerConnectionEvents --> onPeerConnectionStatsReady
+I/CallRTCClient: PeerConnectionEvents --> onPeerConnectionStatsReady
+D/WSRTCClient: Disconnect. Room state: CONNECTED
+D/WSRTCClient: Closing room.
+D/WSRTCClient: C->GAE: https://appr.tc/leave/228837362/11036533
+D/PCRTCClient: Closing peer connection.
+D/WSChannelRTCClient: Disconnect WebSocket. State: REGISTERED
+I/PCRTCClient: PeerConnection.Observer --> onIceConnectionChange
+D/PCRTCClient: IceGatheringState: COMPLETE
+D/PCRTCClient: SignalingState: CLOSED
+D/WSChannelRTCClient: C->WSS: {"cmd":"send","msg":"{\"type\": \"bye\"}"}
+D/WSChannelRTCClient: WS DELETE : https://apprtc-ws.webrtc.org:443/228837362/11036533 : 
+D/AppRTCAudioManager: close
+D/AudioRecordJni: StopRecording@[tid=13007]
+D/AppRTCProximitySensor: stop@[name=main, id=1]
+D/PCRTCClient: Closing audio source.
+D/PCRTCClient: Stopping capture.
+D/CpuMonitor: pause
+D/PCRTCClient: Closing video source.
+D/PCRTCClient: Closing peer connection factory.
+D/AudioRecordJni: Terminate@[tid=13007]
+D/AudioRecordJni: StopRecording@[tid=13007]
+D/AudioTrackJni: Terminate@[tid=13007]
+D/AudioTrackJni: StopPlayout@[tid=13007]
+D/AudioManager: Close@[tid=13007]
+D/AudioRecordJni: ~dtor@[tid=13007]
+D/AudioRecordJni: Terminate@[tid=13007]
+D/AudioRecordJni: StopRecording@[tid=13007]
+D/JVM: GlobalRef::dtor@[tid=13007]
+D/JVM: NativeRegistration::dtor@[tid=13007]
+D/JVM: JNIEnvironment::dtor@[tid=13007]
+D/JVM: AttachCurrentThreadIfNeeded::dtor@[tid=13007]
+D/AudioTrackJni: ~dtor@[tid=13007]
+D/AudioTrackJni: Terminate@[tid=13007]
+D/AudioTrackJni: StopPlayout@[tid=13007]
+D/JVM: GlobalRef::dtor@[tid=13007]
+D/JVM: NativeRegistration::dtor@[tid=13007]
+D/JVM: JNIEnvironment::dtor@[tid=13007]
+D/JVM: AttachCurrentThreadIfNeeded::dtor@[tid=13007]
+D/AudioManager: ~dtor@[tid=13007]
+D/AudioManager: Close@[tid=13007]
+D/AudioManager: JavaAudioManager::dtor@[tid=13007]
+D/JVM: GlobalRef::dtor@[tid=13007]
+D/JVM: NativeRegistration::dtor@[tid=13007]
+D/JVM: JNIEnvironment::dtor@[tid=13007]
+D/JVM: AttachCurrentThreadIfNeeded::dtor@[tid=13007]
+D/JVM: Detaching thread from JVM
+D/PCRTCClient: Closing peer connection done.
+I/CallRTCClient: PeerConnectionEvents --> onPeerConnectionClosed
+D/PCRTCClient: IceConnectionState: CLOSED
+D/de.tavendo.autobahn.WebSocketReader: run() : ConnectionLost
+D/de.tavendo.autobahn.WebSocketReader: WebSocket reader ended.
+D/WSChannelRTCClient: Disconnecting WebSocket done.
+D/LooperExecutor: Looper thread finished.
