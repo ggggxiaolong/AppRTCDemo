@@ -595,6 +595,7 @@ public class CallActivity extends Activity
   // Send local peer connection SDP and ICE candidates to remote party.
   // All callbacks are invoked from peer connection client looper thread and
   // are routed to UI thread.
+  // 发送本地peer连接SDP和ICE候选者到远程参与者
   @Override public void onLocalDescription(final SessionDescription sdp) {
     final long delta = System.currentTimeMillis() - callStartedTimeMs;
     runOnUiThread(new Runnable() {

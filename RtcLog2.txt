@@ -1,0 +1,1551 @@
+D/ConnectActivity: Connecting to room 193423508 at URL https://appr.tc
+I/EglBase14: EglBase14: SDK version: 25. isEGL14Supported: true
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Initializing.
+I/EglBase14: EglBase14: SDK version: 25. isEGL14Supported: true
+I/SurfaceViewRenderer: SurfaceViewRenderer: remote_video_view: Initializing.
+I/EglBase14: EglBase14: SDK version: 25. isEGL14Supported: true
+D/LooperExecutor: Looper thread started.
+D/CpuMonitor: CpuMonitor ctor.
+D/CallRTCClient: Connecting to: https://appr.tc
+D/WSRTCClient: Connect to room: https://appr.tc/join/193423508
+D/RoomRTCClient: Connecting to room: https://appr.tc/join/193423508
+D/AppRTCProximitySensor: AppRTCProximitySensor@[name=main, id=1]
+D/AppRTCAudioManager: Android SDK: 25, Release: 7.1.1, Brand: google, Device: bullhead, Id: NMF26F, Hardware: bullhead, Manufacturer: LGE, Model: Nexus 5X, Product: bullhead
+D/CallRTCClient: Initializing the audio manager...
+D/AppRTCAudioManager: init
+D/CpuMonitor: Core 0. Max frequency: 1440000
+D/CpuMonitor: Core 1. Max frequency: 1440000
+D/CpuMonitor: Core 2. Max frequency: 1440000
+D/CpuMonitor: Core 3. Max frequency: 1440000
+D/CpuMonitor: Core 4. Max frequency: 1824000
+D/CpuMonitor: Core 5. Max frequency: 1824000
+D/AppRTCAudioManager: audioDevices: [EARPIECE, SPEAKER_PHONE]
+D/AppRTCAudioManager: setAudioDevice(device=SPEAKER_PHONE)
+D/AppRTCAudioManager: onAudioManagerChangedState: devices=[EARPIECE, SPEAKER_PHONE], selected=SPEAKER_PHONE
+D/AppRTCProximitySensor: start@[name=main, id=1]
+D/AppRTCProximitySensor: Proximity sensor: name=RPR0521 Proximity Sensor, vendor: Rohm, power: 0.0, resolution: 1.0, max range: 5.0, min delay: 200000, type: android.sensor.proximity, max delay: 10000000, reporting mode: 1, isWakeUpSensor: true
+D/PCRTCClient: Create peer connection factory. Use video: true
+I/libjingle: (peerconnection_jni.cc:1025): initializeFieldTrials: 
+D/PCRTCClient: Pereferred video codec: VP8
+D/PCRTCClient: Disable OpenSL ES audio even if device supports it
+D/PCRTCClient: Enable built-in AEC if device supports it
+D/PCRTCClient: Enable built-in AGC if device supports it
+D/PCRTCClient: Enable built-in NS if device supports it
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Found target encoder for mime video/x-vnd.on2.vp8 : OMX.qcom.video.encoder.vp8. Color: 0x15
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: VP8 HW Encoder supported.
+W/VideoCapabilities: Unrecognized profile 2130706433 for video/avc
+D/CpuMonitor: resume
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Found target encoder for mime video/avc : OMX.qcom.video.encoder.avc. Color: 0x15
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: H.264 HW Encoder supported.
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: MediaCodecVideoDecoderFactory ctor
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: Trying to find HW decoder for mime video/x-vnd.on2.vp8
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: Found candidate decoder OMX.qcom.video.decoder.vp8
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: Found target decoder OMX.qcom.video.decoder.vp8. Color: 0x13
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: VP8 HW Decoder supported.
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: Trying to find HW decoder for mime video/x-vnd.on2.vp9
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: Found candidate decoder OMX.google.vp9.decoder
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: No HW decoder found for mime video/x-vnd.on2.vp9
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: Trying to find HW decoder for mime video/avc
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: Found candidate decoder OMX.qcom.video.decoder.avc
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: Found target decoder OMX.qcom.video.decoder.avc. Color: 0x13
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: H264 HW Decoder supported.
+D/AppRTCProximitySensor: Proximity sensor => FAR state
+D/AppRTCAudioManager: setAudioDevice(device=SPEAKER_PHONE)
+D/AppRTCAudioManager: onAudioManagerChangedState: devices=[EARPIECE, SPEAKER_PHONE], selected=SPEAKER_PHONE
+D/AppRTCProximitySensor: start@[name=main, id=1]
+D/AppRTCProximitySensor: onSensorChanged@[name=main, id=1]: accuracy=3, timestamp=243057682289833, distance=5.0
+I/libjingle: (webrtcvoiceengine.cc:512): WebRtcVoiceEngine::WebRtcVoiceEngine
+I/libjingle: (webrtcvoiceengine.cc:518): Supported codecs in order of preference:
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: opus/48000/2 (111)
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: ISAC/16000/1 (103)
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: ISAC/32000/1 (104)
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: G722/8000/1 (9)
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: ILBC/8000/1 (102)
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: PCMU/8000/1 (0)
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: PCMA/8000/1 (8)
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: CN/32000/1 (106)
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: CN/16000/1 (105)
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: CN/8000/1 (13)
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: telephone-event/8000/1 (126)
+I/libjingle: (webrtcvoiceengine.cc:521): opus/48000/2 (111)
+I/libjingle: (webrtcvoiceengine.cc:521): ISAC/16000/1 (103)
+I/libjingle: (webrtcvoiceengine.cc:521): ISAC/32000/1 (104)
+I/libjingle: (webrtcvoiceengine.cc:521): G722/8000/1 (9)
+I/libjingle: (webrtcvoiceengine.cc:521): ILBC/8000/1 (102)
+I/libjingle: (webrtcvoiceengine.cc:521): PCMU/8000/1 (0)
+I/libjingle: (webrtcvoiceengine.cc:521): PCMA/8000/1 (8)
+I/libjingle: (webrtcvoiceengine.cc:521): CN/32000/1 (106)
+I/libjingle: (webrtcvoiceengine.cc:521): CN/16000/1 (105)
+I/libjingle: (webrtcvoiceengine.cc:521): CN/8000/1 (13)
+I/libjingle: (webrtcvoiceengine.cc:521): telephone-event/8000/1 (126)
+I/libjingle: (webrtcvoiceengine.cc:529): VoiceEngine 4.1.0
+I/libjingle: (audio_device_impl.cc:84): Create
+I/libjingle: (audio_device_buffer.cc:70): AudioDeviceBuffer::ctor
+I/libjingle: (audio_device_impl.cc:131): AudioDeviceModuleImpl
+I/libjingle: (audio_device_impl.cc:139): CheckPlatform
+I/libjingle: (audio_device_impl.cc:150): current platform is Android
+I/libjingle: (audio_device_impl.cc:180): CreatePlatformSpecificObjects
+I/libjingle: (audio_device_impl.cc:1874): PlatformAudioLayer
+D/JVM: AttachCurrentThreadIfNeeded::ctor@[tid=1517]
+D/JVM: Attaching thread to JVM
+D/JVM: JVM::environment@[tid=1517]
+D/JVM: JNIEnvironment::ctor@[tid=1517]
+D/AudioManager: ctor@[tid=1517]
+D/JVM: JNIEnvironment::RegisterNatives(org/webrtc/voiceengine/WebRtcAudioManager)
+D/JVM: NativeRegistration::ctor@[tid=1517]
+D/JVM: NativeRegistration::NewObject@[tid=1517]
+I/WebRtcAudioManager: WebRtcAudioManager: ctor@[name=Thread-21, id=2467]
+I/WebRtcAudioManager: WebRtcAudioManager: Sample rate is set to 48000 Hz
+I/WebRtcAudioEffects: WebRtcAudioEffects: canUseAcousticEchoCanceler: true
+I/WebRtcAudioEffects: WebRtcAudioEffects: canUseAutomaticGainControl: false
+I/WebRtcAudioEffects: WebRtcAudioEffects: canUseNoiseSuppressor: true
+D/AudioManager: OnCacheAudioParameters@[tid=1517]
+D/AudioManager: hardware_aec: 1
+D/AudioManager: hardware_agc: 0
+D/AudioManager: hardware_ns: 1
+D/AudioManager: low_latency_output: 1
+D/AudioManager: pro_audio: 1
+D/AudioManager: sample_rate: 48000
+D/AudioManager: channels: 1
+D/AudioManager: output_buffer_size: 192
+D/AudioManager: input_buffer_size: 1920
+D/JVM: GlobalRef::ctor@[tid=1517]
+D/AudioManager: JavaAudioManager::ctor@[tid=1517]
+D/AudioManager: IsLowLatencyPlayoutSupported()
+E/WebRtcAudioManager: WebRtcAudioManager: Nexus 5X is blacklisted for OpenSL ES usage!
+D/JVM: AttachCurrentThreadIfNeeded::ctor@[tid=1517]
+D/JVM: JVM::environment@[tid=1517]
+D/JVM: JNIEnvironment::ctor@[tid=1517]
+D/AudioTrackJni: ctor@[tid=1517]
+D/JVM: JNIEnvironment::RegisterNatives(org/webrtc/voiceengine/WebRtcAudioTrack)
+D/JVM: NativeRegistration::ctor@[tid=1517]
+D/JVM: NativeRegistration::NewObject@[tid=1517]
+I/WebRtcAudioTrack: WebRtcAudioTrack: ctor@[name=Thread-21, id=2467]
+D/JVM: GlobalRef::ctor@[tid=1517]
+D/JVM: AttachCurrentThreadIfNeeded::ctor@[tid=1517]
+D/JVM: JVM::environment@[tid=1517]
+D/JVM: JNIEnvironment::ctor@[tid=1517]
+D/AudioRecordJni: ctor@[tid=1517]
+D/JVM: JNIEnvironment::RegisterNatives(org/webrtc/voiceengine/WebRtcAudioRecord)
+D/JVM: NativeRegistration::ctor@[tid=1517]
+D/JVM: NativeRegistration::NewObject@[tid=1517]
+I/WebRtcAudioRecord: WebRtcAudioRecord: ctor@[name=Thread-21, id=2467]
+I/WebRtcAudioEffects: WebRtcAudioEffects: ctor@[name=Thread-21, id=2467]
+D/JVM: GlobalRef::ctor@[tid=1517]
+I/libjingle: (audio_device_template.h:42): AudioDeviceTemplate
+D/AudioManager: SetActiveAudioLayer(5)@[tid=1517]
+D/AudioManager: delay_estimate_in_milliseconds: 150
+I/libjingle: (audio_device_impl.cc:354): AttachAudioBuffer
+I/libjingle: (audio_device_template.h:471): AttachAudioBuffer
+D/AudioTrackJni: AttachAudioBuffer@[tid=1517]
+D/AudioTrackJni: SetPlayoutSampleRate(48000)
+I/libjingle: (audio_device_buffer.cc:143): SetPlayoutSampleRate(48000)
+D/AudioTrackJni: SetPlayoutChannels(1)
+D/AudioRecordJni: AttachAudioBuffer
+D/AudioRecordJni: SetRecordingSampleRate(48000)
+I/libjingle: (audio_device_buffer.cc:136): SetRecordingSampleRate(48000)
+D/AudioRecordJni: SetRecordingChannels(1)
+D/AudioRecordJni: total_delay_in_milliseconds: 150
+I/libjingle: (audio_device_impl.cc:1467): RegisterEventObserver
+I/libjingle: (audio_device_impl.cc:1480): RegisterAudioCallback
+I/libjingle: (audio_device_buffer.cc:108): RegisterAudioCallback
+I/libjingle: (audio_device_impl.cc:484): Init
+I/libjingle: (audio_device_template.h:57): Init
+D/AudioManager: Init@[tid=1517]
+I/WebRtcAudioManager: WebRtcAudioManager: init@[name=Thread-21, id=2467]
+I/WebRtcAudioManager: WebRtcAudioManager: audio mode is: MODE_IN_COMMUNICATION
+D/AudioTrackJni: Init@[tid=1517]
+D/AudioRecordJni: Init@[tid=1517]
+I/libjingle: (audio_device_impl.cc:1213): SetPlayoutDevice(0)
+I/libjingle: (audio_device_template.h:122): SetPlayoutDevice
+I/libjingle: (audio_device_impl.cc:533): InitSpeaker
+I/libjingle: (audio_device_template.h:248): InitSpeaker
+I/libjingle: (audio_device_impl.cc:1308): SetRecordingDevice(0)
+I/libjingle: (audio_device_template.h:135): SetRecordingDevice
+I/libjingle: (audio_device_impl.cc:543): InitMicrophone
+I/libjingle: (audio_device_template.h:258): InitMicrophone
+I/libjingle: (audio_device_impl.cc:1022): StereoPlayoutIsAvailable
+I/libjingle: (audio_device_template.h:374): StereoPlayoutIsAvailable
+I/libjingle: (audio_device_impl.cc:1032): output: 0
+I/libjingle: (audio_device_impl.cc:1041): SetStereoPlayout(0)
+I/libjingle: (audio_device_template.h:157): PlayoutIsInitialized
+I/libjingle: (audio_device_template.h:381): SetStereoPlayout
+W/libjingle: (audio_device_impl.cc:1051): stereo playout is not supported
+W/libjingle: (webrtcvoiceengine.cc:990): webrtc: Init() failed to set mono/stereo playout mode (error=8090)
+I/libjingle: (audio_device_impl.cc:908): StereoRecordingIsAvailable
+I/libjingle: (audio_device_template.h:393): StereoRecordingIsAvailable
+I/libjingle: (audio_device_impl.cc:918): output: 0
+I/libjingle: (audio_device_impl.cc:927): SetStereoRecording(0)
+I/libjingle: (audio_device_template.h:173): RecordingIsInitialized
+I/libjingle: (audio_device_template.h:399): SetStereoRecording
+W/libjingle: (audio_device_impl.cc:936): failed to change stereo recording
+W/libjingle: (webrtcvoiceengine.cc:990): webrtc: Init() failed to set mono/stereo recording mode (error=8090)
+I/libjingle: (webrtcvoiceengine.cc:990): webrtc: TransmitMixer::SetAudioProcessingModule(audioProcessingModule=0xbb464b00)
+I/libjingle: (webrtcvoiceengine.cc:990): webrtc: OutputMixer::SetAudioProcessingModule(audioProcessingModule=0xbb464b00)
+I/libjingle: (audio_device_impl.cc:1088): SetAGC(0)
+E/libjingle: (voe_base_impl.cc:374): Init: Failed to set agc to enabled: 0
+I/libjingle: (webrtcvoiceengine.cc:594): WebRtcVoiceEngine::ApplyOptions: AudioOptions {aec: true, agc: true, ns: true, hf: true, swap: false, audio_jitter_buffer_max_packets: 50, audio_jitter_buffer_fast_accelerate: false, typing: true, agc_delta: 0, experimental_agc: false, extended_filter_aec: false, delay_agnostic_aec: false, experimental_ns: false, intelligibility_enhancer: false, level_control: false, }
+I/libjingle: (audio_device_impl.cc:1792): BuiltInAECIsAvailable
+I/libjingle: (audio_device_template.h:495): BuiltInAECIsAvailable
+I/libjingle: (audio_device_impl.cc:1795): output: 1
+I/libjingle: (audio_device_impl.cc:1800): EnableBuiltInAEC(1)
+I/libjingle: (audio_device_template.h:500): EnableBuiltInAEC(1)
+I/libjingle: (audio_device_template.h:495): BuiltInAECIsAvailable
+D/AudioRecordJni: EnableBuiltInAEC@[tid=1517]
+I/WebRtcAudioRecord: WebRtcAudioRecord: enableBuiltInAEC(true)
+I/WebRtcAudioEffects: WebRtcAudioEffects: setAEC(true)
+I/WebRtcAudioEffects: WebRtcAudioEffects: canUseAcousticEchoCanceler: true
+I/libjingle: (audio_device_impl.cc:1803): output: 0
+I/libjingle: (webrtcvoiceengine.cc:660): Disabling EC since built-in EC will be used instead
+I/libjingle: (webrtcvoiceengine.cc:667): Echo control set to 0 with mode 4
+I/libjingle: (audio_device_impl.cc:1808): BuiltInAGCIsAvailable
+I/libjingle: (audio_device_template.h:508): BuiltInAGCIsAvailable
+I/libjingle: (audio_device_impl.cc:1811): output: 0
+I/libjingle: (webrtcvoiceengine.cc:721): Auto gain set to 1 with mode 4
+I/libjingle: (audio_device_impl.cc:1824): BuiltInNSIsAvailable
+I/libjingle: (audio_device_template.h:521): BuiltInNSIsAvailable
+I/libjingle: (audio_device_impl.cc:1827): output: 1
+I/libjingle: (audio_device_impl.cc:1832): EnableBuiltInNS(1)
+I/libjingle: (audio_device_template.h:526): EnableBuiltInNS(1)
+I/libjingle: (audio_device_template.h:521): BuiltInNSIsAvailable
+D/AudioRecordJni: EnableBuiltInNS@[tid=1517]
+I/WebRtcAudioRecord: WebRtcAudioRecord: enableBuiltInNS(true)
+I/WebRtcAudioEffects: WebRtcAudioEffects: setNS(true)
+I/WebRtcAudioEffects: WebRtcAudioEffects: canUseNoiseSuppressor: true
+I/libjingle: (audio_device_impl.cc:1835): output: 0
+I/libjingle: (webrtcvoiceengine.cc:769): Disabling NS since built-in NS will be used instead
+I/libjingle: (webrtcvoiceengine.cc:776): Noise suppression set to 0 with mode 5
+I/libjingle: (webrtcvoiceengine.cc:782): High pass filter enabled? 1
+I/libjingle: (webrtcvoiceengine.cc:790): Stereo swapping enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:799): NetEq capacity is 50
+I/libjingle: (webrtcvoiceengine.cc:807): NetEq fast mode? 0
+I/libjingle: (webrtcvoiceengine.cc:815): Typing detection is enabled? 0
+E/libjingle: (voe_audio_processing_impl.cc:955): SetTypingDetectionStatus: not supported
+W/libjingle: (webrtcvoiceengine.cc:819): SetTypingDetectionStatus(0) failed, err=8003
+I/libjingle: (webrtcvoiceengine.cc:824): Adjust agc delta is 0
+I/libjingle: (webrtcvoiceengine.cc:1015): Adjusting AGC level from default -3dB to -3dB
+I/libjingle: (webrtcvoiceengine.cc:835): Delay agnostic aec is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:844): Extended filter aec is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:853): Experimental ns is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:859): Intelligibility Enhancer is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:869): Level control: 0
+I/libjingle: (webrtcvoiceengine.cc:905): Setting microphone to (id=0) and speaker to (id=0)
+I/libjingle: (audio_device_impl.cc:1456): Recording
+I/libjingle: (audio_device_impl.cc:974): SetRecordingChannel(both)
+I/libjingle: (audio_device_template.h:404): StereoRecording
+W/libjingle: (webrtcvoiceengine.cc:990): webrtc: SetRecordingChannel() unable to set the recording channel (error=10028)
+I/libjingle: (audio_device_impl.cc:1308): SetRecordingDevice(0)
+I/libjingle: (audio_device_template.h:135): SetRecordingDevice
+I/libjingle: (audio_device_impl.cc:543): InitMicrophone
+I/libjingle: (audio_device_template.h:258): InitMicrophone
+I/libjingle: (audio_device_impl.cc:908): StereoRecordingIsAvailable
+I/libjingle: (audio_device_template.h:393): StereoRecordingIsAvailable
+I/libjingle: (audio_device_impl.cc:918): output: 0
+I/libjingle: (audio_device_impl.cc:927): SetStereoRecording(0)
+I/libjingle: (audio_device_template.h:173): RecordingIsInitialized
+I/libjingle: (audio_device_template.h:399): SetStereoRecording
+W/libjingle: (audio_device_impl.cc:936): failed to change stereo recording
+W/libjingle: (webrtcvoiceengine.cc:990): webrtc: SetRecordingDevice() failed to set mono recording mode (error=8090)
+I/libjingle: (audio_device_impl.cc:1416): Playing
+I/libjingle: (audio_device_template.h:196): Playing
+I/libjingle: (audio_device_impl.cc:1213): SetPlayoutDevice(0)
+I/libjingle: (audio_device_template.h:122): SetPlayoutDevice
+I/libjingle: (audio_device_impl.cc:533): InitSpeaker
+I/libjingle: (audio_device_template.h:248): InitSpeaker
+I/libjingle: (audio_device_impl.cc:1022): StereoPlayoutIsAvailable
+I/libjingle: (audio_device_template.h:374): StereoPlayoutIsAvailable
+I/libjingle: (audio_device_impl.cc:1032): output: 0
+I/libjingle: (audio_device_impl.cc:1041): SetStereoPlayout(0)
+I/libjingle: (audio_device_template.h:157): PlayoutIsInitialized
+I/libjingle: (audio_device_template.h:381): SetStereoPlayout
+W/libjingle: (audio_device_impl.cc:1051): stereo playout is not supported
+W/libjingle: (webrtcvoiceengine.cc:990): webrtc: SetPlayoutDevice() failed to set stereo playout mode (error=8090)
+I/libjingle: (webrtcvoiceengine.cc:924): Set microphone to (id=0) and speaker to (id=0)
+I/libjingle: (webrtcvideoengine2.cc:540): WebRtcVideoEngine2::WebRtcVideoEngine2()
+I/libjingle: (webrtcvideoengine2.cc:622): Supported codecs: {VideoCodec[100:VP8:640:400:30], VideoCodec[96:rtx:0:0:0], VideoCodec[101:VP9:640:400:30], VideoCodec[97:rtx:0:0:0], VideoCodec[116:red:0:0:0], VideoCodec[98:rtx:0:0:0], VideoCodec[117:ulpfec:0:0:0]}
+I/libjingle: (webrtcvideoengine2.cc:658): Supported codecs (incl. external codecs): {VideoCodec[100:VP8:640:400:30], VideoCodec[96:rtx:0:0:0], VideoCodec[101:VP9:640:400:30], VideoCodec[97:rtx:0:0:0], VideoCodec[116:red:0:0:0], VideoCodec[98:rtx:0:0:0], VideoCodec[117:ulpfec:0:0:0], VideoCodec[121:H264:1280:1280:30], VideoCodec[99:rtx:0:0:0]}
+I/libjingle: (webrtcvideoengine2.cc:660): Codecs supported by the external encoder factory: VP8, H264
+I/WebRtcAudioManager: WebRtcAudioManager: VOICE_CALL stream volume: 5 (max=7)
+I/libjingle: (webrtcvideoengine2.cc:549): WebRtcVideoEngine2::Init
+I/libjingle: (peerconnection_jni.cc:1134): InvokeJavaCallbacksOnFactoryThreads.
+I/libjingle: (peerconnection_jni.cc:1115): Network thread JavaCallback
+I/PeerConnectionFactory: PeerConnectionFactory: onNetworkThreadReady
+I/libjingle: (peerconnection_jni.cc:1119): Worker thread JavaCallback
+I/PeerConnectionFactory: PeerConnectionFactory: onWorkerThreadReady
+I/libjingle: (peerconnection_jni.cc:1123): Signaling thread JavaCallback
+I/PeerConnectionFactory: PeerConnectionFactory: onSignalingThreadReady
+D/PCRTCClient: Peer connection factory created.
+I/SurfaceViewRenderer: SurfaceViewRenderer: remote_video_view: Surface created.
+I/SurfaceViewRenderer: SurfaceViewRenderer: remote_video_view: Surface changed: 1080x1920
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Surface created.
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Surface changed: 1080x1920
+D/RoomRTCClient: Room response: {"params": {"is_initiator": "false", "room_link": "https://appr.tc/r/193423508", "turn_server_override": [], "ice_server_transports": "", "media_constraints": "{\"audio\": true, \"video\": true}", "include_loopback_js": "", "turn_url": "https://computeengineondemand.appspot.com/turn?username=21294269&key=4080218913", "wss_url": "wss://apprtc-ws.webrtc.org:443/ws", "pc_constraints": "{\"optional\": []}", "pc_config": "{\"rtcpMuxPolicy\": \"require\", \"bundlePolicy\": \"max-bundle\", \"iceServers\": []}", "wss_post_url": "https://apprtc-ws.webrtc.org:443", "ice_server_url": "https://networktraversal.googleapis.com/v1alpha/iceconfig?key=AIzaSyAJdh2HkajseEIltlZ3SIXO02Tze9sO3NY", "warning_messages": [], "room_id": "193423508", "version_info": "{\"gitHash\": \"6e89f36e0d67d4ae535849e11bc2aa7910525948\", \"branch\": \"master\", \"time\": \"Wed Nov 2 01:50:02 2016 -0700\"}", "error_messages": [], "client_id": "21294269", "bypass_join_confirmation": "false", "is_loopback": "false", "offer_options": "{}", "messages": [], "callstats_params": "{\"appSecret\": \"IhG4J05kwq3Pxo+LF4uF0mmSdno=\", \"appId\": \"423310139\"}"}, "result": "SUCCESS"}
+D/RoomRTCClient: RoomId: 193423508. ClientId: 21294269
+D/RoomRTCClient: Initiator: false
+D/RoomRTCClient: WSS url: wss://apprtc-ws.webrtc.org:443/ws
+D/RoomRTCClient: WSS POST url: https://apprtc-ws.webrtc.org:443
+D/RoomRTCClient: Request TURN from: https://networktraversal.googleapis.com/v1alpha/iceconfig?key=AIzaSyAJdh2HkajseEIltlZ3SIXO02Tze9sO3NY
+D/RoomRTCClient: TURN response: {
+                                                                    "lifetimeDuration": "86400s",
+                                                                    "iceServers": [
+                                                                      {
+                                                                        "urls": [
+                                                                          "turn:216.58.221.30:19305?transport=udp",
+                                                                          "turn:[2404:6800:4004:815::201E]:19305?transport=udp",
+                                                                          "turn:216.58.221.30:443?transport=tcp",
+                                                                          "turn:[2404:6800:4004:815::201E]:443?transport=tcp"
+                                                                        ],
+                                                                        "username": "CIKvrcIFEgY7pog0qlEYzc/s6OMT",
+                                                                        "credential": "5dQCyGwY3IsTFXNYUI61JiEuH80="
+                                                                      },
+                                                                      {
+                                                                        "urls": [
+                                                                          "stun:stun.l.google.com:19302"
+                                                                        ]
+                                                                      }
+                                                                    ]
+                                                                  }
+D/RoomRTCClient: TurnServer: turn:216.58.221.30:19305?transport=udp[CIKvrcIFEgY7pog0qlEYzc/s6OMT:5dQCyGwY3IsTFXNYUI61JiEuH80=]
+D/RoomRTCClient: TurnServer: turn:[2404:6800:4004:815::201E]:19305?transport=udp[CIKvrcIFEgY7pog0qlEYzc/s6OMT:5dQCyGwY3IsTFXNYUI61JiEuH80=]
+D/RoomRTCClient: TurnServer: turn:216.58.221.30:443?transport=tcp[CIKvrcIFEgY7pog0qlEYzc/s6OMT:5dQCyGwY3IsTFXNYUI61JiEuH80=]
+D/RoomRTCClient: TurnServer: turn:[2404:6800:4004:815::201E]:443?transport=tcp[CIKvrcIFEgY7pog0qlEYzc/s6OMT:5dQCyGwY3IsTFXNYUI61JiEuH80=]
+D/RoomRTCClient: TurnServer: stun:stun.l.google.com:19302[:]
+D/WSRTCClient: Room connection completed.
+W/WSRTCClient: No offer SDP in room response.
+D/WSRTCClient: Message URL: https://appr.tc/message/193423508/21294269
+D/WSRTCClient: Leave URL: https://appr.tc/leave/193423508/21294269
+D/WSChannelRTCClient: Connecting WebSocket to: wss://apprtc-ws.webrtc.org:443/ws. Post URL: https://apprtc-ws.webrtc.org:443
+D/CallRTCClient: Creating peer connection, delay=1096ms
+D/de.tavendo.autobahn.WebSocketConnection: WebSocket connection created.
+D/PCRTCClient: Create peer connection.
+D/PCRTCClient: PCConstraints: mandatory: [], optional: [DtlsSrtpKeyAgreement: true]
+D/PCRTCClient: EGLContext: org.webrtc.EglBase14$Context@9824b81
+I/EglBase14: EglBase14: SDK version: 25. isEGL14Supported: true
+D/de.tavendo.autobahn.WebSocketReader: WebSocket reader created.
+I/EglBase14: EglBase14: SDK version: 25. isEGL14Supported: true
+D/de.tavendo.autobahn.WebSocketConnection: WebSocket reader created and started.
+D/de.tavendo.autobahn.WebSocketWriter: WebSocket writer created.
+I/libjingle: (peerconnection_jni.cc:1408): Set EGL context for HW encoding.
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: MediaCodecVideoEncoderFactory::SetEGLContext
+I/libjingle: (peerconnection_jni.cc:1416): Set EGL context for HW decoding.
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: MediaCodecVideoDecoderFactory::SetEGLContext
+I/libjingle: (peerconnection.cc:2284): TCP candidates are disabled.
+I/libjingle: (opensslidentity.cc:43): Making key pair
+I/libjingle: (opensslidentity.cc:84): Returning key pair
+I/libjingle: (opensslidentity.cc:91): Making certificate for WebRTC
+I/libjingle: (opensslidentity.cc:139): Returning certificate
+I/PCRTCClient: PCRTCClient: Creating capturer using camera2 API.
+I/PCRTCClient: PCRTCClient: Looking for front facing cameras.
+I/PCRTCClient: PCRTCClient: Creating front facing camera capturer.
+I/Camera2Capturer: Camera2Capturer: Camera2Capturer ctor, camera name: 1
+I/EglBase14: EglBase14: SDK version: 25. isEGL14Supported: true
+I/libjingle: (androidvideotracksource.cc:25): AndroidVideoTrackSource ctor
+I/libjingle: (peerconnection_jni.cc:1306): PeerConnectionFactory_nativeInitializeVideoCapturer
+I/Camera2Capturer: Camera2Capturer: initialize
+I/Camera2Capturer: Camera2Capturer: startCapture requested: 1280x720@30
+D/PCRTCClient: Peer connection created.
+I/Camera2Capturer: Camera2Capturer: Using capture format: 1280x720@[7.0:30.0]
+I/Camera2Capturer: Camera2Capturer: Opening camera 1
+I/Camera2Capturer: Camera2Capturer: Camera opened.
+I/Camera2Capturer: Camera2Capturer: Camera capture session configured.
+I/Camera2Capturer: Camera2Capturer: Camera device successfully started.
+I/libjingle: (androidvideotracksource_jni.cc:66): AndroidVideoTrackSourceObserve_nativeCapturerStarted
+I/SurfaceTextureHelper: SurfaceTextureHelper: Setting listener to org.webrtc.Camera2Capturer@e871ebd
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Reporting frame resolution changed to 1280x720 with rotation 270
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Reporting first rendered frame.
+D/de.tavendo.autobahn.WebSocketReader: WebSocker reader running.
+D/de.tavendo.autobahn.WebSocketWriter: WebSocker writer running.
+D/de.tavendo.autobahn.WebSocketConnection: WebSocket writer created and started.
+W/WSChannelRTCClient: WebSocket register() in state NEW
+W/de.tavendo.autobahn.WebSocketReader: Status: 101 (Switching Protocols)
+D/de.tavendo.autobahn.WebSocketConnection: opening handshake received
+D/WSChannelRTCClient: WebSocket connection opened to: wss://apprtc-ws.webrtc.org:443/ws
+D/WSChannelRTCClient: Registering WebSocket for room 193423508. ClientID: 21294269
+D/WSChannelRTCClient: C->WSS: {"cmd":"register","roomid":"193423508","clientid":"21294269"}
+I/CameraStatistics: CameraStatistics: Camera fps: 27.
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+D/CpuMonitor: CPU User: 14/12. System: 10/9. Freq: 59/57. Total usage: 14/15. Cores: 6( 67 67 67 67 21 21 ). Battery: 95
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/WebRtcAudioManager: WebRtcAudioManager: VOICE_CALL stream volume: 5 (max=7)
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Frames received: 301. Dropped: 0. Rendered: 300
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Duration: 9970 ms. FPS: 30.08920680738263
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Average render time: 2405 us.
+D/CpuMonitor: CPU User: 15/15. System: 9/10. Freq: 57/59. Total usage: 14/15. Cores: 6( 87 87 87 87 21 21 ). Battery: 95
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/CameraStatistics: CameraStatistics: Camera fps: 31.
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+D/CpuMonitor: CPU User: 16/15. System: 10/10. Freq: 59/57. Total usage: 15/14. Cores: 6( 87 87 87 87 21 21 ). Battery: 95
+I/WebRtcAudioManager: WebRtcAudioManager: VOICE_CALL stream volume: 5 (max=7)
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Frames received: 601. Dropped: 0. Rendered: 600
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Duration: 19965 ms. FPS: 30.051607360866672
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Average render time: 2450 us.
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+D/CpuMonitor: CPU User: 15/15. System: 8/9. Freq: 60/59. Total usage: 14/15. Cores: 6( 87 87 87 87 21 21 ). Battery: 95
+I/CameraStatistics: CameraStatistics: Camera fps: 31.
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/WebRtcAudioManager: WebRtcAudioManager: VOICE_CALL stream volume: 5 (max=7)
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Frames received: 901. Dropped: 0. Rendered: 900
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Duration: 29965 ms. FPS: 30.034531195083602
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Average render time: 2452 us.
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+D/CpuMonitor: CPU User: 15/15. System: 8/8. Freq: 55/60. Total usage: 13/14. Cores: 6( 67 67 67 67 21 21 ). Battery: 95
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+D/CpuMonitor: CPU User: 15/15. System: 10/9. Freq: 60/59. Total usage: 15/14. Cores: 6( 87 87 87 87 21 21 ). Battery: 95
+I/WebRtcAudioManager: WebRtcAudioManager: VOICE_CALL stream volume: 5 (max=7)
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Frames received: 1201. Dropped: 0. Rendered: 1200
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Duration: 39961 ms. FPS: 30.028820847717874
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Average render time: 2443 us.
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+D/CpuMonitor: CPU User: 14/15. System: 9/10. Freq: 61/61. Total usage: 14/15. Cores: 6( 87 87 87 87 21 21 ). Battery: 95
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/WebRtcAudioManager: WebRtcAudioManager: VOICE_CALL stream volume: 5 (max=7)
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Frames received: 1501. Dropped: 0. Rendered: 1500
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Duration: 49962 ms. FPS: 30.02227957870878
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Average render time: 2444 us.
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+D/CpuMonitor: CPU User: 14/14. System: 10/9. Freq: 55/60. Total usage: 14/14. Cores: 6( 67 67 67 67 21 21 ). Battery: 95
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/WebRtcAudioManager: WebRtcAudioManager: VOICE_CALL stream volume: 5 (max=7)
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Frames received: 1801. Dropped: 0. Rendered: 1800
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Duration: 59967 ms. FPS: 30.016265853487152
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Average render time: 2442 us.
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+D/CpuMonitor: CPU User: 14/14. System: 10/11. Freq: 55/58. Total usage: 13/14. Cores: 6( 67 67 67 67 21 21 ). Battery: 95
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+D/CpuMonitor: CPU User: 17/15. System: 10/10. Freq: 52/55. Total usage: 14/14. Cores: 6( 67 67 67 67 21 21 ). Battery: 95
+I/WebRtcAudioManager: WebRtcAudioManager: VOICE_CALL stream volume: 5 (max=7)
+I/CameraStatistics: CameraStatistics: Camera fps: 30.
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Frames received: 2101. Dropped: 0. Rendered: 2100
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Duration: 69960 ms. FPS: 30.016743339005686
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Average render time: 2439 us.
+D/WSRTCClient: Disconnect. Room state: CONNECTED
+D/PCRTCClient: Closing peer connection.
+D/WSRTCClient: Closing room.
+D/WSRTCClient: C->GAE: https://appr.tc/leave/193423508/21294269
+I/GlShader: GlShader: Deleting shader.
+I/libjingle: (webrtcsession.cc:818): Session:648339437593046890 Old state:STATE_INIT New state:STATE_CLOSED
+I/PCRTCClient: PeerConnection.Observer --> onIceConnectionChange
+D/PCRTCClient: IceGatheringState: COMPLETE
+D/PCRTCClient: SignalingState: CLOSED
+D/WSChannelRTCClient: Disconnect WebSocket. State: REGISTERED
+D/WSChannelRTCClient: C->WSS: {"cmd":"send","msg":"{\"type\": \"bye\"}"}
+D/WSChannelRTCClient: WS DELETE : https://apprtc-ws.webrtc.org:443/193423508/21294269 : 
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Dropping frame - Not initialized or already released.
+I/libjingle: (webrtcsession.cc:521): Session: 648339437593046890 is destroyed.
+D/PCRTCClient: Closing audio source.
+D/PCRTCClient: Stopping capture.
+I/Camera2Capturer: Camera2Capturer: stopCapture
+I/Camera2Capturer: Camera2Capturer: stopCaptureOnCameraThread
+I/Camera2Capturer: Camera2Capturer: Close and release.
+I/libjingle: (androidvideotracksource_jni.cc:76): AndroidVideoTrackSourceObserve_nativeCapturerStopped
+I/SurfaceTextureHelper: SurfaceTextureHelper: stopListening()
+D/AppRTCAudioManager: close
+D/AppRTCProximitySensor: stop@[name=main, id=1]
+D/CpuMonitor: pause
+I/Camera2Capturer: Camera2Capturer: Camera device closed.
+I/Camera2Capturer: Camera2Capturer: stopCapture done
+I/Camera2Capturer: Camera2Capturer: waitForCameraToExitTransitionalState waiting: STOPPING
+D/PCRTCClient: Closing video source.
+I/libjingle: (surfacetexturehelper_jni.cc:52): SurfaceTextureHelper dtor
+I/SurfaceTextureHelper: SurfaceTextureHelper: dispose()
+D/PCRTCClient: Closing peer connection factory.
+I/libjingle: (webrtcvideoengine2.cc:545): WebRtcVideoEngine2::~WebRtcVideoEngine2
+I/libjingle: (webrtcvoiceengine.cc:572): WebRtcVoiceEngine::~WebRtcVoiceEngine
+I/libjingle: (audio_device_impl.cc:1402): StopPlayout
+I/libjingle: (audio_device_template.h:196): Playing
+I/libjingle: (audio_device_impl.cc:1405): output: 0
+I/libjingle: (audio_device_impl.cc:1442): StopRecording
+I/libjingle: (audio_device_template.h:211): StopRecording
+I/libjingle: (audio_device_impl.cc:1445): output: 0
+I/libjingle: (audio_device_impl.cc:1467): RegisterEventObserver
+I/libjingle: (audio_device_impl.cc:1480): RegisterAudioCallback
+I/libjingle: (audio_device_buffer.cc:108): RegisterAudioCallback
+I/libjingle: (audio_device_impl.cc:507): Terminate
+I/libjingle: (audio_device_template.h:77): Terminate
+D/AudioRecordJni: Terminate@[tid=1517]
+D/AudioRecordJni: StopRecording@[tid=1517]
+D/AudioTrackJni: Terminate@[tid=1517]
+D/AudioTrackJni: StopPlayout@[tid=1517]
+D/AudioManager: Close@[tid=1517]
+I/WebRtcAudioManager: WebRtcAudioManager: dispose@[name=Thread-21, id=2467]
+I/libjingle: (audio_device_impl.cc:366): ~AudioDeviceModuleImpl
+I/libjingle: (audio_device_template.h:47): ~AudioDeviceTemplate
+D/AudioRecordJni: ~dtor@[tid=1517]
+D/AudioRecordJni: Terminate@[tid=1517]
+D/AudioRecordJni: StopRecording@[tid=1517]
+D/JVM: GlobalRef::dtor@[tid=1517]
+D/JVM: NativeRegistration::dtor@[tid=1517]
+D/JVM: JNIEnvironment::dtor@[tid=1517]
+D/JVM: AttachCurrentThreadIfNeeded::dtor@[tid=1517]
+D/AudioTrackJni: ~dtor@[tid=1517]
+D/AudioTrackJni: Terminate@[tid=1517]
+D/AudioTrackJni: StopPlayout@[tid=1517]
+D/JVM: GlobalRef::dtor@[tid=1517]
+D/JVM: NativeRegistration::dtor@[tid=1517]
+D/JVM: JNIEnvironment::dtor@[tid=1517]
+D/JVM: AttachCurrentThreadIfNeeded::dtor@[tid=1517]
+D/AudioManager: ~dtor@[tid=1517]
+D/AudioManager: Close@[tid=1517]
+D/AudioManager: JavaAudioManager::dtor@[tid=1517]
+D/JVM: GlobalRef::dtor@[tid=1517]
+D/JVM: NativeRegistration::dtor@[tid=1517]
+D/JVM: JNIEnvironment::dtor@[tid=1517]
+D/JVM: AttachCurrentThreadIfNeeded::dtor@[tid=1517]
+D/JVM: Detaching thread from JVM
+I/libjingle: (audio_device_buffer.cc:77): AudioDeviceBuffer::~dtor
+I/libjingle: (audio_device_buffer.cc:81): [playout diff time => #measurements]
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: MediaCodecVideoDecoderFactory dtor
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: MediaCodecVideoEncoderFactory dtor
+I/SurfaceViewRenderer: SurfaceViewRenderer: remote_video_view: Surface destroyed.
+I/SurfaceViewRenderer: SurfaceViewRenderer: remote_video_view: Surface created.
+I/SurfaceViewRenderer: SurfaceViewRenderer: remote_video_view: Surface changed: 1080x1794
+D/PCRTCClient: Closing peer connection done.
+D/PCRTCClient: IceConnectionState: CLOSED
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Surface destroyed.
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Surface created.
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Surface changed: 1080x1794
+I/SurfaceViewRenderer: SurfaceViewRenderer: remote_video_view: Surface destroyed.
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Surface destroyed.
+D/de.tavendo.autobahn.WebSocketReader: run() : ConnectionLost
+D/de.tavendo.autobahn.WebSocketReader: WebSocket reader ended.
+D/WSChannelRTCClient: Disconnecting WebSocket done.
+D/LooperExecutor: Looper thread finished.
+D/ConnectActivity: Connecting to room 228837362 at URL https://appr.tc
+I/EglBase14: EglBase14: SDK version: 25. isEGL14Supported: true
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Initializing.
+I/EglBase14: EglBase14: SDK version: 25. isEGL14Supported: true
+I/SurfaceViewRenderer: SurfaceViewRenderer: remote_video_view: Initializing.
+I/EglBase14: EglBase14: SDK version: 25. isEGL14Supported: true
+D/LooperExecutor: Looper thread started.
+D/CpuMonitor: CpuMonitor ctor.
+D/CallRTCClient: Connecting to: https://appr.tc
+D/WSRTCClient: Connect to room: https://appr.tc/join/228837362
+D/RoomRTCClient: Connecting to room: https://appr.tc/join/228837362
+D/AppRTCProximitySensor: AppRTCProximitySensor@[name=main, id=1]
+D/AppRTCAudioManager: Android SDK: 25, Release: 7.1.1, Brand: google, Device: bullhead, Id: NMF26F, Hardware: bullhead, Manufacturer: LGE, Model: Nexus 5X, Product: bullhead
+D/CallRTCClient: Initializing the audio manager...
+D/AppRTCAudioManager: init
+D/CpuMonitor: Core 0. Max frequency: 1440000
+D/CpuMonitor: Core 1. Max frequency: 1440000
+D/CpuMonitor: Core 2. Max frequency: 1440000
+D/CpuMonitor: Core 3. Max frequency: 1440000
+D/CpuMonitor: Core 4. Max frequency: 1824000
+D/CpuMonitor: Core 5. Max frequency: 1824000
+D/AppRTCAudioManager: audioDevices: [EARPIECE, SPEAKER_PHONE]
+D/AppRTCAudioManager: setAudioDevice(device=SPEAKER_PHONE)
+D/AppRTCAudioManager: onAudioManagerChangedState: devices=[EARPIECE, SPEAKER_PHONE], selected=SPEAKER_PHONE
+D/AppRTCProximitySensor: start@[name=main, id=1]
+D/AppRTCProximitySensor: Proximity sensor: name=RPR0521 Proximity Sensor, vendor: Rohm, power: 0.0, resolution: 1.0, max range: 5.0, min delay: 200000, type: android.sensor.proximity, max delay: 10000000, reporting mode: 1, isWakeUpSensor: true
+D/PCRTCClient: Create peer connection factory. Use video: true
+I/libjingle: (peerconnection_jni.cc:1025): initializeFieldTrials: 
+D/PCRTCClient: Pereferred video codec: VP8
+D/PCRTCClient: Disable OpenSL ES audio even if device supports it
+D/PCRTCClient: Enable built-in AEC if device supports it
+D/PCRTCClient: Enable built-in AGC if device supports it
+D/PCRTCClient: Enable built-in NS if device supports it
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Found target encoder for mime video/x-vnd.on2.vp8 : OMX.qcom.video.encoder.vp8. Color: 0x15
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: VP8 HW Encoder supported.
+W/VideoCapabilities: Unrecognized profile 2130706433 for video/avc
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Found target encoder for mime video/avc : OMX.qcom.video.encoder.avc. Color: 0x15
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: H.264 HW Encoder supported.
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: MediaCodecVideoDecoderFactory ctor
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: Trying to find HW decoder for mime video/x-vnd.on2.vp8
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: Found candidate decoder OMX.qcom.video.decoder.vp8
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: Found target decoder OMX.qcom.video.decoder.vp8. Color: 0x13
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: VP8 HW Decoder supported.
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: Trying to find HW decoder for mime video/x-vnd.on2.vp9
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: Found candidate decoder OMX.google.vp9.decoder
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: No HW decoder found for mime video/x-vnd.on2.vp9
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: Trying to find HW decoder for mime video/avc
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: Found candidate decoder OMX.qcom.video.decoder.avc
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: Found target decoder OMX.qcom.video.decoder.avc. Color: 0x13
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: H264 HW Decoder supported.
+I/libjingle: (webrtcvoiceengine.cc:512): WebRtcVoiceEngine::WebRtcVoiceEngine
+I/libjingle: (webrtcvoiceengine.cc:518): Supported codecs in order of preference:
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: opus/48000/2 (111)
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: ISAC/16000/1 (103)
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: ISAC/32000/1 (104)
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: G722/8000/1 (9)
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: ILBC/8000/1 (102)
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: PCMU/8000/1 (0)
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: PCMA/8000/1 (8)
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: CN/32000/1 (106)
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: CN/16000/1 (105)
+D/CpuMonitor: resume
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: CN/8000/1 (13)
+I/libjingle: (webrtcvoiceengine.cc:274): Adding supported codec: telephone-event/8000/1 (126)
+I/libjingle: (webrtcvoiceengine.cc:521): opus/48000/2 (111)
+I/libjingle: (webrtcvoiceengine.cc:521): ISAC/16000/1 (103)
+I/libjingle: (webrtcvoiceengine.cc:521): ISAC/32000/1 (104)
+I/libjingle: (webrtcvoiceengine.cc:521): G722/8000/1 (9)
+I/libjingle: (webrtcvoiceengine.cc:521): ILBC/8000/1 (102)
+I/libjingle: (webrtcvoiceengine.cc:521): PCMU/8000/1 (0)
+I/libjingle: (webrtcvoiceengine.cc:521): PCMA/8000/1 (8)
+I/libjingle: (webrtcvoiceengine.cc:521): CN/32000/1 (106)
+I/libjingle: (webrtcvoiceengine.cc:521): CN/16000/1 (105)
+I/libjingle: (webrtcvoiceengine.cc:521): CN/8000/1 (13)
+I/libjingle: (webrtcvoiceengine.cc:521): telephone-event/8000/1 (126)
+I/libjingle: (webrtcvoiceengine.cc:529): VoiceEngine 4.1.0
+I/libjingle: (audio_device_impl.cc:84): Create
+I/libjingle: (audio_device_buffer.cc:70): AudioDeviceBuffer::ctor
+I/libjingle: (audio_device_impl.cc:131): AudioDeviceModuleImpl
+I/libjingle: (audio_device_impl.cc:139): CheckPlatform
+I/libjingle: (audio_device_impl.cc:150): current platform is Android
+I/libjingle: (audio_device_impl.cc:180): CreatePlatformSpecificObjects
+I/libjingle: (audio_device_impl.cc:1874): PlatformAudioLayer
+D/JVM: AttachCurrentThreadIfNeeded::ctor@[tid=3109]
+D/JVM: Attaching thread to JVM
+D/JVM: JVM::environment@[tid=3109]
+D/JVM: JNIEnvironment::ctor@[tid=3109]
+D/AudioManager: ctor@[tid=3109]
+D/JVM: JNIEnvironment::RegisterNatives(org/webrtc/voiceengine/WebRtcAudioManager)
+D/JVM: NativeRegistration::ctor@[tid=3109]
+D/JVM: NativeRegistration::NewObject@[tid=3109]
+I/WebRtcAudioManager: WebRtcAudioManager: ctor@[name=Thread-29, id=2488]
+I/WebRtcAudioManager: WebRtcAudioManager: Sample rate is set to 48000 Hz
+I/WebRtcAudioEffects: WebRtcAudioEffects: canUseAcousticEchoCanceler: true
+I/WebRtcAudioEffects: WebRtcAudioEffects: canUseAutomaticGainControl: false
+I/WebRtcAudioEffects: WebRtcAudioEffects: canUseNoiseSuppressor: true
+D/AppRTCProximitySensor: Proximity sensor => FAR state
+D/AppRTCAudioManager: setAudioDevice(device=SPEAKER_PHONE)
+D/AppRTCAudioManager: onAudioManagerChangedState: devices=[EARPIECE, SPEAKER_PHONE], selected=SPEAKER_PHONE
+D/AppRTCProximitySensor: start@[name=main, id=1]
+D/AppRTCProximitySensor: onSensorChanged@[name=main, id=1]: accuracy=3, timestamp=243153890436919, distance=5.0
+D/AudioManager: OnCacheAudioParameters@[tid=3109]
+D/AudioManager: hardware_aec: 1
+D/AudioManager: hardware_agc: 0
+D/AudioManager: hardware_ns: 1
+D/AudioManager: low_latency_output: 1
+D/AudioManager: pro_audio: 1
+D/AudioManager: sample_rate: 48000
+D/AudioManager: channels: 1
+D/AudioManager: output_buffer_size: 192
+D/AudioManager: input_buffer_size: 1920
+D/JVM: GlobalRef::ctor@[tid=3109]
+D/AudioManager: JavaAudioManager::ctor@[tid=3109]
+D/AudioManager: IsLowLatencyPlayoutSupported()
+E/WebRtcAudioManager: WebRtcAudioManager: Nexus 5X is blacklisted for OpenSL ES usage!
+D/JVM: AttachCurrentThreadIfNeeded::ctor@[tid=3109]
+D/JVM: JVM::environment@[tid=3109]
+D/JVM: JNIEnvironment::ctor@[tid=3109]
+D/AudioTrackJni: ctor@[tid=3109]
+D/JVM: JNIEnvironment::RegisterNatives(org/webrtc/voiceengine/WebRtcAudioTrack)
+D/JVM: NativeRegistration::ctor@[tid=3109]
+D/JVM: NativeRegistration::NewObject@[tid=3109]
+I/WebRtcAudioTrack: WebRtcAudioTrack: ctor@[name=Thread-29, id=2488]
+D/JVM: GlobalRef::ctor@[tid=3109]
+D/JVM: AttachCurrentThreadIfNeeded::ctor@[tid=3109]
+D/JVM: JVM::environment@[tid=3109]
+D/JVM: JNIEnvironment::ctor@[tid=3109]
+D/AudioRecordJni: ctor@[tid=3109]
+D/JVM: JNIEnvironment::RegisterNatives(org/webrtc/voiceengine/WebRtcAudioRecord)
+D/JVM: NativeRegistration::ctor@[tid=3109]
+D/JVM: NativeRegistration::NewObject@[tid=3109]
+I/WebRtcAudioRecord: WebRtcAudioRecord: ctor@[name=Thread-29, id=2488]
+I/WebRtcAudioEffects: WebRtcAudioEffects: ctor@[name=Thread-29, id=2488]
+D/JVM: GlobalRef::ctor@[tid=3109]
+I/libjingle: (audio_device_template.h:42): AudioDeviceTemplate
+D/AudioManager: SetActiveAudioLayer(5)@[tid=3109]
+D/AudioManager: delay_estimate_in_milliseconds: 150
+I/libjingle: (audio_device_impl.cc:354): AttachAudioBuffer
+I/libjingle: (audio_device_template.h:471): AttachAudioBuffer
+D/AudioTrackJni: AttachAudioBuffer@[tid=3109]
+D/AudioTrackJni: SetPlayoutSampleRate(48000)
+I/libjingle: (audio_device_buffer.cc:143): SetPlayoutSampleRate(48000)
+D/AudioTrackJni: SetPlayoutChannels(1)
+D/AudioRecordJni: AttachAudioBuffer
+D/AudioRecordJni: SetRecordingSampleRate(48000)
+I/libjingle: (audio_device_buffer.cc:136): SetRecordingSampleRate(48000)
+D/AudioRecordJni: SetRecordingChannels(1)
+D/AudioRecordJni: total_delay_in_milliseconds: 150
+I/libjingle: (audio_device_impl.cc:1467): RegisterEventObserver
+I/libjingle: (audio_device_impl.cc:1480): RegisterAudioCallback
+I/libjingle: (audio_device_buffer.cc:108): RegisterAudioCallback
+I/libjingle: (audio_device_impl.cc:484): Init
+I/libjingle: (audio_device_template.h:57): Init
+D/AudioManager: Init@[tid=3109]
+I/WebRtcAudioManager: WebRtcAudioManager: init@[name=Thread-29, id=2488]
+I/WebRtcAudioManager: WebRtcAudioManager: audio mode is: MODE_IN_COMMUNICATION
+D/AudioTrackJni: Init@[tid=3109]
+D/AudioRecordJni: Init@[tid=3109]
+I/libjingle: (audio_device_impl.cc:1213): SetPlayoutDevice(0)
+I/libjingle: (audio_device_template.h:122): SetPlayoutDevice
+I/libjingle: (audio_device_impl.cc:533): InitSpeaker
+I/libjingle: (audio_device_template.h:248): InitSpeaker
+I/libjingle: (audio_device_impl.cc:1308): SetRecordingDevice(0)
+I/libjingle: (audio_device_template.h:135): SetRecordingDevice
+I/libjingle: (audio_device_impl.cc:543): InitMicrophone
+I/libjingle: (audio_device_template.h:258): InitMicrophone
+I/libjingle: (audio_device_impl.cc:1022): StereoPlayoutIsAvailable
+I/libjingle: (audio_device_template.h:374): StereoPlayoutIsAvailable
+I/WebRtcAudioManager: WebRtcAudioManager: VOICE_CALL stream volume: 5 (max=7)
+I/libjingle: (audio_device_impl.cc:1032): output: 0
+I/libjingle: (audio_device_impl.cc:1041): SetStereoPlayout(0)
+I/libjingle: (audio_device_template.h:157): PlayoutIsInitialized
+I/libjingle: (audio_device_template.h:381): SetStereoPlayout
+W/libjingle: (audio_device_impl.cc:1051): stereo playout is not supported
+W/libjingle: (webrtcvoiceengine.cc:990): webrtc: Init() failed to set mono/stereo playout mode (error=8090)
+I/libjingle: (audio_device_impl.cc:908): StereoRecordingIsAvailable
+I/libjingle: (audio_device_template.h:393): StereoRecordingIsAvailable
+I/libjingle: (audio_device_impl.cc:918): output: 0
+I/libjingle: (audio_device_impl.cc:927): SetStereoRecording(0)
+I/libjingle: (audio_device_template.h:173): RecordingIsInitialized
+I/libjingle: (audio_device_template.h:399): SetStereoRecording
+W/libjingle: (audio_device_impl.cc:936): failed to change stereo recording
+W/libjingle: (webrtcvoiceengine.cc:990): webrtc: Init() failed to set mono/stereo recording mode (error=8090)
+I/libjingle: (webrtcvoiceengine.cc:990): webrtc: TransmitMixer::SetAudioProcessingModule(audioProcessingModule=0xb816b900)
+I/libjingle: (webrtcvoiceengine.cc:990): webrtc: OutputMixer::SetAudioProcessingModule(audioProcessingModule=0xb816b900)
+I/libjingle: (audio_device_impl.cc:1088): SetAGC(0)
+E/libjingle: (voe_base_impl.cc:374): Init: Failed to set agc to enabled: 0
+I/libjingle: (webrtcvoiceengine.cc:594): WebRtcVoiceEngine::ApplyOptions: AudioOptions {aec: true, agc: true, ns: true, hf: true, swap: false, audio_jitter_buffer_max_packets: 50, audio_jitter_buffer_fast_accelerate: false, typing: true, agc_delta: 0, experimental_agc: false, extended_filter_aec: false, delay_agnostic_aec: false, experimental_ns: false, intelligibility_enhancer: false, level_control: false, }
+I/libjingle: (audio_device_impl.cc:1792): BuiltInAECIsAvailable
+I/libjingle: (audio_device_template.h:495): BuiltInAECIsAvailable
+I/libjingle: (audio_device_impl.cc:1795): output: 1
+I/libjingle: (audio_device_impl.cc:1800): EnableBuiltInAEC(1)
+I/libjingle: (audio_device_template.h:500): EnableBuiltInAEC(1)
+I/libjingle: (audio_device_template.h:495): BuiltInAECIsAvailable
+D/AudioRecordJni: EnableBuiltInAEC@[tid=3109]
+I/WebRtcAudioRecord: WebRtcAudioRecord: enableBuiltInAEC(true)
+I/WebRtcAudioEffects: WebRtcAudioEffects: setAEC(true)
+I/WebRtcAudioEffects: WebRtcAudioEffects: canUseAcousticEchoCanceler: true
+I/libjingle: (audio_device_impl.cc:1803): output: 0
+I/libjingle: (webrtcvoiceengine.cc:660): Disabling EC since built-in EC will be used instead
+I/libjingle: (webrtcvoiceengine.cc:667): Echo control set to 0 with mode 4
+I/libjingle: (audio_device_impl.cc:1808): BuiltInAGCIsAvailable
+I/libjingle: (audio_device_template.h:508): BuiltInAGCIsAvailable
+I/libjingle: (audio_device_impl.cc:1811): output: 0
+I/libjingle: (webrtcvoiceengine.cc:721): Auto gain set to 1 with mode 4
+I/libjingle: (audio_device_impl.cc:1824): BuiltInNSIsAvailable
+I/libjingle: (audio_device_template.h:521): BuiltInNSIsAvailable
+I/libjingle: (audio_device_impl.cc:1827): output: 1
+I/libjingle: (audio_device_impl.cc:1832): EnableBuiltInNS(1)
+I/libjingle: (audio_device_template.h:526): EnableBuiltInNS(1)
+I/libjingle: (audio_device_template.h:521): BuiltInNSIsAvailable
+D/AudioRecordJni: EnableBuiltInNS@[tid=3109]
+I/WebRtcAudioRecord: WebRtcAudioRecord: enableBuiltInNS(true)
+I/WebRtcAudioEffects: WebRtcAudioEffects: setNS(true)
+I/WebRtcAudioEffects: WebRtcAudioEffects: canUseNoiseSuppressor: true
+I/libjingle: (audio_device_impl.cc:1835): output: 0
+I/libjingle: (webrtcvoiceengine.cc:769): Disabling NS since built-in NS will be used instead
+I/libjingle: (webrtcvoiceengine.cc:776): Noise suppression set to 0 with mode 5
+I/libjingle: (webrtcvoiceengine.cc:782): High pass filter enabled? 1
+I/libjingle: (webrtcvoiceengine.cc:790): Stereo swapping enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:799): NetEq capacity is 50
+I/libjingle: (webrtcvoiceengine.cc:807): NetEq fast mode? 0
+I/libjingle: (webrtcvoiceengine.cc:815): Typing detection is enabled? 0
+E/libjingle: (voe_audio_processing_impl.cc:955): SetTypingDetectionStatus: not supported
+W/libjingle: (webrtcvoiceengine.cc:819): SetTypingDetectionStatus(0) failed, err=8003
+I/libjingle: (webrtcvoiceengine.cc:824): Adjust agc delta is 0
+I/libjingle: (webrtcvoiceengine.cc:1015): Adjusting AGC level from default -3dB to -3dB
+I/libjingle: (webrtcvoiceengine.cc:835): Delay agnostic aec is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:844): Extended filter aec is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:853): Experimental ns is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:859): Intelligibility Enhancer is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:869): Level control: 0
+I/libjingle: (webrtcvoiceengine.cc:905): Setting microphone to (id=0) and speaker to (id=0)
+I/libjingle: (audio_device_impl.cc:1456): Recording
+I/libjingle: (audio_device_impl.cc:974): SetRecordingChannel(both)
+I/libjingle: (audio_device_template.h:404): StereoRecording
+W/libjingle: (webrtcvoiceengine.cc:990): webrtc: SetRecordingChannel() unable to set the recording channel (error=10028)
+I/libjingle: (audio_device_impl.cc:1308): SetRecordingDevice(0)
+I/libjingle: (audio_device_template.h:135): SetRecordingDevice
+I/libjingle: (audio_device_impl.cc:543): InitMicrophone
+I/libjingle: (audio_device_template.h:258): InitMicrophone
+I/libjingle: (audio_device_impl.cc:908): StereoRecordingIsAvailable
+I/libjingle: (audio_device_template.h:393): StereoRecordingIsAvailable
+I/libjingle: (audio_device_impl.cc:918): output: 0
+I/libjingle: (audio_device_impl.cc:927): SetStereoRecording(0)
+I/libjingle: (audio_device_template.h:173): RecordingIsInitialized
+I/libjingle: (audio_device_template.h:399): SetStereoRecording
+W/libjingle: (audio_device_impl.cc:936): failed to change stereo recording
+W/libjingle: (webrtcvoiceengine.cc:990): webrtc: SetRecordingDevice() failed to set mono recording mode (error=8090)
+I/libjingle: (audio_device_impl.cc:1416): Playing
+I/libjingle: (audio_device_template.h:196): Playing
+I/libjingle: (audio_device_impl.cc:1213): SetPlayoutDevice(0)
+I/libjingle: (audio_device_template.h:122): SetPlayoutDevice
+I/libjingle: (audio_device_impl.cc:533): InitSpeaker
+I/libjingle: (audio_device_template.h:248): InitSpeaker
+I/libjingle: (audio_device_impl.cc:1022): StereoPlayoutIsAvailable
+I/libjingle: (audio_device_template.h:374): StereoPlayoutIsAvailable
+I/libjingle: (audio_device_impl.cc:1032): output: 0
+I/libjingle: (audio_device_impl.cc:1041): SetStereoPlayout(0)
+I/libjingle: (audio_device_template.h:157): PlayoutIsInitialized
+I/libjingle: (audio_device_template.h:381): SetStereoPlayout
+W/libjingle: (audio_device_impl.cc:1051): stereo playout is not supported
+W/libjingle: (webrtcvoiceengine.cc:990): webrtc: SetPlayoutDevice() failed to set stereo playout mode (error=8090)
+I/libjingle: (webrtcvoiceengine.cc:924): Set microphone to (id=0) and speaker to (id=0)
+I/libjingle: (webrtcvideoengine2.cc:540): WebRtcVideoEngine2::WebRtcVideoEngine2()
+I/libjingle: (webrtcvideoengine2.cc:622): Supported codecs: {VideoCodec[100:VP8:640:400:30], VideoCodec[96:rtx:0:0:0], VideoCodec[101:VP9:640:400:30], VideoCodec[97:rtx:0:0:0], VideoCodec[116:red:0:0:0], VideoCodec[98:rtx:0:0:0], VideoCodec[117:ulpfec:0:0:0]}
+I/libjingle: (webrtcvideoengine2.cc:658): Supported codecs (incl. external codecs): {VideoCodec[100:VP8:640:400:30], VideoCodec[96:rtx:0:0:0], VideoCodec[101:VP9:640:400:30], VideoCodec[97:rtx:0:0:0], VideoCodec[116:red:0:0:0], VideoCodec[98:rtx:0:0:0], VideoCodec[117:ulpfec:0:0:0], VideoCodec[121:H264:1280:1280:30], VideoCodec[99:rtx:0:0:0]}
+I/libjingle: (webrtcvideoengine2.cc:660): Codecs supported by the external encoder factory: VP8, H264
+I/libjingle: (webrtcvideoengine2.cc:549): WebRtcVideoEngine2::Init
+I/libjingle: (peerconnection_jni.cc:1134): InvokeJavaCallbacksOnFactoryThreads.
+I/libjingle: (peerconnection_jni.cc:1115): Network thread JavaCallback
+I/PeerConnectionFactory: PeerConnectionFactory: onNetworkThreadReady
+I/libjingle: (peerconnection_jni.cc:1119): Worker thread JavaCallback
+I/PeerConnectionFactory: PeerConnectionFactory: onWorkerThreadReady
+I/libjingle: (peerconnection_jni.cc:1123): Signaling thread JavaCallback
+I/PeerConnectionFactory: PeerConnectionFactory: onSignalingThreadReady
+D/PCRTCClient: Peer connection factory created.
+I/SurfaceViewRenderer: SurfaceViewRenderer: remote_video_view: Surface created.
+I/SurfaceViewRenderer: SurfaceViewRenderer: remote_video_view: Surface changed: 1080x1920
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Surface created.
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Surface changed: 1080x1920
+I/SurfaceViewRenderer: SurfaceViewRenderer: remote_video_view: Surface changed: 1080x1794
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Surface changed: 1080x1794
+W/IInputConnectionWrapper: finishComposingText on inactive InputConnection
+W/IInputConnectionWrapper: finishComposingText on inactive InputConnection
+W/IInputConnectionWrapper: finishComposingText on inactive InputConnection
+D/RoomRTCClient: Room response: {"params": {"is_initiator": "true", "room_link": "https://appr.tc/r/228837362", "turn_server_override": [], "ice_server_transports": "", "media_constraints": "{\"audio\": true, \"video\": true}", "include_loopback_js": "", "turn_url": "https://computeengineondemand.appspot.com/turn?username=27650191&key=4080218913", "wss_url": "wss://apprtc-ws.webrtc.org:443/ws", "pc_constraints": "{\"optional\": []}", "pc_config": "{\"rtcpMuxPolicy\": \"require\", \"bundlePolicy\": \"max-bundle\", \"iceServers\": []}", "wss_post_url": "https://apprtc-ws.webrtc.org:443", "ice_server_url": "https://networktraversal.googleapis.com/v1alpha/iceconfig?key=AIzaSyAJdh2HkajseEIltlZ3SIXO02Tze9sO3NY", "warning_messages": [], "room_id": "228837362", "version_info": "{\"gitHash\": \"6e89f36e0d67d4ae535849e11bc2aa7910525948\", \"branch\": \"master\", \"time\": \"Wed Nov 2 01:50:02 2016 -0700\"}", "error_messages": [], "client_id": "27650191", "bypass_join_confirmation": "false", "is_loopback": "false", "offer_options": "{}", "messages": [], "callstats_params": "{\"appSecret\": \"IhG4J05kwq3Pxo+LF4uF0mmSdno=\", \"appId\": \"423310139\"}"}, "result": "SUCCESS"}
+D/RoomRTCClient: RoomId: 228837362. ClientId: 27650191
+D/RoomRTCClient: Initiator: true
+D/RoomRTCClient: WSS url: wss://apprtc-ws.webrtc.org:443/ws
+D/RoomRTCClient: WSS POST url: https://apprtc-ws.webrtc.org:443
+D/RoomRTCClient: Request TURN from: https://networktraversal.googleapis.com/v1alpha/iceconfig?key=AIzaSyAJdh2HkajseEIltlZ3SIXO02Tze9sO3NY
+D/RoomRTCClient: TURN response: {
+                                                                    "lifetimeDuration": "86400s",
+                                                                    "iceServers": [
+                                                                      {
+                                                                        "urls": [
+                                                                          "turn:216.58.221.30:19305?transport=udp",
+                                                                          "turn:[2404:6800:4004:815::201E]:19305?transport=udp",
+                                                                          "turn:216.58.221.30:443?transport=tcp",
+                                                                          "turn:[2404:6800:4004:815::201E]:443?transport=tcp"
+                                                                        ],
+                                                                        "username": "COKvrcIFEgbm3J14Rj0Yzc/s6OMT",
+                                                                        "credential": "s+sFSAtfRZagp1A4TY3Eo4cMYrI="
+                                                                      },
+                                                                      {
+                                                                        "urls": [
+                                                                          "stun:stun.l.google.com:19302"
+                                                                        ]
+                                                                      }
+                                                                    ]
+                                                                  }
+D/RoomRTCClient: TurnServer: turn:216.58.221.30:19305?transport=udp[COKvrcIFEgbm3J14Rj0Yzc/s6OMT:s+sFSAtfRZagp1A4TY3Eo4cMYrI=]
+D/RoomRTCClient: TurnServer: turn:[2404:6800:4004:815::201E]:19305?transport=udp[COKvrcIFEgbm3J14Rj0Yzc/s6OMT:s+sFSAtfRZagp1A4TY3Eo4cMYrI=]
+D/RoomRTCClient: TurnServer: turn:216.58.221.30:443?transport=tcp[COKvrcIFEgbm3J14Rj0Yzc/s6OMT:s+sFSAtfRZagp1A4TY3Eo4cMYrI=]
+D/RoomRTCClient: TurnServer: turn:[2404:6800:4004:815::201E]:443?transport=tcp[COKvrcIFEgbm3J14Rj0Yzc/s6OMT:s+sFSAtfRZagp1A4TY3Eo4cMYrI=]
+D/RoomRTCClient: TurnServer: stun:stun.l.google.com:19302[:]
+D/WSRTCClient: Room connection completed.
+D/WSRTCClient: Message URL: https://appr.tc/message/228837362/27650191
+D/WSRTCClient: Leave URL: https://appr.tc/leave/228837362/27650191
+D/WSChannelRTCClient: Connecting WebSocket to: wss://apprtc-ws.webrtc.org:443/ws. Post URL: https://apprtc-ws.webrtc.org:443
+D/CallRTCClient: Creating peer connection, delay=1022ms
+D/de.tavendo.autobahn.WebSocketConnection: WebSocket connection created.
+D/CallRTCClient: Creating OFFER...
+D/PCRTCClient: Create peer connection.
+D/PCRTCClient: PCConstraints: mandatory: [], optional: [DtlsSrtpKeyAgreement: true]
+D/PCRTCClient: EGLContext: org.webrtc.EglBase14$Context@a7c8f10
+I/EglBase14: EglBase14: SDK version: 25. isEGL14Supported: true
+D/de.tavendo.autobahn.WebSocketReader: WebSocket reader created.
+D/de.tavendo.autobahn.WebSocketConnection: WebSocket reader created and started.
+D/de.tavendo.autobahn.WebSocketWriter: WebSocket writer created.
+I/EglBase14: EglBase14: SDK version: 25. isEGL14Supported: true
+I/libjingle: (peerconnection_jni.cc:1408): Set EGL context for HW encoding.
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: MediaCodecVideoEncoderFactory::SetEGLContext
+I/libjingle: (peerconnection_jni.cc:1416): Set EGL context for HW decoding.
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: MediaCodecVideoDecoderFactory::SetEGLContext
+I/libjingle: (peerconnection.cc:2284): TCP candidates are disabled.
+I/libjingle: (opensslidentity.cc:43): Making key pair
+I/libjingle: (opensslidentity.cc:84): Returning key pair
+I/libjingle: (opensslidentity.cc:91): Making certificate for WebRTC
+I/PCRTCClient: PCRTCClient: Creating capturer using camera2 API.
+I/libjingle: (opensslidentity.cc:139): Returning certificate
+I/PCRTCClient: PCRTCClient: Looking for front facing cameras.
+I/PCRTCClient: PCRTCClient: Creating front facing camera capturer.
+I/Camera2Capturer: Camera2Capturer: Camera2Capturer ctor, camera name: 1
+I/EglBase14: EglBase14: SDK version: 25. isEGL14Supported: true
+I/libjingle: (androidvideotracksource.cc:25): AndroidVideoTrackSource ctor
+I/libjingle: (peerconnection_jni.cc:1306): PeerConnectionFactory_nativeInitializeVideoCapturer
+I/Camera2Capturer: Camera2Capturer: initialize
+I/Camera2Capturer: Camera2Capturer: startCapture requested: 1280x720@30
+D/PCRTCClient: Peer connection created.
+D/PCRTCClient: PC Create OFFER
+I/Camera2Capturer: Camera2Capturer: Using capture format: 1280x720@[7.0:30.0]
+I/Camera2Capturer: Camera2Capturer: Opening camera 1
+W/libjingle: (mediasession.cc:383): Duplicate id found. Reassigning from 101 to 127
+I/PCRTCClient: SDPObserver --> onCreateSuccess
+D/PCRTCClient: Found VP8 rtpmap 100, prefer at m=video 9 UDP/TLS/RTP/SAVPF 100 101 116 117 121 96 97 98 99
+D/PCRTCClient: Change media description: m=video 9 UDP/TLS/RTP/SAVPF 100 101 116 117 121 96 97 98 99
+D/PCRTCClient: Set local SDP from OFFER
+I/libjingle: (webrtcsdp.cc:2606): Ignored line: c=IN IP4 0.0.0.0
+I/libjingle: (webrtcsdp.cc:2606): Ignored line: c=IN IP4 0.0.0.0
+I/libjingle: (webrtcsession.cc:1611): Bundling audio on audio
+I/libjingle: (systeminfo.cc:82): Available number of cores: 6
+I/libjingle: (bitrate_prober.cc:50): Bandwidth probing enabled, set to inactive
+I/libjingle: (remote_bitrate_estimator_single_stream.cc:61): RemoteBitrateEstimatorSingleStream: Instantiating.
+I/libjingle: (delay_based_bwe.cc:85): RemoteBitrateEstimatorAbsSendTime: Instantiating.
+I/libjingle: (congestion_controller.cc:358): Bitrate estimate state changed, BWE: 300000 bps.
+I/libjingle: (bitrate_allocator.cc:77): Current BWE 300000
+I/libjingle: (webrtcvoiceengine.cc:1604): Setting voice channel options: AudioOptions {audio_jitter_buffer_max_packets: 50, audio_jitter_buffer_fast_accelerate: false, }
+I/libjingle: (webrtcvoiceengine.cc:594): WebRtcVoiceEngine::ApplyOptions: AudioOptions {audio_jitter_buffer_max_packets: 50, audio_jitter_buffer_fast_accelerate: false, }
+I/libjingle: (webrtcvoiceengine.cc:799): NetEq capacity is 50
+I/libjingle: (webrtcvoiceengine.cc:807): NetEq fast mode? 0
+I/libjingle: (webrtcvoiceengine.cc:815): Typing detection is enabled? 0
+E/libjingle: (voe_audio_processing_impl.cc:955): SetTypingDetectionStatus: not supported
+W/libjingle: (webrtcvoiceengine.cc:819): SetTypingDetectionStatus(0) failed, err=8003
+I/libjingle: (webrtcvoiceengine.cc:835): Delay agnostic aec is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:844): Extended filter aec is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:853): Experimental ns is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:859): Intelligibility Enhancer is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:869): Level control: 0
+I/libjingle: (webrtcvoiceengine.cc:1616): Set voice channel options.  Current options: AudioOptions {audio_jitter_buffer_max_packets: 50, audio_jitter_buffer_fast_accelerate: false, }
+I/libjingle: (channel.cc:192): Created channel for audio
+I/libjingle: (p2ptransportchannel.cc:342): Set continual_gathering_policy to 1
+I/libjingle: (p2ptransportchannel.cc:370): Set ping most likely connection to 0
+I/libjingle: (p2ptransportchannel.cc:390): Set presume writable when fully relayed to 0
+I/libjingle: (call.cc:704): UpdateAggregateNetworkState: aggregate_state=down
+I/libjingle: (congestion_controller.cc:290): SignalNetworkState Down
+I/libjingle: (paced_sender.cc:269): PacedSender paused.
+I/libjingle: (congestion_controller.cc:358): Bitrate estimate state changed, BWE: 0 bps.
+I/libjingle: (webrtcsession.cc:1611): Bundling video on audio
+I/libjingle: (webrtcvideoengine2.cc:558): CreateChannel. Options: VideoOptions {}
+I/libjingle: (channel.cc:192): Created channel for video
+I/libjingle: (call.cc:704): UpdateAggregateNetworkState: aggregate_state=down
+I/libjingle: (congestion_controller.cc:290): SignalNetworkState Down
+I/libjingle: (paced_sender.cc:269): PacedSender paused.
+I/libjingle: (webrtcsession.cc:818): Session:6761194442006738983 Old state:STATE_INIT New state:STATE_SENTOFFER
+D/PCRTCClient: SignalingState: HAVE_LOCAL_OFFER
+I/libjingle: (channel.cc:1712): Setting local voice description
+I/libjingle: (webrtcvoiceengine.cc:1474): WebRtcVoiceMediaChannel::SetRecvParameters: {codecs: [AudioCodec[111:opus:48000:0:2], AudioCodec[103:ISAC:16000:32000:1], AudioCodec[104:ISAC:32000:56000:1], AudioCodec[9:G722:8000:0:1], AudioCodec[102:ILBC:8000:0:1], AudioCodec[0:PCMU:8000:0:1], AudioCodec[8:PCMA:8000:0:1], AudioCodec[106:CN:32000:0:1], AudioCodec[105:CN:16000:0:1], AudioCodec[13:CN:8000:0:1], AudioCodec[126:telephone-event:8000:0:1]], extensions: [{uri: urn:ietf:params:rtp-hdrext:ssrc-audio-level, id: 1}, {uri: http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time, id: 3}]}
+I/libjingle: (webrtcvoiceengine.cc:1626): Setting receive voice codecs.
+I/libjingle: (webrtcvoiceengine.cc:1664): opus/48000/2 (111)
+I/libjingle: (webrtcvoiceengine.cc:1664): ISAC/16000/1 (103)
+I/libjingle: (webrtcvoiceengine.cc:1664): ISAC/32000/1 (104)
+I/libjingle: (webrtcvoiceengine.cc:1664): G722/8000/1 (9)
+I/libjingle: (webrtcvoiceengine.cc:1664): ILBC/8000/1 (102)
+I/libjingle: (webrtcvoiceengine.cc:1664): PCMU/8000/1 (0)
+I/libjingle: (webrtcvoiceengine.cc:1664): PCMA/8000/1 (8)
+I/libjingle: (webrtcvoiceengine.cc:1664): CN/32000/1 (106)
+I/libjingle: (webrtcvoiceengine.cc:1664): CN/16000/1 (105)
+I/libjingle: (webrtcvoiceengine.cc:1664): CN/8000/1 (13)
+I/libjingle: (webrtcvoiceengine.cc:1664): telephone-event/8000/1 (126)
+I/libjingle: (webrtcvoiceengine.cc:2026): AddSendStream: {id:ARDAMSa0;ssrcs:[759702623];ssrc_groups:;cname:oHMyDNMW3Y6kzmnA;sync_label:ARDAMS}
+I/libjingle: (neteq_impl.cc:109): NetEq config: sample_rate_hz=16000, enable_audio_classifier=false, enable_post_decode_vad=true, max_packets_in_buffer=50, background_noise_mode=2, playout_mode=0, enable_fast_accelerate=false, enable_muted_state= true
+I/libjingle: (audio_send_stream.cc:67): AudioSendStream: {rtp: {ssrc: 759702623, extensions: [], nack: {rtp_history_ms: 0}, c_name: oHMyDNMW3Y6kzmnA}, voe_channel_id: 0, cng_payload_type: -1}
+I/libjingle: (call.cc:704): UpdateAggregateNetworkState: aggregate_state=down
+I/libjingle: (congestion_controller.cc:290): SignalNetworkState Down
+I/libjingle: (paced_sender.cc:269): PacedSender paused.
+I/libjingle: (bitrate_allocator.cc:171): UpdateAllocationLimits : total_requested_min_bitrate: 0bps, total_requested_padding_bitrate: 0bps
+I/libjingle: (audio_device_impl.cc:1442): StopRecording
+I/libjingle: (audio_device_template.h:211): StopRecording
+I/libjingle: (audio_device_impl.cc:1445): output: 0
+I/libjingle: (bitrate_allocator.cc:171): UpdateAllocationLimits : total_requested_min_bitrate: 0bps, total_requested_padding_bitrate: 0bps
+I/libjingle: (audio_device_impl.cc:1442): StopRecording
+I/libjingle: (audio_device_template.h:211): StopRecording
+I/libjingle: (audio_device_impl.cc:1445): output: 0
+I/libjingle: (channel.cc:1331): Add send stream ssrc: 759702623
+I/libjingle: (channel.cc:1699): Changing voice state, recv=0 send=0
+I/libjingle: (channel.cc:1995): Setting local video description
+I/libjingle: (webrtcvideoengine2.cc:1012): SetRecvParameters: {codecs: [VideoCodec[100:VP8:1280:1280:60], VideoCodec[101:VP9:1280:1280:60], VideoCodec[116:red:1280:1280:60], VideoCodec[117:ulpfec:1280:1280:60], VideoCodec[121:H264:1280:1280:60], VideoCodec[96:rtx:1280:1280:60], VideoCodec[97:rtx:1280:1280:60], VideoCodec[98:rtx:1280:1280:60], VideoCodec[99:rtx:1280:1280:60]], extensions: [{uri: urn:ietf:params:rtp-hdrext:toffset, id: 2}, {uri: http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time, id: 3}, {uri: urn:3gpp:video-orientation, id: 4}, {uri: http://www.webrtc.org/experiments/rtp-hdrext/playout-delay, id: 6}]}
+I/libjingle: (webrtcvideoengine2.cc:1021): Changing recv codecs from {VideoCodec[100:VP8:640:400:30], VideoCodec[101:VP9:640:400:30], VideoCodec[121:H264:1280:1280:30]} to {VideoCodec[100:VP8:1280:1280:60], VideoCodec[101:VP9:1280:1280:60], VideoCodec[121:H264:1280:1280:60]}
+I/libjingle: (webrtcvideoengine2.cc:1127): AddSendStream: {id:ARDAMSv0;ssrcs:[4182608386,2807693645];ssrc_groups:{semantics:FID;ssrcs:[4182608386,2807693645]};cname:oHMyDNMW3Y6kzmnA;sync_label:ARDAMS}
+I/libjingle: (webrtcvideoengine2.cc:1153): SetLocalSsrc on all the receive streams because we added a send stream.
+I/libjingle: (channel.cc:1331): Add send stream ssrc: 4182608386
+I/libjingle: (channel.cc:1962): Changing video state, send=0
+I/libjingle: (bitrate_allocator.cc:171): UpdateAllocationLimits : total_requested_min_bitrate: 0bps, total_requested_padding_bitrate: 0bps
+I/libjingle: (audio_device_impl.cc:1442): StopRecording
+I/libjingle: (audio_device_template.h:211): StopRecording
+I/libjingle: (audio_device_impl.cc:1445): output: 0
+I/libjingle: (webrtcvoiceengine.cc:1604): Setting voice channel options: AudioOptions {}
+I/libjingle: (webrtcvoiceengine.cc:594): WebRtcVoiceEngine::ApplyOptions: AudioOptions {audio_jitter_buffer_max_packets: 50, audio_jitter_buffer_fast_accelerate: false, }
+I/libjingle: (webrtcvoiceengine.cc:799): NetEq capacity is 50
+I/libjingle: (webrtcvoiceengine.cc:807): NetEq fast mode? 0
+I/libjingle: (webrtcvoiceengine.cc:815): Typing detection is enabled? 0
+E/libjingle: (voe_audio_processing_impl.cc:955): SetTypingDetectionStatus: not supported
+W/libjingle: (webrtcvoiceengine.cc:819): SetTypingDetectionStatus(0) failed, err=8003
+I/libjingle: (webrtcvoiceengine.cc:835): Delay agnostic aec is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:844): Extended filter aec is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:853): Experimental ns is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:859): Intelligibility Enhancer is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:869): Level control: 0
+I/libjingle: (webrtcvoiceengine.cc:1616): Set voice channel options.  Current options: AudioOptions {audio_jitter_buffer_max_packets: 50, audio_jitter_buffer_fast_accelerate: false, }
+I/libjingle: (webrtcvideoengine2.cc:1087): SetVideoSend (ssrc= 4182608386, enable = 1, options: VideoOptions {noise reduction: false, is_screencast : false, }, source = (source))
+I/NetworkMonitor: NetworkMonitor: Start monitoring from native observer 510235261824
+I/Camera2Capturer: Camera2Capturer: Camera opened.
+I/NetworkMonitorAutoDetect: NetworkMonitorAutoDetect: Network becomes available: 107
+I/libjingle: (androidnetworkmonitor_jni.cc:370): Android network monitor found 1 networks
+I/libjingle: (androidnetworkmonitor_jni.cc:339): Network connected: NetInfo[name wlan0; handle 459577936606; type 2; address fe80::7af8:82ff:fef1:7537 192.168.123.112]
+I/Camera2Capturer: Camera2Capturer: Camera capture session configured.
+I/Camera2Capturer: Camera2Capturer: Camera device successfully started.
+I/libjingle: (androidvideotracksource_jni.cc:66): AndroidVideoTrackSourceObserve_nativeCapturerStarted
+I/SurfaceTextureHelper: SurfaceTextureHelper: Setting listener to org.webrtc.Camera2Capturer@8ce8b72
+I/libjingle: (basicportallocator.cc:250): Pruning turn ports disabled
+I/libjingle: (androidnetworkmonitor_jni.cc:339): Network connected: NetInfo[name wlan0; handle 459577936606; type 2; address fe80::7af8:82ff:fef1:7537 192.168.123.112]
+I/libjingle: (messagequeue.cc:520): Message took 90ms to dispatch. Posted from: SetLocalDescription@../../webrtc/api/peerconnectionproxy.h:62
+I/PCRTCClient: SDPObserver --> onSetSuccess
+D/PCRTCClient: IceGatheringState: GATHERING
+D/PCRTCClient: Local SDP set succesfully
+D/CallRTCClient: Sending OFFER, delay=1202ms
+I/libjingle: (network.cc:842): Connect failed with 101
+I/libjingle: (network.cc:402): Network change was observed
+I/libjingle: (network.cc:842): Connect failed with 101
+I/libjingle: (network.cc:402): Network change was observed
+I/libjingle: (network.cc:842): Connect failed with 101
+I/libjingle: (basicportallocator.cc:1077): Jingle:Net[wlan0:192.168.123.x/24:Wifi]: Allocation Phase=Udp
+I/libjingle: (port.cc:203): Jingle:Port[0x76b7076900::1:0:local:Net[wlan0:192.168.123.x/24:Wifi]]: Port created with network cost 10
+I/libjingle: (basicportallocator.cc:1168): AllocationSequence: UDPPort will be handling the STUN candidate generation.
+I/libjingle: (basicportallocator.cc:643): Adding allocated port for audio
+I/libjingle: (basicportallocator.cc:663): Jingle:Port[0x76b7076900:audio:1:0:local:Net[wlan0:192.168.123.x/24:Wifi]]: Added port to allocator
+I/libjingle: (basicportallocator.cc:680): Jingle:Port[0x76b7076900:audio:1:0:local:Net[wlan0:192.168.123.x/24:Wifi]]: Gathered candidate: Cand[:2879032841:1:udp:2122260223:192.168.123.x:37878:local::0:mEx1:kAvA9OQN9cW018J/sv6G4xvk:3:10:0]
+I/libjingle: (basicportallocator.cc:707): Jingle:Port[0x76b7076900:audio:1:0:local:Net[wlan0:192.168.123.x/24:Wifi]]: Port ready.
+W/libjingle: (physicalsocketserver.cc:595): Socket::OPT_DSCP not supported.
+W/libjingle: (p2ptransportchannel.cc:467): Jingle:Port[0x76b7076900:audio:1:0:local:Net[wlan0:192.168.123.x/24:Wifi]]: SetOption(5, 0) failed: 0
+I/libjingle: (basicportallocator.cc:723): Not yet signaling candidate because protocol is not yet enabled.
+I/libjingle: (stunport.cc:373): Jingle:Port[0x76b7076900:audio:1:0:local:Net[wlan0:192.168.123.x/24:Wifi]]: Starting STUN host lookup for stun.l.google.com:19302
+W/libjingle: (stunport.cc:411): STUN server address is incompatible.
+I/libjingle: (basicportallocator.cc:836): Signaling candidate because protocol was enabled: Cand[:2879032841:1:udp:2122260223:192.168.123.x:37878:local::0:mEx1:kAvA9OQN9cW018J/sv6G4xvk:3:10:0]
+I/PCRTCClient: PeerConnection.Observer --> onIceCandidate
+I/libjingle: (basicportallocator.cc:1077): Jingle:Net[wlan0:192.168.123.x/24:Wifi]: Allocation Phase=Relay
+I/libjingle: (port.cc:203): Jingle:Port[0x76bdf10400::1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: Port created with network cost 10
+I/libjingle: (basicportallocator.cc:643): Adding allocated port for audio
+I/libjingle: (basicportallocator.cc:663): Jingle:Port[0x76bdf10400:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: Added port to allocator
+I/libjingle: (turnport.cc:303): Jingle:Port[0x76bdf10400:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: Trying to connect to TURN server via udp @ 216.58.221.x:19305
+I/libjingle: (turnport.cc:1077): Jingle:Port[0x76bdf10400:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: TURN allocate request sent, id=495a76763761536b39366f78
+I/libjingle: (port.cc:203): Jingle:Port[0x76bdf10a00::1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: Port created with network cost 10
+I/libjingle: (basicportallocator.cc:643): Adding allocated port for audio
+I/libjingle: (basicportallocator.cc:663): Jingle:Port[0x76bdf10a00:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: Added port to allocator
+E/libjingle: (turnport.cc:293): IP address family does not match: server: 10 local: 2
+I/libjingle: (port.cc:203): Jingle:Port[0x76b746a000::1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: Port created with network cost 10
+I/libjingle: (basicportallocator.cc:643): Adding allocated port for audio
+I/libjingle: (basicportallocator.cc:663): Jingle:Port[0x76b746a000:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: Added port to allocator
+I/libjingle: (turnport.cc:303): Jingle:Port[0x76b746a000:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: Trying to connect to TURN server via tcp @ 216.58.221.x:443
+I/libjingle: (port.cc:203): Jingle:Port[0x76b746a600::1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: Port created with network cost 10
+I/libjingle: (basicportallocator.cc:643): Adding allocated port for audio
+I/libjingle: (basicportallocator.cc:663): Jingle:Port[0x76b746a600:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: Added port to allocator
+E/libjingle: (turnport.cc:293): IP address family does not match: server: 10 local: 2
+I/libjingle: (basicportallocator.cc:803): Jingle:Port[0x76bdf10a00:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: Port encountered error while gathering candidates.
+I/libjingle: (basicportallocator.cc:803): Jingle:Port[0x76b746a600:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: Port encountered error while gathering candidates.
+I/libjingle: (turnport.cc:407): TurnPort connected to 216.58.221.30:443 using tcp.
+I/libjingle: (turnport.cc:1077): Jingle:Port[0x76b746a000:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: TURN allocate request sent, id=3379564d414c674164463578
+I/libjingle: (basicportallocator.cc:1077): Jingle:Net[wlan0:192.168.123.x/24:Wifi]: Allocation Phase=Tcp
+I/libjingle: (turnport.cc:1077): Jingle:Port[0x76bdf10400:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: TURN allocate request sent, id=495a76763761536b39366f78
+I/libjingle: (basicportallocator.cc:1077): Jingle:Net[wlan0:192.168.123.x/24:Wifi]: Allocation Phase=SslTcp
+I/libjingle: (turnport.cc:1077): Jingle:Port[0x76b746a000:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: TURN allocate request sent, id=3379564d414c674164463578
+I/libjingle: (webrtcvideoengine2.cc:1621): Video frame parameters changed: dimensions=1280x720, rotation=270, texture=1
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Reporting frame resolution changed to 1280x720 with rotation 270
+W/libjingle: (thread.cc:278): Waiting for the thread to join, but blocking calls have been disallowed
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Reporting first rendered frame.
+I/libjingle: (turnport.cc:1124): Jingle:Port[0x76b746a000:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: Received TURN allocate error response, id=3379564d414c674164463578, code=401, rtt=179
+I/libjingle: (turnport.cc:1077): Jingle:Port[0x76b746a000:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: TURN allocate request sent, id=42473239424d4e4d78776d74
+I/libjingle: (turnport.cc:1077): Jingle:Port[0x76bdf10400:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: TURN allocate request sent, id=495a76763761536b39366f78
+I/libjingle: (turnport.cc:1077): Jingle:Port[0x76b746a000:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: TURN allocate request sent, id=42473239424d4e4d78776d74
+I/libjingle: (turnport.cc:1083): Jingle:Port[0x76b746a000:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: TURN allocate requested successfully, id=42473239424d4e4d78776d74, code=0, rtt=68
+I/libjingle: (basicportallocator.cc:680): Jingle:Port[0x76b746a000:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: Gathered candidate: Cand[:985505607:1:udp:25108479:74.125.39.x:28521:relay:108.61.223.167:48438:mEx1:kAvA9OQN9cW018J/sv6G4xvk:3:10:0]
+I/libjingle: (basicportallocator.cc:707): Jingle:Port[0x76b746a000:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: Port ready.
+W/libjingle: (physicalsocketserver.cc:595): Socket::OPT_DSCP not supported.
+W/libjingle: (p2ptransportchannel.cc:467): Jingle:Port[0x76b746a000:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: SetOption(5, 0) failed: 0
+I/libjingle: (basicportallocator.cc:786): Jingle:Port[0x76b746a000:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: Port completed gathering candidates.
+I/libjingle: (turnport.cc:905): Jingle:Port[0x76b746a000:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: Scheduled refresh in 60000ms.
+I/PCRTCClient: PeerConnection.Observer --> onIceCandidate
+D/de.tavendo.autobahn.WebSocketReader: WebSocker reader running.
+D/de.tavendo.autobahn.WebSocketWriter: WebSocker writer running.
+D/de.tavendo.autobahn.WebSocketConnection: WebSocket writer created and started.
+W/WSChannelRTCClient: WebSocket register() in state NEW
+D/WSRTCClient: C->GAE: https://appr.tc/message/228837362/27650191. Message: {"sdp":"v=0\r\no=- 6761194442006738983 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE audio video\r\na=msid-semantic: WMS ARDAMS\r\nm=audio 9 UDP\/TLS\/RTP\/SAVPF 111 103 104 9 102 0 8 106 105 13 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:mEx1\r\na=ice-pwd:kAvA9OQN9cW018J\/sv6G4xvk\r\na=fingerprint:sha-256 98:90:FD:51:21:40:2F:CC:B6:4E:17:45:8A:F1:3E:B5:A6:73:DB:FA:1D:82:73:78:EE:CA:DE:62:47:60:40:B8\r\na=setup:actpass\r\na=mid:audio\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:3 http:\/\/www.webrtc.org\/experiments\/rtp-hdrext\/abs-send-time\r\na=sendrecv\r\na=rtcp-mux\r\na=rtpmap:111 opus\/48000\/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:103 ISAC\/16000\r\na=rtpmap:104 ISAC\/32000\r\na=rtpmap:9 G722\/8000\r\na=rtpmap:102 ILBC\/8000\r\na=rtpmap:0 PCMU\/8000\r\na=rtpmap:8 PCMA\/8000\r\na=rtpmap:106 CN\/32000\r\na=rtpmap:105 CN\/16000\r\na=rtpmap:13 CN\/8000\r\na=rtpmap:126 telephone-event\/8000\r\na=ssrc:759702623 cname:oHMyDNMW3Y6kzmnA\r\na=ssrc:759702623 msid:ARDAMS ARDAMSa0\r\na=ssrc:759702623 mslabel:ARDAMS\r\na=ssrc:759702623 label:ARDAMSa0\r\nm=video 9 UDP\/TLS\/RTP\/SAVPF 100 101 116 117 121 96 97 98 99\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:mEx1\r\na=ice-pwd:kAvA9OQN9cW018J\/sv6G4xvk\r\na=fingerprint:sha-256 98:90:FD:51:21:40:2F:CC:B6:4E:17:45:8A:F1:3E:B5:A6:73:DB:FA:1D:82:73:78:EE:CA:DE:62:47:60:40:B8\r\na=setup:actpass\r\na=mid:video\r\na=extmap:2 urn:ietf:params:rtp-hdrext:toffset\r\na=extmap:3 http:\/\/www.webrtc.org\/experiments\/rtp-hdrext\/abs-send-time\r\na=extmap:4 urn:3gpp:video-orientation\r\na=extmap:6 http:\/\/www.webrtc.org\/experiments\/rtp-hdrext\/playout-delay\r\na=sendrecv\r\na=rtcp-mux\r\na=rtcp-rsize\r\na=rtpmap:100 VP8\/90000\r\na=rtcp-fb:100 ccm fir\r\na=rtcp-fb:100 nack\r\na=rtcp-fb:100 nack pli\r\na=rtcp-fb:100 goog-remb\r\na=rtcp-fb:100 transport-cc\r\na=rtpmap:101 VP9\/90000\r\na=rtcp-fb:101 ccm fir\r\na=rtcp-fb:101 nack\r\na=rtcp-fb:101 nack pli\r\na=rtcp-fb:101 goog-remb\r\na=rtcp-fb:101 transport-cc\r\na=rtpmap:116 red\/90000\r\na=rtpmap:117 ulpfec\/90000\r\na=rtpmap:121 H264\/90000\r\na=rtcp-fb:121 ccm fir\r\na=rtcp-fb:121 nack\r\na=rtcp-fb:121 nack pli\r\na=rtcp-fb:121 goog-remb\r\na=rtcp-fb:121 transport-cc\r\na=rtpmap:96 rtx\/90000\r\na=fmtp:96 apt=100\r\na=rtpmap:97 rtx\/90000\r\na=fmtp:97 apt=101\r\na=rtpmap:98 rtx\/90000\r\na=fmtp:98 apt=116\r\na=rtpmap:99 rtx\/90000\r\na=fmtp:99 apt=121\r\na=ssrc-group:FID 4182608386 2807693645\r\na=ssrc:4182608386 cname:oHMyDNMW3Y6kzmnA\r\na=ssrc:4182608386 msid:ARDAMS ARDAMSv0\r\na=ssrc:4182608386 mslabel:ARDAMS\r\na=ssrc:4182608386 label:ARDAMSv0\r\na=ssrc:2807693645 cname:oHMyDNMW3Y6kzmnA\r\na=ssrc:2807693645 msid:ARDAMS ARDAMSv0\r\na=ssrc:2807693645 mslabel:ARDAMS\r\na=ssrc:2807693645 label:ARDAMSv0\r\n","type":"offer"}
+D/WSRTCClient: C->GAE: https://appr.tc/message/228837362/27650191. Message: {"type":"candidate","label":0,"id":"audio","candidate":"candidate:2879032841 1 udp 2122260223 192.168.123.112 37878 typ host generation 0 ufrag mEx1 network-id 3 network-cost 10"}
+D/WSRTCClient: C->GAE: https://appr.tc/message/228837362/27650191. Message: {"type":"candidate","label":0,"id":"audio","candidate":"candidate:985505607 1 udp 25108479 74.125.39.34 28521 typ relay raddr 108.61.223.167 rport 48438 generation 0 ufrag mEx1 network-id 3 network-cost 10"}
+I/libjingle: (turnport.cc:1077): Jingle:Port[0x76bdf10400:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: TURN allocate request sent, id=495a76763761536b39366f78
+W/de.tavendo.autobahn.WebSocketReader: Status: 101 (Switching Protocols)
+D/de.tavendo.autobahn.WebSocketConnection: opening handshake received
+D/WSChannelRTCClient: WebSocket connection opened to: wss://apprtc-ws.webrtc.org:443/ws
+D/WSChannelRTCClient: Registering WebSocket for room 228837362. ClientID: 27650191
+D/WSChannelRTCClient: C->WSS: {"cmd":"register","roomid":"228837362","clientid":"27650191"}
+I/libjingle: (turnport.cc:1077): Jingle:Port[0x76bdf10400:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: TURN allocate request sent, id=495a76763761536b39366f78
+I/CameraStatistics: CameraStatistics: Camera fps: 26.
+I/libjingle: (network.cc:842): Connect failed with 101
+I/libjingle: (turnport.cc:1077): Jingle:Port[0x76bdf10400:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: TURN allocate request sent, id=495a76763761536b39366f78
+I/libjingle: (port.cc:312): Received STUN ping  id=312f5a344668456d3474736a from unknown address 192.168.123.x:59271
+I/libjingle: (port.cc:873): Jingle:Conn[0x76be7df800:audio:b9OGv/UQ:1:0:local:udp:192.168.123.x:37878->drvpQVah:1:1845501695:prflx:udp:192.168.123.x:59271|C--W|0|0|7926369428982087167|-]: Connection created
+I/libjingle: (p2ptransportchannel.cc:630): Adding connection from peer reflexive candidate: Cand[:1255290736:1:udp:1845501695:192.168.123.169:59271:prflx::0:WWAe::0:50:0]
+I/libjingle: (port.cc:607): Jingle:Port[0x76b7076900:audio:1:0:local:Net[wlan0:192.168.123.x/24:Wifi]]: Sent STUN ping response, to=192.168.123.x:59271, id=312f5a344668456d3474736a
+I/libjingle: (p2ptransportchannel.cc:219): Switching selected connection due to sorting
+I/libjingle: (p2ptransportchannel.cc:1299): Jingle:Channel[audio|1|__]: New selected connection: Conn[0x76be7df800:audio:b9OGv/UQ:1:0:local:udp:192.168.123.x:37878->drvpQVah:1:1845501695:prflx:udp:192.168.123.x:59271|CR-W|0|0|7926369428982087167|-]
+I/libjingle: (call.cc:649): Transport audio is disconnected
+I/libjingle: (p2ptransportchannel.cc:1327): Jingle:Channel[audio|1|__]: Transport channel state changed from 0 to 2
+I/libjingle: (call.cc:649): Transport audio is disconnected
+I/libjingle: (transportcontroller.cc:622): audio TransportChannel 1 state changed. Check if state is complete.
+W/libjingle: (dtlstransportchannel.cc:474): Jingle:Channel[audio|1|__]: Packet received before we know if we are doing DTLS or not.
+I/libjingle: (dtlstransportchannel.cc:479): Jingle:Channel[audio|1|__]: Caching DTLS ClientHello packet until DTLS is started.
+I/libjingle: (port.cc:998): Jingle:Conn[0x76be7df800:audio:b9OGv/UQ:1:0:local:udp:192.168.123.x:37878->drvpQVah:1:1845501695:prflx:udp:192.168.123.x:59271|CR-W|0|0|7926369428982087167|-]: Received STUN ping, id=4978437a78716f4b44717345
+I/libjingle: (port.cc:607): Jingle:Port[0x76b7076900:audio:1:0:local:Net[wlan0:192.168.123.x/24:Wifi]]: Sent STUN ping response, to=192.168.123.x:59271, id=4978437a78716f4b44717345
+I/libjingle: (port.cc:998): Jingle:Conn[0x76be7df800:audio:b9OGv/UQ:1:0:local:udp:192.168.123.x:37878->drvpQVah:1:1845501695:prflx:udp:192.168.123.x:59271|CR-W|0|0|7926369428982087167|-]: Received STUN ping, id=465a6f49495975584d773350
+I/libjingle: (port.cc:607): Jingle:Port[0x76b7076900:audio:1:0:local:Net[wlan0:192.168.123.x/24:Wifi]]: Sent STUN ping response, to=192.168.123.x:59271, id=465a6f49495975584d773350
+W/libjingle: (dtlstransportchannel.cc:474): Jingle:Channel[audio|1|__]: Packet received before we know if we are doing DTLS or not.
+I/libjingle: (dtlstransportchannel.cc:479): Jingle:Channel[audio|1|__]: Caching DTLS ClientHello packet until DTLS is started.
+I/CameraStatistics: CameraStatistics: Camera fps: 31.
+I/libjingle: (network.cc:842): Connect failed with 101
+W/libjingle: (dtlstransportchannel.cc:474): Jingle:Channel[audio|1|__]: Packet received before we know if we are doing DTLS or not.
+I/libjingle: (dtlstransportchannel.cc:479): Jingle:Channel[audio|1|__]: Caching DTLS ClientHello packet until DTLS is started.
+D/WSChannelRTCClient: WSS->C: {"msg":"{\"sdp\":\"v=0\\r\\no=- 4918931704444775060 2 IN IP4 127.0.0.1\\r\\ns=-\\r\\nt=0 0\\r\\na=group:BUNDLE audio video\\r\\na=msid-semantic: WMS\\r\\nm=audio 9 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126\\r\\nc=IN IP4 0.0.0.0\\r\\na=rtcp:9 IN IP4 0.0.0.0\\r\\na=ice-ufrag:WWAe\\r\\na=ice-pwd:Cu6WRAX5cRVuafZsVMQd0tAD\\r\\na=fingerprint:sha-256 EC:8B:EE:F2:A3:C4:9D:33:0B:63:F6:AB:5E:DD:4E:BB:F9:87:19:47:8A:8D:30:12:6F:2A:10:DB:E6:9B:07:D8\\r\\na=setup:active\\r\\na=mid:audio\\r\\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\\r\\na=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\\r\\na=recvonly\\r\\na=rtcp-mux\\r\\na=rtpmap:111 opus/48000/2\\r\\na=rtcp-fb:111 transport-cc\\r\\na=fmtp:111 minptime=10;useinbandfec=1\\r\\na=rtpmap:103 ISAC/16000\\r\\na=rtpmap:104 ISAC/32000\\r\\na=rtpmap:9 G722/8000\\r\\na=rtpmap:0 PCMU/8000\\r\\na=rtpmap:8 PCMA/8000\\r\\na=rtpmap:106 CN/32000\\r\\na=rtpmap:105 CN/16000\\r\\na=rtpmap:13 CN/8000\\r\\na=rtpmap:126 telephone-event/8000\\r\\nm=video 9 UDP/TLS/RTP/SAVPF 101 100 116 117 121 96 97 98 99\\r\\nc=IN IP4 0.0.0.0\\r\\na=rtcp:9 IN IP4 0.0.0.0\\r\\na=ice-ufrag:WWAe\\r\\na=ice-pwd:Cu6WRAX5cRVuafZsVMQd0tAD\\r\\na=fingerprint:sha-256 EC:8B:EE:F2:A3:C4:9D:33:0B:63:F6:AB:5E:DD:4E:BB:F9:87:19:47:8A:8D:30:12:6F:2A:10:DB:E6:9B:07:D8\\r\\na=setup:active\\r\\na=mid:video\\r\\na=extmap:2 urn:ietf:params:rtp-hdrext:toffset\\r\\na=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\\r\\na=extmap:4 urn:3gpp:video-orientation\\r\\na=extmap:6 http://www.webrtc.org/experiments/rtp-hdrext/playout-delay\\r\\na=recvonly\\r\\na=rtcp-mux\\r\\na=rtcp-rsize\\r\\na=rtpmap:100 VP8/90000\\r\\na=rtcp-fb:100 ccm fir\\r\\na=rtcp-fb:100 nack\\r\\na=rtcp-fb:100 nack pli\\r\\na=rtcp-fb:100 goog-remb\\r\\na=rtcp-fb:100 transport-cc\\r\\na=rtpmap:101 VP9/90000\\r\\na=rtcp-fb:101 ccm fir\\r\\na=rtcp-fb:101 nack\\r\\na=rtcp-fb:101 nack pli\\r\\na=rtcp-fb:101 goog-remb\\r\\na=rtcp-fb:101 transport-cc\\r\\na=rtpmap:116 red/90000\\r\\na=rtpmap:117 ulpfec/90000\\r\\na=rtpmap:121 H264/90000\\r\\na=rtcp-fb:121 ccm fir\\r\\na=rtcp-fb:121 nack\\r\\na=rtcp-fb:121 nack pli\\r\\na=rtcp-fb:121 goog-remb\\r\\na=rtcp-fb:121 transport-cc\\r\\na=fmtp:121 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42e01f\\r\\na=rtpmap:96 rtx/90000\\r\\na=fmtp:96 apt=100\\r\\na=rtpmap:97 rtx/90000\\r\\na=fmtp:97 apt=101\\r\\na=rtpmap:98 rtx/90000\\r\\na=fmtp:98 apt=116\\r\\na=rtpmap:99 rtx/90000\\r\\na=fmtp:99 apt=121\\r\\n\",\"type\":\"answer\"}","error":""}
+D/WSChannelRTCClient: WSS->C: {"msg":"{\"type\":\"candidate\",\"label\":0,\"id\":\"audio\",\"candidate\":\"candidate:3468416280 1 udp 2113937151 192.168.123.169 59271 typ host generation 0 ufrag WWAe network-cost 50\"}","error":""}
+D/CallRTCClient: Received remote ANSWER, delay=5367ms
+D/PCRTCClient: Found VP8 rtpmap 100, prefer at m=video 9 UDP/TLS/RTP/SAVPF 101 100 116 117 121 96 97 98 99
+D/PCRTCClient: Change media description: m=video 9 UDP/TLS/RTP/SAVPF 100 101 116 117 121 96 97 98 99
+D/PCRTCClient: Set remote SDP.
+I/libjingle: (webrtcsdp.cc:2606): Ignored line: c=IN IP4 0.0.0.0
+I/libjingle: (webrtcsdp.cc:2606): Ignored line: c=IN IP4 0.0.0.0
+I/libjingle: (webrtcsession.cc:1079): BUNDLE already enabled for audio on audio.
+I/libjingle: (webrtcsession.cc:1079): BUNDLE already enabled for video on audio.
+I/libjingle: (dtlstransportchannel.cc:301): Jingle:Channel[audio|1|__]: DTLS setup complete.
+I/libjingle: (p2ptransportchannel.cc:1014): Jingle:Channel[audio|1|R_]: Have a pingable connection for the first time; starting to ping.
+I/libjingle: (p2ptransportchannel.cc:1844): Selecting connection for triggered check: Conn[0x76be7df800:audio:b9OGv/UQ:1:0:local:udp:192.168.123.x:37878->drvpQVah:1:1845501695:prflx:udp:192.168.123.x:59271|CR-W|0|0|7926369428982087167|-]
+I/libjingle: (port.cc:1408): Jingle:Conn[0x76be7df800:audio:b9OGv/UQ:1:0:local:udp:192.168.123.x:37878->drvpQVah:1:1845501695:prflx:udp:192.168.123.x:59271|CR-W|0|0|7926369428982087167|-]: Sent STUN ping, id=5a462f436b6474414537472b, use_candidate=1, nomination=0
+I/libjingle: (channel.cc:903): Channel enabled
+I/libjingle: (channel.cc:1699): Changing voice state, recv=1 send=0
+I/libjingle: (channel.cc:903): Channel enabled
+I/libjingle: (channel.cc:1962): Changing video state, send=0
+I/libjingle: (webrtcsession.cc:818): Session:6761194442006738983 Old state:STATE_SENTOFFER New state:STATE_INPROGRESS
+D/PCRTCClient: SignalingState: STABLE
+I/libjingle: (channel.cc:1757): Setting remote voice description
+I/libjingle: (channel.cc:1231): Enabling rtcp-mux for audio by destroying RTCP transport channel for audio
+I/libjingle: (webrtcvoiceengine.cc:1442): WebRtcVoiceMediaChannel::SetSendParameters: {codecs: [AudioCodec[111:opus:48000:0:2], AudioCodec[103:ISAC:16000:32000:1], AudioCodec[104:ISAC:32000:56000:1], AudioCodec[9:G722:8000:0:1], AudioCodec[0:PCMU:8000:0:1], AudioCodec[8:PCMA:8000:0:1], AudioCodec[106:CN:32000:0:1], AudioCodec[105:CN:16000:0:1], AudioCodec[13:CN:8000:0:1], AudioCodec[126:telephone-event:8000:0:1]], extensions: [{uri: urn:ietf:params:rtp-hdrext:ssrc-audio-level, id: 1}, {uri: http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time, id: 3}], max_bandwidth_bps: -1, options: AudioOptions {}}
+I/libjingle: (bitrate_allocator.cc:171): UpdateAllocationLimits : total_requested_min_bitrate: 0bps, total_requested_padding_bitrate: 0bps
+I/libjingle: (audio_device_impl.cc:1442): StopRecording
+I/libjingle: (audio_device_template.h:211): StopRecording
+I/libjingle: (audio_device_impl.cc:1445): output: 0
+I/libjingle: (call.cc:704): UpdateAggregateNetworkState: aggregate_state=down
+I/libjingle: (congestion_controller.cc:290): SignalNetworkState Down
+I/libjingle: (paced_sender.cc:269): PacedSender paused.
+I/libjingle: (audio_send_stream.cc:103): ~AudioSendStream: {rtp: {ssrc: 759702623, extensions: [], nack: {rtp_history_ms: 0}, c_name: oHMyDNMW3Y6kzmnA}, voe_channel_id: 0, cng_payload_type: -1}
+I/libjingle: (audio_send_stream.cc:67): AudioSendStream: {rtp: {ssrc: 759702623, extensions: [], nack: {rtp_history_ms: 0}, c_name: oHMyDNMW3Y6kzmnA}, voe_channel_id: 0, cng_payload_type: -1}
+I/libjingle: (call.cc:704): UpdateAggregateNetworkState: aggregate_state=down
+I/libjingle: (congestion_controller.cc:290): SignalNetworkState Down
+I/libjingle: (paced_sender.cc:269): PacedSender paused.
+I/libjingle: (bitrate_allocator.cc:171): UpdateAllocationLimits : total_requested_min_bitrate: 0bps, total_requested_padding_bitrate: 0bps
+I/libjingle: (audio_device_impl.cc:1442): StopRecording
+I/libjingle: (audio_device_template.h:211): StopRecording
+I/libjingle: (audio_device_impl.cc:1445): output: 0
+I/libjingle: (webrtcvoiceengine.cc:1923): Send channel 0 selected voice codec opus/48000/1 (111), bitrate=32000
+I/libjingle: (port.cc:1355): Jingle:Conn[0x76be7df800:audio:b9OGv/UQ:1:0:local:udp:192.168.123.x:37878->drvpQVah:1:1845501695:prflx:udp:192.168.123.x:59271|CR-I|0|0|7926369428982087167|-]: Received STUN ping response, id=5a462f436b6474414537472b, code=0, rtt=11, pings_since_last_response=5a462f436b6474414537472b 
+I/libjingle: (opensslstreamadapter.cc:758): BeginSSL: with peer
+I/libjingle: (webrtcvoiceengine.cc:1831): Attempt to enable codec internal FEC on channel 0
+I/libjingle: (webrtcvoiceengine.cc:1845): Attempt to disable Opus DTX on channel 0
+I/libjingle: (webrtcvoiceengine.cc:1858): Attempt to set maximum playback rate to 48000 Hz on channel 0
+I/libjingle: (webrtcvoiceengine.cc:1801): Recreate all the receive streams because the send codec has changed.
+I/libjingle: (bitrate_allocator.cc:171): UpdateAllocationLimits : total_requested_min_bitrate: 0bps, total_requested_padding_bitrate: 0bps
+I/libjingle: (audio_device_impl.cc:1442): StopRecording
+I/libjingle: (audio_device_template.h:211): StopRecording
+I/libjingle: (audio_device_impl.cc:1445): output: 0
+I/libjingle: (call.cc:704): UpdateAggregateNetworkState: aggregate_state=down
+I/libjingle: (congestion_controller.cc:290): SignalNetworkState Down
+I/libjingle: (paced_sender.cc:269): PacedSender paused.
+I/libjingle: (audio_send_stream.cc:103): ~AudioSendStream: {rtp: {ssrc: 759702623, extensions: [], nack: {rtp_history_ms: 0}, c_name: oHMyDNMW3Y6kzmnA}, voe_channel_id: 0, cng_payload_type: -1}
+I/libjingle: (audio_send_stream.cc:67): AudioSendStream: {rtp: {ssrc: 759702623, extensions: [{uri: http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time, id: 3}, {uri: urn:ietf:params:rtp-hdrext:ssrc-audio-level, id: 1}], nack: {rtp_history_ms: 0}, c_name: oHMyDNMW3Y6kzmnA}, voe_channel_id: 0, cng_payload_type: -1}
+I/libjingle: (call.cc:704): UpdateAggregateNetworkState: aggregate_state=down
+I/libjingle: (congestion_controller.cc:290): SignalNetworkState Down
+I/libjingle: (paced_sender.cc:269): PacedSender paused.
+I/libjingle: (bitrate_allocator.cc:171): UpdateAllocationLimits : total_requested_min_bitrate: 0bps, total_requested_padding_bitrate: 0bps
+I/libjingle: (audio_device_impl.cc:1442): StopRecording
+I/libjingle: (audio_device_template.h:211): StopRecording
+I/libjingle: (audio_device_impl.cc:1445): output: 0
+I/libjingle: (webrtcvoiceengine.cc:2431): WebRtcVoiceMediaChannel::SetMaxSendBitrate.
+I/libjingle: (webrtcvoiceengine.cc:1604): Setting voice channel options: AudioOptions {}
+I/libjingle: (webrtcvoiceengine.cc:594): WebRtcVoiceEngine::ApplyOptions: AudioOptions {audio_jitter_buffer_max_packets: 50, audio_jitter_buffer_fast_accelerate: false, }
+I/libjingle: (webrtcvoiceengine.cc:799): NetEq capacity is 50
+I/libjingle: (webrtcvoiceengine.cc:807): NetEq fast mode? 0
+I/libjingle: (webrtcvoiceengine.cc:815): Typing detection is enabled? 0
+E/libjingle: (voe_audio_processing_impl.cc:955): SetTypingDetectionStatus: not supported
+W/libjingle: (webrtcvoiceengine.cc:819): SetTypingDetectionStatus(0) failed, err=8003
+I/libjingle: (webrtcvoiceengine.cc:835): Delay agnostic aec is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:844): Extended filter aec is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:853): Experimental ns is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:859): Intelligibility Enhancer is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:869): Level control: 0
+I/libjingle: (webrtcvoiceengine.cc:1616): Set voice channel options.  Current options: AudioOptions {audio_jitter_buffer_max_packets: 50, audio_jitter_buffer_fast_accelerate: false, }
+I/libjingle: (dtlstransportchannel.cc:586): Jingle:Channel[audio|1|__]: DtlsTransportChannelWrapper: Started DTLS handshake
+I/libjingle: (srtpfilter.cc:459): SRTP reset to init state
+I/libjingle: (srtpfilter.cc:459): SRTP reset to init state
+I/libjingle: (dtlstransportchannel.cc:593): Jingle:Channel[audio|1|__]: Handling cached DTLS ClientHello packet.
+I/libjingle: (channel.cc:1699): Changing voice state, recv=1 send=0
+I/libjingle: (channel.cc:2040): Setting remote video description
+I/libjingle: (channel.cc:1231): Enabling rtcp-mux for video by destroying RTCP transport channel for audio
+I/libjingle: (webrtcvideoengine2.cc:809): SetSendParameters: {codecs: [VideoCodec[100:VP8:1280:1280:60], VideoCodec[101:VP9:1280:1280:60], VideoCodec[116:red:1280:1280:60], VideoCodec[117:ulpfec:1280:1280:60], VideoCodec[121:H264:1280:1280:60], VideoCodec[96:rtx:1280:1280:60], VideoCodec[97:rtx:1280:1280:60], VideoCodec[98:rtx:1280:1280:60], VideoCodec[99:rtx:1280:1280:60]], extensions: [{uri: urn:ietf:params:rtp-hdrext:toffset, id: 2}, {uri: http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time, id: 3}, {uri: urn:3gpp:video-orientation, id: 4}, {uri: http://www.webrtc.org/experiments/rtp-hdrext/playout-delay, id: 6}], max_bandwidth_bps: -1, }
+I/libjingle: (webrtcvideoengine2.cc:818): Using codec: VideoCodec[100:VP8:1280:1280:60]
+I/libjingle: (webrtcvideoengine2.cc:1831): RecreateWebRtcStream (send) because of SetCodec.
+I/libjingle: (video_send_stream.cc:440): VideoSendStream: {encoder_settings: {payload_name: VP8, payload_type: 100, encoder: (VideoEncoder)}, rtp: {ssrcs: [4182608386], rtcp_mode: RtcpMode::kReducedSize, max_packet_size: 1200, extensions: [{uri: http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time, id: 3}, {uri: http://www.webrtc.org/experiments/rtp-hdrext/playout-delay, id: 6}, {uri: urn:3gpp:video-orientation, id: 4}], nack: {rtp_history_ms: 1000}, fec: {ulpfec_payload_type: 117, red_payload_type: 116, red_rtx_payload_type: 98}, rtx: {ssrcs: [2807693645], payload_type: 96}, c_name: oHMyDNMW3Y6kzmnA}, pre_encode_callback: nullptr, post_encode_callback: nullptr, local_renderer: nullptr, render_delay_ms: 0, target_delay_ms: 0, suspend_below_min_bitrate: off}
+I/libjingle: (video_send_stream.cc:696): (Re)configureVideoEncoder: {streams: [{width: 1280, height: 720, max_framerate: 60, min_bitrate_bps:30000, target_bitrate_bps:2500000, max_bitrate_bps:2500000, max_qp: 56, temporal_layer_thresholds_bps: []}], content_type: kRealtimeVideo, encoder_specific_settings: (ptr), min_transmit_bitrate_bps: 0}
+I/libjingle: (call.cc:704): UpdateAggregateNetworkState: aggregate_state=down
+I/libjingle: (congestion_controller.cc:290): SignalNetworkState Down
+I/libjingle: (paced_sender.cc:269): PacedSender paused.
+I/libjingle: (webrtcvideoengine2.cc:857): SetFeedbackOptions on all the receive streams because the send codec or RTCP mode has changed.
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Create HW video encoder for type 0 (VP8).
+I/libjingle: (video_send_stream.cc:547): VideoSendStream::Stop
+I/libjingle: (channel.cc:1962): Changing video state, send=0
+I/libjingle: (webrtcsession.cc:1349): Changing IceConnectionState 0 => 1
+I/PCRTCClient: PeerConnection.Observer --> onIceConnectionChange
+I/PCRTCClient: SDPObserver --> onSetSuccess
+D/PCRTCClient: IceConnectionState: CHECKING
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: InitEncode request: 1280 x 720
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder automatic resize enabled
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Scaled resolution: 640 x 360
+D/PCRTCClient: Remote SDP set succesfully
+D/PCRTCClient: Add 1 remote candidates
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: InitEncodeOnCodecThread Type: 0, 640 x 360. Bitrate: 300 kbps. Fps: 60
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Java initEncode: VIDEO_CODEC_VP8 : 640 x 360. @ 300 kbps. Fps: 60. Encode from texture : true
+I/libjingle: (turnport.cc:1320): Jingle:Port[0x76b746a000:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: TURN create permission request sent, id=5736504c4e352f547a612b32
+I/libjingle: (port.cc:873): Jingle:Conn[0x76b8027000:audio:Mrg8V1BW:1:0:relay:udp:74.125.39.x:28521->POOtmGX2:1:2113937151:local:udp:192.168.123.x:59271|C--W|0|0|107840100385177086|-]: Connection created
+I/libjingle: (p2ptransportchannel.cc:814): Jingle:Channel[audio|1|RW]: Created connection with origin=2, (2 total)
+I/libjingle: (port.cc:1112): Jingle:Conn[0x76b8027000:audio:Mrg8V1BW:1:0:relay:udp:74.125.39.x:28521->POOtmGX2:1:2113937151:local:udp:192.168.123.x:59271|C--W|0|0|107840100385177086|-]: Connection pruned
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Found target encoder for mime video/x-vnd.on2.vp8 : OMX.qcom.video.encoder.vp8. Color: 0x7f000789
+I/libjingle: (opensslstreamadapter.cc:1090): Accepted peer certificate.
+I/libjingle: (opensslstreamadapter.cc:1090): Accepted peer certificate.
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Color format: 2130708361. Bitrate adjustment: false
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder:   Format: {width=640, height=360, bitrate=300000, mime=video/x-vnd.on2.vp8, frame-rate=60, i-frame-interval=100, bitrate-mode=2, color-format=2130708361}
+I/libjingle: (dtlstransportchannel.cc:544): Jingle:Channel[audio|1|__]: DTLS handshake complete.
+I/libjingle: (transportcontroller.cc:554): audio TransportChannel 1 writability changed to 1.
+I/libjingle: (channel.cc:933): Channel writable (audio) for the first time
+I/libjingle: (channel.cc:941): Using Cand[:2879032841:1:udp:2122260223:192.168.123.x:37878:local::0:mEx1:kAvA9OQN9cW018J/sv6G4xvk:3:10:0]->Cand[:3468416280:1:udp:2113937151:192.168.123.x:59271:local::0:WWAe:Cu6WRAX5cRVuafZsVMQd0tAD:0:50:0]
+I/libjingle: (channel.cc:1000): Installing keys from DTLS-SRTP on audio RTP
+I/libjingle: (webrtcsession.cc:1381): Changing to ICE connected state because all transports are writable.
+I/libjingle: (webrtcsession.cc:1349): Changing IceConnectionState 1 => 2
+I/libjingle: (call.cc:704): UpdateAggregateNetworkState: aggregate_state=up
+I/libjingle: (congestion_controller.cc:290): SignalNetworkState Up
+I/libjingle: (paced_sender.cc:275): PacedSender resumed.
+I/libjingle: (congestion_controller.cc:358): Bitrate estimate state changed, BWE: 300000 bps.
+I/libjingle: (call.cc:704): UpdateAggregateNetworkState: aggregate_state=up
+I/PCRTCClient: PeerConnection.Observer --> onIceConnectionChange
+I/libjingle: (congestion_controller.cc:290): SignalNetworkState Up
+I/libjingle: (paced_sender.cc:275): PacedSender resumed.
+D/PCRTCClient: IceConnectionState: CONNECTED
+D/CallRTCClient: ICE connected, delay=5442ms
+I/CallRTCClient: Call connected: delay=5468ms
+I/OMXClient: MuxOMX ctor
+I/libjingle: (srtpfilter.cc:144): SRTP activated with negotiated parameters: send cipher_suite 1 recv cipher_suite 1
+I/libjingle: (channel.cc:933): Channel writable (video) for the first time
+I/libjingle: (channel.cc:941): Using Cand[:2879032841:1:udp:2122260223:192.168.123.x:37878:local::0:mEx1:kAvA9OQN9cW018J/sv6G4xvk:3:10:0]->Cand[:3468416280:1:udp:2113937151:192.168.123.x:59271:local::0:WWAe:Cu6WRAX5cRVuafZsVMQd0tAD:0:50:0]
+I/libjingle: (channel.cc:1000): Installing keys from DTLS-SRTP on video RTP
+I/libjingle: (srtpfilter.cc:144): SRTP activated with negotiated parameters: send cipher_suite 1 recv cipher_suite 1
+I/libjingle: (webrtcvoiceengine.cc:594): WebRtcVoiceEngine::ApplyOptions: AudioOptions {audio_jitter_buffer_max_packets: 50, audio_jitter_buffer_fast_accelerate: false, }
+I/libjingle: (webrtcvoiceengine.cc:799): NetEq capacity is 50
+I/libjingle: (webrtcvoiceengine.cc:807): NetEq fast mode? 0
+I/libjingle: (webrtcvoiceengine.cc:815): Typing detection is enabled? 0
+E/libjingle: (voe_audio_processing_impl.cc:955): SetTypingDetectionStatus: not supported
+W/libjingle: (webrtcvoiceengine.cc:819): SetTypingDetectionStatus(0) failed, err=8003
+I/libjingle: (webrtcvoiceengine.cc:835): Delay agnostic aec is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:844): Extended filter aec is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:853): Experimental ns is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:859): Intelligibility Enhancer is enabled? 0
+I/libjingle: (webrtcvoiceengine.cc:869): Level control: 0
+I/libjingle: (audio_device_impl.cc:1375): RecordingIsInitialized
+I/libjingle: (audio_device_template.h:173): RecordingIsInitialized
+I/libjingle: (audio_device_impl.cc:1456): Recording
+I/libjingle: (audio_device_impl.cc:1347): InitRecording
+I/libjingle: (audio_device_impl.cc:1375): RecordingIsInitialized
+I/libjingle: (audio_device_template.h:173): RecordingIsInitialized
+I/libjingle: (audio_device_buffer.cc:127): InitRecording
+I/libjingle: (audio_device_template.h:168): InitRecording
+D/AudioRecordJni: InitRecording@[tid=3109]
+I/WebRtcAudioRecord: WebRtcAudioRecord: initRecording(sampleRate=48000, channels=1)
+I/WebRtcAudioRecord: WebRtcAudioRecord: byteBuffer.capacity: 960
+D/AudioRecordJni: OnCacheDirectBufferAddress
+D/AudioRecordJni: direct buffer capacity: 960
+I/WebRtcAudioRecord: WebRtcAudioRecord: AudioRecord.getMinBufferSize: 3840
+I/WebRtcAudioRecord: WebRtcAudioRecord: bufferSizeInBytes: 7680
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Surface changed: 252x448
+I/WebRtcAudioRecord: WebRtcAudioRecord: AudioRecord session ID: 2185, audio format: 2, channels: 1, sample rate: 48000
+I/WebRtcAudioEffects: WebRtcAudioEffects: enable(audioSession=2185)
+I/libjingle: (turnport.cc:1320): Jingle:Port[0x76b746a000:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: TURN create permission request sent, id=5736504c4e352f547a612b32
+I/WebRtcAudioEffects: WebRtcAudioEffects: name: Noise Suppression, mode: Pre Processing, implementor: Qualcomm Fluence for Bullhead, UUID: 30890b40-4a8d-11e5-b3ee-0002a5d5c51b
+I/WebRtcAudioEffects: WebRtcAudioEffects: name: Acoustic Echo Canceler, mode: Pre Processing, implementor: Qualcomm Fluence for Bullhead, UUID: d2f1b180-4a8c-11e5-9883-0002a5d5c51b
+I/WebRtcAudioEffects: WebRtcAudioEffects: canUseAcousticEchoCanceler: true
+I/WebRtcAudioEffects: WebRtcAudioEffects: AcousticEchoCanceler: was enabled, enable: true, is now: enabled
+I/WebRtcAudioEffects: WebRtcAudioEffects: canUseNoiseSuppressor: true
+I/WebRtcAudioEffects: WebRtcAudioEffects: NoiseSuppressor: was enabled, enable: true, is now: enabled
+D/AudioRecordJni: frames_per_buffer: 480
+I/libjingle: (audio_device_impl.cc:1354): output: 0
+I/libjingle: (audio_device_impl.cc:1375): RecordingIsInitialized
+I/libjingle: (audio_device_template.h:173): RecordingIsInitialized
+I/libjingle: (audio_device_impl.cc:1456): Recording
+I/libjingle: (audio_device_impl.cc:1426): StartRecording
+I/libjingle: (audio_device_impl.cc:1456): Recording
+I/libjingle: (audio_device_template.h:201): StartRecording
+D/AudioManager: IsCommunicationModeEnabled()
+D/AudioRecordJni: StartRecording@[tid=3109]
+I/WebRtcAudioRecord: WebRtcAudioRecord: startRecording
+I/libjingle: (audio_device_impl.cc:1432): output: 0
+I/libjingle: (channel.cc:1699): Changing voice state, recv=1 send=1
+I/libjingle: (messagequeue.cc:520): Message took 67ms to dispatch. Posted from: ChangeState@../../webrtc/pc/channel.cc:1684
+I/libjingle: (video_send_stream.cc:534): VideoSendStream::Start
+I/libjingle: (channel.cc:1962): Changing video state, send=1
+I/libjingle: (messagequeue.cc:520): Message took 85ms to dispatch. Posted from: GetStats@../../webrtc/api/peerconnectionproxy.h:44
+I/WebRtcAudioRecord: WebRtcAudioRecord: AudioRecordThread@[name=AudioRecordJavaThread, id=2504]
+W/libjingle: (turnport.cc:1338): Jingle:Port[0x76b746a000:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: Received TURN create permission error response, id=5736504c4e352f547a612b32, code=403, rtt=31
+E/libjingle: (turnport.cc:1506): Received TURN CreatePermission error response, code=403; pruned connection.
+I/libjingle: (rtp_sender_audio.cc:356): First audio RTP packet sent to pacer
+E/ACodec: [OMX.qcom.video.encoder.vp8] storeMetaDataInBuffers (output) failed w/ err -1010
+W/ACodec: do not know color format 0x7fa30c04 = 2141391876
+W/ACodec: do not know color format 0x7f000789 = 2130708361
+I/ACodec: [OMX.qcom.video.encoder.vp8] cannot encode color aspects. Ignoring.
+I/ACodec: [OMX.qcom.video.encoder.vp8] cannot encode HDR static metadata. Ignoring.
+I/ACodec: setupVideoEncoder succeeded
+W/ACodec: do not know color format 0x7f000789 = 2130708361
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Output buffers: 4
+I/libjingle: (video_send_stream.cc:904): OnBitrateUpdated: Encoder state changed, target bitrate 300000 bps.
+I/libjingle: (bitrate_allocator.cc:171): UpdateAllocationLimits : total_requested_min_bitrate: 30000bps, total_requested_padding_bitrate: 0bps
+I/libjingle: (video_send_stream.cc:645): EncoderProcess: Encoder started.
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 0. TS: 0. Q: 0. Fps: 60. Kbps: 300
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Sync frame request
+D/ACodec: dataspace changed to 0x10c40000 (R:2(Limited), P:4(BT601_6_525), M:3(BT601_6), T:3(SMPTE170M)) (R:2(Limited), S:4(BT601_525), T:3(SMPTE_170M))
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 1. TS: 16. Q: 1. Fps: 60. Kbps: 300
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 2. TS: 33. Q: 2. Fps: 60. Kbps: 300
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 3. TS: 49. Q: 3. Fps: 60. Kbps: 300
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Already 3 frames in the queue, dropping. TS: 49. Fps: 60. Consecutive drops: 0
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Sync frame generated
+I/libjingle: (bitrate_prober.cc:89): Start probing for bandwidth, (bitrate:packets): (900000:6) (1800000:5) 
+I/libjingle: (rtp_sender_video.cc:313): Sent first RTP packet of the first video frame (pre-pacer)
+I/libjingle: (rtp_sender_video.cc:317): Sent last RTP packet of the first video frame (pre-pacer)
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 0. Key: 1. Size: 1675. TS: 0. Latency: 33. EncTime: 75
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 1. Key: 0. Size: 675. TS: 16. Latency: 17. EncTime: 61
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 2. Key: 0. Size: 438. TS: 33. Latency: 0. EncTime: 45
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 4. TS: 66. Q: 0. Fps: 60. Kbps: 300
+I/libjingle: (send_side_bandwidth_estimation.cc:169): WebRTC.BWE.RampUpTimeTo500kbpsInMs 0
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 3. Key: 0. Size: 476. TS: 66. Latency: 0. EncTime: 26
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 5. TS: 83. Q: 0. Fps: 40. Kbps: 743
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 4. Key: 0. Size: 470. TS: 83. Latency: 0. EncTime: 27
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 6. TS: 108. Q: 0. Fps: 40. Kbps: 743
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 5. Key: 0. Size: 484. TS: 108. Latency: 0. EncTime: 31
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 7. TS: 133. Q: 0. Fps: 40. Kbps: 743
+I/libjingle: (turnport.cc:1077): Jingle:Port[0x76bdf10400:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: TURN allocate request sent, id=495a76763761536b39366f78
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 6. Key: 0. Size: 524. TS: 133. Latency: 0. EncTime: 31
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 8. TS: 158. Q: 0. Fps: 40. Kbps: 743
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 7. Key: 0. Size: 599. TS: 158. Latency: 0. EncTime: 27
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 9. TS: 183. Q: 0. Fps: 40. Kbps: 743
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 8. Key: 0. Size: 566. TS: 183. Latency: 0. EncTime: 25
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 10. TS: 208. Q: 0. Fps: 40. Kbps: 743
+D/CpuMonitor: CPU User: 19/13. System: 18/11. Freq: 63/59. Total usage: 23/18. Cores: 6( 87 87 87 87 21 21 ). Battery: 95
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 9. Key: 0. Size: 619. TS: 208. Latency: 0. EncTime: 32
+I/libjingle: (bitrate_allocator.cc:77): Current BWE 742920
+I/CameraStatistics: CameraStatistics: Camera fps: 28.
+I/libjingle: (network.cc:842): Connect failed with 101
+I/libjingle: (turnport.cc:1077): Jingle:Port[0x76bdf10400:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: TURN allocate request sent, id=495a76763761536b39366f78
+I/libjingle: (send_side_bandwidth_estimation.cc:179): WebRTC.BWE.InitiallyLostPackets 0
+I/libjingle: (send_side_bandwidth_estimation.cc:181): WebRTC.BWE.InitialRtt 15
+I/libjingle: (send_side_bandwidth_estimation.cc:183): WebRTC.BWE.InitialBandwidthEstimate 782
+W/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Reconfigure encoder due to frame resolution change from 640 x 360 to 1280 x 720
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoded frames: 73. Bitrate: 451, target: 782 kbps, fps: 26, encTime: 29. QP: 43 for last 2772 ms.
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: EncoderReleaseOnCodecThread: Frames received: 75. Encoded: 73. Dropped: 1
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Java releaseEncoder
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Java releaseEncoder on release thread
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Java releaseEncoder on release thread done
+I/GlShader: GlShader: Deleting shader.
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Java releaseEncoder done
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: EncoderReleaseOnCodecThread done.
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: InitEncodeOnCodecThread Type: 0, 1280 x 720. Bitrate: 0 kbps. Fps: 0
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Java initEncode: VIDEO_CODEC_VP8 : 1280 x 720. @ 782 kbps. Fps: 30. Encode from texture : true
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Found target encoder for mime video/x-vnd.on2.vp8 : OMX.qcom.video.encoder.vp8. Color: 0x7f000789
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Color format: 2130708361. Bitrate adjustment: false
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder:   Format: {width=1280, height=720, bitrate=782000, mime=video/x-vnd.on2.vp8, frame-rate=30, i-frame-interval=100, bitrate-mode=2, color-format=2130708361}
+I/OMXClient: MuxOMX ctor
+E/ACodec: [OMX.qcom.video.encoder.vp8] storeMetaDataInBuffers (output) failed w/ err -1010
+W/ACodec: do not know color format 0x7fa30c04 = 2141391876
+W/ACodec: do not know color format 0x7f000789 = 2130708361
+I/ACodec: [OMX.qcom.video.encoder.vp8] cannot encode color aspects. Ignoring.
+I/ACodec: [OMX.qcom.video.encoder.vp8] cannot encode HDR static metadata. Ignoring.
+I/ACodec: setupVideoEncoder succeeded
+W/ACodec: do not know color format 0x7f000789 = 2130708361
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Output buffers: 4
+D/ACodec: dataspace changed to 0x10c10000 (R:2(Limited), P:1(BT709_5), M:1(BT709_5), T:3(SMPTE170M)) (R:2(Limited), S:1(BT709), T:3(SMPTE_170M))
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 0. TS: 33. Q: 1. Fps: 30. Kbps: 782
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 1. TS: 66. Q: 2. Fps: 30. Kbps: 782
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 2. TS: 99. Q: 3. Fps: 30. Kbps: 782
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Already 3 frames in the queue, dropping. TS: 99. Fps: 30. Consecutive drops: 0
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Sync frame generated
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 0. Key: 1. Size: 5300. TS: 0. Latency: 66. EncTime: 233
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 3. TS: 133. Q: 2. Fps: 28. Kbps: 782
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 1. Key: 0. Size: 2798. TS: 33. Latency: 100. EncTime: 101
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 2. Key: 0. Size: 2862. TS: 66. Latency: 67. EncTime: 81
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 4. TS: 169. Q: 1. Fps: 28. Kbps: 782
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 3. Key: 0. Size: 2528. TS: 133. Latency: 36. EncTime: 47
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 4. Key: 0. Size: 2100. TS: 169. Latency: 0. EncTime: 37
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 5. TS: 204. Q: 0. Fps: 28. Kbps: 782
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 6. TS: 240. Q: 1. Fps: 28. Kbps: 782
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 5. Key: 0. Size: 2057. TS: 204. Latency: 36. EncTime: 52
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 7. TS: 276. Q: 1. Fps: 28. Kbps: 782
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 6. Key: 0. Size: 2020. TS: 240. Latency: 36. EncTime: 53
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 8. TS: 311. Q: 1. Fps: 28. Kbps: 782
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 7. Key: 0. Size: 2042. TS: 276. Latency: 35. EncTime: 47
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame in # 9. TS: 347. Q: 1. Fps: 28. Kbps: 782
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 8. Key: 0. Size: 2067. TS: 311. Latency: 36. EncTime: 43
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Encoder frame out # 9. Key: 0. Size: 3133. TS: 347. Latency: 0. EncTime: 37
+D/WSRTCClient: Disconnect. Room state: CONNECTED
+D/WSRTCClient: Closing room.
+D/WSRTCClient: C->GAE: https://appr.tc/leave/228837362/27650191
+D/PCRTCClient: Closing peer connection.
+I/GlShader: GlShader: Deleting shader.
+D/WSChannelRTCClient: Disconnect WebSocket. State: REGISTERED
+D/WSChannelRTCClient: C->WSS: {"cmd":"send","msg":"{\"type\": \"bye\"}"}
+D/WSChannelRTCClient: WS DELETE : https://apprtc-ws.webrtc.org:443/228837362/27650191 : 
+I/libjingle: (webrtcsession.cc:818): Session:6761194442006738983 Old state:STATE_INPROGRESS New state:STATE_CLOSED
+I/PCRTCClient: PeerConnection.Observer --> onIceConnectionChange
+D/PCRTCClient: IceGatheringState: COMPLETE
+D/PCRTCClient: SignalingState: CLOSED
+I/libjingle: (channel.cc:913): Channel disabled
+I/libjingle: (video_send_stream.cc:547): VideoSendStream::Stop
+I/libjingle: (channel.cc:1962): Changing video state, send=0
+I/libjingle: (bitrate_allocator.cc:171): UpdateAllocationLimits : total_requested_min_bitrate: 0bps, total_requested_padding_bitrate: 0bps
+I/libjingle: (vie_encoder.cc:268): Video suspend state changed to: suspended
+I/libjingle: (video_send_stream.cc:651): EncoderProcess: Encoder stopped.
+I/libjingle: (video_send_stream.cc:547): VideoSendStream::Stop
+I/libjingle: (call.cc:704): UpdateAggregateNetworkState: aggregate_state=up
+I/libjingle: (congestion_controller.cc:290): SignalNetworkState Up
+I/libjingle: (paced_sender.cc:275): PacedSender resumed.
+I/libjingle: (video_send_stream.cc:502): ~VideoSendStream: {encoder_settings: {payload_name: VP8, payload_type: 100, encoder: (VideoEncoder)}, rtp: {ssrcs: [4182608386], rtcp_mode: RtcpMode::kReducedSize, max_packet_size: 1200, extensions: [{uri: http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time, id: 3}, {uri: http://www.webrtc.org/experiments/rtp-hdrext/playout-delay, id: 6}, {uri: urn:3gpp:video-orientation, id: 4}], nack: {rtp_history_ms: 1000}, fec: {ulpfec_payload_type: 117, red_payload_type: 116, red_rtx_payload_type: 98}, rtx: {ssrcs: [2807693645], payload_type: 96}, c_name: oHMyDNMW3Y6kzmnA}, pre_encode_callback: nullptr, post_encode_callback: nullptr, local_renderer: nullptr, render_delay_ms: 0, target_delay_ms: 0, suspend_below_min_bitrate: off}
+I/libjingle: (video_send_stream.cc:547): VideoSendStream::Stop
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Destroy video encoder.
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: EncoderRelease request
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: EncoderReleaseOnCodecThread: Frames received: 13. Encoded: 12. Dropped: 1
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Java releaseEncoder
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Java releaseEncoder on release thread
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Dropping frame - Not initialized or already released.
+D/AppRTCAudioManager: close
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Java releaseEncoder on release thread done
+I/GlShader: GlShader: Deleting shader.
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: Java releaseEncoder done
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: EncoderReleaseOnCodecThread done.
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Dropping frame - Not initialized or already released.
+I/libjingle: (bitrate_allocator.cc:171): UpdateAllocationLimits : total_requested_min_bitrate: 0bps, total_requested_padding_bitrate: 0bps
+I/libjingle: (send_statistics_proxy.cc:196): WebRTC.Video.SendSideDelayInMs 46
+I/libjingle: (send_statistics_proxy.cc:201): WebRTC.Video.SendSideDelayMaxInMs 129
+I/libjingle: (send_statistics_proxy.cc:93): WebRTC.Video.SendStreamLifetimeInSeconds 3
+I/libjingle: (channel.cc:211): Destroyed channel
+I/libjingle: (channel.cc:913): Channel disabled
+I/libjingle: (bitrate_allocator.cc:171): UpdateAllocationLimits : total_requested_min_bitrate: 0bps, total_requested_padding_bitrate: 0bps
+I/libjingle: (audio_device_impl.cc:1442): StopRecording
+I/libjingle: (audio_device_template.h:211): StopRecording
+D/AudioRecordJni: StopRecording@[tid=3109]
+I/WebRtcAudioRecord: WebRtcAudioRecord: stopRecording
+I/WebRtcAudioRecord: WebRtcAudioRecord: stopThread
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Dropping frame - Not initialized or already released.
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Dropping frame - Not initialized or already released.
+I/WebRtcAudioEffects: WebRtcAudioEffects: release
+I/libjingle: (audio_device_impl.cc:1445): output: 0
+I/libjingle: (channel.cc:1699): Changing voice state, recv=0 send=0
+I/libjingle: (webrtcvoiceengine.cc:2083): RemoveSendStream: 759702623
+I/libjingle: (bitrate_allocator.cc:171): UpdateAllocationLimits : total_requested_min_bitrate: 0bps, total_requested_padding_bitrate: 0bps
+I/libjingle: (audio_device_impl.cc:1442): StopRecording
+I/libjingle: (audio_device_template.h:211): StopRecording
+I/libjingle: (audio_device_impl.cc:1445): output: 0
+I/libjingle: (webrtcvoiceengine.cc:2096): Removing audio send stream 759702623 with VoiceEngine channel #0.
+I/libjingle: (bitrate_allocator.cc:171): UpdateAllocationLimits : total_requested_min_bitrate: 0bps, total_requested_padding_bitrate: 0bps
+I/libjingle: (audio_device_impl.cc:1442): StopRecording
+I/libjingle: (audio_device_template.h:211): StopRecording
+I/libjingle: (audio_device_impl.cc:1445): output: 0
+I/libjingle: (bitrate_allocator.cc:171): UpdateAllocationLimits : total_requested_min_bitrate: 0bps, total_requested_padding_bitrate: 0bps
+I/libjingle: (audio_device_impl.cc:1442): StopRecording
+I/libjingle: (audio_device_template.h:211): StopRecording
+I/libjingle: (audio_device_impl.cc:1445): output: 0
+I/libjingle: (call.cc:704): UpdateAggregateNetworkState: aggregate_state=down
+I/libjingle: (congestion_controller.cc:290): SignalNetworkState Down
+I/libjingle: (paced_sender.cc:269): PacedSender paused.
+I/libjingle: (congestion_controller.cc:358): Bitrate estimate state changed, BWE: 0 bps.
+I/libjingle: (audio_send_stream.cc:103): ~AudioSendStream: {rtp: {ssrc: 759702623, extensions: [{uri: http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time, id: 3}, {uri: urn:ietf:params:rtp-hdrext:ssrc-audio-level, id: 1}], nack: {rtp_history_ms: 0}, c_name: oHMyDNMW3Y6kzmnA}, voe_channel_id: 0, cng_payload_type: -1}
+I/libjingle: (audio_device_impl.cc:1442): StopRecording
+I/libjingle: (audio_device_template.h:211): StopRecording
+I/libjingle: (audio_device_impl.cc:1445): output: 0
+I/libjingle: (audio_device_impl.cc:1402): StopPlayout
+I/libjingle: (audio_device_template.h:196): Playing
+I/libjingle: (audio_device_impl.cc:1405): output: 0
+I/libjingle: (opensslstreamadapter.cc:876): Cleanup
+I/NetworkMonitor: NetworkMonitor: Stop monitoring from native observer 510235261824
+I/NetworkMonitorAutoDetect: NetworkMonitorAutoDetect: Unregister network callback
+I/NetworkMonitorAutoDetect: NetworkMonitorAutoDetect: Unregister network callback
+I/libjingle: (turnport.cc:1252): Jingle:Port[0x76b746a000:audio:1:0:relay:Net[wlan0:192.168.123.x/24:Wifi]]: TURN refresh request sent, id=44467835553163656b504668
+I/libjingle: (channel.cc:211): Destroyed channel
+D/AppRTCProximitySensor: stop@[name=main, id=1]
+I/libjingle: (call.cc:298): WebRTC.Call.LifetimeInSeconds 7
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Dropping frame - Not initialized or already released.
+I/libjingle: (bitrate_allocator.cc:61): WebRTC.Call.NumberOfPauseEvents 0
+I/libjingle: (messagequeue.cc:520): Message took 160ms to dispatch. Posted from: Close@../../webrtc/api/peerconnectionproxy.h:79
+I/libjingle: (webrtcsession.cc:1349): Changing IceConnectionState 2 => 5
+W/libjingle: (rtpsender.cc:230): ClearAudioSend: No audio channel exists.
+W/libjingle: (rtpsender.cc:384): SetVideoSend: No video channel exists.
+I/libjingle: (webrtcsession.cc:521): Session: 6761194442006738983 is destroyed.
+D/PCRTCClient: Closing audio source.
+D/PCRTCClient: Stopping capture.
+I/Camera2Capturer: Camera2Capturer: stopCapture
+I/Camera2Capturer: Camera2Capturer: stopCaptureOnCameraThread
+D/CpuMonitor: pause
+I/Camera2Capturer: Camera2Capturer: Close and release.
+I/libjingle: (androidvideotracksource_jni.cc:76): AndroidVideoTrackSourceObserve_nativeCapturerStopped
+I/SurfaceTextureHelper: SurfaceTextureHelper: stopListening()
+I/SurfaceViewRenderer: SurfaceViewRenderer: remote_video_view: Surface destroyed.
+I/SurfaceViewRenderer: SurfaceViewRenderer: local_video_view: Surface destroyed.
+D/de.tavendo.autobahn.WebSocketReader: run() : ConnectionLost
+D/de.tavendo.autobahn.WebSocketReader: WebSocket reader ended.
+I/Camera2Capturer: Camera2Capturer: stopCapture done
+I/Camera2Capturer: Camera2Capturer: Camera device closed.
+I/Camera2Capturer: Camera2Capturer: waitForCameraToExitTransitionalState waiting: STOPPING
+D/PCRTCClient: Closing video source.
+I/libjingle: (surfacetexturehelper_jni.cc:52): SurfaceTextureHelper dtor
+I/SurfaceTextureHelper: SurfaceTextureHelper: dispose()
+D/PCRTCClient: Closing peer connection factory.
+I/libjingle: (webrtcvideoengine2.cc:545): WebRtcVideoEngine2::~WebRtcVideoEngine2
+I/libjingle: (webrtcvoiceengine.cc:572): WebRtcVoiceEngine::~WebRtcVoiceEngine
+I/libjingle: (audio_device_impl.cc:1402): StopPlayout
+I/libjingle: (audio_device_template.h:196): Playing
+I/libjingle: (audio_device_impl.cc:1405): output: 0
+I/libjingle: (audio_device_impl.cc:1442): StopRecording
+I/libjingle: (audio_device_template.h:211): StopRecording
+I/libjingle: (audio_device_impl.cc:1445): output: 0
+I/libjingle: (audio_device_impl.cc:1467): RegisterEventObserver
+I/libjingle: (audio_device_impl.cc:1480): RegisterAudioCallback
+I/libjingle: (audio_device_buffer.cc:108): RegisterAudioCallback
+I/libjingle: (audio_device_impl.cc:507): Terminate
+I/libjingle: (audio_device_template.h:77): Terminate
+D/AudioRecordJni: Terminate@[tid=3109]
+D/AudioRecordJni: StopRecording@[tid=3109]
+D/AudioTrackJni: Terminate@[tid=3109]
+D/AudioTrackJni: StopPlayout@[tid=3109]
+D/AudioManager: Close@[tid=3109]
+I/WebRtcAudioManager: WebRtcAudioManager: dispose@[name=Thread-29, id=2488]
+I/libjingle: (audio_device_impl.cc:366): ~AudioDeviceModuleImpl
+I/libjingle: (audio_device_template.h:47): ~AudioDeviceTemplate
+D/AudioRecordJni: ~dtor@[tid=3109]
+D/AudioRecordJni: Terminate@[tid=3109]
+D/AudioRecordJni: StopRecording@[tid=3109]
+D/JVM: GlobalRef::dtor@[tid=3109]
+D/JVM: NativeRegistration::dtor@[tid=3109]
+D/JVM: JNIEnvironment::dtor@[tid=3109]
+D/JVM: AttachCurrentThreadIfNeeded::dtor@[tid=3109]
+D/AudioTrackJni: ~dtor@[tid=3109]
+D/AudioTrackJni: Terminate@[tid=3109]
+D/AudioTrackJni: StopPlayout@[tid=3109]
+D/JVM: GlobalRef::dtor@[tid=3109]
+D/JVM: NativeRegistration::dtor@[tid=3109]
+D/JVM: JNIEnvironment::dtor@[tid=3109]
+D/JVM: AttachCurrentThreadIfNeeded::dtor@[tid=3109]
+D/AudioManager: ~dtor@[tid=3109]
+D/AudioManager: Close@[tid=3109]
+D/AudioManager: JavaAudioManager::dtor@[tid=3109]
+D/JVM: GlobalRef::dtor@[tid=3109]
+D/JVM: NativeRegistration::dtor@[tid=3109]
+D/JVM: JNIEnvironment::dtor@[tid=3109]
+D/JVM: AttachCurrentThreadIfNeeded::dtor@[tid=3109]
+D/JVM: Detaching thread from JVM
+I/libjingle: (audio_device_buffer.cc:77): AudioDeviceBuffer::~dtor
+I/libjingle: (audio_device_buffer.cc:81): [playout diff time => #measurements]
+I/MediaCodecVideoDecoder: MediaCodecVideoDecoder: MediaCodecVideoDecoderFactory dtor
+I/MediaCodecVideoEncoder: MediaCodecVideoEncoder: MediaCodecVideoEncoderFactory dtor
+D/PCRTCClient: Closing peer connection done.
+D/PCRTCClient: IceConnectionState: CLOSED
+D/WSChannelRTCClient: Disconnecting WebSocket done.
+D/LooperExecutor: Looper thread finished.

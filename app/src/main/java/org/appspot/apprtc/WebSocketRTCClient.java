@@ -65,7 +65,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
   private String messageUrl;
   private String leaveUrl;
 
-  public WebSocketRTCClient(SignalingEvents events, LooperExecutor executor) {
+  WebSocketRTCClient(SignalingEvents events, LooperExecutor executor) {
     this.events = events;
     this.executor = executor;
     roomState = ConnectionState.NEW;
@@ -227,6 +227,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
   }
 
   // Send local answer SDP to the other participant.
+  //发送本地的应答SDP到其他的参与者
   @Override public void sendAnswerSdp(final SessionDescription sdp) {
     executor.execute(new Runnable() {
       @Override public void run() {

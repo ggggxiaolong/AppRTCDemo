@@ -507,7 +507,7 @@ public class PeerConnectionClient {
     Log.d(TAG, "Create peer connection.");
 
     Log.d(TAG, "PCConstraints: " + pcConstraints.toString());//mandatory: [], optional: [DtlsSrtpKeyAgreement: true]
-    queuedRemoteCandidates = new LinkedList<IceCandidate>();
+    queuedRemoteCandidates = new LinkedList<IceCandidate>();//初始化消息队列
 
     if (videoCallEnabled) {//当设备存在可用的摄像头的情况下
       Log.d(TAG, "EGLContext: " + renderEGLContext);
@@ -734,6 +734,7 @@ public class PeerConnectionClient {
     });
   }
 
+  // 将信令服务器返回的sdp消息
   void setRemoteDescription(final SessionDescription sdp) {
     executor.execute(new Runnable() {
       @Override public void run() {
@@ -761,7 +762,7 @@ public class PeerConnectionClient {
         }
         Log.d(TAG, "Set remote SDP.");
         SessionDescription sdpRemote = new SessionDescription(sdp.type, sdpDescription);
-        peerConnection.setRemoteDescription(sdpObserver, sdpRemote);
+        peerConnection.setRemoteDescription(sdpObserver, sdpRemote);//设置远程的SDP信息
       }
     });
   }
@@ -997,6 +998,7 @@ public class PeerConnectionClient {
   // 实现细节： 根据观察ICE和流的改变而改变
   private class PCObserver implements PeerConnection.Observer {
     @Override public void onIceCandidate(final IceCandidate candidate) {
+      Log.i(TAG, "PeerConnection.Observer --> onIceCandidate");
       executor.execute(new Runnable() {
         @Override public void run() {
           events.onIceCandidate(candidate);
@@ -1005,6 +1007,7 @@ public class PeerConnectionClient {
     }
 
     @Override public void onIceCandidatesRemoved(final IceCandidate[] candidates) {
+      Log.i(TAG, "PeerConnection.Observer --> onIceCandidatesRemoved");
       executor.execute(new Runnable() {
         @Override public void run() {
           events.onIceCandidatesRemoved(candidates);
@@ -1017,6 +1020,7 @@ public class PeerConnectionClient {
     }
 
     @Override public void onIceConnectionChange(final PeerConnection.IceConnectionState newState) {
+      Log.i(TAG, "PeerConnection.Observer --> onIceConnectionChange");
       executor.execute(new Runnable() {
         @Override public void run() {
           Log.d(TAG, "IceConnectionState: " + newState);
@@ -1078,8 +1082,10 @@ public class PeerConnectionClient {
 
   // Implementation detail: handle offer creation/signaling and answer setting,
   // as well as adding remote ICE candidates once the answer SDP is set.
+  // 处理offer 候选者／信令 和 应答 一旦应答SDP设置就会添加远程ICE候选者
   private class SDPObserver implements SdpObserver {
     @Override public void onCreateSuccess(final SessionDescription origSdp) {
+      Log.i(TAG, "SDPObserver --> onCreateSuccess");
       if (localSdp != null) {
         reportError("Multiple SDP create.");
         return;
@@ -1104,6 +1110,7 @@ public class PeerConnectionClient {
     }
 
     @Override public void onSetSuccess() {
+      Log.i(TAG, "SDPObserver --> onSetSuccess");
       executor.execute(new Runnable() {
         @Override public void run() {
           if (peerConnection == null || isError) {
@@ -1112,6 +1119,7 @@ public class PeerConnectionClient {
           if (isInitiator) {
             // For offering peer connection we first create offer and set
             // local SDP, then after receiving answer set remote SDP.
+            // 对于请求peer连接 我们首先创建请求并设置本地SDP信息，然后接受应答设置远端的SDP
             if (peerConnection.getRemoteDescription() == null) {
               // We've just set our local SDP so time to send it.
               Log.d(TAG, "Local SDP set succesfully");
@@ -1125,6 +1133,7 @@ public class PeerConnectionClient {
           } else {
             // For answering peer connection we set remote SDP and then
             // create answer and set local SDP.
+            // 对于应答peer连接，我们设置远程SDP然后创建应答并设置本地SDP
             if (peerConnection.getLocalDescription() != null) {
               // We've just set our local SDP so time to send it, drain
               // remote and send local ICE candidates.
@@ -1134,7 +1143,7 @@ public class PeerConnectionClient {
             } else {
               // We've just set remote SDP - do nothing for now -
               // answer will be created soon.
-              Log.d(TAG, "Remote SDP set succesfully");
+              Log.d(TAG, "Remote SDP set successfully");
             }
           }
         }
@@ -1142,10 +1151,12 @@ public class PeerConnectionClient {
     }
 
     @Override public void onCreateFailure(final String error) {
+      Log.i(TAG, "SDPObserver --> onCreateFailure");
       reportError("createSDP error: " + error);
     }
 
     @Override public void onSetFailure(final String error) {
+      Log.i(TAG, "SDPObserver --> onSetFailure");
       reportError("setSDP error: " + error);
     }
   }
