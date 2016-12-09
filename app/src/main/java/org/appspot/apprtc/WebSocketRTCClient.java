@@ -107,7 +107,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
     //初始化WebSocket通道客户端
     wsClient = new WebSocketChannelClient(executor, this);
 
-    //初始化通过信令服务器建立连接的回调
+    //和登陆服务器建立连接的回调
     RoomParametersFetcherEvents callbacks = new RoomParametersFetcherEvents() {
 
       @Override public void onSignalingParametersReady(final SignalingParameters params) {
@@ -172,7 +172,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
 
   // Callback issued when room parameters are extracted. Runs on local
   // looper thread.
-  //信令服务器返回成功时的回调，运行在looper线程
+  //登陆服务器返回成功时的回调，运行在looper线程
   private void signalingParametersReady(final SignalingParameters signalingParameters) {
     Log.d(TAG, "Room connection completed.");
     //在和自己通讯的前提下，信令服务器返回的SDP消息不为空||信令的初始化为false

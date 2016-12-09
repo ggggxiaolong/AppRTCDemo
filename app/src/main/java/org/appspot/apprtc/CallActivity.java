@@ -254,7 +254,9 @@ public class CallActivity extends Activity
     ft.add(R.id.call_fragment_container, callFragment);
     ft.add(R.id.hud_fragment_container, hudFragment);
     ft.commit();
-    startCall();
+    //------------------------------------
+    startCall();//注意这里，开始并行操作了，开启请求服务器
+    //------------------------------------
 
     // For command line execution run connection for <runTimeMs> and exit.
     //对于通过隐式意图开启的连接运行<runTimeMs>长时间后断开连接
@@ -383,10 +385,14 @@ public class CallActivity extends Activity
 
     // Start room connection. 开始与房间建立连接
     logAndToast(getString(R.string.connecting_to, roomConnectionParameters.roomUrl));
+    //---------------------------------------------------
     appRtcClient.connectToRoom(roomConnectionParameters);
+    //---------------------------------------------------
 
     // Create and audio manager that will take care of audio routing,
     // audio modes, audio device enumeration etc.
+    // 创建一个 音频管理器 它将管理音频的控制
+    // 音频模式， 音频设备的列表等
     audioManager = AppRTCAudioManager.create(this, new Runnable() {
       // This method will be called each time the audio state (number and
       // type of devices) has been changed.
@@ -499,6 +505,7 @@ public class CallActivity extends Activity
 
     signalingParameters = params;
     logAndToast("Creating peer connection, delay=" + delta + "ms"); //日志331行
+    // TODO: 2016/12/9 from there I jump
     peerConnectionClient.createPeerConnection(rootEglBase.getEglBaseContext(), localRender,
         remoteRender, signalingParameters);
 
@@ -508,7 +515,7 @@ public class CallActivity extends Activity
       // PeerConnectionEvents.onLocalDescription event.
       peerConnectionClient.createOffer();
     } else {
-      if (params.offerSdp != null) {
+      if (params.offerSdp != null) {//如果不是房间已经含有加入者（不是房间的创建者）
         peerConnectionClient.setRemoteDescription(params.offerSdp);
         logAndToast("Creating ANSWER...");
         // Create answer. Answer SDP will be sent to offering client in
@@ -524,7 +531,7 @@ public class CallActivity extends Activity
     }
   }
 
-  //信令服务器返回建立房间的参数
+  //服务器返回建立房间的参数
   @Override public void onConnectedToRoom(final SignalingParameters params) {
     runOnUiThread(new Runnable() {
       @Override public void run() {

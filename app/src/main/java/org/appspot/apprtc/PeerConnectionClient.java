@@ -297,7 +297,7 @@ public class PeerConnectionClient {
     executor.execute(new Runnable() {
       @Override public void run() {
         try {
-          createMediaConstraintsInternal();
+          createMediaConstraintsInternal();//这只连接信息
           createPeerConnectionInternal(renderEGLContext);
         } catch (Exception e) {
           reportError("Failed to create peer connection: " + e.getMessage());
@@ -345,7 +345,7 @@ public class PeerConnectionClient {
     }
     Log.d(TAG, "Pereferred video codec: " + preferredVideoCodec);
 
-    // Check if ISAC is used by default.
+    // Check if ISAC is used by default. ISAC音频编码
     preferIsac =
         peerConnectionParameters.audioCodec != null && peerConnectionParameters.audioCodec.equals(
             AUDIO_CODEC_ISAC);
@@ -456,7 +456,7 @@ public class PeerConnectionClient {
       audioConstraints.mandatory.add(
           new MediaConstraints.KeyValuePair(AUDIO_LEVEL_CONTROL_CONSTRAINT, "true"));
     }
-    // Create SDP constraints. 创建SDP信息
+    // Create SDP constraints. 创建本地SDP信息
     sdpMediaConstraints = new MediaConstraints();
     sdpMediaConstraints.mandatory.add(
         new MediaConstraints.KeyValuePair("OfferToReceiveAudio", "true"));
@@ -515,18 +515,21 @@ public class PeerConnectionClient {
     }
 
     PeerConnection.RTCConfiguration rtcConfig =
-        new PeerConnection.RTCConfiguration(signalingParameters.iceServers);
+        new PeerConnection.RTCConfiguration(signalingParameters.iceServers);//设置turn服务器地址
     // TCP candidates are only useful when connecting to a server that supports
     // ICE-TCP.
     rtcConfig.tcpCandidatePolicy = PeerConnection.TcpCandidatePolicy.DISABLED;
     rtcConfig.bundlePolicy = PeerConnection.BundlePolicy.MAXBUNDLE;
     rtcConfig.rtcpMuxPolicy = PeerConnection.RtcpMuxPolicy.REQUIRE;
     rtcConfig.continualGatheringPolicy = PeerConnection.ContinualGatheringPolicy.GATHER_CONTINUALLY;
-    // Use ECDSA encryption.
+    // Use ECDSA encryption. （一种数字签名加密算法）
     rtcConfig.keyType = PeerConnection.KeyType.ECDSA;
 
     // 信令服务器的交流回调 pcObserver
+    //--------------there is a callback-------------------
+    // TODO: 2016/12/9 peerConnection callback
     peerConnection = factory.createPeerConnection(rtcConfig, pcConstraints, pcObserver);
+    //--------------there is a callback-------------------
     isInitiator = false;
 
     // Set default WebRTC tracing and INFO libjingle logging.
@@ -536,7 +539,7 @@ public class PeerConnectionClient {
     Logging.enableLogToDebugOutput(Logging.Severity.LS_INFO);
 
     mediaStream = factory.createLocalMediaStream("ARDAMS");//实例化媒体流
-    if (videoCallEnabled) { //设置开启摄像头，并且设备存在摄像头
+    if (videoCallEnabled) { //设置开启摄像头，并且设备存在摄像头 实例化videoCapture对象
       if (peerConnectionParameters.useCamera2) {
         if (!peerConnectionParameters.captureToTexture) {
           reportError(context.getString(R.string.camera2_texture_only_error));
@@ -807,6 +810,7 @@ public class PeerConnectionClient {
     });
   }
 
+  //创建AudioTrack
   private AudioTrack createAudioTrack() {
     audioSource = factory.createAudioSource(audioConstraints);
     localAudioTrack = factory.createAudioTrack(AUDIO_TRACK_ID, audioSource);
@@ -814,6 +818,7 @@ public class PeerConnectionClient {
     return localAudioTrack;
   }
 
+  // 创建VideoTrack
   private VideoTrack createVideoTrack(VideoCapturer capturer) {
     videoSource = factory.createVideoSource(capturer);
     capturer.startCapture(videoWidth, videoHeight, videoFps);

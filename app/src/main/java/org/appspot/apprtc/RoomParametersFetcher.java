@@ -69,7 +69,7 @@ public class RoomParametersFetcher {
   }
 
   public void makeRequest() {
-    Log.d(TAG, "Connecting to room: " + roomUrl);
+    Log.d(TAG, "Connecting to room: " + roomUrl);//https://appr.tc/join/193423508
     httpConnection =
         new AsyncHttpURLConnection("POST", roomUrl, roomMessage, new AsyncHttpEvents() {
           @Override public void onHttpError(String errorMessage) {
@@ -151,7 +151,7 @@ public class RoomParametersFetcher {
       boolean initiator = (roomJson.getBoolean("is_initiator"));
       if (!initiator) {
         iceCandidates = new LinkedList<IceCandidate>();
-        String messagesString = roomJson.getString("messages");
+        String messagesString = roomJson.getString("messages");//如果为发起者的情况下messages为空
         JSONArray messages = new JSONArray(messagesString);
         for (int i = 0; i < messages.length(); ++i) {
           String messageString = messages.getString(i);
