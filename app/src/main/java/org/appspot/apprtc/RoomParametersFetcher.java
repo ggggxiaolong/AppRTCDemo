@@ -69,7 +69,7 @@ public class RoomParametersFetcher {
   }
 
   public void makeRequest() {
-    Log.d(TAG, "Connecting to room: " + roomUrl);//https://appr.tc/join/193423508
+    Log.d(TAG, "Connecting to room: " + roomUrl);//https://appr.tc/join/193423508 日志3：11
     httpConnection =
         new AsyncHttpURLConnection("POST", roomUrl, roomMessage, new AsyncHttpEvents() {
           @Override public void onHttpError(String errorMessage) {

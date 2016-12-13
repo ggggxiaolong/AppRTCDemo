@@ -132,7 +132,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
     } else {
       port = DEFAULT_PORT;
     }
-
+    Log.i(TAG, "connectToRoomInternal: " + ip + ":" +portStr);
     tcpClient = new TCPChannelClient(executor, this, ip, port);
   }
 
@@ -254,6 +254,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
     try {
       JSONObject json = new JSONObject(msg);
       String type = json.optString("type");
+      Log.d(TAG, "onTCPMessage: " + type);
       if (type.equals("candidate")) {
         events.onRemoteIceCandidate(toJavaCandidate(json));
       } else if (type.equals("remove-candidates")) {

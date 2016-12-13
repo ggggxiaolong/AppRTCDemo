@@ -255,6 +255,7 @@ public class CallActivity extends Activity
     ft.add(R.id.hud_fragment_container, hudFragment);
     ft.commit();
     //------------------------------------
+    // TODO: 2016/12/12 Jump
     startCall();//注意这里，开始并行操作了，开启请求服务器
     //------------------------------------
 
@@ -376,7 +377,6 @@ public class CallActivity extends Activity
     remoteRender.requestLayout();
   }
 
-  // TODO: 2016/12/9 start call
   private void startCall() {
     if (appRtcClient == null) {
       Log.e(TAG, "AppRTC client is not allocated for a call.");
@@ -384,9 +384,10 @@ public class CallActivity extends Activity
     }
     callStartedTimeMs = System.currentTimeMillis();
 
-    // Start room connection. 开始与房间建立连接
+    // Start room connection. 开始与房间建立连接 对应日志3：9
     logAndToast(getString(R.string.connecting_to, roomConnectionParameters.roomUrl));
     //---------------------------------------------------
+    // TODO: 2016/12/12 jump 2
     appRtcClient.connectToRoom(roomConnectionParameters);
     //---------------------------------------------------
 
@@ -415,9 +416,10 @@ public class CallActivity extends Activity
       Log.w(TAG, "Call is connected in closed or error state");
       return;
     }
-    // Update video view.
+    // Update video view.刷新UI
+    // TODO: 2016/12/12 jump 5
     updateVideoView();
-    // Enable statistics callback.
+    // Enable statistics callback. 开启统计
     peerConnectionClient.enableStatsEvents(true, STAT_CALLBACK_PERIOD);
   }
 
@@ -506,7 +508,7 @@ public class CallActivity extends Activity
 
     signalingParameters = params;
     logAndToast("Creating peer connection, delay=" + delta + "ms"); //日志331行
-    // TODO: 2016/12/9 from there I jump
+    // TODO: 2016/12/9 jump 4
     peerConnectionClient.createPeerConnection(rootEglBase.getEglBaseContext(), localRender,
         remoteRender, signalingParameters);
 
@@ -609,7 +611,7 @@ public class CallActivity extends Activity
   // Send local peer connection SDP and ICE candidates to remote party.
   // All callbacks are invoked from peer connection client looper thread and
   // are routed to UI thread.
-  // 发送本地peer连接SDP和ICE候选者到远程参与者
+  // 发送本地peer连接SDP到远程参与者
   @Override public void onLocalDescription(final SessionDescription sdp) {
     final long delta = System.currentTimeMillis() - callStartedTimeMs;
     Log.i(TAG, "PeerConnectionEvents --> onLocalDescription");

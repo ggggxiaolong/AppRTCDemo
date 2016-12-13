@@ -17,12 +17,13 @@
     <LinearLayout
            android:id="@+id/buttons_call_container"
            android:orientation="horizontal"
-           android:layout_above="@+id/capture_format_text_call"
-           android:layout_alignWithParentIfMissing="true"
+        android:layout_alignWithParentIfMissing="true"
            android:layout_marginBottom="32dp"
-           android:layout_centerHorizontal="true"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+        android:layout_above="@+id/capture_format_text_call"
+        android:layout_centerHorizontal="true"
+        >
 
        <ImageButton
            android:id="@+id/button_call_disconnect"

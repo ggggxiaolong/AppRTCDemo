@@ -101,7 +101,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
   // 连接到房间 此方法运行在本地looper线程
   private void connectToRoomInternal() {
     String connectionUrl = getConnectionUrl(connectionParameters);
-    Log.d(TAG, "Connect to room: " + connectionUrl);
+    Log.d(TAG, "Connect to room: " + connectionUrl);//日志3：10
     //修改房间的状态
     roomState = ConnectionState.NEW;
     //初始化WebSocket通道客户端
@@ -123,7 +123,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
       }
     };
 
-    new RoomParametersFetcher(connectionUrl, null, callbacks).makeRequest();
+    new RoomParametersFetcher(connectionUrl, null, callbacks).makeRequest();// 将返回的字符串转换成信号参数对象
   }
 
   // Disconnect from room and send bye messages - runs on a local looper thread.
@@ -175,14 +175,14 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
   //登陆服务器返回成功时的回调，运行在looper线程
   private void signalingParametersReady(final SignalingParameters signalingParameters) {
     Log.d(TAG, "Room connection completed.");
-    //在和自己通讯的前提下，信令服务器返回的SDP消息不为空||信令的初始化为false
+    //在和自己通讯的前提下，信令服务器返回的非空SDP消息||不是房间的创建者
     if (connectionParameters.loopback && (!signalingParameters.initiator
         || signalingParameters.offerSdp != null)) {
       reportError("Loopback room is busy.");
       return;
     }
     if (!connectionParameters.loopback //不是和自己通讯
-        && !signalingParameters.initiator  //信令服务器已经ok
+        && !signalingParameters.initiator  //不是房间的创建者
         && signalingParameters.offerSdp == null) {//信令服务器没有返回sdp信息
       Log.w(TAG, "No offer SDP in room response.");
     }
@@ -196,6 +196,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
 
     // Fire connection and signaling parameters events.
     // 回调
+    // TODO: 2016/12/12 jump3
     events.onConnectedToRoom(signalingParameters);
 
     // Connect and register WebSocket client. 注册并建立WebSocket客户端的连接
@@ -255,6 +256,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
         jsonPut(json, "candidate", candidate.sdp);
         if (initiator) {//是否为发起者
           // Call initiator sends ice candidates to GAE server.
+          // 通话的发起者发送ICE候选者到网管服务器
           if (roomState != ConnectionState.CONNECTED) {
             reportError("Sending ICE candidate in non connected state.");
             return;
@@ -265,6 +267,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
           }
         } else {
           // Call receiver sends ice candidates to websocket server.
+          // 通话的加入者发送候选ICE到webSocket
           wsClient.send(json.toString());
         }
       }
@@ -317,16 +320,19 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
       if (msgText.length() > 0) {
         json = new JSONObject(msgText);
         String type = json.optString("type");
-        if (type.equals("candidate")) {//有候选者加入
+        //----------有候选者加入
+        if (type.equals("candidate")) {
           events.onRemoteIceCandidate(toJavaCandidate(json));
-        } else if (type.equals("remove-candidates")) {//有候选者退出
+        }//----------有候选者退出
+        else if (type.equals("remove-candidates")) {
           JSONArray candidateArray = json.getJSONArray("candidates");
           IceCandidate[] candidates = new IceCandidate[candidateArray.length()];
           for (int i = 0; i < candidateArray.length(); ++i) {
             candidates[i] = toJavaCandidate(candidateArray.getJSONObject(i));
           }
           events.onRemoteIceCandidatesRemoved(candidates);
-        } else if (type.equals("answer")) {//offer 应答
+        } //----------offer 应答
+        else if (type.equals("answer")) {
           if (initiator) {
             SessionDescription sdp =
                 new SessionDescription(SessionDescription.Type.fromCanonicalForm(type),
@@ -335,7 +341,8 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
           } else {
             reportError("Received answer for call initiator: " + msg);
           }
-        } else if (type.equals("offer")) {//请求
+        } //----------请求
+        else if (type.equals("offer")) {
           if (!initiator) {
             SessionDescription sdp =
                 new SessionDescription(SessionDescription.Type.fromCanonicalForm(type),
@@ -344,7 +351,8 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
           } else {
             reportError("Received offer for call receiver: " + msg);
           }
-        } else if (type.equals("bye")) {//关闭
+        } //----------关闭
+        else if (type.equals("bye")) {
           events.onChannelClose();
         } else {
           reportError("Unexpected WebSocket message: " + msg);
@@ -362,7 +370,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
   }
 
   @Override public void onWebSocketClose() {
-    Log.i(TAG, "WebSocketChannelEvents --> onWebSocketClose" );
+    Log.i(TAG, "WebSocketChannelEvents --> onWebSocketClose");
     events.onChannelClose();
   }
 

@@ -515,7 +515,7 @@ public class PeerConnectionClient {
     }
 
     PeerConnection.RTCConfiguration rtcConfig =
-        new PeerConnection.RTCConfiguration(signalingParameters.iceServers);//设置turn服务器地址
+        new PeerConnection.RTCConfiguration(signalingParameters.iceServers);//设置turn服务器地址，可能会包含stun服务器
     // TCP candidates are only useful when connecting to a server that supports
     // ICE-TCP.
     rtcConfig.tcpCandidatePolicy = PeerConnection.TcpCandidatePolicy.DISABLED;
@@ -530,7 +530,7 @@ public class PeerConnectionClient {
     // TODO: 2016/12/9 peerConnection callback
     peerConnection = factory.createPeerConnection(rtcConfig, pcConstraints, pcObserver);
     //--------------there is a callback-------------------
-    isInitiator = false;
+    isInitiator = false;//将创建者标志改为false
 
     // Set default WebRTC tracing and INFO libjingle logging.
     // NOTE: this _must_ happen while |factory| is alive!
@@ -748,7 +748,7 @@ public class PeerConnectionClient {
           return;
         }
         String sdpDescription = sdp.description;
-        if (preferIsac) {//设置音频编码格式
+        if (preferIsac) {//修正音频编码格式
           sdpDescription = preferCodec(sdpDescription, AUDIO_CODEC_ISAC, true);
         }
         if (videoCallEnabled) {//设置是否开启视频编码
@@ -1136,7 +1136,7 @@ public class PeerConnectionClient {
               // We've just set remote description, so drain remote
               // and send local ICE candidates.
               Log.d(TAG, "Remote SDP set successfully");
-              drainCandidates();
+              drainCandidates();//清空队列
             }
           } else {
             // For answering peer connection we set remote SDP and then
