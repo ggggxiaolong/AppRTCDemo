@@ -71,7 +71,7 @@ public class CallFragment extends Fragment {
     captureFormatSlider =
         (SeekBar) controlView.findViewById(R.id.capture_format_slider_call);
 
-    // Add buttons click events.
+    // Add buttons click mEvents.
     disconnectButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {

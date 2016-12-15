@@ -28,9 +28,9 @@ import java.util.concurrent.ExecutorService;
  * Replacement for WebSocketChannelClient for direct communication between two IP addresses. Handles
  * the signaling between the two clients using a TCP connection.
  *
- * <p>All public methods should be called from a looper executor thread
+ * <p>All public methods should be called from a looper mExecutor thread
  * passed in a constructor, otherwise exception will be thrown.
- * All events are dispatched on the same thread.
+ * All mEvents are dispatched on the same thread.
  */
 public class TCPChannelClient {
   private static final String TAG = "TCPChannelClient";
@@ -42,7 +42,7 @@ public class TCPChannelClient {
 
   /**
    * Callback interface for messages delivered on TCP Connection. All callbacks are invoked from the
-   * looper executor thread.
+   * looper mExecutor thread.
    */
   public interface TCPChannelEvents {
     void onTCPConnected(boolean server);
@@ -55,7 +55,7 @@ public class TCPChannelClient {
    * Initializes the TCPChannelClient. If IP is a local IP address, starts a listening server on
    * that IP. If not, instead connects to the IP.
    *
-   * @param eventListener Listener that will receive events from the client.
+   * @param eventListener Listener that will receive mEvents from the client.
    * @param ip IP address to listen on or connect to.
    * @param port Port to listen on or connect to.
    */
@@ -104,7 +104,7 @@ public class TCPChannelClient {
   }
 
   /**
-   * Helper method for firing onTCPError events. Calls onTCPError on the executor thread.
+   * Helper method for firing onTCPError mEvents. Calls onTCPError on the mExecutor thread.
    */
   private void reportError(final String message) {
     Log.e(TAG, "TCP Error: " + message);
@@ -244,7 +244,7 @@ public class TCPChannelClient {
     }
 
     /**
-     * Sends a message on the socket. Should only be called on the executor thread.
+     * Sends a message on the socket. Should only be called on the mExecutor thread.
      */
     public void send(String message) {
       Log.v(TAG, "Send: " + message);

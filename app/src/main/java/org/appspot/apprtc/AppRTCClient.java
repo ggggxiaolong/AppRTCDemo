@@ -11,6 +11,7 @@
 package org.appspot.apprtc;
 
 import org.webrtc.IceCandidate;
+import org.webrtc.MediaConstraints;
 import org.webrtc.PeerConnection;
 import org.webrtc.SessionDescription;
 
@@ -29,8 +30,8 @@ public interface AppRTCClient {
     public final String roomUrl;
     public final String roomId;
     public final boolean loopback;
-    public RoomConnectionParameters(
-        String roomUrl, String roomId, boolean loopback) {
+
+    public RoomConnectionParameters(String roomUrl, String roomId, boolean loopback) {
       this.roomUrl = roomUrl;
       this.roomId = roomId;
       this.loopback = loopback;
@@ -81,11 +82,9 @@ public interface AppRTCClient {
     final SessionDescription offerSdp;
     final List<IceCandidate> iceCandidates;
 
-    SignalingParameters(
-        List<PeerConnection.IceServer> iceServers,
-        boolean initiator, String clientId,
-        String wssUrl, String wssPostUrl,
-        SessionDescription offerSdp, List<IceCandidate> iceCandidates) {
+    SignalingParameters(List<PeerConnection.IceServer> iceServers, boolean initiator,
+        String clientId, String wssUrl, String wssPostUrl, SessionDescription offerSdp,
+        List<IceCandidate> iceCandidates) {
       this.iceServers = iceServers;
       this.initiator = initiator;
       this.clientId = clientId;
@@ -111,7 +110,7 @@ public interface AppRTCClient {
     /**
      * Callback fired once remote SDP is received.
      */
-    void onRemoteDescription(final SessionDescription sdp);
+    void onRemoteDescription(final SessionDescription sdp, final MediaConstraints mediaConstraints);
 
     /**
      * Callback fired once remote Ice candidate is received.
@@ -133,4 +132,12 @@ public interface AppRTCClient {
      */
     void onChannelError(final String description);
   }
+
+  String ROOM_CREATE = "CREATED";
+  String ROOM_JOIN = "JOINED";
+  String ROOM_CREATE_OR_JOIN = "CREATE_OR_JOIN";
+  String ICE_CANDIDATE = "CREATE_OR_JOIN";
+  String SDP_ANSWER = "SESSION_DESCRIPTION_ANSWER";
+  String SDP_OFFER = "SESSION_DESCRIPTION_OFFER";
+  String MEDIA_INFO = "MEDIA_INFO";
 }

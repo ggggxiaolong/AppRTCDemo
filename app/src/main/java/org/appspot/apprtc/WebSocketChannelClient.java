@@ -30,9 +30,9 @@ import java.util.LinkedList;
 /**
  * WebSocket client implementation.
  * WebSocket客户端实现
- * <p>All public methods should be called from a looper executor thread
+ * <p>All public methods should be called from a looper mExecutor thread
  * passed in a constructor, otherwise exception will be thrown.
- * All events are dispatched on the same thread.
+ * All mEvents are dispatched on the same thread.
  * 所有的public方法都应该执行在通过构造方法传入的looper线程池中
  * 否则会抛出异常。所有的事件都在同一线程中分发
  */
@@ -65,7 +65,7 @@ public class WebSocketChannelClient {
 
   /**
    * Callback interface for messages delivered on WebSocket.
-   * All events are dispatched from a looper executor thread.
+   * All mEvents are dispatched from a looper mExecutor thread.
    * WebSocket发送消息的回调接口
    * 所有的事件都是从looper线程池中分发的
    */

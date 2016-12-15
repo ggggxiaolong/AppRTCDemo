@@ -194,7 +194,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
     //修改房间的状态
     roomState = ConnectionState.CONNECTED;
 
-    // Fire connection and signaling parameters events.
+    // Fire connection and signaling parameters mEvents.
     // 回调
     // TODO: 2016/12/12 jump3
     events.onConnectedToRoom(signalingParameters);
@@ -221,7 +221,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
           SessionDescription sdpAnswer =
               new SessionDescription(SessionDescription.Type.fromCanonicalForm("answer"),
                   sdp.description);
-          events.onRemoteDescription(sdpAnswer);
+          events.onRemoteDescription(sdpAnswer, null);
         }
       }
     });
@@ -305,7 +305,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
 
   // --------------------------------------------------------------------
   // WebSocketChannelEvents interface implementation.
-  // All events are called by WebSocketChannelClient on a local looper thread
+  // All mEvents are called by WebSocketChannelClient on a local looper thread
   // (passed to WebSocket client constructor).
   @Override public void onWebSocketMessage(final String msg) {
     Log.i(TAG, "WebSocketChannelEvents --> onWebSocketMessage:" + msg);
@@ -337,7 +337,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
             SessionDescription sdp =
                 new SessionDescription(SessionDescription.Type.fromCanonicalForm(type),
                     json.getString("sdp"));
-            events.onRemoteDescription(sdp);
+            events.onRemoteDescription(sdp, null);
           } else {
             reportError("Received answer for call initiator: " + msg);
           }
@@ -347,7 +347,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
             SessionDescription sdp =
                 new SessionDescription(SessionDescription.Type.fromCanonicalForm(type),
                     json.getString("sdp"));
-            events.onRemoteDescription(sdp);
+            events.onRemoteDescription(sdp, null);
           } else {
             reportError("Received offer for call receiver: " + msg);
           }

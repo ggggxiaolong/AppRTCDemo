@@ -10,11 +10,6 @@
 
 package org.appspot.apprtc;
 
-import org.appspot.apprtc.AppRTCClient.RoomConnectionParameters;
-import org.appspot.apprtc.AppRTCClient.SignalingParameters;
-import org.appspot.apprtc.PeerConnectionClient.PeerConnectionParameters;
-import org.appspot.apprtc.util.LooperExecutor;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
@@ -29,10 +24,14 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
 import android.widget.Toast;
-
+import org.appspot.apprtc.AppRTCClient.RoomConnectionParameters;
+import org.appspot.apprtc.AppRTCClient.SignalingParameters;
+import org.appspot.apprtc.PeerConnectionClient.PeerConnectionParameters;
+import org.appspot.apprtc.util.LooperExecutor;
 import org.webrtc.Camera2Enumerator;
 import org.webrtc.EglBase;
 import org.webrtc.IceCandidate;
+import org.webrtc.MediaConstraints;
 import org.webrtc.PeerConnectionFactory;
 import org.webrtc.RendererCommon.ScalingType;
 import org.webrtc.SessionDescription;
@@ -239,6 +238,7 @@ public class CallActivity extends Activity
       Log.i(TAG, "Using DirectRTCClient because room name looks like an IP.");
       appRtcClient = new DirectRTCClient(this);
     }
+    //appRtcClient = new WebSocket3Client(this, new LooperExecutor());
     // Create connection parameters. 创建连接参数
     roomConnectionParameters = new RoomConnectionParameters(roomUri.toString(), roomId, loopback);
 
@@ -523,7 +523,7 @@ public class CallActivity extends Activity
         logAndToast("Creating ANSWER...");
         // Create answer. Answer SDP will be sent to offering client in
         // PeerConnectionEvents.onLocalDescription event.
-        peerConnectionClient.createAnswer();
+        peerConnectionClient.createAnswer(null);
       }
       if (params.iceCandidates != null) {
         // Add remote ICE candidates from room.
@@ -544,7 +544,7 @@ public class CallActivity extends Activity
     });
   }
 
-  @Override public void onRemoteDescription(final SessionDescription sdp) {
+  @Override public void onRemoteDescription(final SessionDescription sdp, final MediaConstraints constraints) {
     Log.i(TAG, "SignalingEvents --> onRemoteDescription");
     final long delta = System.currentTimeMillis() - callStartedTimeMs;
     runOnUiThread(new Runnable() {
@@ -559,7 +559,7 @@ public class CallActivity extends Activity
           logAndToast("Creating ANSWER...");
           // Create answer. Answer SDP will be sent to offering client in
           // PeerConnectionEvents.onLocalDescription event.
-          peerConnectionClient.createAnswer();
+          peerConnectionClient.createAnswer(constraints);
         }
       }
     });

@@ -190,7 +190,7 @@ public class PeerConnectionClient {
   }
 
   /**
-   * Peer connection events.
+   * Peer connection mEvents.
    * p2p连接回调
    */
   interface PeerConnectionEvents {
@@ -401,13 +401,13 @@ public class PeerConnectionClient {
     // 创建p2p连接的约束
     pcConstraints = new MediaConstraints();
     // Enable DTLS for normal calls and disable for loopback calls. (DTLS 数据包传输层安全性协议)
-    if (peerConnectionParameters.loopback) {//如果是和自己通讯
-      pcConstraints.optional.add(
-          new MediaConstraints.KeyValuePair(DTLS_SRTP_KEY_AGREEMENT_CONSTRAINT, "false"));
-    } else {
-      pcConstraints.optional.add(
-          new MediaConstraints.KeyValuePair(DTLS_SRTP_KEY_AGREEMENT_CONSTRAINT, "true"));
-    }
+    //if (peerConnectionParameters.loopback) {//如果是和自己通讯
+    //  pcConstraints.optional.add(
+    //      new MediaConstraints.KeyValuePair(DTLS_SRTP_KEY_AGREEMENT_CONSTRAINT, "false"));
+    //} else {
+    //  pcConstraints.optional.add(
+    //      new MediaConstraints.KeyValuePair(DTLS_SRTP_KEY_AGREEMENT_CONSTRAINT, "true"));
+    //}
 
     // Check if there is a camera on device and disable video call if not.
     numberOfCameras = CameraEnumerationAndroid.getDeviceCount();
@@ -464,8 +464,8 @@ public class PeerConnectionClient {
       sdpMediaConstraints.mandatory.add(
           new MediaConstraints.KeyValuePair("OfferToReceiveVideo", "true"));
     } else {
-      sdpMediaConstraints.mandatory.add(
-          new MediaConstraints.KeyValuePair("OfferToReceiveVideo", "false"));
+    sdpMediaConstraints.mandatory.add(
+        new MediaConstraints.KeyValuePair("OfferToReceiveVideo", "false"));
     }
   }
 
@@ -506,7 +506,8 @@ public class PeerConnectionClient {
     }
     Log.d(TAG, "Create peer connection.");
 
-    Log.d(TAG, "PCConstraints: " + pcConstraints.toString());//mandatory: [], optional: [DtlsSrtpKeyAgreement: true]
+    Log.d(TAG, "PCConstraints: "
+        + pcConstraints.toString());//mandatory: [], optional: [DtlsSrtpKeyAgreement: true]
     queuedRemoteCandidates = new LinkedList<IceCandidate>();//初始化消息队列
 
     if (videoCallEnabled) {//当设备存在可用的摄像头的情况下
@@ -514,8 +515,8 @@ public class PeerConnectionClient {
       factory.setVideoHwAccelerationOptions(renderEGLContext, renderEGLContext);
     }
 
-    PeerConnection.RTCConfiguration rtcConfig =
-        new PeerConnection.RTCConfiguration(signalingParameters.iceServers);//设置turn服务器地址，可能会包含stun服务器
+    PeerConnection.RTCConfiguration rtcConfig = new PeerConnection.RTCConfiguration(
+        signalingParameters.iceServers);//设置turn服务器地址，可能会包含stun服务器
     // TCP candidates are only useful when connecting to a server that supports
     // ICE-TCP.
     rtcConfig.tcpCandidatePolicy = PeerConnection.TcpCandidatePolicy.DISABLED;
@@ -566,6 +567,7 @@ public class PeerConnectionClient {
     mediaStream.addTrack(createAudioTrack());//添加音频流
     peerConnection.addStream(mediaStream);//将流信息添加到p2p连接
 
+    peerConnection.createDataChannel("sdwqecsadqewa", null).registerObserver(mDataChannelObserver);
     if (peerConnectionParameters.aecDump) {
       try {
         aecDumpFileDescriptor = ParcelFileDescriptor.open(new File(
@@ -700,13 +702,14 @@ public class PeerConnectionClient {
     });
   }
 
-  void createAnswer() {
+  void createAnswer(final MediaConstraints constraints) {
     executor.execute(new Runnable() {
       @Override public void run() {
         if (peerConnection != null && !isError) {
           Log.d(TAG, "PC create ANSWER");
           isInitiator = false;
-          peerConnection.createAnswer(sdpObserver, sdpMediaConstraints);
+          peerConnection.createAnswer(sdpObserver,
+              constraints == null ? sdpMediaConstraints : constraints);
         }
       }
     });
@@ -781,7 +784,7 @@ public class PeerConnectionClient {
           try {
             videoCapture.stopCapture();
           } catch (InterruptedException e) {
-            Log.e(TAG,e.getMessage());
+            Log.e(TAG, e.getMessage());
           }
           videoCapturerStopped = true;
         }
@@ -1079,7 +1082,9 @@ public class PeerConnectionClient {
     }
 
     @Override public void onDataChannel(final DataChannel dc) {
-      reportError("AppRTC doesn't use data channels, but got: " + dc.label() + " anyway!");
+      Log.i(TAG, "onDataChannel: datachannel create");
+      dc.registerObserver(mDataChannelObserver);
+      //reportError("AppRTC doesn't use data channels, but got: " + dc.label() + " anyway!");
     }
 
     @Override public void onRenegotiationNeeded() {
@@ -1168,4 +1173,19 @@ public class PeerConnectionClient {
       reportError("setSDP error: " + error);
     }
   }
+
+  DataChannel.Observer mDataChannelObserver = new DataChannel.Observer() {
+    @Override public void onBufferedAmountChange(long l) {
+      Log.i(TAG, "onBufferedAmountChange: " + l);
+    }
+
+    @Override public void onStateChange() {
+      Log.i(TAG, "onStateChange");
+    }
+
+    @Override public void onMessage(DataChannel.Buffer buffer) {
+      String s = new String(buffer.data.array());
+      Log.i(TAG, "onMessage: " + s);
+    }
+  };
 }

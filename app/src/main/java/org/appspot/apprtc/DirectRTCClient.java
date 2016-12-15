@@ -268,7 +268,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
         SessionDescription sdp = new SessionDescription(
             SessionDescription.Type.fromCanonicalForm(type),
             json.getString("sdp"));
-        events.onRemoteDescription(sdp);
+        events.onRemoteDescription(sdp, null);
       } else if (type.equals("offer")) {
         SessionDescription sdp = new SessionDescription(
             SessionDescription.Type.fromCanonicalForm(type),
