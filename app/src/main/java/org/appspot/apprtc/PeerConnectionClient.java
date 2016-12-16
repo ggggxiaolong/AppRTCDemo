@@ -14,8 +14,13 @@ import android.content.Context;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
+import android.widget.Toast;
 import java.io.File;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
 import java.util.EnumSet;
 import java.util.LinkedList;
 import java.util.Timer;
@@ -133,6 +138,7 @@ public class PeerConnectionClient {
   // enableAudio is set to true if audio should be sent.
   private boolean enableAudio;
   private AudioTrack localAudioTrack;
+  private DataChannel mDataChannel;
 
   /**
    * Peer connection parameters.
@@ -458,15 +464,15 @@ public class PeerConnectionClient {
     }
     // Create SDP constraints. 创建本地SDP信息
     sdpMediaConstraints = new MediaConstraints();
-    sdpMediaConstraints.mandatory.add(
-        new MediaConstraints.KeyValuePair("OfferToReceiveAudio", "true"));
-    if (videoCallEnabled || peerConnectionParameters.loopback) {//设备存在可以使用的摄像头，或者和自己通讯
-      sdpMediaConstraints.mandatory.add(
-          new MediaConstraints.KeyValuePair("OfferToReceiveVideo", "true"));
-    } else {
-    sdpMediaConstraints.mandatory.add(
-        new MediaConstraints.KeyValuePair("OfferToReceiveVideo", "false"));
-    }
+    //sdpMediaConstraints.mandatory.add(
+    //    new MediaConstraints.KeyValuePair("OfferToReceiveAudio", "true"));
+    //if (videoCallEnabled || peerConnectionParameters.loopback) {//设备存在可以使用的摄像头，或者和自己通讯
+    //  sdpMediaConstraints.mandatory.add(
+    //      new MediaConstraints.KeyValuePair("OfferToReceiveVideo", "true"));
+    //} else {
+    //  sdpMediaConstraints.mandatory.add(
+    //      new MediaConstraints.KeyValuePair("OfferToReceiveVideo", "false"));
+    //}
   }
 
   private void createCapturer(CameraEnumerator enumerator) {
@@ -564,10 +570,10 @@ public class PeerConnectionClient {
       mediaStream.addTrack(createVideoTrack(videoCapture));//添加视频流
     }
 
-    mediaStream.addTrack(createAudioTrack());//添加音频流
+    //mediaStream.addTrack(createAudioTrack());//添加音频流
     peerConnection.addStream(mediaStream);//将流信息添加到p2p连接
 
-    peerConnection.createDataChannel("sdwqecsadqewa", null).registerObserver(mDataChannelObserver);
+    //peerConnection.createDataChannel("sdwqecsadqewa", null).registerObserver(mDataChannelObserver);
     if (peerConnectionParameters.aecDump) {
       try {
         aecDumpFileDescriptor = ParcelFileDescriptor.open(new File(
@@ -1008,6 +1014,7 @@ public class PeerConnectionClient {
   // Implementation detail: observe ICE & stream changes and react accordingly.
   // 实现细节： 根据观察ICE和流的改变而改变
   private class PCObserver implements PeerConnection.Observer {
+
     @Override public void onIceCandidate(final IceCandidate candidate) {
       Log.i(TAG, "PeerConnection.Observer --> onIceCandidate");
       executor.execute(new Runnable() {
@@ -1083,7 +1090,8 @@ public class PeerConnectionClient {
 
     @Override public void onDataChannel(final DataChannel dc) {
       Log.i(TAG, "onDataChannel: datachannel create");
-      dc.registerObserver(mDataChannelObserver);
+      mDataChannel = dc;
+      mDataChannel.registerObserver(mDataChannelObserver);
       //reportError("AppRTC doesn't use data channels, but got: " + dc.label() + " anyway!");
     }
 
@@ -1180,12 +1188,25 @@ public class PeerConnectionClient {
     }
 
     @Override public void onStateChange() {
-      Log.i(TAG, "onStateChange");
+      Log.i(TAG, "onStateChange " + mDataChannel.state());
     }
 
     @Override public void onMessage(DataChannel.Buffer buffer) {
-      String s = new String(buffer.data.array());
-      Log.i(TAG, "onMessage: " + s);
+      Log.i(TAG, "onMessage: " + byteBufferToString(buffer.data));
     }
   };
+
+  public static String byteBufferToString(ByteBuffer buffer) {
+    CharBuffer charBuffer = null;
+    try {
+      Charset charset = Charset.forName("UTF-8");
+      CharsetDecoder decoder = charset.newDecoder();
+      charBuffer = decoder.decode(buffer);
+      buffer.flip();
+      return charBuffer.toString();
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      return "";
+    }
+  }
 }

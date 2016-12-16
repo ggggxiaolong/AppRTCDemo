@@ -232,13 +232,13 @@ public class CallActivity extends Activity
     // Create connection client. Use DirectRTCClient if room name is an IP otherwise use the
     // standard WebSocketRTCClient.
     //如果房间号码是ip地址使用DirectRTCClient🔗，否者使用WebSocketRTCClient
-    if (loopback || !DirectRTCClient.IP_PATTERN.matcher(roomId).matches()) {
-      appRtcClient = new WebSocketRTCClient(this, new LooperExecutor());
-    } else {
-      Log.i(TAG, "Using DirectRTCClient because room name looks like an IP.");
-      appRtcClient = new DirectRTCClient(this);
-    }
-    //appRtcClient = new WebSocket3Client(this, new LooperExecutor());
+    //if (loopback || !DirectRTCClient.IP_PATTERN.matcher(roomId).matches()) {
+    //  appRtcClient = new WebSocketRTCClient(this, new LooperExecutor());
+    //} else {
+    //  Log.i(TAG, "Using DirectRTCClient because room name looks like an IP.");
+    //  appRtcClient = new DirectRTCClient(this);
+    //}
+    appRtcClient = new WebSocket3Client(this, new LooperExecutor());
     // Create connection parameters. 创建连接参数
     roomConnectionParameters = new RoomConnectionParameters(roomUri.toString(), roomId, loopback);
 

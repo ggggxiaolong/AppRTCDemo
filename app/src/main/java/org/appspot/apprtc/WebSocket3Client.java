@@ -26,7 +26,7 @@ public final class WebSocket3Client implements AppRTCClient {
   final LooperExecutor mExecutor;
   final String TAG = "WebSocket2Client";
   private Socket mSocket;
-  MediaConstraints mRemoteMediaConstrains;
+  MediaConstraints mRemoteMediaConstrains = new MediaConstraints();
 
   public WebSocket3Client(SignalingEvents events, LooperExecutor executor) {
     this.mEvents = events;
@@ -102,8 +102,7 @@ public final class WebSocket3Client implements AppRTCClient {
     //jsonPut(object, "sdp", sdp.description);
     //jsonPut(object, "type", sdp.type);
     String jsonString = top.toString();
-    Log.d(TAG, "C -> WS: " + jsonString);
-    mExecutor.execute(() -> mSocket.send(jsonString));
+    sendMessage(jsonString);
   }
 
   @Override public void sendAnswerSdp(SessionDescription sdp) {
@@ -123,8 +122,7 @@ public final class WebSocket3Client implements AppRTCClient {
     jsonPut(payload, "peer", "10010");
     jsonPut(top, "payload", payload);
     String jsonString = top.toString();
-    Log.d(TAG, "C -> WS: " + jsonString);
-    mExecutor.execute(() -> mSocket.send(jsonString));
+    sendMessage(jsonString);
   }
 
   @Override public void sendLocalIceCandidate(IceCandidate candidate) {
@@ -139,8 +137,7 @@ public final class WebSocket3Client implements AppRTCClient {
     jsonPut(json, "id", candidate.sdpMid);
     jsonPut(json, "candidate", candidate.sdp);
     String jsonString = json.toString();
-    Log.d(TAG, "C -> WS: " + jsonString);
-    mExecutor.execute(() -> mSocket.send(jsonString));
+    sendMessage(jsonString);
   }
 
   @Override public void sendLocalIceCandidateRemovals(IceCandidate[] candidates) {
@@ -157,6 +154,10 @@ public final class WebSocket3Client implements AppRTCClient {
     }
     jsonPut(json, "candidates", jsonArray);
     String jsonString = json.toString();
+    sendMessage(jsonString);
+  }
+
+  void sendMessage(String jsonString) {
     Log.d(TAG, "C -> WS: " + jsonString);
     mExecutor.execute(() -> mSocket.send(jsonString));
   }
@@ -225,8 +226,9 @@ public final class WebSocket3Client implements AppRTCClient {
         case ROOM_JOIN: {
           //exchange media info
           Log.i(TAG, "dealWebSocketMessage: room join");
-          mSocket.send(
-              "{\"type\":\"MEDIA_INFO\", \"payload\":{\"media\":{\"video\": true, \"audio\":true} } }");
+          //String mediaInfo =
+          //    "{\"type\":\"MEDIA_INFO\", \"payload\":{\"media\":{\"video\": true, \"audio\":true} } }";
+          //mSocket.send(mediaInfo);
           break;
         }
         case MEDIA_INFO: {
