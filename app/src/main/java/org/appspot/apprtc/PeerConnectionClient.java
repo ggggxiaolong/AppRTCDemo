@@ -30,6 +30,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.appspot.apprtc.AppRTCClient.SignalingParameters;
+import org.appspot.apprtc.bean.DCMetaData;
+import org.appspot.apprtc.bean.DCRequest;
+import org.appspot.apprtc.bean.DCResponse;
 import org.webrtc.AudioSource;
 import org.webrtc.AudioTrack;
 import org.webrtc.Camera1Enumerator;
@@ -241,6 +244,16 @@ public class PeerConnectionClient {
      * Callback fired once peer connection error happened.
      */
     void onPeerConnectionError(final String description);
+
+    /**
+     * Callback fired once data channel receive
+     */
+    void onDataChannelRequest(DCRequest request);
+
+    /**
+     * Callback fired once data channel receive
+     */
+    void onDataChannelResponse(DCResponse response);
   }
 
   private PeerConnectionClient() {
@@ -548,30 +561,30 @@ public class PeerConnectionClient {
     Logging.enableTracing("logcat:", EnumSet.of(Logging.TraceLevel.TRACE_NONE));
     Logging.enableLogToDebugOutput(Logging.Severity.LS_ERROR);
 
-    mediaStream = factory.createLocalMediaStream("ARDAMS");//实例化媒体流
-    if (videoCallEnabled) { //设置开启摄像头，并且设备存在摄像头 实例化videoCapture对象
-      if (peerConnectionParameters.useCamera2) {
-        if (!peerConnectionParameters.captureToTexture) {
-          reportError(context.getString(R.string.camera2_texture_only_error));
-          return;
-        }
-
-        Logging.d(TAG, "Creating capture using camera2 API.");
-        createCapturer(new Camera2Enumerator(context));
-      } else {
-        Logging.d(TAG, "Creating capture using camera1 API.");
-        createCapturer(new Camera1Enumerator(peerConnectionParameters.captureToTexture));
-      }
-
-      if (videoCapture == null) {
-        reportError("Failed to open camera");
-        return;
-      }
-      mediaStream.addTrack(createVideoTrack(videoCapture));//添加视频流
-    }
+    //mediaStream = factory.createLocalMediaStream("ARDAMS");//实例化媒体流
+    //if (videoCallEnabled) { //设置开启摄像头，并且设备存在摄像头 实例化videoCapture对象
+    //  if (peerConnectionParameters.useCamera2) {
+    //    if (!peerConnectionParameters.captureToTexture) {
+    //      reportError(context.getString(R.string.camera2_texture_only_error));
+    //      return;
+    //    }
+    //
+    //    Logging.d(TAG, "Creating capture using camera2 API.");
+    //    createCapturer(new Camera2Enumerator(context));
+    //  } else {
+    //    Logging.d(TAG, "Creating capture using camera1 API.");
+    //    createCapturer(new Camera1Enumerator(peerConnectionParameters.captureToTexture));
+    //  }
+    //
+    //  if (videoCapture == null) {
+    //    reportError("Failed to open camera");
+    //    return;
+    //  }
+    //  mediaStream.addTrack(createVideoTrack(videoCapture));//添加视频流
+    //}
 
     //mediaStream.addTrack(createAudioTrack());//添加音频流
-    peerConnection.addStream(mediaStream);//将流信息添加到p2p连接
+    //peerConnection.addStream(mediaStream);//将流信息添加到p2p连接
 
     //peerConnection.createDataChannel("sdwqecsadqewa", null).registerObserver(mDataChannelObserver);
     if (peerConnectionParameters.aecDump) {
@@ -808,6 +821,15 @@ public class PeerConnectionClient {
         }
       }
     });
+  }
+
+  void sendMessage(DCMetaData data) {
+    if (mDataChannel != null) {
+      mDataChannel.send(new DataChannel.Buffer(data.map(), true));
+      Log.i(TAG, "sendMessage from data channel :" + data.toString());
+    } else {
+      Log.e(TAG, "sendMessage from data channel fail it's null");
+    }
   }
 
   private void reportError(final String errorMessage) {
@@ -1192,21 +1214,16 @@ public class PeerConnectionClient {
     }
 
     @Override public void onMessage(DataChannel.Buffer buffer) {
-      Log.i(TAG, "onMessage: " + byteBufferToString(buffer.data));
+      Log.i(TAG, "onMessage from data channel");
+      if (DCMetaData.isRequest(buffer.data)) {
+        DCRequest request = new DCRequest(buffer.data);
+        Log.i(TAG, "receive  request message from data channel :" + request.apiCode);
+        events.onDataChannelRequest(request);
+      } else {
+        DCResponse response = new DCResponse(buffer.data);
+        Log.i(TAG, "receive  response message from data channel :" + response.apiCode);
+        events.onDataChannelResponse(response);
+      }
     }
   };
-
-  public static String byteBufferToString(ByteBuffer buffer) {
-    CharBuffer charBuffer = null;
-    try {
-      Charset charset = Charset.forName("UTF-8");
-      CharsetDecoder decoder = charset.newDecoder();
-      charBuffer = decoder.decode(buffer);
-      buffer.flip();
-      return charBuffer.toString();
-    } catch (Exception ex) {
-      ex.printStackTrace();
-      return "";
-    }
-  }
 }

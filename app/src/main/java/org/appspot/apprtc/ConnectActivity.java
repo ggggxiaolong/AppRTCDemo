@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -244,11 +245,19 @@ public class ConnectActivity extends Activity {
   @Override
   protected void onActivityResult(
       int requestCode, int resultCode, Intent data) {
-    if (requestCode == CONNECTION_REQUEST && commandLineRun) {
-      Log.d(TAG, "Return: " + resultCode);
-      setResult(resultCode);
-      commandLineRun = false;
-      finish();
+    //if (requestCode == CONNECTION_REQUEST && commandLineRun) {
+    //  Log.d(TAG, "Return: " + resultCode);
+    //  setResult(resultCode);
+    //  commandLineRun = false;
+    //  finish();
+    //}
+    if (resultCode == 251){
+      new Thread(new Runnable() {
+        @Override public void run() {
+          SystemClock.sleep(2000);
+          connectToRoom(roomEditText.getText().toString(), false, false, 0);
+        }
+      }).start();
     }
   }
 

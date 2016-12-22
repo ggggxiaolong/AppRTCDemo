@@ -202,7 +202,7 @@ public final class WebSocket3Client implements AppRTCClient {
           Log.d(TAG, "webSocket return :answer");
           //SessionDescription sdp =
           //    new SessionDescription(SessionDescription.Type.ANSWER, json.getString("sdp"));
-          //mEvents.onRemoteDescription(sdp);
+          //mEvents.onRemoteDescription(sdp ,mRemoteMediaConstrains);
           //reportError("received answer for call initiator " + msg);
           break;
         }
@@ -226,9 +226,10 @@ public final class WebSocket3Client implements AppRTCClient {
         case ROOM_JOIN: {
           //exchange media info
           Log.i(TAG, "dealWebSocketMessage: room join");
-          //String mediaInfo =
-          //    "{\"type\":\"MEDIA_INFO\", \"payload\":{\"media\":{\"video\": true, \"audio\":true} } }";
-          //mSocket.send(mediaInfo);
+          String mediaInfo =
+              "{\"type\":\"MEDIA_INFO\", \"payload\":{\"media\":{\"video\": true, \"audio\":true} } }";
+          mSocket.send(mediaInfo);
+          mEvents.onConnectedToRoom(createSignalingParameters());
           break;
         }
         case MEDIA_INFO: {
@@ -280,7 +281,7 @@ public final class WebSocket3Client implements AppRTCClient {
     return object;
   }
 
-  LinkedList<PeerConnection.IceServer> createICEServer() {
+  SignalingParameters createSignalingParameters() {
     LinkedList<PeerConnection.IceServer> turnServers = new LinkedList<PeerConnection.IceServer>();
     String username = "28224511:1379330808";
     String credential = "JZEOEt2V3Qb0y27GRntt2u2PAYA=";
@@ -288,7 +289,18 @@ public final class WebSocket3Client implements AppRTCClient {
     turnServers.add(new PeerConnection.IceServer(turnUrl, username, credential));
     turnServers.add(new PeerConnection.IceServer(turnUrl, username, credential));
     turnServers.add(new PeerConnection.IceServer("stun:stun.l.google.com:19302", "", ""));
-    return turnServers;
+
+    SignalingParameters parameters = new SignalingParameters(
+        // Ice servers are not needed for direct connections.
+        turnServers,
+        false, // Server side acts as the initiator on direct connections.
+        null, // clientId
+        null, // wssUrl
+        null, // wwsPostUrl
+        null, // offerSdp
+        null // iceCandidates
+    );
+    return parameters;
   }
 
   MediaConstraints createRemoteMediaConstrains(boolean video, boolean audio) {

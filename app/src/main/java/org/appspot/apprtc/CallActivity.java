@@ -27,6 +27,9 @@ import android.widget.Toast;
 import org.appspot.apprtc.AppRTCClient.RoomConnectionParameters;
 import org.appspot.apprtc.AppRTCClient.SignalingParameters;
 import org.appspot.apprtc.PeerConnectionClient.PeerConnectionParameters;
+import org.appspot.apprtc.bean.DCRequest;
+import org.appspot.apprtc.bean.DCResponse;
+import org.appspot.apprtc.util.DCPresenter;
 import org.appspot.apprtc.util.LooperExecutor;
 import org.webrtc.Camera2Enumerator;
 import org.webrtc.EglBase;
@@ -125,6 +128,7 @@ public class CallActivity extends Activity
   private CallFragment callFragment;
   private HudFragment hudFragment;
   private CpuMonitor cpuMonitor;
+  DCPresenter mDCPresenter;
 
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -277,6 +281,7 @@ public class CallActivity extends Activity
     }
     peerConnectionClient.createPeerConnectionFactory(CallActivity.this, peerConnectionParameters,
         CallActivity.this);
+    mDCPresenter = new DCPresenter(this);
   }
 
   // Activity interfaces
@@ -451,11 +456,11 @@ public class CallActivity extends Activity
       audioManager.close();
       audioManager = null;
     }
-    if (iceConnected && !isError) {
-      setResult(RESULT_OK);
-    } else {
-      setResult(RESULT_CANCELED);
-    }
+    //if (iceConnected && !isError) {
+    //  setResult(RESULT_OK);
+    //} else {
+    //  setResult(RESULT_CANCELED);
+    //}
     finish();
   }
 
@@ -669,6 +674,7 @@ public class CallActivity extends Activity
       @Override public void run() {
         logAndToast("ICE disconnected");
         iceConnected = false;
+        setResult(251);
         disconnect();
       }
     });
@@ -692,5 +698,13 @@ public class CallActivity extends Activity
   @Override public void onPeerConnectionError(final String description) {
     Log.i(TAG, "PeerConnectionEvents --> onPeerConnectionError");
     reportError(description);
+  }
+
+  @Override public void onDataChannelRequest(DCRequest request) {
+    mDCPresenter.onRequest(request).subscribe(response -> peerConnectionClient.sendMessage(response));
+  }
+
+  @Override public void onDataChannelResponse(DCResponse response) {
+    // TODO: 2016/12/22
   }
 }
