@@ -20,7 +20,7 @@ public class TestResponse {
   byte responseCode = 0;
   byte more = 0;
   String str = "hi web";
-  DCResponse mResponse = new DCResponse.Builder().version(version)
+  DCResponse mResponse = new DCResponse.Builder()
       .apiCode(apiCode)
       .dataType(DCMetaData.DATA_STRING)
       .sessionId(sessionId)

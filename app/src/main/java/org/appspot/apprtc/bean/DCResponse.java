@@ -18,9 +18,9 @@ public class DCResponse extends DCMetaData {
   public final byte more;
   public final byte[] data;
 
-  public DCResponse(byte version, byte from, byte apiCode, byte dataType, byte sessionId,
+  public DCResponse( byte from, byte apiCode, byte dataType, byte sessionId,
       byte responseCode, byte more, byte[] data) {
-    this.version = version;
+    this.version = VERSION;
     this.from = from;
     this.apiCode = apiCode;
     this.dataType = dataType;
@@ -69,7 +69,6 @@ public class DCResponse extends DCMetaData {
   }
 
   public static class Builder {
-    byte mVersion;
     byte mFrom = RESPONSE_MOBILE;
     byte mApiCode;
     byte mDataType;
@@ -77,11 +76,6 @@ public class DCResponse extends DCMetaData {
     byte mResponseCode;
     byte mMore;
     byte[] mData;
-
-    public Builder version(byte version) {
-      mVersion = version;
-      return this;
-    }
 
     public Builder apiCode(byte apiCode) {
       mApiCode = apiCode;
@@ -113,8 +107,20 @@ public class DCResponse extends DCMetaData {
       return this;
     }
 
+    public Builder fromRequest(final DCRequest request, boolean hasMore) {
+      mApiCode = request.apiCode;
+      mDataType = request.dataType;
+      mSessionId = request.sessionId;
+      mResponseCode = RESPONSE_CODE_SUCCESS;
+      mMore = (byte) (hasMore ? MORE_YES : MORE_NO);
+      return this;
+    }
+
     public DCResponse build() {
-      return new DCResponse(mVersion, mFrom, mApiCode, mDataType, mSessionId, mResponseCode, mMore,
+      if (mData == null){
+        mData = new byte[0];
+      }
+      return new DCResponse(mFrom, mApiCode, mDataType, mSessionId, mResponseCode, mMore,
           mData);
     }
   }

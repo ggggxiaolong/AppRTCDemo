@@ -10,6 +10,7 @@ import java.nio.ByteBuffer;
  */
 
 public abstract class DCMetaData {
+  public static final byte VERSION = 1;
   public static final int REQUEST_WEB = 1;
   public static final int REQUEST_MOBILE = 2;
 

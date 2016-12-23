@@ -40,6 +40,7 @@ import org.webrtc.RendererCommon.ScalingType;
 import org.webrtc.SessionDescription;
 import org.webrtc.StatsReport;
 import org.webrtc.SurfaceViewRenderer;
+import rx.schedulers.Schedulers;
 
 /**
  * Activity for peer connection call setup, call waiting
@@ -701,7 +702,7 @@ public class CallActivity extends Activity
   }
 
   @Override public void onDataChannelRequest(DCRequest request) {
-    mDCPresenter.onRequest(request).subscribe(response -> peerConnectionClient.sendMessage(response));
+    mDCPresenter.onRequest(request).subscribeOn(Schedulers.io()).subscribe(response -> peerConnectionClient.sendMessage(response));
   }
 
   @Override public void onDataChannelResponse(DCResponse response) {

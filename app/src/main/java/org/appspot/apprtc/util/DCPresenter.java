@@ -11,12 +11,12 @@ import com.ubnt.webrtc.deviceinfo.media.MediaInfo;
 import org.appspot.apprtc.bean.DCMetaData;
 import org.appspot.apprtc.bean.DCRequest;
 import org.appspot.apprtc.bean.DCResponse;
-import org.json.JSONException;
 import org.json.JSONObject;
 import rx.Observable;
 import rx.schedulers.Schedulers;
 
 import static org.appspot.apprtc.bean.DCMetaData.REQUEST_DEVICE_INFO;
+import static org.appspot.apprtc.util.Common.putJson;
 
 /**
  * @author leon.tan on 2016/12/22.
@@ -24,18 +24,19 @@ import static org.appspot.apprtc.bean.DCMetaData.REQUEST_DEVICE_INFO;
 
 public class DCPresenter {
   final Context mContext;
+  DeviceState mDeviceState;
 
   public DCPresenter(Context context) {
     mContext = context;
   }
 
-  public Observable<DCResponse> onRequest(final DCRequest request){
-    switch (request.apiCode){
-      case REQUEST_DEVICE_INFO:{
+  public Observable<DCResponse> onRequest(final DCRequest request) {
+    switch (request.apiCode) {
+      case REQUEST_DEVICE_INFO: {
         return dealDeviceInfo(request).subscribeOn(Schedulers.io());
       }
     }
-    return null;
+    return unSupport(request);
   }
 
   Observable<DCResponse> dealDeviceInfo(final DCRequest request) {
@@ -53,8 +54,7 @@ public class DCPresenter {
       putJson(object, "memory", memory.toJSON());
       putJson(object, "network", network.toJSON());
       putJson(object, "media", mediaInfo.toJSON());
-      DCResponse response = new DCResponse.Builder().version(request.version)
-          .apiCode(request.apiCode)
+      DCResponse response = new DCResponse.Builder().apiCode(request.apiCode)
           .dataType(DCMetaData.DATA_STRING)
           .sessionId(request.sessionId)
           .responseCode(DCMetaData.RESPONSE_CODE_SUCCESS)
@@ -65,10 +65,53 @@ public class DCPresenter {
     });
   }
 
-  static void putJson(JSONObject json, String key, Object value){
-    try {
-      json.put(key, value);
-    } catch (JSONException e) {
+  Observable<DCResponse> unSupport(final DCRequest request) {
+    return Observable.create(subscriber -> {
+      DCResponse response = new DCResponse.Builder().apiCode(request.apiCode)
+          .dataType(DCMetaData.DATA_STRING)
+          .sessionId(request.sessionId)
+          .responseCode(DCMetaData.RESPONSE_CODE_FAIL_UNKNOWN_API_TYPE)
+          .more(false)
+          .build();
+      subscriber.onNext(response);
+    });
+  }
+
+  Observable<DCResponse> dealDeviceState(final DCRequest request) {
+    if (request.isUnSubscribe() && mDeviceState != null) {
+      mDeviceState.unRegister();
+      return successResponse(request);
+    } else if (request.isSubscribe()) {
+      if (mDeviceState == null) {
+        mDeviceState = new DeviceState(mContext);
+      }
+      return Observable.create(subscriber -> {
+        mDeviceState.register(info -> {
+          DCResponse response = new DCResponse.Builder().fromRequest(request, true)
+              .dataType(DCMetaData.DATA_STRING)
+              .data(info.toJSON().toString().getBytes())
+              .build();
+          subscriber.onNext(response);
+        });
+      });
+    } else {
+      if (mDeviceState == null) {
+        mDeviceState = new DeviceState(mContext);
+      }
+      return Observable.create(subscriber -> {
+        DCResponse response = new DCResponse.Builder().fromRequest(request, true)
+            .dataType(DCMetaData.DATA_STRING)
+            .data(mDeviceState.getInfo().toJSON().toString().getBytes())
+            .build();
+        subscriber.onNext(response);
+      });
     }
+  }
+
+  Observable<DCResponse> successResponse(final DCRequest request) {
+    return Observable.create(subscriber -> {
+      DCResponse response = new DCResponse.Builder().fromRequest(request, false).build();
+      subscriber.onNext(response);
+    });
   }
 }

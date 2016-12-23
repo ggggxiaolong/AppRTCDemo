@@ -7,6 +7,8 @@ import android.content.IntentFilter;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
+import com.ubnt.webrtc.deviceinfo.device.DeviceInfo;
+import com.ubnt.webrtc.deviceinfo.device.model.Device;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,31 +17,40 @@ import static android.content.Intent.ACTION_BATTERY_CHANGED;
 /**
  * @author leon.tan on 2016/12/22.
  */
-// TODO: 2016/12/22 改成定时 rxjava
 public class DeviceState {
   final Context mContext;
   DeviceReceiver mReceiver;
   private DeviceInfo mInfo;
-  final DeviceState.Observer mObserver;
+  DeviceState.Observer mObserver;
 
-  public DeviceState(Context context, Observer observer) {
+  public DeviceState(Context context) {
     mContext = context;
-    mObserver = observer;
-  }
-
-  public void register() {
-    if (mReceiver != null) return;
-    mReceiver = new DeviceReceiver();
-    Intent intent = mContext.registerReceiver(mReceiver, getFilter());
     mInfo = new DeviceInfo();
-    mInfo.batteryPercent = getBatteryPercent(intent);
-    mInfo.isCharge = isPhoneCharging(intent);
+    com.ubnt.webrtc.deviceinfo.device.DeviceInfo
+        deviceInfo = new com.ubnt.webrtc.deviceinfo.device.DeviceInfo(context);
+    mInfo.batteryPercent = deviceInfo.getBatteryPercent();
+    mInfo.isCharge = deviceInfo.isPhoneCharging();
     mInfo.isWifi = isWifi(mContext);
     mInfo.wifiStrength = getStrength(mContext);
   }
 
+  public DeviceInfo getInfo() {
+    return mInfo;
+  }
+
+  public void register(Observer observer) {
+    mObserver = observer;
+    if (mReceiver != null) return;
+    mReceiver = new DeviceReceiver();
+    mContext.registerReceiver(mReceiver, getFilter());
+  }
+
   public void unRegister() {
-    if (mReceiver != null) mContext.unregisterReceiver(mReceiver);
+    if (mReceiver != null) {
+      mContext.unregisterReceiver(mReceiver);
+      mReceiver = null;
+      mObserver = null;
+    }
   }
 
   IntentFilter getFilter() {
@@ -50,7 +61,7 @@ public class DeviceState {
     return intentFilter;
   }
 
-  static class DeviceInfo {
+  public static class DeviceInfo {
     int batteryPercent;
     boolean isCharge;
     boolean isWifi;
@@ -108,7 +119,7 @@ public class DeviceState {
   private void dealRSSI(Context context) {
     mInfo.isWifi = true;
     mInfo.wifiStrength = getStrength(context);
-    mObserver.onStateChange(mInfo);
+    if (mObserver != null) mObserver.onStateChange(mInfo);
   }
 
   private void dealWifi(Context context, Intent intent) {
@@ -122,13 +133,13 @@ public class DeviceState {
       mInfo.isWifi = true;
       mInfo.wifiStrength = getStrength(context);
     }
-    mObserver.onStateChange(mInfo);
+    if (mObserver != null) mObserver.onStateChange(mInfo);
   }
 
   private void dealBattery(Intent intent) {
     mInfo.batteryPercent = getBatteryPercent(intent);
     mInfo.isCharge = isPhoneCharging(intent);
-    mObserver.onStateChange(mInfo);
+    if (mObserver != null) mObserver.onStateChange(mInfo);
   }
 
   public int getBatteryPercent(Intent intent) {
@@ -157,7 +168,7 @@ public class DeviceState {
         (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
     WifiInfo info = wifiManager.getConnectionInfo();
     if (info.getBSSID() != null) {
-      return WifiManager.calculateSignalLevel(info.getRssi(), 4);
+      return WifiManager.calculateSignalLevel(info.getRssi(), 5);
     }
     return 0;
   }

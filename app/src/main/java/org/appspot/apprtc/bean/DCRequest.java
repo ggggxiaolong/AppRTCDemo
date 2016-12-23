@@ -18,9 +18,9 @@ public class DCRequest extends DCMetaData {
   public final byte more;
   public final byte[] data;
 
-  public DCRequest(byte version, byte from, byte apiCode, byte dataType, byte subscribe,
+  public DCRequest( byte from, byte apiCode, byte dataType, byte subscribe,
       byte sessionId, byte more, byte[] data) {
-    this.version = version;
+    this.version = VERSION;
     this.from = from;
     this.apiCode = apiCode;
     this.dataType = dataType;
@@ -68,8 +68,19 @@ public class DCRequest extends DCMetaData {
     return "";
   }
 
+  public boolean isSubscribe(){
+    return subscribe == SUBSCRIBE_REGISTER;
+  }
+
+  public boolean isUnSubscribe(){
+    return subscribe == SUBSCRIBE_UNREGISTER;
+  }
+
+  public boolean isNone(){
+    return subscribe == SUBSCRIBE_NONE;
+  }
+
   public static class Builder {
-    byte mVersion;
     byte mFrom;
     byte mApiCode;
     byte mDataType;
@@ -77,11 +88,6 @@ public class DCRequest extends DCMetaData {
     byte mSessionId;
     byte mMore;
     byte[] mData;
-
-    public Builder version(byte version) {
-      mVersion = version;
-      return this;
-    }
 
     public Builder from(@RequestFrom int from) {
       mFrom = (byte) from;
@@ -119,7 +125,7 @@ public class DCRequest extends DCMetaData {
     }
 
     public DCRequest build() {
-      return new DCRequest(mVersion, mFrom, mApiCode, mDataType, mSubscribe, mSessionId, mMore,
+      return new DCRequest(mFrom, mApiCode, mDataType, mSubscribe, mSessionId, mMore,
           mData);
     }
   }
