@@ -16,6 +16,7 @@ import rx.Observable;
 import rx.schedulers.Schedulers;
 
 import static org.appspot.apprtc.bean.DCMetaData.REQUEST_DEVICE_INFO;
+import static org.appspot.apprtc.bean.DCMetaData.REQUEST_DEVICE_STATE;
 import static org.appspot.apprtc.util.Common.putJson;
 
 /**
@@ -34,6 +35,9 @@ public class DCPresenter {
     switch (request.apiCode) {
       case REQUEST_DEVICE_INFO: {
         return dealDeviceInfo(request).subscribeOn(Schedulers.io());
+      }
+      case REQUEST_DEVICE_STATE:{
+        return dealDeviceState(request).subscribeOn(Schedulers.io());
       }
     }
     return unSupport(request);
@@ -87,7 +91,7 @@ public class DCPresenter {
       }
       return Observable.create(subscriber -> {
         mDeviceState.register(info -> {
-          DCResponse response = new DCResponse.Builder().fromRequest(request, true)
+          DCResponse response = new DCResponse.Builder().fromRequest(request, false)
               .dataType(DCMetaData.DATA_STRING)
               .data(info.toJSON().toString().getBytes())
               .build();
@@ -99,7 +103,7 @@ public class DCPresenter {
         mDeviceState = new DeviceState(mContext);
       }
       return Observable.create(subscriber -> {
-        DCResponse response = new DCResponse.Builder().fromRequest(request, true)
+        DCResponse response = new DCResponse.Builder().fromRequest(request, false)
             .dataType(DCMetaData.DATA_STRING)
             .data(mDeviceState.getInfo().toJSON().toString().getBytes())
             .build();

@@ -18,8 +18,8 @@ public class DCResponse extends DCMetaData {
   public final byte more;
   public final byte[] data;
 
-  public DCResponse( byte from, byte apiCode, byte dataType, byte sessionId,
-      byte responseCode, byte more, byte[] data) {
+  public DCResponse(byte from, byte apiCode, byte dataType, byte sessionId, byte responseCode,
+      byte more, byte[] data) {
     this.version = VERSION;
     this.from = from;
     this.apiCode = apiCode;
@@ -61,7 +61,7 @@ public class DCResponse extends DCMetaData {
   }
 
   @Override public String dataString() {
-    if (isString()){
+    if (isString()) {
       Charset charset = Charset.forName("UTF-8");
       return new String(data, charset);
     }
@@ -117,11 +117,10 @@ public class DCResponse extends DCMetaData {
     }
 
     public DCResponse build() {
-      if (mData == null){
+      if (mData == null) {
         mData = new byte[0];
       }
-      return new DCResponse(mFrom, mApiCode, mDataType, mSessionId, mResponseCode, mMore,
-          mData);
+      return new DCResponse(mFrom, mApiCode, mDataType, mSessionId, mResponseCode, mMore, mData);
     }
   }
 
@@ -169,6 +168,8 @@ public class DCResponse extends DCMetaData {
         + responseCode
         + ", more="
         + more
+        + ", data="
+        + (isString() ? dataString() : "not string")
         + '}';
   }
 }

@@ -26,8 +26,8 @@ public class DeviceState {
   public DeviceState(Context context) {
     mContext = context;
     mInfo = new DeviceInfo();
-    com.ubnt.webrtc.deviceinfo.device.DeviceInfo
-        deviceInfo = new com.ubnt.webrtc.deviceinfo.device.DeviceInfo(context);
+    com.ubnt.webrtc.deviceinfo.device.DeviceInfo deviceInfo =
+        new com.ubnt.webrtc.deviceinfo.device.DeviceInfo(context);
     mInfo.batteryPercent = deviceInfo.getBatteryPercent();
     mInfo.isCharge = deviceInfo.isPhoneCharging();
     mInfo.isWifi = isWifi(mContext);
@@ -43,6 +43,7 @@ public class DeviceState {
     if (mReceiver != null) return;
     mReceiver = new DeviceReceiver();
     mContext.registerReceiver(mReceiver, getFilter());
+    mObserver.onStateChange(mInfo);
   }
 
   public void unRegister() {
@@ -117,28 +118,35 @@ public class DeviceState {
   }
 
   private void dealRSSI(Context context) {
+    int strength = getStrength(context);
+    if (mInfo.isWifi && mInfo.wifiStrength == strength) return;
     mInfo.isWifi = true;
-    mInfo.wifiStrength = getStrength(context);
+    mInfo.wifiStrength = strength;
     if (mObserver != null) mObserver.onStateChange(mInfo);
   }
 
   private void dealWifi(Context context, Intent intent) {
     int wifistate =
         intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_DISABLED);
-
     if (wifistate == WifiManager.WIFI_STATE_DISABLED) {
+      if (!mInfo.isWifi) return;
       mInfo.isWifi = false;
       mInfo.wifiStrength = 0;
     } else if (wifistate == WifiManager.WIFI_STATE_ENABLED) {
+      int strength = getStrength(context);
+      if (mInfo.isWifi && mInfo.wifiStrength == strength) return;
       mInfo.isWifi = true;
-      mInfo.wifiStrength = getStrength(context);
+      mInfo.wifiStrength = strength;
     }
     if (mObserver != null) mObserver.onStateChange(mInfo);
   }
 
   private void dealBattery(Intent intent) {
-    mInfo.batteryPercent = getBatteryPercent(intent);
-    mInfo.isCharge = isPhoneCharging(intent);
+    int batteryPercent = getBatteryPercent(intent);
+    boolean phoneCharging = isPhoneCharging(intent);
+    if (mInfo.batteryPercent == batteryPercent && mInfo.isCharge == phoneCharging) return;
+    mInfo.batteryPercent = batteryPercent;
+    mInfo.isCharge = phoneCharging;
     if (mObserver != null) mObserver.onStateChange(mInfo);
   }
 
