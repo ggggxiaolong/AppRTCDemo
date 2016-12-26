@@ -60,7 +60,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
 
   private enum ConnectionState {
     NEW, CONNECTED, CLOSED, ERROR
-  };
+  }
 
   // All alterations of the room state should be done from inside the looper thread.
   private ConnectionState roomState;
@@ -152,7 +152,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
   }
 
   @Override
-  public void sendOfferSdp(final SessionDescription sdp) {
+  public void sendOfferSdp(final SessionDescription sdp, int label) {
     executor.execute(new Runnable() {
       @Override
       public void run() {
@@ -169,7 +169,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
   }
 
   @Override
-  public void sendAnswerSdp(final SessionDescription sdp) {
+  public void sendAnswerSdp(final SessionDescription sdp, int label) {
     executor.execute(new Runnable() {
       @Override
       public void run() {
@@ -182,7 +182,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
   }
 
   @Override
-  public void sendLocalIceCandidate(final IceCandidate candidate) {
+  public void sendLocalIceCandidate(final IceCandidate candidate, int label) {
     executor.execute(new Runnable() {
       @Override
       public void run() {
@@ -203,7 +203,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
 
   /** Send removed Ice candidates to the other participant. */
   @Override
-  public void sendLocalIceCandidateRemovals(final IceCandidate[] candidates) {
+  public void sendLocalIceCandidateRemovals(final IceCandidate[] candidates, int label) {
     executor.execute(new Runnable() {
       @Override
       public void run() {
@@ -243,9 +243,10 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
           null, // wssUrl
           null, // wwsPostUrl
           null, // offerSdp
-          null // iceCandidates
+          null, // iceCandidates
+          null
       );
-      events.onConnectedToRoom(parameters);
+      events.onConnectedToRoom(parameters, SignalingEvents.TYPE_PC);
     }
   }
 
@@ -256,19 +257,19 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
       String type = json.optString("type");
       Log.d(TAG, "onTCPMessage: " + type);
       if (type.equals("candidate")) {
-        events.onRemoteIceCandidate(toJavaCandidate(json));
+        events.onRemoteIceCandidate(toJavaCandidate(json), SignalingEvents.TYPE_PC);
       } else if (type.equals("remove-candidates")) {
         JSONArray candidateArray = json.getJSONArray("candidates");
         IceCandidate[] candidates = new IceCandidate[candidateArray.length()];
         for (int i = 0; i < candidateArray.length(); ++i) {
           candidates[i] = toJavaCandidate(candidateArray.getJSONObject(i));
         }
-        events.onRemoteIceCandidatesRemoved(candidates);
+        events.onRemoteIceCandidatesRemoved(candidates, SignalingEvents.TYPE_PC);
       } else if (type.equals("answer")) {
         SessionDescription sdp = new SessionDescription(
             SessionDescription.Type.fromCanonicalForm(type),
             json.getString("sdp"));
-        events.onRemoteDescription(sdp, null);
+        events.onRemoteDescription(sdp, null, SignalingEvents.TYPE_PC);
       } else if (type.equals("offer")) {
         SessionDescription sdp = new SessionDescription(
             SessionDescription.Type.fromCanonicalForm(type),
@@ -282,10 +283,11 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
             null, // wssUrl
             null, // wssPostUrl
             sdp, // offerSdp
-            null // iceCandidates
+            null, // iceCandidates
+            null
         );
         roomState = ConnectionState.CONNECTED;
-        events.onConnectedToRoom(parameters);
+        events.onConnectedToRoom(parameters, SignalingEvents.TYPE_PC);
       } else {
         reportError("Unexpected TCP message: " + msg);
       }
@@ -301,7 +303,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
 
   @Override
   public void onTCPClose() {
-    events.onChannelClose();
+    events.onChannelClose(SignalingEvents.TYPE_PC);
   }
 
   // --------------------------------------------------------------------

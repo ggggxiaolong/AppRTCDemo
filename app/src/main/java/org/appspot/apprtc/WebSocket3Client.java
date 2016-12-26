@@ -15,6 +15,9 @@ import org.webrtc.MediaConstraints;
 import org.webrtc.PeerConnection;
 import org.webrtc.SessionDescription;
 
+import static org.appspot.apprtc.AppRTCClient.SignalingEvents.TYPE_DC;
+import static org.appspot.apprtc.AppRTCClient.SignalingEvents.TYPE_MS;
+
 /**
  * @author leon.tan on 2016/12/13.
  */
@@ -24,10 +27,11 @@ public final class WebSocket3Client implements AppRTCClient {
   ConnectionState mConnectionState;
   final SignalingEvents mEvents;
   final LooperExecutor mExecutor;
-  final String TAG = "WebSocket2Client";
+  final String TAG = "WebSocketClient";
   private Socket mSocket;
   private boolean mIsVideo;
   private boolean misAudio;
+  PCInfo mDcPcInfo, mMediaPcInfo;
 
   public WebSocket3Client(SignalingEvents events, LooperExecutor executor) {
     this.mEvents = events;
@@ -52,18 +56,6 @@ public final class WebSocket3Client implements AppRTCClient {
         Log.i(TAG, "WebSocketListener --> onOpen: ");
         mConnectionState = ConnectionState.CONNECTED;
         mSocket.send("{\"roomID\":10010, \"type\":\"CREATE_OR_JOIN\"}");
-
-        SignalingParameters parameters = new SignalingParameters(
-            // Ice servers are not needed for direct connections.
-            new LinkedList<PeerConnection.IceServer>(), false,
-            // Server side acts as the initiator on direct connections.
-            null, // clientId
-            null, // wssUrl
-            null, // wwsPostUrl
-            null, // offerSdp
-            null // iceCandidates
-        );
-        mEvents.onConnectedToRoom(parameters);
       }).on(Socket.EVENT_MESSAGE, args -> {
         String text = (String) args[0];
         Log.i(TAG, "WebSocketListener --> onMessage: " + text);
@@ -74,7 +66,7 @@ public final class WebSocket3Client implements AppRTCClient {
       }).on(Socket.EVENT_CONNECT_ERROR, args -> {
         Log.i(TAG, "WebSocketListener --> onFailure, reason: ");
         mConnectionState = ConnectionState.ERROR;
-        reportError(args.toString());
+        reportError(args[0].toString());
       });
       mSocket.connect();
     } catch (URISyntaxException e) {
@@ -84,65 +76,64 @@ public final class WebSocket3Client implements AppRTCClient {
     }
   }
 
-  @Override public void sendOfferSdp(SessionDescription sdp) {
+  @Override public void sendOfferSdp(SessionDescription sdp, int label) {
     Log.i(TAG, "sendOfferSdp: " + sdp.type);
     if (mConnectionState != ConnectionState.CONNECTED) {
       reportError("sending sdp offer in non connected");
       return;
     }
-
-    JSONObject top = new JSONObject();
-    jsonPut(top, "type", sdp.type == SessionDescription.Type.OFFER ? SDP_OFFER : SDP_ANSWER);
-    final JSONObject object = new JSONObject();
-    jsonPut(object, "sdp", sdp.description);
-    jsonPut(object, "type", sdp.type);
-    jsonPut(object, "peer", "10010");
-    jsonPut(top, "payload", object);
-
-    //final JSONObject object = new JSONObject();
-    //jsonPut(object, "sdp", sdp.description);
-    //jsonPut(object, "type", sdp.type);
-    String jsonString = top.toString();
-    sendMessage(jsonString);
+    sendSdp(sdp, label);
   }
 
-  @Override public void sendAnswerSdp(SessionDescription sdp) {
+  @Override public void sendAnswerSdp(SessionDescription sdp, int label) {
     Log.i(TAG, "sendAnswerSdp: " + sdp.type);
     if (mConnectionState != ConnectionState.CONNECTED) {
       reportError("sending sdp answer in non connected");
       return;
     }
+    sendSdp(sdp, label);
+  }
+
+  private void sendSdp(SessionDescription sdp, int label) {
     JSONObject top = new JSONObject();
     jsonPut(top, "type", sdp.type == SessionDescription.Type.OFFER ? SDP_OFFER : SDP_ANSWER);
     final JSONObject sdpJson = new JSONObject();
     jsonPut(sdpJson, "sdp", sdp.description);
-    jsonPut(sdpJson, "type", "answer");
+    jsonPut(sdpJson, "type", sdp.type.name().toLowerCase());
 
     JSONObject payload = new JSONObject();
     jsonPut(payload, "sdp", sdpJson);
-    jsonPut(payload, "peer", "10010");
+    get(label).restore(payload);
     jsonPut(top, "payload", payload);
     String jsonString = top.toString();
     sendMessage(jsonString);
   }
 
-  @Override public void sendLocalIceCandidate(IceCandidate candidate) {
+  @Override public void sendLocalIceCandidate(IceCandidate candidate, int label) {
     Log.i(TAG, "sendLocalIceCandidate: ");
     if (mConnectionState != ConnectionState.CONNECTED) {
       reportError("sending local ice in non connected");
       return;
     }
-    final JSONObject json = new JSONObject();
-    jsonPut(json, "type", "candidate");
-    jsonPut(json, "label", candidate.sdpMLineIndex);
-    jsonPut(json, "id", candidate.sdpMid);
-    jsonPut(json, "candidate", candidate.sdp);
-    String jsonString = json.toString();
+    final JSONObject top = new JSONObject();
+    jsonPut(top, "type", ICE_CANDIDATE);
+
+    final JSONObject ice = new JSONObject();
+    jsonPut(ice, "sdpMLineIndex", candidate.sdpMLineIndex);
+    jsonPut(ice, "sdpMid", candidate.sdpMid);
+    jsonPut(ice, "candidate", candidate.sdp);
+
+    final JSONObject payload = new JSONObject();
+    jsonPut(payload, "candidate", ice);
+    get(label).restore(payload);
+
+    jsonPut(top, "payload", payload);
+    String jsonString = top.toString();
     sendMessage(jsonString);
   }
 
-  @Override public void sendLocalIceCandidateRemovals(IceCandidate[] candidates) {
-    Log.i(TAG, "sendLocalIceCandidateRemovals: " + candidates.length);
+  @Override public void sendLocalIceCandidateRemovals(IceCandidate[] candidates, int label) {
+    /*Log.i(TAG, "sendLocalIceCandidateRemovals: " + candidates.length);
     if (mConnectionState != ConnectionState.CONNECTED) {
       reportError("sending remove local ices in non connected");
       return;
@@ -155,7 +146,8 @@ public final class WebSocket3Client implements AppRTCClient {
     }
     jsonPut(json, "candidates", jsonArray);
     String jsonString = json.toString();
-    sendMessage(jsonString);
+    sendMessage(jsonString);*/
+    //do nothing now
   }
 
   void sendMessage(String jsonString) {
@@ -183,23 +175,25 @@ public final class WebSocket3Client implements AppRTCClient {
       //String error = json.optString("error");
       JSONObject payload = json.optJSONObject("payload");
       switch (msg) {
-        case "ICE_CANDIDATE": {
+        case ICE_CANDIDATE: {
           Log.d(TAG, "webSocket return :candidate");
-          if (payload != null) mEvents.onRemoteIceCandidate(toJavaCandidate(payload));
+          if (payload == null) return;
+          JSONObject candidate = payload.getJSONObject("candidate");
+          mEvents.onRemoteIceCandidate(toJavaCandidate(candidate), storePcInfo(new PCInfo(payload)));
           break;
         }
         case "remove-candidate": {
-          Log.d(TAG, "webSocket return :remove-candidate:\n" + text);
-          if (payload == null) return;
-          JSONArray array = payload.getJSONArray("remove-candidates");
-          IceCandidate[] candidates = new IceCandidate[array.length()];
-          for (int i = 0; i < array.length(); i++) {
-            candidates[i] = toJavaCandidate(array.getJSONObject(i));
-          }
-          mEvents.onRemoteIceCandidatesRemoved(candidates);
+          Log.w(TAG, "webSocket return :remove-candidate:\n" + text);
+          //if (payload == null) return;
+          //JSONArray array = payload.getJSONArray("remove-candidates");
+          //IceCandidate[] candidates = new IceCandidate[array.length()];
+          //for (int i = 0; i < array.length(); i++) {
+          //  candidates[i] = toJavaCandidate(array.getJSONObject(i));
+          //}
+          //mEvents.onRemoteIceCandidatesRemoved(candidates);
           break;
         }
-        case "SESSION_DESCRIPTION_ANSWER": {
+        case SDP_ANSWER: {
           Log.d(TAG, "webSocket return :answer");
           //SessionDescription sdp =
           //    new SessionDescription(SessionDescription.Type.ANSWER, json.getString("sdp"));
@@ -207,20 +201,15 @@ public final class WebSocket3Client implements AppRTCClient {
           //reportError("received answer for call initiator " + msg);
           break;
         }
-        case "SESSION_DESCRIPTION_OFFER": {
+        case SDP_OFFER: {
           Log.d(TAG, "webSocket return :offer\n" + text);
           if (payload == null) return;
           String string = payload.getJSONObject("sdp").getString("sdp");
           SessionDescription sdp = new SessionDescription(SessionDescription.Type.OFFER, string);
-          mEvents.onRemoteDescription(sdp, mIsVideo, misAudio);
+          mEvents.onConnectedToRoom(createSignalingParameters(sdp, createSDPConstrains(misAudio, mIsVideo)), storePcInfo(new PCInfo(payload)));
           break;
         }
-        case "bye": {
-          Log.d(TAG, "webSocket return :bye");
-          mEvents.onChannelClose();
-          break;
-        }
-        case "CREATED": {
+        case ROOM_CREATE: {
           Log.d(TAG, "webSocket return :CREATED \n" + text);
           break;
         }
@@ -230,7 +219,6 @@ public final class WebSocket3Client implements AppRTCClient {
           String mediaInfo =
               "{\"type\":\"MEDIA_INFO\", \"payload\":{\"media\":{\"video\": true, \"audio\":true} } }";
           mSocket.send(mediaInfo);
-          mEvents.onConnectedToRoom(createSignalingParameters());
           break;
         }
         case MEDIA_INFO: {
@@ -238,6 +226,10 @@ public final class WebSocket3Client implements AppRTCClient {
           JSONObject media = payload.getJSONObject("media");
           mIsVideo = media.getBoolean("video");
           misAudio = media.getBoolean("audio");
+          break;
+        }
+        case ROOM_FULL:{
+          mEvents.onChannelError("Room is full");
           break;
         }
         default: {
@@ -255,9 +247,35 @@ public final class WebSocket3Client implements AppRTCClient {
     }
   }
 
+  int storePcInfo(PCInfo pcInfo) {
+    int label;
+    if (pcInfo.isData()){
+      mDcPcInfo = pcInfo;
+      label = TYPE_DC;
+    } else {
+      mMediaPcInfo = pcInfo;
+      label = TYPE_MS;
+    }
+    return label;
+  }
+
+  PCInfo get(int label){
+    if (label == TYPE_DC) return mDcPcInfo;
+    else return mMediaPcInfo;
+  }
+
   IceCandidate toJavaCandidate(JSONObject json) throws JSONException {
-    return new IceCandidate(json.getString("id"), json.getInt("label"),
+    return new IceCandidate(json.getString("sdpMid"), json.getInt("sdpMLineIndex"),
         json.getString("candidate"));
+  }
+
+  MediaConstraints createSDPConstrains(boolean useAudio, boolean useVideo) {
+    MediaConstraints constraints = new MediaConstraints();
+    constraints.mandatory.add(
+        new MediaConstraints.KeyValuePair("OfferToReceiveAudio", useAudio ? "true" : "false"));
+    constraints.mandatory.add(
+        new MediaConstraints.KeyValuePair("OfferToReceiveVideo", useVideo ? "true" : "false"));
+    return constraints;
   }
 
   void reportError(final String msg) {
@@ -282,7 +300,7 @@ public final class WebSocket3Client implements AppRTCClient {
     return object;
   }
 
-  SignalingParameters createSignalingParameters() {
+  SignalingParameters createSignalingParameters(SessionDescription sdp, MediaConstraints constraints) {
     LinkedList<PeerConnection.IceServer> turnServers = new LinkedList<PeerConnection.IceServer>();
     String username = "28224511:1379330808";
     String credential = "JZEOEt2V3Qb0y27GRntt2u2PAYA=";
@@ -293,25 +311,45 @@ public final class WebSocket3Client implements AppRTCClient {
 
     SignalingParameters parameters = new SignalingParameters(
         // Ice servers are not needed for direct connections.
-        turnServers,
-        false, // Server side acts as the initiator on direct connections.
+        turnServers, false, // Server side acts as the initiator on direct connections.
         null, // clientId
         null, // wssUrl
         null, // wwsPostUrl
-        null, // offerSdp
-        null // iceCandidates
+        sdp, // offerSdp
+        null, // iceCandidates
+        constraints
     );
     return parameters;
   }
 
-  MediaConstraints createRemoteMediaConstrains(boolean video, boolean audio) {
-    MediaConstraints mediaConstraints = new MediaConstraints();
-    mediaConstraints.mandatory.add(
-        new MediaConstraints.KeyValuePair("OfferToReceiveAudio", audio ? "true" : "false"));
-    //设备存在可以使用的摄像头，或者和自己通讯
-    mediaConstraints.mandatory.add(
-        new MediaConstraints.KeyValuePair("OfferToReceiveVideo", video ? "true" : "false"));
-    //mediaConstraints.mandatory.add(new MediaConstraints.KeyValuePair("DtlsSrtpKeyAgreement", "true"));
-    return mediaConstraints;
+  static class PCInfo {
+    static final String TYPE_DC = "data";
+    static final String TYPE_MEDIA = "media";
+    String peer;
+    String type;
+    String label;
+    String connectionID;
+
+    PCInfo(JSONObject json) {
+      try {
+        peer = json.getString("peer");
+        type = json.getString("type");
+        label = json.getString("label");
+        connectionID = json.getString("connectionID");
+      } catch (JSONException e) {
+        Log.e("PCINFO", "PCInfo create error: ", e);
+      }
+    }
+
+    boolean isData(){
+      return TYPE_DC.equals(type);
+    }
+
+    void restore(JSONObject json) {
+      jsonPut(json, "peer", peer);
+      jsonPut(json, "type", type);
+      jsonPut(json, "label", label);
+      jsonPut(json, "connectionID", connectionID);
+    }
   }
 }

@@ -43,6 +43,7 @@ android {
 dependencies {
   compile files('libs/autobanh.jar')
   compile files('libs/libjingle_peerconnection.jar')
+  compile files('libs/base_java.jar')
   compile 'com.squareup.okhttp3:okhttp:3.5.0'
   compile('io.socket:socket.io-client:0.8.3') {
     // excluding org.json which is provided by Android

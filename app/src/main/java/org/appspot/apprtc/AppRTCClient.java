@@ -48,22 +48,22 @@ public interface AppRTCClient {
   /**
    * Send offer SDP to the other participant.
    */
-  void sendOfferSdp(final SessionDescription sdp);
+  void sendOfferSdp(final SessionDescription sdp, int label);
 
   /**
    * Send answer SDP to the other participant.
    */
-  void sendAnswerSdp(final SessionDescription sdp);
+  void sendAnswerSdp(final SessionDescription sdp, int label);
 
   /**
    * Send Ice candidate to the other participant.
    */
-  void sendLocalIceCandidate(final IceCandidate candidate);
+  void sendLocalIceCandidate(final IceCandidate candidate, int label);
 
   /**
    * Send removed ICE candidates to the other participant.
    */
-  void sendLocalIceCandidateRemovals(final IceCandidate[] candidates);
+  void sendLocalIceCandidateRemovals(final IceCandidate[] candidates, int label);
 
   /**
    * Disconnect from room.
@@ -81,10 +81,11 @@ public interface AppRTCClient {
     final String wssPostUrl;
     final SessionDescription offerSdp;
     final List<IceCandidate> iceCandidates;
+    final MediaConstraints mediaConstraints;
 
     SignalingParameters(List<PeerConnection.IceServer> iceServers, boolean initiator,
         String clientId, String wssUrl, String wssPostUrl, SessionDescription offerSdp,
-        List<IceCandidate> iceCandidates) {
+        List<IceCandidate> iceCandidates, MediaConstraints mediaConstraints) {
       this.iceServers = iceServers;
       this.initiator = initiator;
       this.clientId = clientId;
@@ -92,6 +93,7 @@ public interface AppRTCClient {
       this.wssPostUrl = wssPostUrl;
       this.offerSdp = offerSdp;
       this.iceCandidates = iceCandidates;
+      this.mediaConstraints = mediaConstraints;
     }
   }
 
@@ -101,31 +103,34 @@ public interface AppRTCClient {
    * <p>Methods are guaranteed to be invoked on the UI thread of |activity|.
    */
   interface SignalingEvents {
+    int TYPE_PC = 0;
+    int TYPE_DC = 1;
+    int TYPE_MS = 2;
     /**
      * Callback fired once the room's signaling parameters
      * SignalingParameters are extracted.
      */
-    void onConnectedToRoom(final SignalingParameters params);
+    void onConnectedToRoom(final SignalingParameters params, int label);
 
     /**
      * Callback fired once remote SDP is received.
      */
-    void onRemoteDescription(final SessionDescription sdp, final boolean useVideo, final boolean useAudio);
+    void onRemoteDescription(final SessionDescription sdp, MediaConstraints constraints, int label);
 
     /**
      * Callback fired once remote Ice candidate is received.
      */
-    void onRemoteIceCandidate(final IceCandidate candidate);
+    void onRemoteIceCandidate(final IceCandidate candidate, int label);
 
     /**
      * Callback fired once remote Ice candidate removals are received.
      */
-    void onRemoteIceCandidatesRemoved(final IceCandidate[] candidates);
+    void onRemoteIceCandidatesRemoved(final IceCandidate[] candidates, int label);
 
     /**
      * Callback fired once channel is closed.
      */
-    void onChannelClose();
+    void onChannelClose(int label);
 
     /**
      * Callback fired once channel error happened.
@@ -135,8 +140,9 @@ public interface AppRTCClient {
 
   String ROOM_CREATE = "CREATED";
   String ROOM_JOIN = "JOINED";
+  String ROOM_FULL = "ROOM_FULL";
   String ROOM_CREATE_OR_JOIN = "CREATE_OR_JOIN";
-  String ICE_CANDIDATE = "CREATE_OR_JOIN";
+  String ICE_CANDIDATE = "ICE_CANDIDATE";
   String SDP_ANSWER = "SESSION_DESCRIPTION_ANSWER";
   String SDP_OFFER = "SESSION_DESCRIPTION_OFFER";
   String MEDIA_INFO = "MEDIA_INFO";

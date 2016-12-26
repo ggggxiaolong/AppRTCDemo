@@ -219,7 +219,7 @@ public class ConnectActivity extends Activity {
   @Override
   public void onResume() {
     super.onResume();
-    String room = sharedPref.getString(keyprefRoom, "");
+    String room = sharedPref.getString(keyprefRoom, "http://192.168.8.140:8889");
     roomEditText.setText(room);
     roomList = new ArrayList<String>();
     String roomListJson = sharedPref.getString(keyprefRoomList, null);

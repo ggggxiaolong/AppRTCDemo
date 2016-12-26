@@ -3,6 +3,7 @@ package org.appspot.apprtc.PCManager;
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
+import android.util.SparseArray;
 import java.io.File;
 import java.util.List;
 import org.appspot.apprtc.BuildConfig;
@@ -29,12 +30,19 @@ public class PCFactory {
   static final String AUDIO_TRACK_ID = "ARDAMSa0";
   public static final String TAG = "PCFactory";
   private PeerConnectionFactory mFactory;
+  final SparseArray<PCManager> mPCManagerSparseArray;
+
+  PCFactory() {
+    mPCManagerSparseArray = new SparseArray<>();
+  }
 
   boolean createFactory(Context context) {
     if (mFactory != null) return true;
-    if (BuildConfig.DEBUG) PeerConnectionFactory.initializeInternalTracer();//初始化p2p的连接工厂
-    // Initialize field trials.
-    PeerConnectionFactory.initializeFieldTrials("");
+    if (BuildConfig.DEBUG) {
+      PeerConnectionFactory.initializeInternalTracer();//初始化p2p的连接工厂
+      // Initialize field trials.
+      PeerConnectionFactory.initializeFieldTrials("");
+    }
 
     Log.d(TAG, "Disable OpenSL ES audio even if device supports it");
     WebRtcAudioManager.setBlacklistDeviceForOpenSLESUsage(true /* enable */);
@@ -55,10 +63,14 @@ public class PCFactory {
   }
 
   PCManager createPCManager(final List<PeerConnection.IceServer> iceServers,
-      EglBase.Context renderEGLContext, PCManager pcManager) {
-    if (mFactory == null){
-      throw new IllegalStateException("method createFactory should be call first");
+      EglBase.Context renderEGLContext, PCManager.Observer observer, int label) {
+    if (mFactory == null) {
+      Log.e(TAG, "method createFactory should be call first");
+      return null;
     }
+    PCManager pcManager = mPCManagerSparseArray.get(label);
+    if (pcManager != null) return pcManager;
+    pcManager = new PCManager(observer, label);
     mFactory.setVideoHwAccelerationOptions(renderEGLContext, renderEGLContext);
 
     PeerConnection.RTCConfiguration rtcConfig = new PeerConnection.RTCConfiguration(iceServers);
@@ -74,10 +86,15 @@ public class PCFactory {
     PeerConnection peerConnection =
         mFactory.createPeerConnection(rtcConfig, pcConstraints, pcManager);
     pcManager.setPeerConnection(peerConnection);
+    mPCManagerSparseArray.put(label, pcManager);
     return pcManager;
   }
 
-  AudioSource createAudioSource(){
+  PCManager getPCManager(int label) {
+    return mPCManagerSparseArray.get(label);
+  }
+
+  AudioSource createAudioSource() {
     return mFactory.createAudioSource(new MediaConstraints());
   }
 
@@ -87,13 +104,14 @@ public class PCFactory {
     return audioTrack;
   }
 
-  MediaStream createLocalMediaStream(){
+  MediaStream createLocalMediaStream() {
     return mFactory.createLocalMediaStream("ARDAMS");
   }
 
-  VideoSource createVideoSource(VideoCapturer capturer){
+  VideoSource createVideoSource(VideoCapturer capturer) {
     return mFactory.createVideoSource(capturer);
   }
+
   // 创建VideoTrack
   VideoTrack createVideoTrack(VideoSource source, VideoRenderer.Callbacks callbacks) {
     VideoTrack videoTrack = mFactory.createVideoTrack(VIDEO_TRACK_ID, source);
@@ -104,14 +122,40 @@ public class PCFactory {
   /**
    * should be close at lost
    */
-  public void close(){
+  public void close(int label) {
+    if (mPCManagerSparseArray.get(label) != null) {
+      mPCManagerSparseArray.remove(label);
+    }
+    if (mPCManagerSparseArray.size() > 0) return;
     Log.d(TAG, "Closing peer connection factory.");
+    mPCManagerSparseArray.clear();
     if (mFactory != null) {
       mFactory.dispose();
       mFactory = null;
+      if (BuildConfig.DEBUG) {
+        PeerConnectionFactory.stopInternalTracingCapture();
+        PeerConnectionFactory.shutdownInternalTracer();
+      }
     }
     Log.d(TAG, "Closing peer connection done.");
-    PeerConnectionFactory.stopInternalTracingCapture();
-    PeerConnectionFactory.shutdownInternalTracer();
+  }
+
+  public void closeAll() {
+    for (int i = 0; i < mPCManagerSparseArray.size(); i++) {
+      int key = mPCManagerSparseArray.keyAt(i);
+      PCManager pcManager = mPCManagerSparseArray.get(key);
+      if (pcManager != null) pcManager.close();
+    }
+    Log.d(TAG, "Closing peer connection factory.");
+    mPCManagerSparseArray.clear();
+    if (mFactory != null) {
+      mFactory.dispose();
+      mFactory = null;
+      if (BuildConfig.DEBUG) {
+        PeerConnectionFactory.stopInternalTracingCapture();
+        PeerConnectionFactory.shutdownInternalTracer();
+      }
+    }
+    Log.d(TAG, "Closing peer connection done.");
   }
 }

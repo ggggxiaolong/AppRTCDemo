@@ -25,6 +25,7 @@ public class DCManager {
   }
 
   void setDataChannel(@NonNull DataChannel dataChannel) {
+    Log.i(TAG, "setDataChannel: receive data channel");
     mDataChannel = dataChannel;
     if (mDataChannel.state() == DataChannel.State.OPEN) {
       mDataChannel.registerObserver(mDCObserver);
@@ -55,7 +56,7 @@ public class DCManager {
   }
 
   void close() {
-    if (mDataChannel == null) {
+    if (mDataChannel != null) {
       mDataChannel.close();
     }
   }
@@ -79,8 +80,10 @@ public class DCManager {
     @Override public void onMessage(DataChannel.Buffer buffer) {
       if (mObserver != null) {
         if (DCMetaData.isRequest(buffer.data)) {
+          Log.i(TAG, " data channel onMessage: request");
           mObserver.onRequest(new DCRequest(buffer.data));
         } else {
+          Log.i(TAG, " data channel onMessage: response");
           mObserver.onResponse(new DCResponse(buffer.data));
         }
       }

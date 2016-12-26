@@ -39,6 +39,7 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
   static final PCFactory pcFactory = new PCFactory();
   PeerConnection mPeerConnection;
   final Observer mObserver;
+  final int mLabel;
   DCManager mDCManager;
   MediaManager mMediaManager;
   LinkedList<IceCandidate> mRemoteCandidates;
@@ -48,22 +49,26 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
   final ExecutorService mExecutor;
   Timer statsTimer;
 
-  private PCManager(Observer observer) {
+  PCManager(Observer observer, int label) {
     mObserver = observer;
     mDCManager = new DCManager();
     mMediaManager = new MediaManager();
     mExecutor = Executors.newSingleThreadExecutor();
     statsTimer = new Timer();
+    mLabel = label;
   }
 
   public static boolean createPCFactory(Context context) {
     return pcFactory.createFactory(context);
   }
 
-  public static PCManager createPCManager(final List<PeerConnection.IceServer> iceServers,
-      EglBase.Context context, PCManager.Observer observer) {
-    PCManager pcManager = new PCManager(observer);
-    return pcFactory.createPCManager(iceServers, context, pcManager);
+  public static void createPCManager(final List<PeerConnection.IceServer> iceServers,
+      EglBase.Context context, PCManager.Observer observer, int label) {
+    pcFactory.createPCManager(iceServers, context, observer, label);
+  }
+
+  public static PCManager get(int label){
+    return pcFactory.getPCManager(label);
   }
 
   void setPeerConnection(@NonNull PeerConnection peerConnection) {
@@ -71,11 +76,12 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
     mRemoteCandidates = new LinkedList<IceCandidate>();
   }
 
-  public DCManager getDCManager(boolean initiative) {
+  public DCManager getDCManager(boolean initiative, DCManager.Observer observer) {
     if (initiative) {
       DataChannel dc = mPeerConnection.createDataChannel("MobileDC", new DataChannel.Init());
       mDCManager.setDataChannel(dc);
     }
+    mDCManager.setObserver(observer);
     return mDCManager;
   }
 
@@ -114,20 +120,20 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
 
   @Override public void onIceConnectionChange(IceConnectionState newState) {
     if (newState == IceConnectionState.CONNECTED) {
-      mObserver.onIceConnected();
+      mObserver.onIceConnected(mLabel);
     } else if (newState == IceConnectionState.DISCONNECTED) {
-      mObserver.onIceDisconnected();
+      mObserver.onIceDisconnected(mLabel);
     } else if (newState == IceConnectionState.FAILED) {
-      mObserver.onPeerConnectionError("ICE connection failed.");
+      mObserver.onPeerConnectionError("ICE connection failed.", mLabel);
     }
   }
 
   @Override public void onIceCandidate(IceCandidate iceCandidate) {
-    mObserver.onIceCandidate(iceCandidate);
+    mObserver.onIceCandidate(iceCandidate, mLabel);
   }
 
   @Override public void onIceCandidatesRemoved(IceCandidate[] iceCandidates) {
-    mObserver.onIceCandidatesRemoved(iceCandidates);
+    mObserver.onIceCandidatesRemoved(iceCandidates, mLabel);
   }
 
   @Override public void onAddStream(MediaStream mediaStream) {
@@ -152,7 +158,7 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
 
   @Override public void onCreateSuccess(SessionDescription origSdp) {
     if (mLocalSDP != null) {
-      mObserver.onPeerConnectionError("Multiple SDP create.");
+      mObserver.onPeerConnectionError("Multiple SDP create.", mLabel);
       return;
     }
     String sdpDescription = origSdp.description;
@@ -170,9 +176,8 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
       return;
     }
     boolean success = mPeerConnection.getStats(new StatsObserver() {
-      @Override
-      public void onComplete(final StatsReport[] reports) {
-        mObserver.onPeerConnectionStatsReady(reports);
+      @Override public void onComplete(final StatsReport[] reports) {
+        mObserver.onPeerConnectionStatsReady(reports, mLabel);
       }
     }, null);
     if (!success) {
@@ -184,11 +189,9 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
     if (enable) {
       try {
         statsTimer.schedule(new TimerTask() {
-          @Override
-          public void run() {
+          @Override public void run() {
             mExecutor.execute(new Runnable() {
-              @Override
-              public void run() {
+              @Override public void run() {
                 getStats();
               }
             });
@@ -212,7 +215,7 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
       if (mPeerConnection.getRemoteDescription() == null) {
         // We've just set our local SDP so time to send it.
         Log.d(TAG, "Local SDP set succesfully");
-        mObserver.onLocalDescription(mLocalSDP);
+        mObserver.onLocalDescription(mLocalSDP, mLabel);
       } else {
         // We've just set remote description, so drain remote
         // and send local ICE candidates.
@@ -226,7 +229,7 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
         // We've just set our local SDP so time to send it, drain
         // remote and send local ICE candidates.
         Log.d(TAG, "Local SDP set succesfully");
-        mObserver.onLocalDescription(mLocalSDP);
+        mObserver.onLocalDescription(mLocalSDP, mLabel);
         drainCandidates();
       } else {
         // We've just set remote SDP - do nothing for now -
@@ -238,12 +241,12 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
 
   @Override public void onCreateFailure(String s) {
     Log.e(TAG, "sdp CreateFailure" + s);
-    mObserver.onPeerConnectionError(s);
+    mObserver.onPeerConnectionError(s, mLabel);
   }
 
   @Override public void onSetFailure(String s) {
     Log.e(TAG, "sdp SetFailure:" + s);
-    mObserver.onPeerConnectionError(s);
+    mObserver.onPeerConnectionError(s, mLabel);
   }
   //(end)------------------------------SdpObserver-------------------------------
 
@@ -256,15 +259,17 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
     return constraints;
   }
 
-  public void createOffer(boolean useAudio, boolean useVideo) {
+  public void createOffer(MediaConstraints constraints) {
     if (!isError) {
-      Log.d(TAG, "PC Create OFFER");
-      mPeerConnection.createOffer(this, createSDPConstrains(useAudio, useVideo));
+      mExecutor.execute(() -> {
+        Log.d(TAG, "PC Create OFFER");
+        mPeerConnection.createOffer(this, constraints);
+      });
     }
   }
 
-  public void createAnswer(boolean useAudio, boolean useVideo) {
-    mPeerConnection.createAnswer(this, createSDPConstrains(useAudio, useVideo));
+  public void createAnswer(MediaConstraints constraints) {
+    mExecutor.execute(() -> mPeerConnection.createAnswer(this, constraints));
   }
 
   public void addRemoteIceCandidate(final IceCandidate candidate) {
@@ -302,8 +307,11 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
     mDCManager.close();
     if (mPeerConnection != null) mPeerConnection.close();
     mMediaManager.close();
-    // TODO: 2016/12/26 检查是否为最后一个PC
-    pcFactory.close();
+    pcFactory.close(mLabel);
+  }
+
+  public static void closeAll(){
+    pcFactory.closeAll();
   }
 
   void drainCandidates() {
@@ -376,43 +384,43 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
     /**
      * Callback fired once local SDP is created and set.
      */
-    void onLocalDescription(final SessionDescription sdp);
+    void onLocalDescription(final SessionDescription sdp, int label);
 
     /**
      * Callback fired once local Ice candidate is generated.
      */
-    void onIceCandidate(final IceCandidate candidate);
+    void onIceCandidate(final IceCandidate candidate, int label);
 
     /**
      * Callback fired once local ICE candidates are removed.
      */
-    void onIceCandidatesRemoved(final IceCandidate[] candidates);
+    void onIceCandidatesRemoved(final IceCandidate[] candidates, int label);
 
     /**
      * Callback fired once connection is established (IceConnectionState is
      * CONNECTED).
      */
-    void onIceConnected();
+    void onIceConnected(int label);
 
     /**
      * Callback fired once connection is closed (IceConnectionState is
      * DISCONNECTED).
      */
-    void onIceDisconnected();
+    void onIceDisconnected(int label);
 
     /**
      * Callback fired once peer connection is closed.
      */
-    void onPeerConnectionClosed();
+    void onPeerConnectionClosed(int label);
 
     /**
      * Callback fired once peer connection statistics is ready.
      */
-    void onPeerConnectionStatsReady(final StatsReport[] reports);
+    void onPeerConnectionStatsReady(final StatsReport[] reports, int label);
 
     /**
      * Callback fired once peer connection error happened.
      */
-    void onPeerConnectionError(final String description);
+    void onPeerConnectionError(final String description, int label);
   }
 }

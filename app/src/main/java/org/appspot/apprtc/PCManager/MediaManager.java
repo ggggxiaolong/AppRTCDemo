@@ -144,7 +144,7 @@ public class MediaManager {
       audioSource = null;
     }
     Log.d(TAG, "Stopping capture.");
-    if (parameter.videoCapturer != null) {
+    if (parameter != null && parameter.videoCapturer != null) {
       try {
         parameter.videoCapturer.stopCapture();
       } catch (InterruptedException e) {
@@ -169,7 +169,7 @@ public class MediaManager {
     public final int videoHeight;
     public final int videoFps;
 
-    Parameter(EglBase.Context renderEGLContext, VideoRenderer.Callbacks localRender,
+    public Parameter(EglBase.Context renderEGLContext, VideoRenderer.Callbacks localRender,
         VideoRenderer.Callbacks remoteRender, VideoCapturer videoCapturer, int videoWidth,
         int videoHeight, int videoFps) {
       this.renderEGLContext = renderEGLContext;
