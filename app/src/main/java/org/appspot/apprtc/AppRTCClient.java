@@ -110,7 +110,7 @@ public interface AppRTCClient {
     /**
      * Callback fired once remote SDP is received.
      */
-    void onRemoteDescription(final SessionDescription sdp, final MediaConstraints mediaConstraints);
+    void onRemoteDescription(final SessionDescription sdp, final boolean useVideo, final boolean useAudio);
 
     /**
      * Callback fired once remote Ice candidate is received.

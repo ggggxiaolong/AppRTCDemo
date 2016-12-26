@@ -265,7 +265,7 @@ public class PeerConnectionClient {
     executor = Executors.newSingleThreadScheduledExecutor();
   }
 
-  static PeerConnectionClient getInstance() {
+  private static PeerConnectionClient getInstance() {
     return instance;
   }
 

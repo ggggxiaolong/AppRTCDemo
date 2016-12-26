@@ -26,7 +26,8 @@ public final class WebSocket3Client implements AppRTCClient {
   final LooperExecutor mExecutor;
   final String TAG = "WebSocket2Client";
   private Socket mSocket;
-  MediaConstraints mRemoteMediaConstrains = new MediaConstraints();
+  private boolean mIsVideo;
+  private boolean misAudio;
 
   public WebSocket3Client(SignalingEvents events, LooperExecutor executor) {
     this.mEvents = events;
@@ -211,7 +212,7 @@ public final class WebSocket3Client implements AppRTCClient {
           if (payload == null) return;
           String string = payload.getJSONObject("sdp").getString("sdp");
           SessionDescription sdp = new SessionDescription(SessionDescription.Type.OFFER, string);
-          mEvents.onRemoteDescription(sdp, mRemoteMediaConstrains);
+          mEvents.onRemoteDescription(sdp, mIsVideo, misAudio);
           break;
         }
         case "bye": {
@@ -235,8 +236,8 @@ public final class WebSocket3Client implements AppRTCClient {
         case MEDIA_INFO: {
           //{"type":"MEDIA_INFO","payload":{"media":{"video":false,"audio":true}}}
           JSONObject media = payload.getJSONObject("media");
-          mRemoteMediaConstrains =
-              createRemoteMediaConstrains(media.getBoolean("video"), media.getBoolean("audio"));
+          mIsVideo = media.getBoolean("video");
+          misAudio = media.getBoolean("audio");
           break;
         }
         default: {

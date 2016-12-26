@@ -2,6 +2,8 @@ package org.appspot.apprtc.PCManager;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import org.appspot.apprtc.bean.DCMetaData;
 import org.appspot.apprtc.bean.DCRequest;
 import org.appspot.apprtc.bean.DCResponse;
@@ -16,6 +18,11 @@ public class DCManager {
   DataChannel mDataChannel;
   Observer mObserver;
   boolean isRegister;
+  final ExecutorService mExecutorService;
+
+  DCManager() {
+    mExecutorService = Executors.newSingleThreadScheduledExecutor();
+  }
 
   void setDataChannel(@NonNull DataChannel dataChannel) {
     mDataChannel = dataChannel;
@@ -29,8 +36,15 @@ public class DCManager {
     mObserver = observer;
   }
 
-  void sendMessage(DCMetaData message) {
-
+  public void sendMessage(DCMetaData data) {
+    mExecutorService.execute(() -> {
+      if (mDataChannel != null) {
+        mDataChannel.send(new DataChannel.Buffer(data.map(), true));
+        Log.i(TAG, "sendMessage from data channel :" + data.toString());
+      } else {
+        Log.e(TAG, "sendMessage from data channel fail it's null");
+      }
+    });
   }
 
   void register() {
@@ -40,8 +54,13 @@ public class DCManager {
     }
   }
 
+  void close() {
+    if (mDataChannel == null) {
+      mDataChannel.close();
+    }
+  }
 
-  interface Observer {
+  public interface Observer {
     void onRequest(DCRequest request);
 
     void onResponse(DCResponse response);

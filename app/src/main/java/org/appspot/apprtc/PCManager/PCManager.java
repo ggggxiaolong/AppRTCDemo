@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -14,6 +16,7 @@ import java.util.regex.Pattern;
 import org.webrtc.AudioSource;
 import org.webrtc.AudioTrack;
 import org.webrtc.DataChannel;
+import org.webrtc.EglBase;
 import org.webrtc.IceCandidate;
 import org.webrtc.MediaConstraints;
 import org.webrtc.MediaStream;
@@ -21,6 +24,7 @@ import org.webrtc.PeerConnection;
 import org.webrtc.PeerConnection.IceConnectionState;
 import org.webrtc.SdpObserver;
 import org.webrtc.SessionDescription;
+import org.webrtc.StatsObserver;
 import org.webrtc.StatsReport;
 import org.webrtc.VideoSource;
 import org.webrtc.VideoTrack;
@@ -42,22 +46,24 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
   SessionDescription mLocalSDP;
   boolean isInitiator = false;
   final ExecutorService mExecutor;
+  Timer statsTimer;
 
   private PCManager(Observer observer) {
     mObserver = observer;
     mDCManager = new DCManager();
     mMediaManager = new MediaManager();
     mExecutor = Executors.newSingleThreadExecutor();
+    statsTimer = new Timer();
   }
 
   public static boolean createPCFactory(Context context) {
     return pcFactory.createFactory(context);
   }
 
-  public static PCManager createPc(final List<PeerConnection.IceServer> iceServers,
-      PCManager.Observer observer) {
+  public static PCManager createPCManager(final List<PeerConnection.IceServer> iceServers,
+      EglBase.Context context, PCManager.Observer observer) {
     PCManager pcManager = new PCManager(observer);
-    return pcFactory.createPCManager(iceServers, pcManager);
+    return pcFactory.createPCManager(iceServers, context, pcManager);
   }
 
   void setPeerConnection(@NonNull PeerConnection peerConnection) {
@@ -84,6 +90,7 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
     mediaStream.addTrack(videoTrack);
     mPeerConnection.addStream(mediaStream);
 
+    mMediaManager.setParameter(parameter);
     mMediaManager.audioSource = audioSource;
     mMediaManager.videoSource = videoSource;
     mMediaManager.localAudioTrack = audioTrack;
@@ -155,6 +162,43 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
     if (!isError) {
       Log.d(TAG, "Set local SDP from " + sdp.type);
       mPeerConnection.setLocalDescription(this, sdp);
+    }
+  }
+
+  void getStats() {
+    if (mPeerConnection == null || isError) {
+      return;
+    }
+    boolean success = mPeerConnection.getStats(new StatsObserver() {
+      @Override
+      public void onComplete(final StatsReport[] reports) {
+        mObserver.onPeerConnectionStatsReady(reports);
+      }
+    }, null);
+    if (!success) {
+      Log.e(TAG, "getStats() returns false!");
+    }
+  }
+
+  public void enableStatsEvents(boolean enable, int periodMs) {
+    if (enable) {
+      try {
+        statsTimer.schedule(new TimerTask() {
+          @Override
+          public void run() {
+            mExecutor.execute(new Runnable() {
+              @Override
+              public void run() {
+                getStats();
+              }
+            });
+          }
+        }, 0, periodMs);
+      } catch (Exception e) {
+        Log.e(TAG, "Can not schedule statistics timer", e);
+      }
+    } else {
+      statsTimer.cancel();
     }
   }
 
@@ -254,6 +298,14 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
     mPeerConnection.setRemoteDescription(this, sdpRemote);
   }
 
+  public void close() {
+    mDCManager.close();
+    if (mPeerConnection != null) mPeerConnection.close();
+    mMediaManager.close();
+    // TODO: 2016/12/26 检查是否为最后一个PC
+    pcFactory.close();
+  }
+
   void drainCandidates() {
     if (mRemoteCandidates != null) {
       Log.d(TAG, "Add " + mRemoteCandidates.size() + " remote candidates");
@@ -320,7 +372,7 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
     return newSdpDescription.toString();
   }
 
-  interface Observer {
+  public interface Observer {
     /**
      * Callback fired once local SDP is created and set.
      */

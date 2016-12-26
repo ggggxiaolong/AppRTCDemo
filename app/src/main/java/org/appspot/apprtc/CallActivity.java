@@ -26,6 +26,9 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.Toast;
 import org.appspot.apprtc.AppRTCClient.RoomConnectionParameters;
 import org.appspot.apprtc.AppRTCClient.SignalingParameters;
+import org.appspot.apprtc.PCManager.DCManager;
+import org.appspot.apprtc.PCManager.MediaManager;
+import org.appspot.apprtc.PCManager.PCManager;
 import org.appspot.apprtc.PeerConnectionClient.PeerConnectionParameters;
 import org.appspot.apprtc.bean.DCRequest;
 import org.appspot.apprtc.bean.DCResponse;
@@ -49,34 +52,35 @@ import rx.schedulers.Schedulers;
  */
 public class CallActivity extends Activity
     implements AppRTCClient.SignalingEvents, PeerConnectionClient.PeerConnectionEvents,
-    CallFragment.OnCallEvents {
+    CallFragment.OnCallEvents, PCManager.Observer {
 
-  public static final String EXTRA_ROOMID                 = "org.appspot.apprtc.ROOMID";
-  public static final String EXTRA_LOOPBACK               = "org.appspot.apprtc.LOOPBACK";
-  public static final String EXTRA_VIDEO_CALL             = "org.appspot.apprtc.VIDEO_CALL";
-  public static final String EXTRA_CAMERA2                = "org.appspot.apprtc.CAMERA2";
-  public static final String EXTRA_VIDEO_WIDTH            = "org.appspot.apprtc.VIDEO_WIDTH";
-  public static final String EXTRA_VIDEO_HEIGHT           = "org.appspot.apprtc.VIDEO_HEIGHT";
-  public static final String EXTRA_VIDEO_FPS              = "org.appspot.apprtc.VIDEO_FPS";
-  public static final String EXTRA_VIDEO_CAPTUREQUALITYSLIDER_ENABLED = "org.appsopt.apprtc.VIDEO_CAPTUREQUALITYSLIDER";
-  public static final String EXTRA_VIDEO_BITRATE          = "org.appspot.apprtc.VIDEO_BITRATE";
-  public static final String EXTRA_VIDEOCODEC             = "org.appspot.apprtc.VIDEOCODEC";
-  public static final String EXTRA_HWCODEC_ENABLED        = "org.appspot.apprtc.HWCODEC";
+  public static final String EXTRA_ROOMID = "org.appspot.apprtc.ROOMID";
+  public static final String EXTRA_LOOPBACK = "org.appspot.apprtc.LOOPBACK";
+  public static final String EXTRA_VIDEO_CALL = "org.appspot.apprtc.VIDEO_CALL";
+  public static final String EXTRA_CAMERA2 = "org.appspot.apprtc.CAMERA2";
+  public static final String EXTRA_VIDEO_WIDTH = "org.appspot.apprtc.VIDEO_WIDTH";
+  public static final String EXTRA_VIDEO_HEIGHT = "org.appspot.apprtc.VIDEO_HEIGHT";
+  public static final String EXTRA_VIDEO_FPS = "org.appspot.apprtc.VIDEO_FPS";
+  public static final String EXTRA_VIDEO_CAPTUREQUALITYSLIDER_ENABLED =
+      "org.appsopt.apprtc.VIDEO_CAPTUREQUALITYSLIDER";
+  public static final String EXTRA_VIDEO_BITRATE = "org.appspot.apprtc.VIDEO_BITRATE";
+  public static final String EXTRA_VIDEOCODEC = "org.appspot.apprtc.VIDEOCODEC";
+  public static final String EXTRA_HWCODEC_ENABLED = "org.appspot.apprtc.HWCODEC";
   public static final String EXTRA_CAPTURETOTEXTURE_ENABLED = "org.appspot.apprtc.CAPTURETOTEXTURE";
-  public static final String EXTRA_AUDIO_BITRATE          = "org.appspot.apprtc.AUDIO_BITRATE";
-  public static final String EXTRA_AUDIOCODEC             = "org.appspot.apprtc.AUDIOCODEC";
+  public static final String EXTRA_AUDIO_BITRATE = "org.appspot.apprtc.AUDIO_BITRATE";
+  public static final String EXTRA_AUDIOCODEC = "org.appspot.apprtc.AUDIOCODEC";
   public static final String EXTRA_NOAUDIOPROCESSING_ENABLED =
       "org.appspot.apprtc.NOAUDIOPROCESSING";
-  public static final String EXTRA_AECDUMP_ENABLED        = "org.appspot.apprtc.AECDUMP";
-  public static final String EXTRA_OPENSLES_ENABLED       = "org.appspot.apprtc.OPENSLES";
-  public static final String EXTRA_DISABLE_BUILT_IN_AEC   = "org.appspot.apprtc.DISABLE_BUILT_IN_AEC";
-  public static final String EXTRA_DISABLE_BUILT_IN_AGC   = "org.appspot.apprtc.DISABLE_BUILT_IN_AGC";
-  public static final String EXTRA_DISABLE_BUILT_IN_NS    = "org.appspot.apprtc.DISABLE_BUILT_IN_NS";
-  public static final String EXTRA_ENABLE_LEVEL_CONTROL   = "org.appspot.apprtc.ENABLE_LEVEL_CONTROL";
-  public static final String EXTRA_DISPLAY_HUD            = "org.appspot.apprtc.DISPLAY_HUD";
-  public static final String EXTRA_TRACING                = "org.appspot.apprtc.TRACING";
-  public static final String EXTRA_CMDLINE                = "org.appspot.apprtc.CMDLINE";
-  public static final String EXTRA_RUNTIME                = "org.appspot.apprtc.RUNTIME";
+  public static final String EXTRA_AECDUMP_ENABLED = "org.appspot.apprtc.AECDUMP";
+  public static final String EXTRA_OPENSLES_ENABLED = "org.appspot.apprtc.OPENSLES";
+  public static final String EXTRA_DISABLE_BUILT_IN_AEC = "org.appspot.apprtc.DISABLE_BUILT_IN_AEC";
+  public static final String EXTRA_DISABLE_BUILT_IN_AGC = "org.appspot.apprtc.DISABLE_BUILT_IN_AGC";
+  public static final String EXTRA_DISABLE_BUILT_IN_NS = "org.appspot.apprtc.DISABLE_BUILT_IN_NS";
+  public static final String EXTRA_ENABLE_LEVEL_CONTROL = "org.appspot.apprtc.ENABLE_LEVEL_CONTROL";
+  public static final String EXTRA_DISPLAY_HUD = "org.appspot.apprtc.DISPLAY_HUD";
+  public static final String EXTRA_TRACING = "org.appspot.apprtc.TRACING";
+  public static final String EXTRA_CMDLINE = "org.appspot.apprtc.CMDLINE";
+  public static final String EXTRA_RUNTIME = "org.appspot.apprtc.RUNTIME";
   private static final String TAG = "CallRTCClient";
 
   // List of mandatory application permissions.
@@ -103,7 +107,7 @@ public class CallActivity extends Activity
   private static final int REMOTE_Y = 0;
   private static final int REMOTE_WIDTH = 100;
   private static final int REMOTE_HEIGHT = 100;
-  private PeerConnectionClient peerConnectionClient = null;
+  //private PeerConnectionClient peerConnectionClient = null;
   private AppRTCClient appRtcClient;
   private SignalingParameters signalingParameters;
   private AppRTCAudioManager audioManager = null;
@@ -130,6 +134,9 @@ public class CallActivity extends Activity
   private HudFragment hudFragment;
   private CpuMonitor cpuMonitor;
   DCPresenter mDCPresenter;
+  private PCManager mPcManager;
+  DCManager mDCManager;
+  MediaManager mMediaManager;
 
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -274,14 +281,17 @@ public class CallActivity extends Activity
       }, runTimeMs);
     }
 
-    peerConnectionClient = PeerConnectionClient.getInstance();
-    if (loopback) {//如果是和自己建立连接
-      PeerConnectionFactory.Options options = new PeerConnectionFactory.Options();
-      options.networkIgnoreMask = 0;
-      peerConnectionClient.setPeerConnectionFactoryOptions(options);
+    //peerConnectionClient = PeerConnectionClient.getInstance();
+    if (!PCManager.createPCFactory(this)) {
+      reportError("create peer connection factory fail");
     }
-    peerConnectionClient.createPeerConnectionFactory(CallActivity.this, peerConnectionParameters,
-        CallActivity.this);
+    //if (loopback) {//如果是和自己建立连接
+    //  PeerConnectionFactory.Options options = new PeerConnectionFactory.Options();
+    //  options.networkIgnoreMask = 0;
+    //  peerConnectionClient.setPeerConnectionFactoryOptions(options);
+    //}
+    //peerConnectionClient.createPeerConnectionFactory(CallActivity.this, peerConnectionParameters,
+    //    CallActivity.this);
     mDCPresenter = new DCPresenter(this);
   }
 
@@ -289,8 +299,8 @@ public class CallActivity extends Activity
   @Override public void onPause() {
     super.onPause();
     activityRunning = false;
-    if (peerConnectionClient != null) {
-      peerConnectionClient.stopVideoSource();
+    if (mMediaManager != null) {
+      mMediaManager.stopVideoSource();
     }
     cpuMonitor.pause();
   }
@@ -298,8 +308,8 @@ public class CallActivity extends Activity
   @Override public void onResume() {
     super.onResume();
     activityRunning = true;
-    if (peerConnectionClient != null) {
-      peerConnectionClient.startVideoSource();
+    if (mMediaManager != null) {
+      mMediaManager.startVideoSource();
     }
     cpuMonitor.resume();
   }
@@ -320,8 +330,8 @@ public class CallActivity extends Activity
   }
 
   @Override public void onCameraSwitch() {
-    if (peerConnectionClient != null) {
-      peerConnectionClient.switchCamera();
+    if (mMediaManager != null) {
+      mMediaManager.switchCamera();
     }
   }
 
@@ -331,15 +341,15 @@ public class CallActivity extends Activity
   }
 
   @Override public void onCaptureFormatChange(int width, int height, int framerate) {
-    if (peerConnectionClient != null) {
-      peerConnectionClient.changeCaptureFormat(width, height, framerate);
+    if (mMediaManager != null) {
+      mMediaManager.changeCaptureFormat(width, height, framerate);
     }
   }
 
   @Override public boolean onToggleMic() {
-    if (peerConnectionClient != null) {
+    if (mMediaManager != null) {
       micEnabled = !micEnabled;
-      peerConnectionClient.setAudioEnabled(micEnabled);
+      mMediaManager.setAudioEnabled(micEnabled);
     }
     return micEnabled;
   }
@@ -418,7 +428,7 @@ public class CallActivity extends Activity
   private void callConnected() {
     final long delta = System.currentTimeMillis() - callStartedTimeMs;
     Log.i(TAG, "Call connected: delay=" + delta + "ms");
-    if (peerConnectionClient == null || isError) {
+    if (mPcManager == null || isError) {
       Log.w(TAG, "Call is connected in closed or error state");
       return;
     }
@@ -426,7 +436,7 @@ public class CallActivity extends Activity
     // TODO: 2016/12/12 jump 5
     updateVideoView();
     // Enable statistics callback. 开启统计
-    peerConnectionClient.enableStatsEvents(true, STAT_CALLBACK_PERIOD);
+    mPcManager.enableStatsEvents(true, STAT_CALLBACK_PERIOD);
   }
 
   private void onAudioManagerChangedState() {
@@ -441,9 +451,9 @@ public class CallActivity extends Activity
       appRtcClient.disconnectFromRoom();
       appRtcClient = null;
     }
-    if (peerConnectionClient != null) {
-      peerConnectionClient.close();
-      peerConnectionClient = null;
+    if (mPcManager != null) {
+      mPcManager.close();
+      mPcManager = null;
     }
     if (localRender != null) {
       localRender.release();
@@ -515,17 +525,21 @@ public class CallActivity extends Activity
     signalingParameters = params;
     logAndToast("Creating peer connection, delay=" + delta + "ms"); //日志331行
     // TODO: 2016/12/9 jump 4
-    peerConnectionClient.createPeerConnection(rootEglBase.getEglBaseContext(), localRender,
-        remoteRender, signalingParameters);
+    //peerConnectionClient.createPeerConnection(rootEglBase.getEglBaseContext(), localRender,
+    //    remoteRender, signalingParameters);
+    mPcManager =
+        PCManager.createPCManager(signalingParameters.iceServers, rootEglBase.getEglBaseContext(),
+            this);
+    mDCManager = mPcManager.getDCManager(false);
 
-    if (signalingParameters.initiator) {
+    /*if (signalingParameters.initiator) {
       logAndToast("Creating OFFER...");
-      // Create offer. Offer SDP will be sent to answering client in
-      // PeerConnectionEvents.onLocalDescription event.
-      peerConnectionClient.createOffer();
+       Create offer. Offer SDP will be sent to answering client in
+       PeerConnectionEvents.onLocalDescription event.
+      mPcManager.createOffer();
     } else {
       if (params.offerSdp != null) {//如果不是房间已经含有加入者（不是房间的创建者）
-        peerConnectionClient.setRemoteDescription(params.offerSdp);
+        mPcManager.setRemoteDescription(params.offerSdp);
         logAndToast("Creating ANSWER...");
         // Create answer. Answer SDP will be sent to offering client in
         // PeerConnectionEvents.onLocalDescription event.
@@ -537,7 +551,7 @@ public class CallActivity extends Activity
           peerConnectionClient.addRemoteIceCandidate(iceCandidate);
         }
       }
-    }
+    }*/
   }
 
   //服务器返回建立房间的参数
@@ -550,22 +564,23 @@ public class CallActivity extends Activity
     });
   }
 
-  @Override public void onRemoteDescription(final SessionDescription sdp, final MediaConstraints constraints) {
+  @Override public void onRemoteDescription(final SessionDescription sdp, final boolean useVideo,
+      final boolean useAudio) {
     Log.i(TAG, "SignalingEvents --> onRemoteDescription");
     final long delta = System.currentTimeMillis() - callStartedTimeMs;
     runOnUiThread(new Runnable() {
       @Override public void run() {
-        if (peerConnectionClient == null) {
+        if (mPcManager == null) {
           Log.e(TAG, "Received remote SDP for non-initilized peer connection.");
           return;
         }
         logAndToast("Received remote " + sdp.type + ", delay=" + delta + "ms");
-        peerConnectionClient.setRemoteDescription(sdp);
+        mPcManager.setRemoteDescription(sdp);
         if (!signalingParameters.initiator) {
           logAndToast("Creating ANSWER...");
           // Create answer. Answer SDP will be sent to offering client in
           // PeerConnectionEvents.onLocalDescription event.
-          peerConnectionClient.createAnswer(constraints);
+          mPcManager.createAnswer(useAudio, useVideo);
         }
       }
     });
@@ -575,11 +590,11 @@ public class CallActivity extends Activity
     Log.i(TAG, "SignalingEvents --> onRemoteIceCandidate");
     runOnUiThread(new Runnable() {
       @Override public void run() {
-        if (peerConnectionClient == null) {
+        if (mPcManager == null) {
           Log.e(TAG, "Received ICE candidate for a non-initialized peer connection.");
           return;
         }
-        peerConnectionClient.addRemoteIceCandidate(candidate);
+        mPcManager.addRemoteIceCandidate(candidate);
       }
     });
   }
@@ -588,11 +603,11 @@ public class CallActivity extends Activity
     Log.i(TAG, "SignalingEvents --> onRemoteIceCandidatesRemoved");
     runOnUiThread(new Runnable() {
       @Override public void run() {
-        if (peerConnectionClient == null) {
+        if (mPcManager == null) {
           Log.e(TAG, "Received ICE candidate removals for a non-initialized peer connection.");
           return;
         }
-        peerConnectionClient.removeRemoteIceCandidates(candidates);
+        mPcManager.removeRemoteIceCandidates(candidates);
       }
     });
   }
@@ -702,7 +717,14 @@ public class CallActivity extends Activity
   }
 
   @Override public void onDataChannelRequest(DCRequest request) {
-    mDCPresenter.onRequest(request).subscribeOn(Schedulers.io()).subscribe(response -> peerConnectionClient.sendMessage(response));
+    if (mDCManager != null) {
+      mDCPresenter.onRequest(request)
+          .subscribeOn(Schedulers.io())
+          .subscribe(response -> mDCManager.sendMessage(response));
+      
+    } else {
+      Log.w(TAG, "onDataChannelRequest: data channel not init");
+    }
   }
 
   @Override public void onDataChannelResponse(DCResponse response) {

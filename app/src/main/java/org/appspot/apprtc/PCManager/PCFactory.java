@@ -8,6 +8,7 @@ import java.util.List;
 import org.appspot.apprtc.BuildConfig;
 import org.webrtc.AudioSource;
 import org.webrtc.AudioTrack;
+import org.webrtc.EglBase;
 import org.webrtc.MediaConstraints;
 import org.webrtc.MediaStream;
 import org.webrtc.PeerConnection;
@@ -54,10 +55,12 @@ public class PCFactory {
   }
 
   PCManager createPCManager(final List<PeerConnection.IceServer> iceServers,
-      PCManager pcManager) {
+      EglBase.Context renderEGLContext, PCManager pcManager) {
     if (mFactory == null){
       throw new IllegalStateException("method createFactory should be call first");
     }
+    mFactory.setVideoHwAccelerationOptions(renderEGLContext, renderEGLContext);
+
     PeerConnection.RTCConfiguration rtcConfig = new PeerConnection.RTCConfiguration(iceServers);
     rtcConfig.tcpCandidatePolicy = PeerConnection.TcpCandidatePolicy.DISABLED;
     rtcConfig.bundlePolicy = PeerConnection.BundlePolicy.MAXBUNDLE;
