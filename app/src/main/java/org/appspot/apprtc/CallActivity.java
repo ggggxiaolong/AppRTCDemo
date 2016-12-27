@@ -239,8 +239,6 @@ public class CallActivity extends Activity
     ft.add(R.id.call_fragment_container, callFragment);
     ft.add(R.id.hud_fragment_container, hudFragment);
     ft.commit();
-    //------------------------------------
-    // TODO: 2016/12/12 Jump
     startCall();//注意这里，开始并行操作了，开启请求服务器
     //------------------------------------
 
@@ -258,13 +256,6 @@ public class CallActivity extends Activity
     if (!PCManager.createPCFactory(this)) {
       reportError("create peer connection factory fail");
     }
-    //if (loopback) {//如果是和自己建立连接
-    //  PeerConnectionFactory.Options options = new PeerConnectionFactory.Options();
-    //  options.networkIgnoreMask = 0;
-    //  peerConnectionClient.setPeerConnectionFactoryOptions(options);
-    //}
-    //peerConnectionClient.createPeerConnectionFactory(CallActivity.this, peerConnectionParameters,
-    //    CallActivity.this);
     mDCPresenter = new DCPresenter(this);
   }
 
@@ -348,7 +339,7 @@ public class CallActivity extends Activity
 
   VideoCapturer createVideoCapturer() {
     VideoCapturer videoCapturer;
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+    if (!Camera2Enumerator.isSupported(this)) {
       videoCapturer = createCameraCapturer(new Camera1Enumerator(true));
     } else {
       videoCapturer = createCameraCapturer(new Camera2Enumerator(this));
@@ -448,7 +439,6 @@ public class CallActivity extends Activity
       return;
     }
     // Update video view.刷新UI
-    // TODO: 2016/12/12 jump 5
     updateVideoView();
     // Enable statistics callback. 开启统计
     PCManager.get(label).enableStatsEvents(true, STAT_CALLBACK_PERIOD);
@@ -625,7 +615,6 @@ public class CallActivity extends Activity
     runOnUiThread(new Runnable() {
       @Override public void run() {
         logAndToast("Remote end hung up; dropping PeerConnection");
-        // TODO: 2016/12/26 检查关闭的类型
         PCManager.get(label).close();
       }
     });

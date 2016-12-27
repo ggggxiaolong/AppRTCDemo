@@ -7,10 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.webrtc.AudioSource;
@@ -91,7 +89,9 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
     AudioSource audioSource = pcFactory.createAudioSource();
     VideoSource videoSource = pcFactory.createVideoSource(parameter.videoCapturer);
     AudioTrack audioTrack = pcFactory.createAudioTrack(audioSource);
+    parameter.videoCapturer.startCapture(parameter.videoWidth, parameter.videoHeight, parameter.videoFps);
     VideoTrack videoTrack = pcFactory.createVideoTrack(videoSource, parameter.localRender);
+    videoTrack.setEnabled(true);
     mediaStream.addTrack(audioTrack);
     mediaStream.addTrack(videoTrack);
     mPeerConnection.addStream(mediaStream);
@@ -124,7 +124,7 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
     } else if (newState == IceConnectionState.DISCONNECTED) {
       mObserver.onIceDisconnected(mLabel);
     } else if (newState == IceConnectionState.FAILED) {
-      mObserver.onPeerConnectionError("ICE connection failed.", mLabel);
+      mObserver.onIceDisconnected(mLabel);
     }
   }
 

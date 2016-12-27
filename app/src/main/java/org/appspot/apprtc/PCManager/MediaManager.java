@@ -25,7 +25,7 @@ public class MediaManager {
   AudioSource audioSource;
   VideoSource videoSource;
   Parameter parameter;
-  boolean renderVideo = true;
+  boolean renderVideo;
   boolean isInit;
   boolean videoCapturerStopped;
   final ExecutorService mExecutorService;
@@ -94,18 +94,6 @@ public class MediaManager {
     remoteVideoTrack = null;
   }
 
-  //void findVideoSender() {
-  //  for (RtpSender sender : peerConnection.getSenders()) {
-  //    if (sender.track() != null) {
-  //      String trackType = sender.track().kind();
-  //      if (trackType.equals(VIDEO_TRACK_TYPE)) {
-  //        Log.d(TAG, "Found video sender.");
-  //        localVideoSender = sender;
-  //      }
-  //    }
-  //  }
-  //}
-
   public void switchCamera() {
     mExecutorService.execute(() -> {
       switchCameraInternal();
@@ -114,10 +102,6 @@ public class MediaManager {
 
   void switchCameraInternal() {
     if (parameter.videoCapturer != null && parameter.videoCapturer instanceof CameraVideoCapturer) {
-      //if (!videoCallEnabled || isError || videoCapturer == null) {
-      //  Log.e(TAG, "Failed to switch camera. Video: " + videoCallEnabled + ". Error : " + isError);
-      //  return; // No video is sent or only one camera is available or error happened.
-      //}
       Log.d(TAG, "Switch camera");
       CameraVideoCapturer cameraVideoCapturer = (CameraVideoCapturer) parameter.videoCapturer;
       cameraVideoCapturer.switchCamera(null);
