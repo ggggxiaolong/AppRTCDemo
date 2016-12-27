@@ -27,10 +27,10 @@ public class DCManager {
   void setDataChannel(@NonNull DataChannel dataChannel) {
     Log.i(TAG, "setDataChannel: receive data channel");
     mDataChannel = dataChannel;
-    if (mDataChannel.state() == DataChannel.State.OPEN) {
+    //if (mDataChannel.state() == DataChannel.State.OPEN) {
       mDataChannel.registerObserver(mDCObserver);
       isRegister = true;
-    }
+    //}
   }
 
   void setObserver(Observer observer) {

@@ -304,8 +304,9 @@ public class PCManager implements PeerConnection.Observer, SdpObserver {
   }
 
   public void close() {
+    statsTimer.cancel();
     mDCManager.close();
-    if (mPeerConnection != null) mPeerConnection.close();
+    if (mPeerConnection != null) mPeerConnection.dispose();
     mMediaManager.close();
     pcFactory.close(mLabel);
   }

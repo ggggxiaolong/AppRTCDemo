@@ -34,6 +34,7 @@
       android:icon="@drawable/ic_launcher"
       android:allowBackup="false"
       tools:replace="allowBackup"
+      android:name=".App"
       >
 
     <activity

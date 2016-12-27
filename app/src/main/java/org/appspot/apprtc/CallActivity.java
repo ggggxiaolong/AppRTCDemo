@@ -33,6 +33,7 @@ import org.appspot.apprtc.PeerConnectionClient.PeerConnectionParameters;
 import org.appspot.apprtc.bean.DCRequest;
 import org.appspot.apprtc.bean.DCResponse;
 import org.appspot.apprtc.util.DCPresenter;
+import org.appspot.apprtc.util.DeviceState;
 import org.appspot.apprtc.util.LooperExecutor;
 import org.webrtc.Camera2Enumerator;
 import org.webrtc.CameraEnumerator;
@@ -511,6 +512,7 @@ public class CallActivity extends Activity
     //} else {
     //  setResult(RESULT_CANCELED);
     //}
+    mDCPresenter.close();
     finish();
   }
 

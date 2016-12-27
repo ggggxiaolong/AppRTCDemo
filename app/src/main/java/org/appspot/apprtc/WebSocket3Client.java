@@ -58,7 +58,7 @@ public final class WebSocket3Client implements AppRTCClient {
         mSocket.send("{\"roomID\":10010, \"type\":\"CREATE_OR_JOIN\"}");
       }).on(Socket.EVENT_MESSAGE, args -> {
         String text = (String) args[0];
-        Log.i(TAG, "WebSocketListener --> onMessage: " + text);
+        //Log.i(TAG, "WebSocketListener --> onMessage: " + text);
         dealWebSocketMessage(text);
       }).on(Socket.EVENT_DISCONNECT, args -> {
         Log.i(TAG, "disconnectFromRoom");
@@ -216,9 +216,6 @@ public final class WebSocket3Client implements AppRTCClient {
         case ROOM_JOIN: {
           //exchange media info
           Log.i(TAG, "dealWebSocketMessage: room join");
-          String mediaInfo =
-              "{\"type\":\"MEDIA_INFO\", \"payload\":{\"media\":{\"video\": true, \"audio\":true} } }";
-          mSocket.send(mediaInfo);
           break;
         }
         case MEDIA_INFO: {
@@ -226,6 +223,9 @@ public final class WebSocket3Client implements AppRTCClient {
           JSONObject media = payload.getJSONObject("media");
           mIsVideo = media.getBoolean("video");
           misAudio = media.getBoolean("audio");
+          String mediaInfo =
+              "{\"type\":\"MEDIA_INFO\", \"payload\":{\"media\":{\"video\": true, \"audio\":true} } }";
+          mSocket.send(mediaInfo);
           break;
         }
         case ROOM_FULL:{
@@ -252,9 +252,11 @@ public final class WebSocket3Client implements AppRTCClient {
     if (pcInfo.isData()){
       mDcPcInfo = pcInfo;
       label = TYPE_DC;
+      Log.i(TAG, "storePcInfo: TYPE_DC" );
     } else {
       mMediaPcInfo = pcInfo;
       label = TYPE_MS;
+      Log.i(TAG, "storePcInfo: TYPE_MS" );
     }
     return label;
   }
@@ -334,8 +336,8 @@ public final class WebSocket3Client implements AppRTCClient {
       try {
         peer = json.getString("peer");
         type = json.getString("type");
-        label = json.getString("label");
         connectionID = json.getString("connectionID");
+        label = json.getString("label");
       } catch (JSONException e) {
         Log.e("PCINFO", "PCInfo create error: ", e);
       }

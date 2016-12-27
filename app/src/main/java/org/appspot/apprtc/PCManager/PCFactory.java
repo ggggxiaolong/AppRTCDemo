@@ -40,18 +40,17 @@ public class PCFactory {
     if (mFactory != null) return true;
     if (BuildConfig.DEBUG) {
       PeerConnectionFactory.initializeInternalTracer();//初始化p2p的连接工厂
-      // Initialize field trials.
       PeerConnectionFactory.initializeFieldTrials("");
     }
 
-    Log.d(TAG, "Disable OpenSL ES audio even if device supports it");
-    WebRtcAudioManager.setBlacklistDeviceForOpenSLESUsage(true /* enable */);
-    Log.d(TAG, "Disable built-in AEC even if device supports it");
-    WebRtcAudioUtils.setWebRtcBasedAcousticEchoCanceler(true);
-    Log.d(TAG, "Disable built-in AGC even if device supports it");
-    WebRtcAudioUtils.setWebRtcBasedAutomaticGainControl(true);
-    Log.d(TAG, "Disable built-in NS even if device supports it");
-    WebRtcAudioUtils.setWebRtcBasedNoiseSuppressor(true);
+    Log.d(TAG, "Enable OpenSL ES audio even if device supports it");
+    WebRtcAudioManager.setBlacklistDeviceForOpenSLESUsage(false /* enable */);
+    Log.d(TAG, "Enable built-in AEC even if device supports it");
+    WebRtcAudioUtils.setWebRtcBasedAcousticEchoCanceler(false);
+    Log.d(TAG, "Enable built-in AGC even if device supports it");
+    WebRtcAudioUtils.setWebRtcBasedAutomaticGainControl(false);
+    Log.d(TAG, "Enable built-in NS even if device supports it");
+    WebRtcAudioUtils.setWebRtcBasedNoiseSuppressor(false);
 
     // Create peer connection factory.
     if (!PeerConnectionFactory.initializeAndroidGlobals(context, true, true, true)) {
@@ -146,16 +145,5 @@ public class PCFactory {
       PCManager pcManager = mPCManagerSparseArray.get(key);
       if (pcManager != null) pcManager.close();
     }
-    Log.d(TAG, "Closing peer connection factory.");
-    mPCManagerSparseArray.clear();
-    if (mFactory != null) {
-      mFactory.dispose();
-      mFactory = null;
-      if (BuildConfig.DEBUG) {
-        PeerConnectionFactory.stopInternalTracingCapture();
-        PeerConnectionFactory.shutdownInternalTracer();
-      }
-    }
-    Log.d(TAG, "Closing peer connection done.");
   }
 }

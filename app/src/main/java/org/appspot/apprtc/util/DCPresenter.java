@@ -36,7 +36,7 @@ public class DCPresenter {
       case REQUEST_DEVICE_INFO: {
         return dealDeviceInfo(request).subscribeOn(Schedulers.io());
       }
-      case REQUEST_DEVICE_STATE:{
+      case REQUEST_DEVICE_STATE: {
         return dealDeviceState(request).subscribeOn(Schedulers.io());
       }
     }
@@ -117,5 +117,9 @@ public class DCPresenter {
       DCResponse response = new DCResponse.Builder().fromRequest(request, false).build();
       subscriber.onNext(response);
     });
+  }
+
+  public void close() {
+    if (mDeviceState != null) mDeviceState.unRegister();
   }
 }
