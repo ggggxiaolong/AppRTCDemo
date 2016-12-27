@@ -55,7 +55,7 @@ public final class WebSocket3Client implements AppRTCClient {
       mSocket.on(Socket.EVENT_CONNECT, args -> {
         Log.i(TAG, "WebSocketListener --> onOpen: ");
         mConnectionState = ConnectionState.CONNECTED;
-        mSocket.send("{\"roomID\":10010, \"type\":\"CREATE_OR_JOIN\"}");
+        mSocket.send("{\"roomID\":6a8a4509e663b3bf80422a6c7657006a, \"type\":\"CREATE_OR_JOIN\"}");
       }).on(Socket.EVENT_MESSAGE, args -> {
         String text = (String) args[0];
         //Log.i(TAG, "WebSocketListener --> onMessage: " + text);
