@@ -1,10 +1,8 @@
 package org.appspot.apprtc.PCManager;
 
 import android.content.Context;
-import android.os.Environment;
 import android.util.Log;
 import android.util.SparseArray;
-import java.io.File;
 import java.util.List;
 import org.appspot.apprtc.BuildConfig;
 import org.webrtc.AudioSource;

@@ -25,7 +25,7 @@ public class MediaManager {
   AudioSource audioSource;
   VideoSource videoSource;
   Parameter parameter;
-  boolean renderVideo;
+  boolean renderVideo = true;
   boolean isInit;
   boolean videoCapturerStopped;
   final ExecutorService mExecutorService;

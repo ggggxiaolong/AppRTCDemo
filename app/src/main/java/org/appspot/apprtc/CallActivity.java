@@ -17,8 +17,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.multidex.MultiDex;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -35,6 +37,7 @@ import org.appspot.apprtc.bean.DCResponse;
 import org.appspot.apprtc.util.DCPresenter;
 import org.appspot.apprtc.util.DeviceState;
 import org.appspot.apprtc.util.LooperExecutor;
+import org.webrtc.Camera1Enumerator;
 import org.webrtc.Camera2Enumerator;
 import org.webrtc.CameraEnumerator;
 import org.webrtc.EglBase;
@@ -344,43 +347,12 @@ public class CallActivity extends Activity
   }
 
   VideoCapturer createVideoCapturer() {
-    VideoCapturer videoCapturer = null;
-    //String videoFileAsCamera = getIntent().getStringExtra(EXTRA_VIDEO_FILE_AS_CAMERA);
-    //if (videoFileAsCamera != null) {
-    //  try {
-    //    videoCapturer = new FileVideoCapturer(videoFileAsCamera);
-    //  } catch (IOException e) {
-    //    reportError("Failed to open video file for emulated camera");
-    //    return null;
-    //  }
-    //} else if (screencaptureEnabled) {
-    //  if (mediaProjectionPermissionResultCode != Activity.RESULT_OK) {
-    //    reportError("User didn't give permission to capture the screen.");
-    //    return null;
-    //  }
-    //  return new ScreenCapturerAndroid(
-    //      mediaProjectionPermissionResultData, new MediaProjection.Callback() {
-    //    @Override
-    //    public void onStop() {
-    //      reportError("User revoked permission to capture the screen.");
-    //    }
-    //  });
-    //} else if (useCamera2()) {
-    //  if (!captureToTexture()) {
-    //    reportError(getString(R.string.camera2_texture_only_error));
-    //    return null;
-    //  }
-    //
-    //  Logging.d(TAG, "Creating capturer using camera2 API.");
-    videoCapturer = createCameraCapturer(new Camera2Enumerator(this));
-    //} else {
-    //  Logging.d(TAG, "Creating capturer using camera1 API.");
-    //  videoCapturer = createCameraCapturer(new Camera1Enumerator(captureToTexture()));
-    //}
-    //if (videoCapturer == null) {
-    //  reportError("Failed to open camera");
-    //  return null;
-    //}
+    VideoCapturer videoCapturer;
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+      videoCapturer = createCameraCapturer(new Camera1Enumerator(true));
+    } else {
+      videoCapturer = createCameraCapturer(new Camera2Enumerator(this));
+    }
     return videoCapturer;
   }
 
@@ -568,8 +540,13 @@ public class CallActivity extends Activity
     PCManager.createPCManager(signalingParameters.iceServers, rootEglBase.getEglBaseContext(), this,
         label);
     PCManager pcManager = PCManager.get(label);
+    if (pcManager == null) {
+      disconnect();
+      return;
+    }
     if (label == TYPE_DC) {
       mDCManager = pcManager.getDCManager(false, mDcObserver);
+      Log.i(TAG, "create data channel");
     }
     if (label == TYPE_MS) {
       MediaManager.Parameter parameter =
@@ -581,26 +558,6 @@ public class CallActivity extends Activity
       pcManager.setRemoteDescription(params.offerSdp);
       pcManager.createAnswer(params.mediaConstraints);
     }
-    /*if (signalingParameters.initiator) {
-      logAndToast("Creating OFFER...");
-       Create offer. Offer SDP will be sent to answering client in
-       PeerConnectionEvents.onLocalDescription event.
-      mPcManager.createOffer();
-    } else {
-      if (params.offerSdp != null) {//如果不是房间已经含有加入者（不是房间的创建者）
-        mPcManager.setRemoteDescription(params.offerSdp);
-        logAndToast("Creating ANSWER...");
-        // Create answer. Answer SDP will be sent to offering client in
-        // PeerConnectionEvents.onLocalDescription event.
-        peerConnectionClient.createAnswer(null);
-      }
-      if (params.iceCandidates != null) {
-        // Add remote ICE candidates from room.
-        for (IceCandidate iceCandidate : params.iceCandidates) {
-          peerConnectionClient.addRemoteIceCandidate(iceCandidate);
-        }
-      }
-    }*/
   }
 
   //服务器返回建立房间的参数
@@ -742,7 +699,6 @@ public class CallActivity extends Activity
       @Override public void run() {
         logAndToast("ICE disconnected");
         iceConnected = false;
-        //setResult(251);
         PCManager.get(label).close();
       }
     });
