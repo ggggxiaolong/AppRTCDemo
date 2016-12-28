@@ -55,7 +55,7 @@ public final class WebSocket3Client implements AppRTCClient {
       mSocket.on(Socket.EVENT_CONNECT, args -> {
         Log.i(TAG, "WebSocketListener --> onOpen: ");
         mConnectionState = ConnectionState.CONNECTED;
-        mSocket.send("{\"roomID\":6a8a4509e663b3bf80422a6c7657006a, \"type\":\"CREATE_OR_JOIN\"}");
+        mSocket.send("{\"roomID\":\"6a8a4509e663b3bf80422a6c7657006a\", \"type\":\"CREATE_OR_JOIN\"}");
       }).on(Socket.EVENT_MESSAGE, args -> {
         String text = (String) args[0];
         //Log.i(TAG, "WebSocketListener --> onMessage: " + text);
@@ -306,9 +306,10 @@ public final class WebSocket3Client implements AppRTCClient {
     LinkedList<PeerConnection.IceServer> turnServers = new LinkedList<PeerConnection.IceServer>();
     String username = "28224511:1379330808";
     String credential = "JZEOEt2V3Qb0y27GRntt2u2PAYA=";
-    String turnUrl = "turn:192.158.29.39:3478?transport=tcp";
-    turnServers.add(new PeerConnection.IceServer(turnUrl, username, credential));
-    turnServers.add(new PeerConnection.IceServer(turnUrl, username, credential));
+    String turnUrl1 = "turn:192.158.29.39:3478?transport=tcp";
+    String turnUrl2 = "turn:192.158.29.39:3478?transport=udp";
+    turnServers.add(new PeerConnection.IceServer(turnUrl1, username, credential));
+    turnServers.add(new PeerConnection.IceServer(turnUrl2, username, credential));
     turnServers.add(new PeerConnection.IceServer("stun:stun.l.google.com:19302", "", ""));
 
     SignalingParameters parameters = new SignalingParameters(
